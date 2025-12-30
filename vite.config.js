@@ -4,8 +4,8 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   
-  // ✅ BENAR: Hanya path relative
-  base: '/Portfolio-with-react-and-vite/',
+  // ✅ VERCEL: base = '/' (root domain)
+  base: '/',
   
   server: {
     host: '127.0.0.1',
