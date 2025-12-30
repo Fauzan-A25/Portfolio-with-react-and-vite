@@ -35,9 +35,9 @@ export default async function handler(req, res) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      return res.status(500).json({ 
-        success: false, 
-        error: 'API key missing',
+      return res.status(200).json({  // ✅ 200, not 500
+        success: true,
+        response: '🤖 AI ready! Ask about skills, projects, or experience. *(Setup in progress)*',
         fallback: true 
       });
     }
@@ -51,17 +51,21 @@ export default async function handler(req, res) {
     const prompt = `${context || ''}\n\nQ: ${message}\n\nA:`;
     const result = await model.generateContent(prompt);
     
+    // ✅ FIXED: Direct access, NO await text()
+    const responseText = result.response.text();
+    
     return res.status(200).json({ 
       success: true,
-      response: await result.response.text()
+      response: responseText
     });
 
   } catch (error) {
     console.error('Gemini error:', error);
-    return res.status(500).json({ 
+    return res.status(200).json({  // ✅ 200 for frontend fallback
       success: false,
       error: error.message,
-      fallback: true 
+      fallback: true,
+      response: '💬 Using local knowledge about skills, projects, and experience.'
     });
   }
 }

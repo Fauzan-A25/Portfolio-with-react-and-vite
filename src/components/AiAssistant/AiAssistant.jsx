@@ -1,7 +1,7 @@
 // src/components/AIAssistant/AIAssistant.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import './AIAssistant.css';
+import './AiAssistant.css';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 

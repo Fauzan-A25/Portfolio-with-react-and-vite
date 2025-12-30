@@ -40,5 +40,16 @@
     "eslint-plugin-react-refresh": "^0.4.26",
     "gh-pages": "^6.1.1",
     "vite": "^7.3.0"
+  },
+  "vercel": {
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist",
+    "framework": "vite",
+    "functions": {
+      "api/chat.js": {
+        "runtime": "nodejs18.x",
+        "maxDuration": 30
+      }
+    }
   }
 }
