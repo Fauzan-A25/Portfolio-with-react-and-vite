@@ -1,25 +1,21 @@
 import { memo } from 'react';
+import PropTypes from 'prop-types';
 import { useTypingEffect } from '../../../hooks/useTypingEffect';
-import { personalInfo, socialLinks } from '../../../data/portfolioData';
 import './Hero.css';
 
-const Hero = memo(() => {
-  // Array of texts to rotate through
-  const typingTexts = [
-    'Machine Learning Enthusiast',
-    'Python Developer',
-  ];
-
+const Hero = memo(({ personalInfo, socialLinks, heroTypingTexts }) => {
   // Use the typing effect with rotating texts
   const { displayText } = useTypingEffect(
-    typingTexts,
+    heroTypingTexts || ['Developer', 'Designer'],
     80,      // typing speed
     50,      // delete speed
     2000     // delay between texts
   );
 
   const handleCVDownload = () => {
-    window.open(personalInfo.cvLink, '_blank');
+    if (personalInfo?.cvLink) {
+      window.open(personalInfo.cvLink, '_blank');
+    }
   };
 
   const scrollToContact = (e) => {
@@ -29,6 +25,16 @@ const Hero = memo(() => {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const socialLinksArray = socialLinks
+    ? Object.entries(socialLinks)
+        .filter(([key]) => key !== 'email')
+        .map(([platform, url]) => ({
+          platform,
+          url,
+          label: platform.charAt(0).toUpperCase() + platform.slice(1)
+        }))
+    : [];
 
   return (
     <section id="home" className="hero-section">
@@ -52,13 +58,15 @@ const Hero = memo(() => {
 
             {/* Name */}
             <h1 className="hero-name">
-              {personalInfo.name}
+              {personalInfo?.name || 'Your Name'}
             </h1>
 
             {/* Animated Title - Single Line with Typing Effect */}
             <div className="hero-title-wrapper">
               <h2 className="hero-title">
-                <span className="title-static">{personalInfo.title}</span>
+                <span className="title-static">
+                  {personalInfo?.title || 'Developer'}
+                </span>
                 <span className="title-separator"> | </span>
                 <span className="title-dynamic">{displayText}</span>
                 <span className="cursor-blink">|</span>
@@ -67,33 +75,39 @@ const Hero = memo(() => {
 
             {/* Tagline */}
             <p className="hero-tagline">
-              {personalInfo.tagline}
+              {personalInfo?.tagline || 'Building amazing things with code'}
             </p>
 
             {/* Info Cards */}
             <div className="hero-info-cards">
-              <div className="info-card">
-                <i className="bi bi-mortarboard-fill"></i>
-                <div className="info-content">
-                  <span className="info-label">Studying at</span>
-                  <span className="info-value">{personalInfo.university}</span>
+              {personalInfo?.university && (
+                <div className="info-card">
+                  <i className="bi bi-mortarboard-fill"></i>
+                  <div className="info-content">
+                    <span className="info-label">Studying at</span>
+                    <span className="info-value">{personalInfo.university}</span>
+                  </div>
                 </div>
-              </div>
-              <div className="info-card">
-                <i className="bi bi-geo-alt-fill"></i>
-                <div className="info-content">
-                  <span className="info-label">Based in</span>
-                  <span className="info-value">{personalInfo.location}</span>
+              )}
+              {personalInfo?.location && (
+                <div className="info-card">
+                  <i className="bi bi-geo-alt-fill"></i>
+                  <div className="info-content">
+                    <span className="info-label">Based in</span>
+                    <span className="info-value">{personalInfo.location}</span>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Action Buttons */}
             <div className="hero-actions">
-              <button className="hero-btn btn-primary" onClick={handleCVDownload}>
-                <i className="bi bi-download"></i>
-                <span>Download CV</span>
-              </button>
+              {personalInfo?.cvLink && (
+                <button className="hero-btn btn-primary" onClick={handleCVDownload}>
+                  <i className="bi bi-download"></i>
+                  <span>Download CV</span>
+                </button>
+              )}
               <a href="#contact" className="hero-btn btn-secondary" onClick={scrollToContact}>
                 <i className="bi bi-envelope"></i>
                 <span>Get In Touch</span>
@@ -101,12 +115,11 @@ const Hero = memo(() => {
             </div>
 
             {/* Social Links */}
-            <div className="hero-social">
-              <span className="social-label">Connect with me:</span>
-              <div className="social-links">
-                {Object.entries(socialLinks)
-                  .filter(([key]) => key !== 'email')
-                  .map(([platform, url]) => (
+            {socialLinksArray.length > 0 && (
+              <div className="hero-social">
+                <span className="social-label">Connect with me:</span>
+                <div className="social-links">
+                  {socialLinksArray.map(({ platform, url, label }) => (
                     <a
                       key={platform}
                       href={url}
@@ -114,13 +127,14 @@ const Hero = memo(() => {
                       rel="noopener noreferrer"
                       className="social-link"
                       aria-label={platform}
-                      title={platform.charAt(0).toUpperCase() + platform.slice(1)}
+                      title={label}
                     >
                       <i className={`bi bi-${platform}`}></i>
                     </a>
                   ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Right Side - Profile Image */}
@@ -134,8 +148,8 @@ const Hero = memo(() => {
               <div className="profile-image-wrapper">
                 <div className="profile-image-border">
                   <img
-                    src={personalInfo.profileImage || 'https://via.placeholder.com/500/1a1a1a/00d4aa?text=Profile'}
-                    alt={personalInfo.name}
+                    src={personalInfo?.profileImage || 'https://via.placeholder.com/500/1a1a1a/00d4aa?text=Profile'}
+                    alt={personalInfo?.name || 'Profile'}
                     className="profile-image"
                     loading="eager"
                   />
@@ -180,5 +194,34 @@ const Hero = memo(() => {
 });
 
 Hero.displayName = 'Hero';
+
+Hero.propTypes = {
+  personalInfo: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    tagline: PropTypes.string,
+    university: PropTypes.string,
+    location: PropTypes.string,
+    cvLink: PropTypes.string,
+    profileImage: PropTypes.string,
+  }),
+  socialLinks: PropTypes.shape({
+    github: PropTypes.string,
+    linkedin: PropTypes.string,
+    instagram: PropTypes.string,
+    email: PropTypes.string,
+  }),
+  heroTypingTexts: PropTypes.arrayOf(PropTypes.string),
+};
+
+Hero.defaultProps = {
+  personalInfo: {
+    name: 'Your Name',
+    title: 'Developer',
+    tagline: 'Building amazing things with code',
+  },
+  socialLinks: {},
+  heroTypingTexts: ['Developer', 'Designer', 'Creator'],
+};
 
 export default Hero;

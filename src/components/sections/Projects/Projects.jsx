@@ -1,16 +1,18 @@
 import { memo, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
-import { projects, projectCategories } from '../../../data/portfolioData';
 import './Projects.css';
 
-const Projects = memo(() => {
+const Projects = memo(({ projects, projectCategories, projectsContent }) => {
   const [elementRef, isVisible] = useIntersectionObserver();
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [showAll, setShowAll] = useState(false); // ✅ State untuk show all
-  const [itemsToShow, setItemsToShow] = useState(3); // ✅ NEW: Limit awal 3 items
+  const [showAll, setShowAll] = useState(false);
+  const [itemsToShow] = useState(3);
 
-  // ✅ UPDATED: Filter logic dengan limit
+  // ✅ Filter logic dengan limit
   const getFilteredProjects = () => {
+    if (!projects || projects.length === 0) return [];
+    
     let filtered = projects;
 
     // Filter by category
@@ -18,7 +20,7 @@ const Projects = memo(() => {
       filtered = filtered.filter(p => p.category === selectedCategory);
     }
 
-    // ✅ NEW: Slice berdasarkan showAll
+    // Slice berdasarkan showAll
     if (!showAll) {
       filtered = filtered.slice(0, itemsToShow);
     }
@@ -28,25 +30,34 @@ const Projects = memo(() => {
 
   const filteredProjects = getFilteredProjects();
   const totalProjects = selectedCategory === 'All' 
-    ? projects.length 
-    : projects.filter(p => p.category === selectedCategory).length;
+    ? (projects?.length || 0)
+    : (projects?.filter(p => p.category === selectedCategory).length || 0);
 
-  // ✅ NEW: Handle View All button
+  // Handle View All button
   const handleViewAll = () => {
     setShowAll(true);
   };
 
-  // ✅ NEW: Handle Show Less button
+  // Handle Show Less button
   const handleShowLess = () => {
     setShowAll(false);
-    setItemsToShow(3); // Reset ke 3 items
   };
 
-  // ✅ NEW: Reset showAll ketika kategori berubah
+  // Reset showAll ketika kategori berubah
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    setShowAll(false); // Reset ke tampilan awal (3 items)
-    setItemsToShow(3);
+    setShowAll(false);
+  };
+
+  // Default content fallback
+  const content = projectsContent || {
+    featuredTitle: 'Featured Projects',
+    allTitle: 'All Projects',
+    subtitle: 'Some of my recent work',
+    allSubtitle: 'Showing {count} projects{category}',
+    viewAllButton: 'View All Projects ({count})',
+    showLessButton: 'Show Less',
+    noProjects: 'No projects found in this category',
   };
 
   return (
@@ -59,28 +70,32 @@ const Projects = memo(() => {
         {/* Header */}
         <div className="projects-header">
           <h2 className="section-title">
-            {showAll ? 'All Projects' : 'Featured Projects'}
+            {showAll ? content.allTitle : content.featuredTitle}
           </h2>
           <p className="section-subtitle">
             {showAll 
-              ? `Displaying all ${totalProjects} projects${selectedCategory !== 'All' ? ` in ${selectedCategory}` : ''}`
-              : `Showcasing latest work in ${selectedCategory === 'All' ? 'data science and machine learning' : selectedCategory}`
+              ? content.allSubtitle
+                  .replace('{count}', totalProjects)
+                  .replace('{category}', selectedCategory !== 'All' ? ` in ${selectedCategory}` : '')
+              : content.subtitle
             }
           </p>
         </div>
 
         {/* Category Filter */}
-        <div className="project-filters">
-          {projectCategories.map((category) => (
-            <button
-              key={category}
-              className={`filter-btn ${selectedCategory === category ? 'active' : ''}`}
-              onClick={() => handleCategoryChange(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        {projectCategories && projectCategories.length > 0 && (
+          <div className="project-filters">
+            {projectCategories.map((category) => (
+              <button
+                key={category}
+                className={`filter-btn ${selectedCategory === category ? 'active' : ''}`}
+                onClick={() => handleCategoryChange(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Projects Grid */}
         <div className="projects-grid">
@@ -91,7 +106,7 @@ const Projects = memo(() => {
           ) : (
             <div className="no-projects">
               <i className="bi bi-folder-x"></i>
-              <p>No projects found in this category</p>
+              <p>{content.noProjects}</p>
             </div>
           )}
         </div>
@@ -105,7 +120,7 @@ const Projects = memo(() => {
                 onClick={handleViewAll}
               >
                 <i className="bi bi-grid-3x3"></i>
-                View All Projects ({totalProjects})
+                {content.viewAllButton.replace('{count}', totalProjects)}
               </button>
             ) : (
               <button 
@@ -113,7 +128,7 @@ const Projects = memo(() => {
                 onClick={handleShowLess}
               >
                 <i className="bi bi-eye-slash"></i>
-                Show Less
+                {content.showLessButton}
               </button>
             )}
           </div>
@@ -171,11 +186,13 @@ const ProjectCard = memo(({ project, index }) => {
         </div>
 
         {/* Status Badge */}
-        <div className="project-status-badge">
-          <span className={`status ${project.status.toLowerCase().replace(' ', '-')}`}>
-            {project.status}
-          </span>
-        </div>
+        {project.status && (
+          <div className="project-status-badge">
+            <span className={`status ${project.status.toLowerCase().replace(' ', '-')}`}>
+              {project.status}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Content */}
@@ -186,7 +203,7 @@ const ProjectCard = memo(({ project, index }) => {
             <i className="bi bi-folder"></i>
             {project.category}
           </span>
-          <span className="year">{project.year}</span>
+          {project.year && <span className="year">{project.year}</span>}
         </div>
 
         {/* Title */}
@@ -196,16 +213,18 @@ const ProjectCard = memo(({ project, index }) => {
         <p className="project-description">{project.description}</p>
 
         {/* Tags */}
-        <div className="project-tags">
-          {project.tags.slice(0, 3).map((tag) => (
-            <span key={tag} className="tag">
-              {tag}
-            </span>
-          ))}
-          {project.tags.length > 3 && (
-            <span className="tag more">+{project.tags.length - 3}</span>
-          )}
-        </div>
+        {project.tags && project.tags.length > 0 && (
+          <div className="project-tags">
+            {project.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="tag">
+                {tag}
+              </span>
+            ))}
+            {project.tags.length > 3 && (
+              <span className="tag more">+{project.tags.length - 3}</span>
+            )}
+          </div>
+        )}
 
         {/* Footer - Links */}
         <div className="project-footer">
@@ -238,6 +257,61 @@ const ProjectCard = memo(({ project, index }) => {
 });
 
 ProjectCard.displayName = 'ProjectCard';
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.string,
+    category: PropTypes.string,
+    status: PropTypes.string,
+    year: PropTypes.number,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    githubUrl: PropTypes.string,
+    demoUrl: PropTypes.string,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+};
+
 Projects.displayName = 'Projects';
+
+Projects.propTypes = {
+  projects: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      category: PropTypes.string,
+      status: PropTypes.string,
+      year: PropTypes.number,
+      tags: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  projectCategories: PropTypes.arrayOf(PropTypes.string),
+  projectsContent: PropTypes.shape({
+    featuredTitle: PropTypes.string,
+    allTitle: PropTypes.string,
+    subtitle: PropTypes.string,
+    allSubtitle: PropTypes.string,
+    viewAllButton: PropTypes.string,
+    showLessButton: PropTypes.string,
+    noProjects: PropTypes.string,
+  }),
+};
+
+Projects.defaultProps = {
+  projects: [],
+  projectCategories: ['All'],
+  projectsContent: {
+    featuredTitle: 'Featured Projects',
+    allTitle: 'All Projects',
+    subtitle: 'Some of my recent work',
+    allSubtitle: 'Showing {count} projects{category}',
+    viewAllButton: 'View All Projects ({count})',
+    showLessButton: 'Show Less',
+    noProjects: 'No projects found in this category',
+  },
+};
 
 export default Projects;

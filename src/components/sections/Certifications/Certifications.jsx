@@ -1,9 +1,9 @@
 import { memo } from 'react';
+import PropTypes from 'prop-types';
 import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
-import { certifications } from '../../../data/portfolioData';
 import './Certifications.css';
 
-const Certifications = memo(() => {
+const Certifications = memo(({ certifications }) => {
   const [elementRef, isVisible] = useIntersectionObserver();
 
   return (
@@ -23,7 +23,7 @@ const Certifications = memo(() => {
         </div>
 
         <div className="certifications-grid">
-          {certifications.map((cert, index) => (
+          {certifications?.map((cert, index) => (
             <div 
               key={cert.id} 
               className={`certification-card ${isVisible ? 'fade-in' : ''}`}
@@ -80,36 +80,59 @@ const Certifications = memo(() => {
         </div>
 
         {/* Stats Summary */}
-        <div className="cert-stats">
-          <div className="stat-item">
-            <i className="bi bi-patch-check-fill"></i>
-            <div className="stat-content">
-              <span className="stat-value">{certifications.length}</span>
-              <span className="stat-label">Total Certifications</span>
+        {certifications && certifications.length > 0 && (
+          <div className="cert-stats">
+            <div className="stat-item">
+              <i className="bi bi-patch-check-fill"></i>
+              <div className="stat-content">
+                <span className="stat-value">{certifications.length}</span>
+                <span className="stat-label">Total Certifications</span>
+              </div>
+            </div>
+            <div className="stat-item">
+              <i className="bi bi-trophy-fill"></i>
+              <div className="stat-content">
+                <span className="stat-value">
+                  {certifications.filter(c => c.name.includes('Competition')).length}
+                </span>
+                <span className="stat-label">Competition Awards</span>
+              </div>
+            </div>
+            <div className="stat-item">
+              <i className="bi bi-mortarboard-fill"></i>
+              <div className="stat-content">
+                <span className="stat-value">
+                  {certifications.filter(c => 
+                    c.issuer.includes('MySkill') || c.name.includes('Belajar')
+                  ).length}
+                </span>
+                <span className="stat-label">Learning Certificates</span>
+              </div>
             </div>
           </div>
-          <div className="stat-item">
-            <i className="bi bi-trophy-fill"></i>
-            <div className="stat-content">
-              <span className="stat-value">
-                {certifications.filter(c => c.name.includes('Competition')).length}
-              </span>
-              <span className="stat-label">Competition Awards</span>
-            </div>
-          </div>
-          <div className="stat-item">
-            <i className="bi bi-mortarboard-fill"></i>
-            <div className="stat-content">
-              <span className="stat-value">
-                {certifications.filter(c => c.issuer.includes('MySkill') || c.name.includes('Belajar')).length}
-              </span>
-              <span className="stat-label">Learning Certificates</span>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </section>
   );
 });
+
+Certifications.displayName = 'Certifications';
+
+Certifications.propTypes = {
+  certifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      issuer: PropTypes.string,
+      date: PropTypes.string,
+      credentialId: PropTypes.string,
+      url: PropTypes.string,
+    })
+  ),
+};
+
+Certifications.defaultProps = {
+  certifications: [],
+};
 
 export default Certifications;

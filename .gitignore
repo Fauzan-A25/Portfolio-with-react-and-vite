@@ -1,29 +1,79 @@
-# dependencies
+# ============================================
+# VITE + VERCEL + REACT PORTFOLIO
+# ============================================
+
+# Dependencies
 node_modules/
-dist/
-build/
-.vite/
-.cache/
-
-# local env files
-.env
-.env.*
-
-# system files
-.DS_Store
-Thumbs.db
-
-# editor config
-.vscode/
-.idea/
-
-# log files
 npm-debug.log*
 yarn-debug.log*
 pnpm-debug.log*
 
-# misc
-*.local
-*.lock
+# Production builds
+dist/
+build/
+
+# Vite
+.vite/
+.cache/
+.vite-inspect/
+
+# Vercel
+.vercel/
+
+# Environment variables
+.env
+.env.local
+.env.*
+.env*.local
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.vscode/settings.json
+.idea/
+.idea/workspace.xml
+.idea/tasks.xml
+
+# Temporary files
+*.log
+logs/
+*.tmp
+*.tmp.*
+*.swp
+*.swo
+*.swn
 *.bak
-*.tmps
+*.tgz
+*.tar.gz
+
+# IDE temporary files
+*.rej
+*.orig
+
+# OS-specific
+# Windows
+Thumbs.db
+ehthumbs.db
+# Mac
+.DS_Store?
+# Linux
+*~
+
+# ============================================
+# GITIGNORE TEMPLATE (DO NOT COMMIT)
+# ============================================
+# .env.example           ← COMMIT THIS!
+# api/chat.js            ← COMMIT THIS!
+# src/**                 ← COMMIT THIS!
+
+.vercel
+.env*.local

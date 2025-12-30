@@ -1,16 +1,21 @@
 import { memo } from 'react';
+import PropTypes from 'prop-types';
 import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
-import { skills } from '../../../data/portfolioData';
 import './Skills.css';
 
-const Skills = memo(() => {
+const Skills = memo(({ skills, skillsContent }) => {
   const [elementRef, isVisible] = useIntersectionObserver();
 
-  const categoryTitles = {
-    programming: 'Programming Languages',
-    dataScience: 'Data Science & ML',
-    tools: 'Tools & Frameworks',
-    soft: 'Soft Skills',
+  // Default content fallback
+  const content = skillsContent || {
+    title: 'Skills & Expertise',
+    subtitle: 'Technologies and tools I work with',
+    categoryTitles: {
+      programming: 'Programming Languages',
+      dataScience: 'Data Science & ML',
+      tools: 'Tools & Technologies',
+      soft: 'Soft Skills',
+    },
   };
 
   return (
@@ -20,16 +25,16 @@ const Skills = memo(() => {
       className={`skills-section ${isVisible ? 'animate-in' : ''}`}
     >
       <div className="container">
-        <h2 className="section-title">Skills & Expertise</h2>
+        <h2 className="section-title">{content.title}</h2>
         <p className="section-subtitle">
-          Technologies and tools I work with, measured by years of hands-on experience
+          {content.subtitle}
         </p>
 
         <div className="skills-container">
-          {Object.entries(skills).map(([category, skillList], index) => (
+          {skills && Object.entries(skills).map(([category, skillList], index) => (
             <SkillCategory 
               key={category}
-              title={categoryTitles[category] || category}
+              title={content.categoryTitles?.[category] || category}
               skills={skillList}
               delay={index * 100}
             />
@@ -42,6 +47,8 @@ const Skills = memo(() => {
 
 const SkillCategory = memo(({ title, skills, delay }) => {
   const [categoryRef, isVisible] = useIntersectionObserver();
+
+  if (!skills || skills.length === 0) return null;
 
   return (
     <div 
@@ -66,6 +73,7 @@ const SkillCategory = memo(({ title, skills, delay }) => {
 
 const SkillCard = memo(({ skill, isVisible, delay }) => {
   const getExperienceLabel = (years) => {
+    if (!years) return '';
     if (years < 1) return `${years * 12} months`;
     if (years === 1) return '1 year';
     return `${years} years`;
@@ -86,9 +94,11 @@ const SkillCard = memo(({ skill, isVisible, delay }) => {
       <div className="skill-content">
         <div className="skill-header">
           <h4 className="skill-name">{skill.name}</h4>
-          <span className="skill-experience">
-            {getExperienceLabel(skill.yearsOfExperience)}
-          </span>
+          {skill.yearsOfExperience && (
+            <span className="skill-experience">
+              {getExperienceLabel(skill.yearsOfExperience)}
+            </span>
+          )}
         </div>
         
         {skill.description && (
@@ -109,7 +119,71 @@ const SkillCard = memo(({ skill, isVisible, delay }) => {
 });
 
 SkillCategory.displayName = 'SkillCategory';
+
+SkillCategory.propTypes = {
+  title: PropTypes.string.isRequired,
+  skills: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      icon: PropTypes.string,
+      color: PropTypes.string,
+      yearsOfExperience: PropTypes.number,
+      description: PropTypes.string,
+      projects: PropTypes.arrayOf(PropTypes.string),
+    })
+  ).isRequired,
+  delay: PropTypes.number,
+};
+
 SkillCard.displayName = 'SkillCard';
+
+SkillCard.propTypes = {
+  skill: PropTypes.shape({
+    name: PropTypes.string,
+    icon: PropTypes.string,
+    color: PropTypes.string,
+    yearsOfExperience: PropTypes.number,
+    description: PropTypes.string,
+    projects: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+  isVisible: PropTypes.bool.isRequired,
+  delay: PropTypes.number.isRequired,
+};
+
 Skills.displayName = 'Skills';
+
+Skills.propTypes = {
+  skills: PropTypes.objectOf(
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        icon: PropTypes.string,
+        color: PropTypes.string,
+        yearsOfExperience: PropTypes.number,
+        description: PropTypes.string,
+        projects: PropTypes.arrayOf(PropTypes.string),
+      })
+    )
+  ),
+  skillsContent: PropTypes.shape({
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+    categoryTitles: PropTypes.objectOf(PropTypes.string),
+  }),
+};
+
+Skills.defaultProps = {
+  skills: {},
+  skillsContent: {
+    title: 'Skills & Expertise',
+    subtitle: 'Technologies and tools I work with',
+    categoryTitles: {
+      programming: 'Programming Languages',
+      dataScience: 'Data Science & ML',
+      tools: 'Tools & Technologies',
+      soft: 'Soft Skills',
+    },
+  },
+};
 
 export default Skills;

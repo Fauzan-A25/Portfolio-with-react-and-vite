@@ -1,9 +1,9 @@
 import { useState, useEffect, memo } from 'react';
+import PropTypes from 'prop-types';
 import { useScrollAnimation } from '../../../hooks/useScrollAnimation';
-import { navLinks } from '../../../data/portfolioData';
 import './Navbar.css';
 
-const Navbar = memo(() => {
+const Navbar = memo(({ navLinks }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY, isScrollingDown } = useScrollAnimation();
@@ -44,6 +44,16 @@ const Navbar = memo(() => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Default navLinks fallback
+  const links = navLinks || [
+    { id: 'home', label: 'Home', href: '#home' },
+    { id: 'about', label: 'About', href: '#about' },
+    { id: 'skills', label: 'Skills', href: '#skills' },
+    { id: 'experience', label: 'Experience', href: '#experience' },
+    { id: 'projects', label: 'Projects', href: '#projects' },
+    { id: 'contact', label: 'Contact', href: '#contact' },
+  ];
+
   return (
     <nav
       className={`navbar ${scrollY > 50 ? 'navbar-scrolled' : ''} ${
@@ -66,7 +76,7 @@ const Navbar = memo(() => {
         </button>
 
         <ul className={`nav-links ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
-          {navLinks.map((link) => (
+          {links.map((link) => (
             <li key={link.id}>
               <a
                 href={link.href}
@@ -84,5 +94,27 @@ const Navbar = memo(() => {
 });
 
 Navbar.displayName = 'Navbar';
+
+Navbar.propTypes = {
+  navLinks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      label: PropTypes.string,
+      href: PropTypes.string,
+    })
+  ),
+};
+
+Navbar.defaultProps = {
+  navLinks: [
+    { id: 'home', label: 'Home', href: '#home' },
+    { id: 'about', label: 'About', href: '#about' },
+    { id: 'skills', label: 'Skills', href: '#skills' },
+    { id: 'experience', label: 'Experience', href: '#experience' },
+    { id: 'certifications', label: 'Certifications', href: '#certifications' },
+    { id: 'projects', label: 'Projects', href: '#projects' },
+    { id: 'contact', label: 'Contact', href: '#contact' },
+  ],
+};
 
 export default Navbar;

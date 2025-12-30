@@ -5,14 +5,33 @@
 .experience-section {
   padding: 100px 0;
   background: var(--primary-bg);
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
 }
 
-.experience-section.animate-in {
-  opacity: 1;
-  transform: translateY(0);
+/* ========================================
+   SECTION HEADER
+   ======================================== */
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.section-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* ========================================
@@ -85,15 +104,7 @@
 
 .experience-card {
   position: relative;
-  margin-bottom: 40px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.experience-card.fade-in {
-  opacity: 1;
-  transform: translateY(0);
+  margin-bottom: 50px;
 }
 
 /* Timeline Dot */
@@ -125,14 +136,14 @@
 }
 
 /* ========================================
-   CARD CONTENT
+   CARD CONTENT - IMPROVED SPACING
    ======================================== */
 
 .experience-content {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
-  padding: 30px;
+  padding: 32px;
   margin-left: calc(50% + 60px);
   width: calc(50% - 80px);
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -155,219 +166,278 @@
 }
 
 /* ========================================
-   HEADER
+   HEADER - IMPROVED LAYOUT
    ======================================== */
 
 .experience-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .experience-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.title-group {
+  flex: 1;
 }
 
 .experience-title {
   color: var(--text-primary);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
-  margin: 0 0 10px 0;
-  line-height: 1.3;
+  margin: 0 0 14px 0;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
 }
 
 .company-info {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   font-size: 14px;
 }
 
 .company-name,
-.location {
+.company-location {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: var(--text-secondary);
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .company-name i,
-.location i {
+.company-location i {
   color: var(--accent-color);
-  font-size: 13px;
-}
-
-.type-badge {
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
+  font-size: 14px;
+  min-width: 14px;
   flex-shrink: 0;
 }
 
-.type-badge[data-type="internship"] {
+.experience-type {
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+  line-height: 1.2;
+}
+
+.type-internship {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
 }
 
-.type-badge[data-type="organizational"] {
+.type-organizational {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   color: white;
 }
 
 /* ========================================
-   PERIOD
+   PERIOD - IMPROVED SPACING
    ======================================== */
 
 .experience-period {
   display: flex;
   align-items: center;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 12px;
   color: var(--accent-color);
   font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 15px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 212, 170, 0.1);
 }
 
 .experience-period i {
-  font-size: 15px;
+  font-size: 16px;
+}
+
+.experience-period > span:first-of-type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .duration {
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .duration {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.duration i {
+  font-size: 14px;
+  color: var(--text-secondary);
 }
 
 /* ========================================
-   DESCRIPTION
+   DESCRIPTION - IMPROVED READABILITY
    ======================================== */
 
 .experience-description {
   color: var(--text-secondary);
   font-size: 15px;
-  line-height: 1.7;
-  margin-bottom: 20px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  font-weight: 400;
 }
 
 /* ========================================
-   DETAILS
+   RESPONSIBILITIES - BETTER SPACING
    ======================================== */
 
-.experience-details {
-  margin: 20px 0;
+.experience-responsibilities {
+  margin: 24px 0;
 }
 
-.details-title {
+.experience-responsibilities h4 {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: var(--text-primary);
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-.details-title i {
-  color: var(--accent-color);
   font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
 }
 
-.responsibilities-list {
+.experience-responsibilities h4 i {
+  color: var(--accent-color);
+  font-size: 18px;
+}
+
+.experience-responsibilities ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.responsibilities-list li {
+.experience-responsibilities li {
   position: relative;
-  padding-left: 25px;
+  padding-left: 30px;
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.8;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  font-weight: 400;
 }
 
-.responsibilities-list li::before {
+.experience-responsibilities li:last-child {
+  margin-bottom: 0;
+}
+
+.experience-responsibilities li::before {
   content: '▹';
   position: absolute;
-  left: 0;
+  left: 8px;
   color: var(--accent-color);
   font-size: 18px;
+  line-height: 1.8;
 }
 
 /* ========================================
-   TECHNOLOGIES
+   TECHNOLOGIES - IMPROVED LAYOUT
    ======================================== */
 
 .experience-technologies {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 20px 0;
+  gap: 10px;
+  margin: 24px 0;
 }
 
 .tech-tag {
-  padding: 5px 12px;
+  padding: 6px 14px;
   background: rgba(0, 212, 170, 0.1);
   border: 1px solid rgba(0, 212, 170, 0.2);
   border-radius: 6px;
   color: var(--accent-color);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   transition: all 0.3s ease;
+  line-height: 1.4;
 }
 
 .tech-tag:hover {
   background: rgba(0, 212, 170, 0.2);
+  border-color: var(--accent-color);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 212, 170, 0.2);
 }
 
 /* ========================================
-   ACHIEVEMENTS
+   ACHIEVEMENTS - BETTER PRESENTATION
    ======================================== */
 
 .experience-achievements {
-  margin-top: 20px;
-  padding: 15px;
+  margin-top: 24px;
+  padding: 18px 20px;
   background: rgba(0, 212, 170, 0.05);
-  border-left: 3px solid var(--accent-color);
+  border-left: 4px solid var(--accent-color);
   border-radius: 8px;
 }
 
-.achievements-title {
+.experience-achievements h4 {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: var(--text-primary);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
 }
 
-.achievements-title i {
+.experience-achievements h4 i {
   color: #FFD700;
-  font-size: 15px;
+  font-size: 18px;
 }
 
-.achievements-list {
+.experience-achievements ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.achievements-list li {
+.experience-achievements li {
   position: relative;
-  padding-left: 25px;
+  padding-left: 30px;
   color: var(--text-secondary);
-  font-size: 13px;
-  line-height: 1.7;
-  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  font-weight: 400;
 }
 
-.achievements-list li::before {
+.experience-achievements li:last-child {
+  margin-bottom: 0;
+}
+
+.experience-achievements li::before {
   content: '★';
   position: absolute;
-  left: 0;
+  left: 8px;
   color: #FFD700;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 1.8;
 }
 
 /* ========================================
@@ -377,6 +447,10 @@
 @media (max-width: 768px) {
   .experience-section {
     padding: 80px 0;
+  }
+
+  .section-title {
+    font-size: 28px;
   }
 
   .timeline-line {
@@ -397,25 +471,61 @@
     margin-left: 80px !important;
     margin-right: 0 !important;
     width: calc(100% - 80px) !important;
-    padding: 25px;
+    padding: 28px;
   }
 
   .experience-header {
     flex-direction: column;
+    gap: 14px;
   }
 
-  .type-badge {
+  .experience-type {
     align-self: flex-start;
   }
 
   .experience-title {
-    font-size: 18px;
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .company-info {
+    font-size: 13px;
+  }
+
+  .experience-period {
+    font-size: 13px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .duration {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .experience-responsibilities h4,
+  .experience-achievements h4 {
+    font-size: 15px;
+  }
+
+  .experience-responsibilities li,
+  .experience-achievements li {
+    font-size: 13px;
   }
 }
 
 @media (max-width: 480px) {
   .experience-section {
     padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
   }
 
   .experience-filters {
@@ -437,23 +547,37 @@
     height: 35px;
   }
 
+  .timeline-dot i {
+    font-size: 16px;
+  }
+
   .experience-content {
     margin-left: 65px !important;
     width: calc(100% - 65px) !important;
-    padding: 20px;
+    padding: 24px;
   }
 
   .experience-title {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .company-info,
   .experience-period {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .experience-description {
     font-size: 14px;
+  }
+
+  .experience-type {
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+
+  .tech-tag {
+    padding: 5px 12px;
+    font-size: 12px;
   }
 }
 
@@ -482,6 +606,7 @@
   background-size: 100px 100px, 100px 100px;
   animation: digitalRain 20s linear infinite;
   pointer-events: none;
+  z-index: 0;
 }
 
 @keyframes digitalRain {
@@ -505,11 +630,32 @@
   background-size: 200% 200%;
   animation: particleShift 25s ease-in-out infinite;
   pointer-events: none;
+  z-index: 0;
 }
 
 @keyframes particleShift {
   0%, 100% { background-position: 0% 0%; }
   50% { background-position: 100% 100%; }
+}
+
+/* Ensure content is above background effects */
+[data-theme="anime"] .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Section header */
+[data-theme="anime"] .section-title {
+  background: linear-gradient(135deg, #ffffff 0%, #00e5ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.5));
+}
+
+[data-theme="anime"] .section-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
 }
 
 /* Filter buttons with neon effect */
@@ -662,10 +808,22 @@
     rgba(0, 229, 255, 0.1), 
     transparent);
   transition: left 0.8s ease;
+  z-index: 0;
 }
 
 [data-theme="anime"] .experience-card:hover .experience-content::before {
   left: 100%;
+}
+
+/* Ensure content is above scan line */
+[data-theme="anime"] .experience-header,
+[data-theme="anime"] .experience-period,
+[data-theme="anime"] .experience-description,
+[data-theme="anime"] .experience-responsibilities,
+[data-theme="anime"] .experience-technologies,
+[data-theme="anime"] .experience-achievements {
+  position: relative;
+  z-index: 1;
 }
 
 [data-theme="anime"] .experience-card:hover .experience-content {
@@ -675,6 +833,11 @@
               0 0 60px rgba(0, 229, 255, 0.3),
               inset 0 0 50px rgba(0, 229, 255, 0.05);
   transform: translateY(-8px);
+}
+
+/* Header border */
+[data-theme="anime"] .experience-header {
+  border-bottom-color: rgba(0, 229, 255, 0.15);
 }
 
 /* Experience title */
@@ -698,19 +861,19 @@
 
 /* Company info */
 [data-theme="anime"] .company-name,
-[data-theme="anime"] .location {
+[data-theme="anime"] .company-location {
   color: rgba(255, 255, 255, 0.75);
   text-shadow: 0 0 5px rgba(0, 229, 255, 0.2);
 }
 
 [data-theme="anime"] .company-name i,
-[data-theme="anime"] .location i {
+[data-theme="anime"] .company-location i {
   color: #00e5ff;
   filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.6));
 }
 
 /* Type badges with enhanced gradients */
-[data-theme="anime"] .type-badge[data-type="internship"] {
+[data-theme="anime"] .type-internship {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4),
               0 0 20px rgba(118, 75, 162, 0.3);
@@ -718,7 +881,7 @@
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
-[data-theme="anime"] .type-badge[data-type="organizational"] {
+[data-theme="anime"] .type-organizational {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4),
               0 0 20px rgba(245, 87, 108, 0.3);
@@ -726,7 +889,7 @@
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
-[data-theme="anime"] .experience-card:hover .type-badge {
+[data-theme="anime"] .experience-card:hover .experience-type {
   box-shadow: 0 6px 25px rgba(240, 147, 251, 0.6),
               0 0 30px rgba(245, 87, 108, 0.5);
 }
@@ -735,6 +898,7 @@
 [data-theme="anime"] .experience-period {
   color: #00e5ff;
   text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+  border-bottom-color: rgba(0, 229, 255, 0.2);
 }
 
 [data-theme="anime"] .experience-period i {
@@ -744,6 +908,11 @@
 [data-theme="anime"] .duration {
   color: rgba(255, 255, 255, 0.7);
   text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
+  border-left-color: rgba(0, 229, 255, 0.2);
+}
+
+[data-theme="anime"] .duration i {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Description */
@@ -752,22 +921,22 @@
   text-shadow: 0 0 3px rgba(0, 229, 255, 0.1);
 }
 
-/* Details section */
-[data-theme="anime"] .details-title {
+/* Responsibilities section */
+[data-theme="anime"] .experience-responsibilities h4 {
   color: #ffffff;
   text-shadow: 0 0 8px rgba(255, 23, 68, 0.4);
 }
 
-[data-theme="anime"] .details-title i {
+[data-theme="anime"] .experience-responsibilities h4 i {
   color: #ff4081;
   filter: drop-shadow(0 0 8px rgba(255, 64, 129, 0.8));
 }
 
-[data-theme="anime"] .responsibilities-list li {
+[data-theme="anime"] .experience-responsibilities li {
   color: rgba(255, 255, 255, 0.75);
 }
 
-[data-theme="anime"] .responsibilities-list li::before {
+[data-theme="anime"] .experience-responsibilities li::before {
   color: #00e5ff;
   text-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
 }
@@ -816,12 +985,12 @@
               0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-[data-theme="anime"] .achievements-title {
+[data-theme="anime"] .experience-achievements h4 {
   color: #ffffff;
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
 }
 
-[data-theme="anime"] .achievements-title i {
+[data-theme="anime"] .experience-achievements h4 i {
   color: #FFD700;
   filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
   animation: starShine 2s ease-in-out infinite;
@@ -838,11 +1007,11 @@
   }
 }
 
-[data-theme="anime"] .achievements-list li {
+[data-theme="anime"] .experience-achievements li {
   color: rgba(255, 255, 255, 0.8);
 }
 
-[data-theme="anime"] .achievements-list li::before {
+[data-theme="anime"] .experience-achievements li::before {
   color: #FFD700;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
   animation: starTwinkle 3s ease-in-out infinite;
@@ -853,7 +1022,7 @@
   50% { opacity: 0.6; }
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for anime theme */
 @media (max-width: 768px) {
   [data-theme="anime"] .timeline-line {
     box-shadow: 0 0 15px rgba(255, 23, 68, 0.5),
@@ -868,6 +1037,10 @@
 
   [data-theme="anime"] .experience-card:hover .experience-content {
     transform: translateY(-5px);
+  }
+
+  [data-theme="anime"] .duration {
+    border-left: none;
   }
 }
 

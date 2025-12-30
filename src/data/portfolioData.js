@@ -632,6 +632,112 @@ export const projectCategories = [
   'Data Visualization',
 ];
 
+// Hero section typing texts
+export const heroTypingTexts = [
+  'Machine Learning Enthusiast',
+  'Python Developer',
+];
+
+// EmailJS Configuration
+export const emailjsConfig = {
+  serviceId: 'service_e0byds5',
+  templateId: 'template_jtsltyj',
+  publicKey: '_RI8Nk23mYc9B8ZeX',
+};
+
+// About Section Content
+export const aboutContent = {
+  paragraphs: [
+    {
+      id: 1,
+      text: 'Third-year undergraduate student of Data Science at {university} with strong skills in data analysis, statistical evaluation, and problem-solving. Actively involved in academic activities with excellent attention to detail and observation skills.',
+    },
+    {
+      id: 2,
+      text: 'Proficient in programming with Python for data processing and analysis. Experienced in participating in various Data Science competitions, demonstrating strong analytical and critical thinking skills. A collaborative team player dedicated to delivering accurate and reliable data insights.',
+    },
+  ],
+  highlights: [
+    {
+      id: 1,
+      icon: 'bi-check-circle-fill',
+      text: 'Strong analytical and problem-solving skills',
+    },
+    {
+      id: 2,
+      icon: 'bi-check-circle-fill',
+      text: 'Experience in ML competitions and projects',
+    },
+    {
+      id: 3,
+      icon: 'bi-check-circle-fill',
+      text: 'Team collaboration and communication',
+    },
+  ],
+};
+
+// Skills Section Content
+export const skillsContent = {
+  title: 'Skills & Expertise',
+  subtitle: 'Technologies and tools I work with, measured by years of hands-on experience',
+  categoryTitles: {
+    programming: 'Programming Languages',
+    dataScience: 'Data Science & ML',
+    tools: 'Tools & Frameworks',
+    soft: 'Soft Skills',
+  },
+};
+
+// Contact Section Content
+export const contactContent = {
+  title: 'Get In Touch',
+  subtitle: "Have a project in mind? Let's work together to create something amazing",
+  leftSection: {
+    title: 'Contact Me',
+    description: "Feel free to reach out through any of these channels. I'm always open to discussing new projects and opportunities.",
+  },
+  form: {
+    name: {
+      label: 'Your Name',
+      placeholder: 'John Doe',
+    },
+    email: {
+      label: 'Your Email',
+      placeholder: 'john@example.com',
+    },
+    subject: {
+      label: 'Subject',
+      placeholder: 'Project Inquiry',
+    },
+    message: {
+      label: 'Message',
+      placeholder: 'Tell me about your project...',
+    },
+    submit: 'Send Message',
+    sending: 'Sending...',
+  },
+  messages: {
+    success: 'Thank you! Your message has been sent successfully.',
+    error: 'Oops! Something went wrong. Please try again or contact me directly.',
+  },
+};
+
+// Projects Section Content
+export const projectsContent = {
+  featuredTitle: 'Featured Projects',
+  allTitle: 'All Projects',
+  subtitle: 'Showcasing latest work in data science and machine learning',
+  allSubtitle: 'Displaying all {count} projects{category}',
+  viewAllButton: 'View All Projects ({count})',
+  showLessButton: 'Show Less',
+  noProjects: 'No projects found in this category',
+};
+
+// Footer Section Content
+export const footerContent = {
+  quote: 'Data is the new oil. But like oil, data is useless unless refined.',
+};
+
 export default {
   personalInfo,
   socialLinks,
@@ -643,4 +749,11 @@ export default {
   stats,
   navLinks,
   projectCategories,
+  heroTypingTexts,
+  emailjsConfig,
+  aboutContent,
+  skillsContent,
+  contactContent,
+  projectsContent,
+  footerContent,
 };

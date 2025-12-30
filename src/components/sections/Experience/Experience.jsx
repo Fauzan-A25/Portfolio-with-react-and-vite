@@ -1,23 +1,8 @@
 import { memo } from 'react';
-import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
+import PropTypes from 'prop-types';
 import './Experience.css';
 
-// Import dengan error handling
-let experiences = [];
-try {
-  const portfolioData = await import('../../../data/portfolioData');
-  experiences = portfolioData.experiences || [];
-} catch (error) {
-  console.error('Error loading experiences:', error);
-}
-
-const Experience = memo(() => {
-  const [elementRef, isVisible] = useIntersectionObserver();
-
-  // Debug log
-  console.log('Experience rendering, data:', experiences);
-  console.log('isVisible:', isVisible);
-
+const Experience = memo(({ experiences }) => {
   // Jika data kosong, tampilkan placeholder
   if (!experiences || experiences.length === 0) {
     return (
@@ -34,7 +19,7 @@ const Experience = memo(() => {
       >
         <div className="container">
           <h2 style={{ color: 'white', textAlign: 'center' }}>
-            No experiences data found. Please add experiences to portfolioData.js
+            Loading experiences...
           </h2>
         </div>
       </section>
@@ -44,8 +29,7 @@ const Experience = memo(() => {
   return (
     <section 
       id="experience" 
-      className={`experience-section ${isVisible ? 'animate-in' : ''}`}
-      ref={elementRef}
+      className="experience-section"
     >
       <div className="container">
         <div className="section-header">
@@ -61,11 +45,10 @@ const Experience = memo(() => {
         <div className="timeline-container">
           <div className="timeline-line"></div>
           
-          {experiences.map((exp, index) => (
+          {experiences.map((exp) => (
             <div 
               key={exp.id} 
-              className={`experience-card ${isVisible ? 'fade-in' : ''}`}
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="experience-card"
             >
               {/* Timeline Dot */}
               <div className="timeline-dot">
@@ -83,18 +66,61 @@ const Experience = memo(() => {
                         <i className="bi bi-building"></i>
                         {exp.company}
                       </span>
+                      {exp.location && (
+                        <span className="company-location">
+                          <i className="bi bi-geo-alt"></i>
+                          {exp.location}
+                        </span>
+                      )}
                     </div>
                   </div>
+                  {exp.type && (
+                    <span className={`experience-type type-${exp.type.toLowerCase()}`}>
+                      {exp.type}
+                    </span>
+                  )}
                 </div>
 
                 {/* Period */}
                 <div className="experience-period">
                   <i className="bi bi-calendar-event"></i>
                   <span>{exp.period}</span>
+                  {exp.duration && (
+                    <span className="duration">
+                      <i className="bi bi-clock"></i>
+                      {exp.duration}
+                    </span>
+                  )}
                 </div>
 
                 {/* Description */}
-                <p className="experience-description">{exp.description}</p>
+                {exp.description && (
+                  <p className="experience-description">{exp.description}</p>
+                )}
+
+                {/* Responsibilities */}
+                {exp.responsibilities && exp.responsibilities.length > 0 && (
+                  <div className="experience-responsibilities">
+                    <h4><i className="bi bi-check-circle"></i> Key Responsibilities:</h4>
+                    <ul>
+                      {exp.responsibilities.map((resp, idx) => (
+                        <li key={idx}>{resp}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Achievements */}
+                {exp.achievements && exp.achievements.length > 0 && (
+                  <div className="experience-achievements">
+                    <h4><i className="bi bi-trophy"></i> Achievements:</h4>
+                    <ul>
+                      {exp.achievements.map((achievement, idx) => (
+                        <li key={idx}>{achievement}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 {/* Technologies */}
                 {exp.technologies && exp.technologies.length > 0 && (
@@ -114,5 +140,27 @@ const Experience = memo(() => {
 });
 
 Experience.displayName = 'Experience';
+
+Experience.propTypes = {
+  experiences: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      company: PropTypes.string,
+      location: PropTypes.string,
+      period: PropTypes.string,
+      duration: PropTypes.string,
+      type: PropTypes.string,
+      description: PropTypes.string,
+      responsibilities: PropTypes.arrayOf(PropTypes.string),
+      technologies: PropTypes.arrayOf(PropTypes.string),
+      achievements: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+};
+
+Experience.defaultProps = {
+  experiences: [],
+};
 
 export default Experience;

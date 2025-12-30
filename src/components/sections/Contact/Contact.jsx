@@ -1,10 +1,10 @@
 import { memo, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
-import { personalInfo, socialLinks } from '../../../data/portfolioData';
 import emailjs from '@emailjs/browser';
 import './Contact.css';
 
-const Contact = memo(() => {
+const Contact = memo(({ personalInfo, socialLinks, emailjsConfig, contactContent }) => {
   const [elementRef, isVisible] = useIntersectionObserver();
   const [formData, setFormData] = useState({
     name: '',
@@ -26,24 +26,22 @@ const Contact = memo(() => {
     setFormStatus({ type: '', message: '' });
 
     try {
-      // ⚠️ GANTI dengan credentials EmailJS Anda
-      // Cara dapat: https://dashboard.emailjs.com/
       await emailjs.send(
-        'service_e0byds5',      // Service ID dari EmailJS Dashboard
-        'template_jtsltyj',     // Template ID dari EmailJS Dashboard
+        emailjsConfig?.serviceId,
+        emailjsConfig?.templateId,
         {
           from_name: formData.name,
           from_email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          to_name: personalInfo.name,
+          to_name: personalInfo?.name,
         },
-        '_RI8Nk23mYc9B8ZeX'       // Public Key dari EmailJS Dashboard
+        emailjsConfig?.publicKey
       );
 
       setFormStatus({
         type: 'success',
-        message: 'Thank you! Your message has been sent successfully.',
+        message: contactContent?.messages?.success || 'Message sent successfully!',
       });
       setFormData({ name: '', email: '', subject: '', message: '' });
 
@@ -55,7 +53,7 @@ const Contact = memo(() => {
       console.error('EmailJS Error:', error);
       setFormStatus({
         type: 'error',
-        message: 'Oops! Something went wrong. Please try again or contact me directly.',
+        message: contactContent?.messages?.error || 'Failed to send message. Please try again.',
       });
     } finally {
       setIsSubmitting(false);
@@ -66,24 +64,26 @@ const Contact = memo(() => {
     {
       icon: 'bi-envelope-fill',
       title: 'Email',
-      value: personalInfo.email,
-      link: `mailto:${personalInfo.email}`,
+      value: personalInfo?.email,
+      link: `mailto:${personalInfo?.email}`,
     },
     {
       icon: 'bi-geo-alt-fill',
       title: 'Location',
-      value: personalInfo.location,
+      value: personalInfo?.location,
       link: null,
     },
   ];
 
-  const socialLinksArray = Object.entries(socialLinks)
-    .filter(([key]) => key !== 'email')
-    .map(([platform, url]) => ({
-      icon: `bi-${platform}`,
-      url,
-      label: platform.charAt(0).toUpperCase() + platform.slice(1),
-    }));
+  const socialLinksArray = socialLinks
+    ? Object.entries(socialLinks)
+        .filter(([key]) => key !== 'email')
+        .map(([platform, url]) => ({
+          icon: `bi-${platform}`,
+          url,
+          label: platform.charAt(0).toUpperCase() + platform.slice(1),
+        }))
+    : [];
 
   return (
     <section 
@@ -92,20 +92,59 @@ const Contact = memo(() => {
       className={`contact-section ${isVisible ? 'animate-in' : ''}`}
     >
       <div className="container">
-        <h2 className="section-title" data-aos="fade-down">Get In Touch</h2>
+        <h2 className="section-title" data-aos="fade-down">
+          {contactContent?.title || 'Get In Touch'}
+        </h2>
         <p className="section-subtitle" data-aos="fade-down" data-aos-delay="100">
-          Have a project in mind? Let's work together to create something amazing
+          {contactContent?.subtitle || "Let's work together"}
         </p>
 
         <div className="row">
           <div className="col-lg-5" data-aos="fade-right" data-aos-delay="200">
             <div className="contact-info-container">
-              <h3 className="contact-info-title">Contact Me</h3>
+              <h3 className="contact-info-title">
+                {contactContent?.leftSection?.title || 'Contact Me'}
+              </h3>
               <p className="contact-info-text">
-                Feel free to reach out through any of these channels. I'm always open 
-                to discussing new projects and opportunities.
+                {contactContent?.leftSection?.description || 'Feel free to reach out!'}
               </p>
 
+              {/* Contact Info Cards */}
+              <div className="contact-info-cards">
+                {contactInfo.map((info, index) => (
+                  info.value && (
+                    <div key={index} className="contact-info-card">
+                      <i className={`bi ${info.icon}`}></i>
+                      <div className="contact-info-details">
+                        <h4>{info.title}</h4>
+                        {info.link ? (
+                          <a href={info.link}>{info.value}</a>
+                        ) : (
+                          <p>{info.value}</p>
+                        )}
+                      </div>
+                    </div>
+                  )
+                ))}
+              </div>
+
+              {/* Social Links */}
+              {socialLinksArray.length > 0 && (
+                <div className="social-links-contact">
+                  {socialLinksArray.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link"
+                      aria-label={social.label}
+                    >
+                      <i className={`bi ${social.icon}`}></i>
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -114,7 +153,9 @@ const Contact = memo(() => {
               <div className="row">
                 <div className="col-md-6">
                   <div className="form-group">
-                    <label htmlFor="name">Your Name</label>
+                    <label htmlFor="name">
+                      {contactContent?.form?.name?.label || 'Your Name'}
+                    </label>
                     <input
                       type="text"
                       id="name"
@@ -123,13 +164,15 @@ const Contact = memo(() => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      placeholder="John Doe"
+                      placeholder={contactContent?.form?.name?.placeholder || 'John Doe'}
                     />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="form-group">
-                    <label htmlFor="email">Your Email</label>
+                    <label htmlFor="email">
+                      {contactContent?.form?.email?.label || 'Your Email'}
+                    </label>
                     <input
                       type="email"
                       id="email"
@@ -138,14 +181,16 @@ const Contact = memo(() => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      placeholder="john@example.com"
+                      placeholder={contactContent?.form?.email?.placeholder || 'john@example.com'}
                     />
                   </div>
                 </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="subject">Subject</label>
+                <label htmlFor="subject">
+                  {contactContent?.form?.subject?.label || 'Subject'}
+                </label>
                 <input
                   type="text"
                   id="subject"
@@ -154,12 +199,14 @@ const Contact = memo(() => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  placeholder="Project Inquiry"
+                  placeholder={contactContent?.form?.subject?.placeholder || 'Project Inquiry'}
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">Message</label>
+                <label htmlFor="message">
+                  {contactContent?.form?.message?.label || 'Message'}
+                </label>
                 <textarea
                   id="message"
                   name="message"
@@ -168,7 +215,7 @@ const Contact = memo(() => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  placeholder="Tell me about your project..."
+                  placeholder={contactContent?.form?.message?.placeholder || 'Tell me about your project...'}
                 ></textarea>
               </div>
 
@@ -187,12 +234,12 @@ const Contact = memo(() => {
                 {isSubmitting ? (
                   <>
                     <span className="spinner-border spinner-border-sm me-2"></span>
-                    Sending...
+                    {contactContent?.form?.sending || 'Sending...'}
                   </>
                 ) : (
                   <>
                     <i className="bi bi-send me-2"></i>
-                    Send Message
+                    {contactContent?.form?.submit || 'Send Message'}
                   </>
                 )}
               </button>
@@ -205,5 +252,82 @@ const Contact = memo(() => {
 });
 
 Contact.displayName = 'Contact';
+
+Contact.propTypes = {
+  personalInfo: PropTypes.shape({
+    name: PropTypes.string,
+    email: PropTypes.string,
+    location: PropTypes.string,
+  }),
+  socialLinks: PropTypes.shape({
+    github: PropTypes.string,
+    linkedin: PropTypes.string,
+    instagram: PropTypes.string,
+    email: PropTypes.string,
+  }),
+  emailjsConfig: PropTypes.shape({
+    serviceId: PropTypes.string,
+    templateId: PropTypes.string,
+    publicKey: PropTypes.string,
+  }),
+  contactContent: PropTypes.shape({
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+    leftSection: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+    }),
+    form: PropTypes.shape({
+      name: PropTypes.shape({
+        label: PropTypes.string,
+        placeholder: PropTypes.string,
+      }),
+      email: PropTypes.shape({
+        label: PropTypes.string,
+        placeholder: PropTypes.string,
+      }),
+      subject: PropTypes.shape({
+        label: PropTypes.string,
+        placeholder: PropTypes.string,
+      }),
+      message: PropTypes.shape({
+        label: PropTypes.string,
+        placeholder: PropTypes.string,
+      }),
+      submit: PropTypes.string,
+      sending: PropTypes.string,
+    }),
+    messages: PropTypes.shape({
+      success: PropTypes.string,
+      error: PropTypes.string,
+    }),
+  }),
+};
+
+Contact.defaultProps = {
+  personalInfo: {},
+  socialLinks: {},
+  emailjsConfig: {},
+  contactContent: {
+    title: 'Get In Touch',
+    subtitle: "Let's work together",
+    leftSection: {
+      title: 'Contact Me',
+      description: 'Feel free to reach out!',
+    },
+    form: {
+      name: { label: 'Your Name', placeholder: 'John Doe' },
+      email: { label: 'Your Email', placeholder: 'john@example.com' },
+      subject: { label: 'Subject', placeholder: 'Project Inquiry' },
+      message: { label: 'Message', placeholder: 'Tell me about your project...' },
+      submit: 'Send Message',
+      sending: 'Sending...',
+    },
+    messages: {
+      success: 'Message sent successfully!',
+      error: 'Failed to send message. Please try again.',
+    },
+  },
+};
 
 export default Contact;

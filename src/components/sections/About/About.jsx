@@ -1,9 +1,9 @@
 import { memo } from 'react';
+import PropTypes from 'prop-types';
 import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
-import { personalInfo, stats } from '../../../data/portfolioData';
 import './About.css';
 
-const About = memo(() => {
+const About = memo(({ personalInfo, aboutContent, stats }) => {
   const [elementRef, isVisible] = useIntersectionObserver();
 
   return (
@@ -20,38 +20,25 @@ const About = memo(() => {
               <h2 className="section-title">About Me</h2>
               <div className="title-underline"></div>
               
-              <p className="about-text">
-                Third-year undergraduate student of <strong>Data Science at {personalInfo.university}</strong> with 
-                strong skills in data analysis, statistical evaluation, and problem-solving. Actively involved 
-                in academic activities with excellent attention to detail and observation skills.
-              </p>
-
-              <p className="about-text">
-                Proficient in programming with <strong>Python</strong> for data processing and analysis. 
-                Experienced in participating in various Data Science competitions, demonstrating strong 
-                analytical and critical thinking skills. A collaborative team player dedicated to delivering 
-                accurate and reliable data insights.
-              </p>
+              {aboutContent?.paragraphs?.map((para) => (
+                <p key={para.id} className="about-text">
+                  {para.text.replace('{university}', personalInfo?.university || 'University')}
+                </p>
+              ))}
 
               {/* Highlights */}
               <div className="about-highlights">
-                <div className="highlight-item">
-                  <i className="bi bi-check-circle-fill"></i>
-                  <span>Strong analytical and problem-solving skills</span>
-                </div>
-                <div className="highlight-item">
-                  <i className="bi bi-check-circle-fill"></i>
-                  <span>Experience in ML competitions and projects</span>
-                </div>
-                <div className="highlight-item">
-                  <i className="bi bi-check-circle-fill"></i>
-                  <span>Team collaboration and communication</span>
-                </div>
+                {aboutContent?.highlights?.map((highlight) => (
+                  <div key={highlight.id} className="highlight-item">
+                    <i className={`bi ${highlight.icon}`}></i>
+                    <span>{highlight.text}</span>
+                  </div>
+                ))}
               </div>
 
               {/* Stats Grid */}
               <div className="stats-grid">
-                {stats.map((stat, index) => (
+                {stats?.map((stat, index) => (
                   <div 
                     key={index} 
                     className="stat-card glass-card"
@@ -83,5 +70,34 @@ const About = memo(() => {
 });
 
 About.displayName = 'About';
+
+About.propTypes = {
+  personalInfo: PropTypes.shape({
+    university: PropTypes.string,
+  }),
+  aboutContent: PropTypes.shape({
+    paragraphs: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        text: PropTypes.string,
+      })
+    ),
+    highlights: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        icon: PropTypes.string,
+        text: PropTypes.string,
+      })
+    ),
+  }),
+  stats: PropTypes.arrayOf(
+    PropTypes.shape({
+      icon: PropTypes.string,
+      value: PropTypes.string,
+      label: PropTypes.string,
+      color: PropTypes.string,
+    })
+  ),
+};
 
 export default About;
