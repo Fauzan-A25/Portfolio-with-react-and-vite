@@ -1,6 +1,7 @@
 import { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
+import { getOptimizedImageUrl } from '../../../utils/imageHelper';
 import './Projects.css';
 
 const Projects = memo(({ projects, projectCategories, projectsContent }) => {
@@ -101,7 +102,7 @@ const Projects = memo(({ projects, projectCategories, projectsContent }) => {
         <div className="projects-grid">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+              <ProjectCard key={project.id || index} project={project} index={index} />
             ))
           ) : (
             <div className="no-projects">
@@ -112,7 +113,7 @@ const Projects = memo(({ projects, projectCategories, projectsContent }) => {
         </div>
 
         {/* View All / Show Less Button */}
-        {totalProjects > 3 && (
+        {totalProjects > itemsToShow && (
           <div className="projects-footer">
             {!showAll ? (
               <button 
@@ -140,6 +141,29 @@ const Projects = memo(({ projects, projectCategories, projectsContent }) => {
 
 const ProjectCard = memo(({ project, index }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // ✅ Get optimized Google Drive image URL
+  const imageUrl = getOptimizedImageUrl(
+    project.image,
+    'https://via.placeholder.com/600x400/1a1a1a/00d4aa?text=No+Image'
+  );
+
+  // ✅ Handle image load error
+  const handleImageError = (e) => {
+    console.error(`❌ Failed to load image for project: ${project.title}`, project.image);
+    setImageError(true);
+    setIsLoading(false);
+    
+    // Set fallback image
+    e.target.src = 'https://via.placeholder.com/600x400/1a1a1a/00d4aa?text=Image+Error';
+  };
+
+  // ✅ Handle image load success
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
 
   return (
     <div 
@@ -150,11 +174,21 @@ const ProjectCard = memo(({ project, index }) => {
     >
       {/* Image Container */}
       <div className="project-image-wrapper">
+        {/* ✅ Loading Skeleton */}
+        {isLoading && (
+          <div className="image-skeleton">
+            <div className="skeleton-shimmer"></div>
+          </div>
+        )}
+
+        {/* ✅ Main Image with Error Handling */}
         <img
-          src={project.image || 'https://via.placeholder.com/600x400/1a1a1a/00d4aa?text=No+Image'}
+          src={imageUrl}
           alt={project.title}
-          className="project-image"
+          className={`project-image ${isLoading ? 'loading' : ''} ${imageError ? 'error' : ''}`}
           loading="lazy"
+          onError={handleImageError}
+          onLoad={handleImageLoad}
         />
         
         {/* Overlay with Buttons */}
@@ -182,15 +216,33 @@ const ProjectCard = memo(({ project, index }) => {
                 <i className="bi bi-box-arrow-up-right"></i>
               </a>
             )}
+            {project.videoUrl && (
+              <a
+                href={project.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="overlay-btn"
+                title="Watch Video"
+              >
+                <i className="bi bi-play-circle"></i>
+              </a>
+            )}
           </div>
         </div>
 
         {/* Status Badge */}
         {project.status && (
           <div className="project-status-badge">
-            <span className={`status ${project.status.toLowerCase().replace(' ', '-')}`}>
+            <span className={`status ${project.status.toLowerCase().replace(/\s+/g, '-')}`}>
               {project.status}
             </span>
+          </div>
+        )}
+
+        {/* ✅ Featured Badge */}
+        {project.featured && (
+          <div className="project-featured-badge">
+            <i className="bi bi-star-fill"></i>
           </div>
         )}
       </div>
@@ -209,14 +261,16 @@ const ProjectCard = memo(({ project, index }) => {
         {/* Title */}
         <h3 className="project-title">{project.title}</h3>
 
-        {/* Description */}
-        <p className="project-description">{project.description}</p>
+        {/* Short Description */}
+        <p className="project-description">
+          {project.shortDescription || project.description}
+        </p>
 
         {/* Tags */}
-        {project.tags && project.tags.length > 0 && (
+        {project.tags && Array.isArray(project.tags) && project.tags.length > 0 && (
           <div className="project-tags">
-            {project.tags.slice(0, 3).map((tag) => (
-              <span key={tag} className="tag">
+            {project.tags.slice(0, 3).map((tag, idx) => (
+              <span key={`${tag}-${idx}`} className="tag">
                 {tag}
               </span>
             ))}
@@ -260,9 +314,10 @@ ProjectCard.displayName = 'ProjectCard';
 
 ProjectCard.propTypes = {
   project: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    title: PropTypes.string.isRequired,
     description: PropTypes.string,
+    shortDescription: PropTypes.string,
     image: PropTypes.string,
     category: PropTypes.string,
     status: PropTypes.string,
@@ -270,6 +325,8 @@ ProjectCard.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string),
     githubUrl: PropTypes.string,
     demoUrl: PropTypes.string,
+    videoUrl: PropTypes.string,
+    featured: PropTypes.bool,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
@@ -279,7 +336,7 @@ Projects.displayName = 'Projects';
 Projects.propTypes = {
   projects: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       title: PropTypes.string,
       description: PropTypes.string,
       category: PropTypes.string,
