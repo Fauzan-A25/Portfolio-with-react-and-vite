@@ -56,7 +56,6 @@ IMPORTANT INSTRUCTIONS:
 - Be conversational and friendly, but always accurate
 - Do not make up information or hallucinate facts
 - If you're unsure, admit it rather than guess
-- Keep responses concise (under 200 characters when possible)
 
 PORTFOLIO CONTEXT:
 ${context || 'No context provided'}
