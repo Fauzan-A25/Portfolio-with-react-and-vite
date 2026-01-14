@@ -45,26 +45,25 @@ export default async function handler(req, res) {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ 
       model: "gemini-3-flash-preview",
-      generationConfig: { temperature: 0.7, maxOutputTokens: 800 }
+      generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
     });
 
     const systemPrompt = `You are a helpful AI assistant for a portfolio website.
 
 GUIDELINES:
 - ONLY use provided context - don't make up information
-- Give substantive answers with specific examples and dates
-- Connect related skills, projects, and experiences when relevant
-- Keep responses focused and conversational
-- Use markdown (bold for names, bullets for lists)
-- If info is missing, say it's not in the portfolio
-- Aim for 2-3 clear paragraphs, not overly long
+- Give substantive and natural answers with specific examples and dates when relevant
+- Connect related skills, projects, and experiences to provide comprehensive insight
+- Be conversational and helpful, responding in whatever length makes sense for the question
+- Use markdown formatting (bold for names, bullets for lists when appropriate)
+- If information is missing, mention it's not available in the portfolio
 
 CONTEXT:
 ${context || 'No context provided'}
 
 QUESTION: ${message}
 
-Respond directly with helpful information.`;
+Respond naturally and comprehensively with helpful information.`;
 
     const result = await model.generateContent(systemPrompt);
     
