@@ -29,7 +29,7 @@ const AIAssistant = ({ portfolioData }) => {
     }
   }, [portfolioData?.personalInfo?.name]);
 
-  // ✅ Dynamic Context Based on Question from props - IMPROVED ACCURACY
+  // ✅ Dynamic Context Based on Question from props - IMPROVED ACCURACY & DETAIL
   const getRelevantContext = (userMessage) => {
     if (!portfolioData) return '';
     
@@ -43,71 +43,83 @@ const AIAssistant = ({ portfolioData }) => {
 - Location: ${personalInfo?.location}
 - Email: ${personalInfo?.email}
 - GPA: ${personalInfo?.gpa}
+- Subtitle: ${personalInfo?.subtitle}
 - Bio: ${personalInfo?.tagline}
 
 `;
     
     // Add relevant details based on question - MORE DETAILED
-    if (skills && (lowerMsg.includes('skill') || lowerMsg.includes('tech') || lowerMsg.includes('expert') || lowerMsg.includes('proficient'))) {
+    if (skills && (lowerMsg.includes('skill') || lowerMsg.includes('tech') || lowerMsg.includes('expert') || lowerMsg.includes('proficient') || lowerMsg.includes('ability') || lowerMsg.includes('knowledge'))) {
       if (skills.programming && skills.programming.length > 0) {
-        const progList = skills.programming.slice(0, 6).map(s => 
-          `${s.name} (${s.yearsOfExperience} years)`
+        const progList = skills.programming.slice(0, 8).map(s => 
+          `${s.name} (${s.yearsOfExperience} years of experience)`
         ).join(', ');
         context += `Programming Skills: ${progList}\n`;
       }
       if (skills.dataScience && skills.dataScience.length > 0) {
-        const dsList = skills.dataScience.slice(0, 6).map(s => 
-          `${s.name} (${s.yearsOfExperience} years)`
+        const dsList = skills.dataScience.slice(0, 8).map(s => 
+          `${s.name} (${s.yearsOfExperience} years of experience)`
         ).join(', ');
-        context += `Data Science & ML: ${dsList}\n`;
+        context += `Data Science & Machine Learning: ${dsList}\n`;
       }
       if (skills.tools && skills.tools.length > 0) {
-        const toolsList = skills.tools.slice(0, 6).map(s => s.name).join(', ');
+        const toolsList = skills.tools.slice(0, 8).map(s => `${s.name}`).join(', ');
         context += `Tools & Platforms: ${toolsList}\n`;
       }
     }
     
     // Projects - WITH FULL DETAILS
-    if (projects && (lowerMsg.includes('project') || lowerMsg.includes('work') || lowerMsg.includes('build'))) {
-      const projList = projects.slice(0, 4).map(p => 
-        `• ${p.title} (${p.year}): ${p.description}. Tech: ${p.technologies?.slice(0, 3).join(', ')}. Status: ${p.status}`
+    if (projects && (lowerMsg.includes('project') || lowerMsg.includes('work') || lowerMsg.includes('build') || lowerMsg.includes('portfolio') || lowerMsg.includes('create'))) {
+      const projList = projects.slice(0, 5).map(p => 
+        `• ${p.title} (${p.year}): ${p.description}
+   Technologies: ${p.technologies?.slice(0, 4).join(', ')}
+   Status: ${p.status}${p.highlights ? '\n   Highlights: ' + p.highlights.slice(0, 2).join(', ') : ''}`
       ).join('\n');
       context += `\nProjects:\n${projList}\n`;
     }
     
     // Experience - COMPLETE INFO
-    if (experiences && (lowerMsg.includes('experience') || lowerMsg.includes('work') || lowerMsg.includes('job') || lowerMsg.includes('role'))) {
-      const expList = experiences.slice(0, 3).map(e => 
-        `• ${e.title} at ${e.company} (${e.period}, ${e.duration}): ${e.description}. Key skills: ${e.technologies?.slice(0, 3).join(', ')}`
+    if (experiences && (lowerMsg.includes('experience') || lowerMsg.includes('work') || lowerMsg.includes('job') || lowerMsg.includes('role') || lowerMsg.includes('career'))) {
+      const expList = experiences.slice(0, 4).map(e => 
+        `• ${e.title} at ${e.company}
+   Period: ${e.period} (${e.duration})
+   Type: ${e.type}
+   Description: ${e.description}
+   Key Technologies: ${e.technologies?.slice(0, 4).join(', ')}${e.responsibilities ? '\n   Responsibilities: ' + e.responsibilities.slice(0, 2).join('; ') : ''}`
       ).join('\n');
       context += `\nProfessional Experience:\n${expList}\n`;
     }
     
     // Education - FULL DETAILS
-    if (education && (lowerMsg.includes('education') || lowerMsg.includes('study') || lowerMsg.includes('university') || lowerMsg.includes('degree'))) {
+    if (education && (lowerMsg.includes('education') || lowerMsg.includes('study') || lowerMsg.includes('university') || lowerMsg.includes('degree') || lowerMsg.includes('course'))) {
       const eduList = education.map(e => 
-        `• ${e.degree} at ${e.institution} (${e.period}). Relevant courses: ${e.relevantCourses?.slice(0, 4).join(', ')}`
+        `• ${e.degree} at ${e.institution}
+   Period: ${e.period}
+   Relevant Courses: ${e.relevantCourses?.slice(0, 5).join(', ')}${e.gpa ? '\n   GPA: ' + e.gpa : ''}`
       ).join('\n');
       context += `\nEducation:\n${eduList}\n`;
     }
     
     // Contact - EXPLICIT
-    if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('reach') || lowerMsg.includes('linkedin') || lowerMsg.includes('github')) {
+    if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('reach') || lowerMsg.includes('linkedin') || lowerMsg.includes('github') || lowerMsg.includes('connect')) {
       context += `\nContact Information:
 - Email: ${personalInfo?.email}
 - Location: ${personalInfo?.location}
 - GitHub: https://github.com/Fauzan-A25
-- LinkedIn: https://linkedin.com/in/fauzanahsanudin\n`;
+- LinkedIn: https://linkedin.com/in/fauzanahsanudin
+- Instagram: https://instagram.com/fauzan_1718
+- CV Link: ${personalInfo?.cvLink || 'Available upon request'}\n`;
     }
     
     // Always include full summary if no specific match
-    if (!lowerMsg.match(/skill|tech|project|work|build|experience|job|role|education|study|university|degree|contact|email|reach|linkedin|github/i)) {
-      context += `\nQUICK SUMMARY:
+    if (!lowerMsg.match(/skill|tech|expert|proficient|ability|knowledge|project|work|build|portfolio|create|experience|job|role|career|education|study|university|degree|course|contact|email|reach|linkedin|github|connect/i)) {
+      context += `\nCOMPREHENSIVE SUMMARY:
 ${personalInfo?.name} is a ${personalInfo?.title} at ${personalInfo?.university}. 
-Specialties: Machine Learning, Data Science, Python Development
-Top Projects: ${projects?.slice(0, 2).map(p => p.title).join(', ')}
-Years of Experience: ${experiences?.length || 0}+ roles
-Contact: ${personalInfo?.email}\n`;
+Specialties: Machine Learning, Data Science, Python Development, Computer Vision
+Featured Projects: ${projects?.filter(p => p.featured).slice(0, 3).map(p => p.title).join(', ')}
+Professional Roles: ${experiences?.slice(0, 2).map(e => `${e.title} at ${e.company}`).join(', ')}
+Contact: ${personalInfo?.email}
+CV: ${personalInfo?.cvLink || 'Available upon request'}\n`;
     }
     
     return context;
