@@ -27,29 +27,7 @@ const Footer = memo(({ personalInfo, socialLinks, footerContent }) => {
             </div>
           </div>
 
-          {/* Optional: Social Links Section */}
-          {socialLinksArray.length > 0 && (
-            <div className="col-lg-3 col-md-6">
-              <div className="footer-section">
-                <h4 className="footer-title">Connect</h4>
-                <div className="footer-social">
-                  {socialLinksArray.map(({ icon, url, label }) => (
-                    <a
-                      key={label}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="footer-social-link"
-                      aria-label={label}
-                      title={label}
-                    >
-                      <i className={`bi ${icon}`}></i>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
+
         </div>
 
         <div className="footer-bottom">

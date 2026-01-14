@@ -109,13 +109,15 @@ const Contact = memo(({ personalInfo, socialLinks, emailjsConfig, contactContent
                 {contactContent?.leftSection?.description || 'Feel free to reach out!'}
               </p>
 
-              {/* Contact Info Cards */}
-              <div className="contact-info-cards">
+              {/* Contact Info Items */}
+              <div className="contact-info-list">
                 {contactInfo.map((info, index) => (
                   info.value && (
-                    <div key={index} className="contact-info-card">
-                      <i className={`bi ${info.icon}`}></i>
-                      <div className="contact-info-details">
+                    <div key={index} className="contact-info-item">
+                      <div className="contact-icon">
+                        <i className={`bi ${info.icon}`}></i>
+                      </div>
+                      <div className="contact-details">
                         <h4>{info.title}</h4>
                         {info.link ? (
                           <a href={info.link}>{info.value}</a>
@@ -128,23 +130,7 @@ const Contact = memo(({ personalInfo, socialLinks, emailjsConfig, contactContent
                 ))}
               </div>
 
-              {/* Social Links */}
-              {socialLinksArray.length > 0 && (
-                <div className="social-links-contact">
-                  {socialLinksArray.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="social-link"
-                      aria-label={social.label}
-                    >
-                      <i className={`bi ${social.icon}`}></i>
-                    </a>
-                  ))}
-                </div>
-              )}
+
             </div>
           </div>
 

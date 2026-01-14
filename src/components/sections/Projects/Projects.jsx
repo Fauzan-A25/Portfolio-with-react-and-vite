@@ -4,11 +4,13 @@ import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver'
 import { getOptimizedImageUrl } from '../../../utils/imageHelper';
 import './Projects.css';
 
+
 const Projects = memo(({ projects, projectCategories, projectsContent }) => {
   const [elementRef, isVisible] = useIntersectionObserver();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [showAll, setShowAll] = useState(false);
   const [itemsToShow] = useState(3);
+
 
   // ✅ Filter logic dengan limit
   const getFilteredProjects = () => {
@@ -16,39 +18,47 @@ const Projects = memo(({ projects, projectCategories, projectsContent }) => {
     
     let filtered = projects;
 
+
     // Filter by category
     if (selectedCategory !== 'All') {
       filtered = filtered.filter(p => p.category === selectedCategory);
     }
+
 
     // Slice berdasarkan showAll
     if (!showAll) {
       filtered = filtered.slice(0, itemsToShow);
     }
 
+
     return filtered;
   };
+
 
   const filteredProjects = getFilteredProjects();
   const totalProjects = selectedCategory === 'All' 
     ? (projects?.length || 0)
     : (projects?.filter(p => p.category === selectedCategory).length || 0);
 
+
   // Handle View All button
   const handleViewAll = () => {
     setShowAll(true);
   };
+
 
   // Handle Show Less button
   const handleShowLess = () => {
     setShowAll(false);
   };
 
+
   // Reset showAll ketika kategori berubah
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
     setShowAll(false);
   };
+
 
   // Default content fallback
   const content = projectsContent || {
@@ -60,6 +70,7 @@ const Projects = memo(({ projects, projectCategories, projectsContent }) => {
     showLessButton: 'Show Less',
     noProjects: 'No projects found in this category',
   };
+
 
   return (
     <section
@@ -83,6 +94,7 @@ const Projects = memo(({ projects, projectCategories, projectsContent }) => {
           </p>
         </div>
 
+
         {/* Category Filter */}
         {projectCategories && projectCategories.length > 0 && (
           <div className="project-filters">
@@ -98,6 +110,7 @@ const Projects = memo(({ projects, projectCategories, projectsContent }) => {
           </div>
         )}
 
+
         {/* Projects Grid */}
         <div className="projects-grid">
           {filteredProjects.length > 0 ? (
@@ -111,6 +124,7 @@ const Projects = memo(({ projects, projectCategories, projectsContent }) => {
             </div>
           )}
         </div>
+
 
         {/* View All / Show Less Button */}
         {totalProjects > itemsToShow && (
@@ -139,16 +153,20 @@ const Projects = memo(({ projects, projectCategories, projectsContent }) => {
   );
 });
 
+
 const ProjectCard = memo(({ project, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+
 
   // ✅ Get optimized Google Drive image URL
   const imageUrl = getOptimizedImageUrl(
     project.image,
     'https://via.placeholder.com/600x400/1a1a1a/00d4aa?text=No+Image'
   );
+
 
   // ✅ Handle image load error
   const handleImageError = (e) => {
@@ -160,14 +178,29 @@ const ProjectCard = memo(({ project, index }) => {
     e.target.src = 'https://via.placeholder.com/600x400/1a1a1a/00d4aa?text=Image+Error';
   };
 
+
   // ✅ Handle image load success
   const handleImageLoad = () => {
     setIsLoading(false);
   };
 
+
+  // ✅ Toggle description dengan smooth transition
+  const toggleDescription = (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // Prevent event bubbling
+    setIsDescriptionExpanded(prev => !prev);
+  };
+
+
+  // ✅ Check if description is long enough to show read more button
+  const descriptionText = project.description || project.shortDescription || '';
+  const shouldShowReadMore = descriptionText.length > 120;
+
+
   return (
     <div 
-      className="project-card"
+      className={`project-card ${isDescriptionExpanded ? 'card-expanded' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ animationDelay: `${index * 100}ms` }}
@@ -180,6 +213,7 @@ const ProjectCard = memo(({ project, index }) => {
             <div className="skeleton-shimmer"></div>
           </div>
         )}
+
 
         {/* ✅ Main Image with Error Handling */}
         <img
@@ -230,6 +264,7 @@ const ProjectCard = memo(({ project, index }) => {
           </div>
         </div>
 
+
         {/* Status Badge */}
         {project.status && (
           <div className="project-status-badge">
@@ -239,6 +274,7 @@ const ProjectCard = memo(({ project, index }) => {
           </div>
         )}
 
+
         {/* ✅ Featured Badge */}
         {project.featured && (
           <div className="project-featured-badge">
@@ -246,6 +282,7 @@ const ProjectCard = memo(({ project, index }) => {
           </div>
         )}
       </div>
+
 
       {/* Content */}
       <div className="project-content">
@@ -258,13 +295,39 @@ const ProjectCard = memo(({ project, index }) => {
           {project.year && <span className="year">{project.year}</span>}
         </div>
 
+
         {/* Title */}
         <h3 className="project-title">{project.title}</h3>
 
-        {/* Short Description */}
-        <p className="project-description">
-          {project.shortDescription || project.description}
-        </p>
+
+        {/* ✅ FIXED: Description with Read More */}
+        <div className={`project-description-wrapper ${isDescriptionExpanded ? 'expanded' : ''}`}>
+          <p className="project-description">
+            {descriptionText}
+          </p>
+          
+          {shouldShowReadMore && (
+            <button 
+              className="read-more-btn"
+              onClick={toggleDescription}
+              aria-expanded={isDescriptionExpanded}
+              type="button"
+            >
+              {isDescriptionExpanded ? (
+                <>
+                  Show Less
+                  <i className="bi bi-chevron-up"></i>
+                </>
+              ) : (
+                <>
+                  Read More
+                  <i className="bi bi-chevron-down"></i>
+                </>
+              )}
+            </button>
+          )}
+        </div>
+
 
         {/* Tags */}
         {project.tags && Array.isArray(project.tags) && project.tags.length > 0 && (
@@ -279,6 +342,7 @@ const ProjectCard = memo(({ project, index }) => {
             )}
           </div>
         )}
+
 
         {/* Footer - Links */}
         <div className="project-footer">
@@ -310,7 +374,9 @@ const ProjectCard = memo(({ project, index }) => {
   );
 });
 
+
 ProjectCard.displayName = 'ProjectCard';
+
 
 ProjectCard.propTypes = {
   project: PropTypes.shape({
@@ -331,7 +397,9 @@ ProjectCard.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
+
 Projects.displayName = 'Projects';
+
 
 Projects.propTypes = {
   projects: PropTypes.arrayOf(
@@ -357,6 +425,7 @@ Projects.propTypes = {
   }),
 };
 
+
 Projects.defaultProps = {
   projects: [],
   projectCategories: ['All'],
@@ -370,5 +439,6 @@ Projects.defaultProps = {
     noProjects: 'No projects found in this category',
   },
 };
+
 
 export default Projects;

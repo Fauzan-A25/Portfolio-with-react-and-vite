@@ -34,10 +34,10 @@ const Experience = memo(({ experiences }) => {
       <div className="container">
         <div className="section-header">
           <h2 className="section-title">
-            <i className="bi bi-briefcase"></i> Professional Experience
+            Professional Experience
           </h2>
           <p className="section-subtitle">
-            My journey through professional roles and organizational leadership
+            Experience and professional journey
           </p>
         </div>
 
@@ -52,45 +52,30 @@ const Experience = memo(({ experiences }) => {
             >
               {/* Timeline Dot */}
               <div className="timeline-dot">
-                <i className="bi bi-building"></i>
+                <i className="bi bi-briefcase"></i>
               </div>
 
               {/* Card Content */}
               <div className="experience-content">
-                {/* Header */}
-                <div className="experience-header">
-                  <div className="title-group">
-                    <h3 className="experience-title">{exp.title}</h3>
-                    <div className="company-info">
-                      <span className="company-name">
-                        <i className="bi bi-building"></i>
-                        {exp.company}
-                      </span>
-                      {exp.location && (
-                        <span className="company-location">
-                          <i className="bi bi-geo-alt"></i>
-                          {exp.location}
-                        </span>
-                      )}
+                {/* Main Info */}
+                <div className="experience-main">
+                  <div className="experience-header">
+                    <div>
+                      <h3 className="experience-title">{exp.title}</h3>
+                      <p className="experience-company">{exp.company}</p>
                     </div>
+                    {exp.type && (
+                      <span className={`experience-type type-${exp.type.toLowerCase()}`}>
+                        {exp.type}
+                      </span>
+                    )}
                   </div>
-                  {exp.type && (
-                    <span className={`experience-type type-${exp.type.toLowerCase()}`}>
-                      {exp.type}
-                    </span>
-                  )}
-                </div>
 
-                {/* Period */}
-                <div className="experience-period">
-                  <i className="bi bi-calendar-event"></i>
-                  <span>{exp.period}</span>
-                  {exp.duration && (
-                    <span className="duration">
-                      <i className="bi bi-clock"></i>
-                      {exp.duration}
-                    </span>
-                  )}
+                  {/* Period */}
+                  <div className="experience-period">
+                    <span>{exp.period}</span>
+                    {exp.duration && <span className="duration">{exp.duration}</span>}
+                  </div>
                 </div>
 
                 {/* Description */}
@@ -98,25 +83,13 @@ const Experience = memo(({ experiences }) => {
                   <p className="experience-description">{exp.description}</p>
                 )}
 
-                {/* Responsibilities */}
+                {/* Key Responsibilities */}
                 {exp.responsibilities && exp.responsibilities.length > 0 && (
                   <div className="experience-responsibilities">
-                    <h4><i className="bi bi-check-circle"></i> Key Responsibilities:</h4>
+                    <h4>Key Responsibilities:</h4>
                     <ul>
-                      {exp.responsibilities.map((resp, idx) => (
+                      {exp.responsibilities.slice(0, 3).map((resp, idx) => (
                         <li key={idx}>{resp}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Achievements */}
-                {exp.achievements && exp.achievements.length > 0 && (
-                  <div className="experience-achievements">
-                    <h4><i className="bi bi-trophy"></i> Achievements:</h4>
-                    <ul>
-                      {exp.achievements.map((achievement, idx) => (
-                        <li key={idx}>{achievement}</li>
                       ))}
                     </ul>
                   </div>
@@ -125,7 +98,7 @@ const Experience = memo(({ experiences }) => {
                 {/* Technologies */}
                 {exp.technologies && exp.technologies.length > 0 && (
                   <div className="experience-technologies">
-                    {exp.technologies.map((tech, idx) => (
+                    {exp.technologies.slice(0, 5).map((tech, idx) => (
                       <span key={idx} className="tech-tag">{tech}</span>
                     ))}
                   </div>

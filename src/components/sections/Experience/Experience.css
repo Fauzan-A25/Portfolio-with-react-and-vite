@@ -21,59 +21,13 @@
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
 }
 
 .section-subtitle {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
-}
-
-/* ========================================
-   FILTERS
-   ======================================== */
-
-.experience-filters {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 40px 0 60px;
-  flex-wrap: wrap;
-}
-
-.filter-btn {
-  padding: 10px 24px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--glass-border);
-  border-radius: 25px;
-  color: var(--text-secondary);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-[data-theme="light"] .filter-btn {
-  background: rgba(0, 0, 0, 0.02);
-}
-
-.filter-btn:hover {
-  background: rgba(0, 212, 170, 0.08);
-  border-color: var(--accent-color);
-  color: var(--accent-color);
-  transform: translateY(-2px);
-}
-
-.filter-btn.active {
-  background: var(--accent-gradient);
-  border-color: var(--accent-color);
-  color: white;
-  box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
 }
 
 /* ========================================
@@ -92,10 +46,10 @@
   left: 50%;
   top: 0;
   bottom: 0;
-  width: 3px;
-  background: var(--accent-gradient);
+  width: 2px;
+  background: var(--accent-color);
   transform: translateX(-50%);
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 /* ========================================
@@ -111,42 +65,42 @@
 .timeline-dot {
   position: absolute;
   left: 50%;
-  top: 30px;
+  top: 20px;
   transform: translateX(-50%);
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background: var(--accent-gradient);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
-  box-shadow: 0 0 0 10px var(--primary-bg), 0 4px 15px rgba(0, 212, 170, 0.4);
-  transition: all 0.4s ease;
+  box-shadow: 0 0 0 8px var(--primary-bg), 0 2px 10px rgba(0, 212, 170, 0.3);
+  transition: all 0.3s ease;
 }
 
 .timeline-dot i {
-  font-size: 22px;
+  font-size: 18px;
   color: white;
 }
 
 .experience-card:hover .timeline-dot {
-  transform: translateX(-50%) scale(1.15);
-  box-shadow: 0 0 0 10px var(--primary-bg), 0 6px 25px rgba(0, 212, 170, 0.6);
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 0 0 8px var(--primary-bg), 0 4px 16px rgba(0, 212, 170, 0.5);
 }
 
 /* ========================================
-   CARD CONTENT - IMPROVED SPACING
+   CARD CONTENT
    ======================================== */
 
 .experience-content {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  padding: 32px;
-  margin-left: calc(50% + 60px);
-  width: calc(50% - 80px);
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 12px;
+  padding: 28px;
+  margin-left: calc(50% + 40px);
+  width: calc(50% - 60px);
+  transition: all 0.3s ease;
 }
 
 [data-theme="light"] .experience-content {
@@ -155,81 +109,59 @@
 
 .experience-card:nth-child(even) .experience-content {
   margin-left: 0;
-  margin-right: calc(50% + 60px);
+  margin-right: calc(50% + 40px);
 }
 
 .experience-card:hover .experience-content {
   background: rgba(0, 212, 170, 0.05);
   border-color: var(--accent-color);
-  box-shadow: 0 8px 30px rgba(0, 212, 170, 0.15);
-  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 212, 170, 0.12);
+  transform: translateY(-2px);
 }
 
 /* ========================================
-   HEADER - IMPROVED LAYOUT
+   MAIN INFO
    ======================================== */
+
+.experience-main {
+  margin-bottom: 18px;
+}
 
 .experience-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 20px;
-  margin-bottom: 20px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="light"] .experience-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.title-group {
-  flex: 1;
+  gap: 16px;
+  margin-bottom: 12px;
 }
 
 .experience-title {
   color: var(--text-primary);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
-  margin: 0 0 14px 0;
-  line-height: 1.4;
-  letter-spacing: -0.02em;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
 }
 
-.company-info {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 14px;
-}
-
-.company-name,
-.company-location {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--text-secondary);
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.company-name i,
-.company-location i {
+.experience-company {
   color: var(--accent-color);
-  font-size: 14px;
-  min-width: 14px;
-  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .experience-type {
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 11px;
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
-  align-self: flex-start;
   line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .type-internship {
@@ -243,85 +175,56 @@
 }
 
 /* ========================================
-   PERIOD - IMPROVED SPACING
+   PERIOD
    ======================================== */
 
 .experience-period {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  color: var(--accent-color);
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(0, 212, 170, 0.1);
-}
-
-.experience-period i {
-  font-size: 16px;
-}
-
-.experience-period > span:first-of-type {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 14px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 14px;
 }
 
 .duration {
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 500;
-  padding-left: 12px;
+  padding-left: 14px;
   border-left: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
 }
 
 [data-theme="light"] .duration {
   border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.duration i {
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
 /* ========================================
-   DESCRIPTION - IMPROVED READABILITY
+   DESCRIPTION
    ======================================== */
 
 .experience-description {
   color: var(--text-secondary);
-  font-size: 15px;
-  line-height: 1.8;
-  margin-bottom: 24px;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 14px;
   font-weight: 400;
 }
 
 /* ========================================
-   RESPONSIBILITIES - BETTER SPACING
+   RESPONSIBILITIES
    ======================================== */
 
 .experience-responsibilities {
-  margin: 24px 0;
+  margin-bottom: 14px;
 }
 
 .experience-responsibilities h4 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   color: var(--text-primary);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
-  margin-bottom: 16px;
-  letter-spacing: -0.01em;
-}
-
-.experience-responsibilities h4 i {
-  color: var(--accent-color);
-  font-size: 18px;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .experience-responsibilities ul {
@@ -332,11 +235,11 @@
 
 .experience-responsibilities li {
   position: relative;
-  padding-left: 30px;
+  padding-left: 20px;
   color: var(--text-secondary);
-  font-size: 14px;
-  line-height: 1.8;
-  margin-bottom: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 8px;
   font-weight: 400;
 }
 
@@ -345,99 +248,40 @@
 }
 
 .experience-responsibilities li::before {
-  content: '▹';
+  content: '•';
   position: absolute;
-  left: 8px;
+  left: 6px;
   color: var(--accent-color);
-  font-size: 18px;
-  line-height: 1.8;
+  font-weight: bold;
 }
 
 /* ========================================
-   TECHNOLOGIES - IMPROVED LAYOUT
+   TECHNOLOGIES
    ======================================== */
 
 .experience-technologies {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin: 24px 0;
-}
-
-.tech-tag {
-  padding: 6px 14px;
-  background: rgba(0, 212, 170, 0.1);
-  border: 1px solid rgba(0, 212, 170, 0.2);
-  border-radius: 6px;
-  color: var(--accent-color);
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  line-height: 1.4;
-}
-
-.tech-tag:hover {
-  background: rgba(0, 212, 170, 0.2);
-  border-color: var(--accent-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 212, 170, 0.2);
-}
-
-/* ========================================
-   ACHIEVEMENTS - BETTER PRESENTATION
-   ======================================== */
-
-.experience-achievements {
-  margin-top: 24px;
-  padding: 18px 20px;
-  background: rgba(0, 212, 170, 0.05);
-  border-left: 4px solid var(--accent-color);
-  border-radius: 8px;
-}
-
-.experience-achievements h4 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--text-primary);
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 14px;
-  letter-spacing: -0.01em;
-}
-
-.experience-achievements h4 i {
-  color: #FFD700;
-  font-size: 18px;
-}
-
-.experience-achievements ul {
-  list-style: none;
-  padding: 0;
+  gap: 8px;
   margin: 0;
 }
 
-.experience-achievements li {
-  position: relative;
-  padding-left: 30px;
-  color: var(--text-secondary);
-  font-size: 14px;
-  line-height: 1.8;
-  margin-bottom: 10px;
-  font-weight: 400;
+.tech-tag {
+  padding: 5px 11px;
+  background: rgba(0, 212, 170, 0.1);
+  border: 1px solid rgba(0, 212, 170, 0.2);
+  border-radius: 4px;
+  color: var(--accent-color);
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
-.experience-achievements li:last-child {
-  margin-bottom: 0;
-}
-
-.experience-achievements li::before {
-  content: '★';
-  position: absolute;
-  left: 8px;
-  color: #FFD700;
-  font-size: 16px;
-  line-height: 1.8;
+.tech-tag:hover {
+  background: rgba(0, 212, 170, 0.15);
+  border-color: var(--accent-color);
+  box-shadow: 0 2px 6px rgba(0, 212, 170, 0.15);
 }
 
 /* ========================================
@@ -454,64 +298,36 @@
   }
 
   .timeline-line {
-    left: 30px;
+    left: 24px;
   }
 
   .timeline-dot {
-    left: 30px;
-    width: 40px;
-    height: 40px;
-  }
-
-  .timeline-dot i {
-    font-size: 18px;
+    left: 24px;
   }
 
   .experience-content {
-    margin-left: 80px !important;
+    margin-left: 64px !important;
     margin-right: 0 !important;
-    width: calc(100% - 80px) !important;
-    padding: 28px;
+    width: calc(100% - 64px) !important;
+    padding: 20px;
   }
 
   .experience-header {
     flex-direction: column;
-    gap: 14px;
-  }
-
-  .experience-type {
-    align-self: flex-start;
+    gap: 10px;
   }
 
   .experience-title {
-    font-size: 20px;
-    margin-bottom: 12px;
+    font-size: 16px;
   }
 
-  .company-info {
-    font-size: 13px;
+  .experience-responsibilities li {
+    font-size: 12px;
   }
 
-  .experience-period {
-    font-size: 13px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .duration {
-    padding-left: 0;
-    border-left: none;
-  }
-
-  .experience-responsibilities h4,
-  .experience-achievements h4 {
-    font-size: 15px;
-  }
-
-  .experience-responsibilities li,
-  .experience-achievements li {
-    font-size: 13px;
+  .tech-tag {
+    padding: 4px 10px;
+    font-size: 10px;
   }
 }
 
@@ -525,26 +341,17 @@
   }
 
   .section-subtitle {
-    font-size: 14px;
-  }
-
-  .experience-filters {
-    gap: 10px;
-  }
-
-  .filter-btn {
-    padding: 8px 18px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .timeline-line {
-    left: 20px;
+    left: 18px;
   }
 
   .timeline-dot {
-    left: 20px;
-    width: 35px;
-    height: 35px;
+    left: 18px;
+    width: 36px;
+    height: 36px;
   }
 
   .timeline-dot i {
@@ -552,32 +359,30 @@
   }
 
   .experience-content {
-    margin-left: 65px !important;
-    width: calc(100% - 65px) !important;
-    padding: 24px;
+    margin-left: 56px !important;
+    width: calc(100% - 56px) !important;
+    padding: 16px;
   }
 
   .experience-title {
-    font-size: 18px;
-  }
-
-  .company-info,
-  .experience-period {
-    font-size: 12px;
-  }
-
-  .experience-description {
     font-size: 14px;
   }
 
-  .experience-type {
-    padding: 6px 14px;
-    font-size: 12px;
+  .experience-company {
+    font-size: 11px;
+  }
+
+  .experience-period {
+    font-size: 11px;
+  }
+
+  .experience-description {
+    font-size: 13px;
   }
 
   .tech-tag {
-    padding: 5px 12px;
-    font-size: 12px;
+    padding: 3px 8px;
+    font-size: 9px;
   }
 }
 
@@ -586,13 +391,12 @@
 [data-theme="anime"] .experience-section {
   background: linear-gradient(180deg,
     rgba(20, 0, 35, 0.98) 0%,
-    rgba(10, 0, 20, 0.95) 50%,
-    rgba(20, 0, 35, 0.98) 100%);
+    rgba(10, 0, 20, 0.95) 100%);
   position: relative;
   overflow: hidden;
 }
 
-/* Animated digital rain effect */
+/* Animated background */
 [data-theme="anime"] .experience-section::before {
   content: '';
   position: absolute;
@@ -600,21 +404,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    linear-gradient(transparent 50%, rgba(0, 229, 255, 0.03) 50%),
-    linear-gradient(90deg, transparent 50%, rgba(255, 23, 68, 0.03) 50%);
-  background-size: 100px 100px, 100px 100px;
-  animation: digitalRain 20s linear infinite;
+  background: repeating-linear-gradient(60deg, 
+    transparent, 
+    transparent 50px, 
+    rgba(0, 229, 255, 0.02) 50px, 
+    rgba(0, 229, 255, 0.02) 51px);
   pointer-events: none;
-  z-index: 0;
 }
 
-@keyframes digitalRain {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 0 100px, 100px 0; }
-}
-
-/* Floating particles */
 [data-theme="anime"] .experience-section::after {
   content: '';
   position: absolute;
@@ -623,313 +420,131 @@
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(2px 2px at 10% 20%, rgba(0, 229, 255, 0.5), transparent),
-    radial-gradient(2px 2px at 80% 30%, rgba(255, 23, 68, 0.5), transparent),
-    radial-gradient(1px 1px at 50% 60%, rgba(255, 64, 129, 0.6), transparent),
-    radial-gradient(1px 1px at 30% 80%, rgba(0, 229, 255, 0.4), transparent);
-  background-size: 200% 200%;
-  animation: particleShift 25s ease-in-out infinite;
+    radial-gradient(2px 2px at 20% 30%, rgba(0, 229, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 80% 70%, rgba(255, 23, 68, 0.3), transparent);
   pointer-events: none;
-  z-index: 0;
 }
 
-@keyframes particleShift {
-  0%, 100% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
-}
-
-/* Ensure content is above background effects */
-[data-theme="anime"] .container {
-  position: relative;
-  z-index: 1;
-}
-
-/* Section header */
+/* Section title */
 [data-theme="anime"] .section-title {
-  background: linear-gradient(135deg, #ffffff 0%, #00e5ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.5));
-}
-
-[data-theme="anime"] .section-subtitle {
-  color: rgba(255, 255, 255, 0.7);
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
-}
-
-/* Filter buttons with neon effect */
-[data-theme="anime"] .filter-btn {
-  background: rgba(17, 0, 32, 0.5);
-  border: 2px solid rgba(255, 23, 68, 0.3);
-  color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-[data-theme="anime"] .filter-btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.3), transparent);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s ease, height 0.4s ease;
-}
-
-[data-theme="anime"] .filter-btn:hover::before {
-  width: 200px;
-  height: 200px;
-}
-
-[data-theme="anime"] .filter-btn:hover {
-  background: rgba(255, 23, 68, 0.15);
-  border-color: rgba(0, 229, 255, 0.6);
-  color: #00e5ff;
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 20px rgba(0, 229, 255, 0.3);
-}
-
-[data-theme="anime"] .filter-btn.active {
-  background: linear-gradient(135deg, rgba(255, 23, 68, 0.4), rgba(0, 229, 255, 0.4));
-  border-color: rgba(0, 229, 255, 0.8);
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(0, 229, 255, 1);
-  box-shadow: 0 4px 20px rgba(255, 23, 68, 0.5),
-              0 0 30px rgba(0, 229, 255, 0.4);
-}
-
-/* Timeline line with neon glow */
-[data-theme="anime"] .timeline-line {
-  background: linear-gradient(180deg, 
-    #ff1744 0%, 
-    #00e5ff 50%, 
-    #ff4081 100%);
-  box-shadow: 0 0 20px rgba(255, 23, 68, 0.6),
-              0 0 40px rgba(0, 229, 255, 0.4);
-  opacity: 0.8;
-  width: 4px;
-  animation: lineGlow 3s ease-in-out infinite;
-}
-
-@keyframes lineGlow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 23, 68, 0.6),
-                0 0 40px rgba(0, 229, 255, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(255, 23, 68, 0.9),
-                0 0 50px rgba(0, 229, 255, 0.7);
-  }
-}
-
-/* Timeline dot with holographic effect */
-[data-theme="anime"] .timeline-dot {
-  background: linear-gradient(135deg, #ff1744 0%, #00e5ff 100%);
-  box-shadow: 0 0 0 10px rgba(17, 0, 32, 0.9),
-              0 0 30px rgba(255, 23, 68, 0.6),
-              0 0 50px rgba(0, 229, 255, 0.4);
-  animation: dotPulse 2s ease-in-out infinite;
-  position: relative;
-}
-
-@keyframes dotPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 10px rgba(17, 0, 32, 0.9),
-                0 0 30px rgba(255, 23, 68, 0.6),
-                0 0 50px rgba(0, 229, 255, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(17, 0, 32, 0.9),
-                0 0 40px rgba(255, 23, 68, 0.8),
-                0 0 60px rgba(0, 229, 255, 0.6);
-  }
-}
-
-/* Rotating ring around dot */
-[data-theme="anime"] .timeline-dot::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  border: 2px solid transparent;
-  border-top-color: #ff1744;
-  border-right-color: #00e5ff;
-  border-radius: 50%;
-  animation: rotateRing 3s linear infinite;
-}
-
-@keyframes rotateRing {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-[data-theme="anime"] .experience-card:hover .timeline-dot {
-  transform: translateX(-50%) scale(1.2);
-  box-shadow: 0 0 0 10px rgba(17, 0, 32, 0.9),
-              0 0 50px rgba(255, 23, 68, 0.9),
-              0 0 80px rgba(0, 229, 255, 0.7);
-}
-
-[data-theme="anime"] .experience-card:hover .timeline-dot::before {
-  animation-duration: 1.5s;
-}
-
-/* Experience content card */
-[data-theme="anime"] .experience-content {
-  background: rgba(17, 0, 32, 0.6);
-  border: 2px solid rgba(255, 23, 68, 0.3);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
-              inset 0 0 40px rgba(255, 23, 68, 0.03);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Scan line animation */
-[data-theme="anime"] .experience-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(0, 229, 255, 0.1), 
-    transparent);
-  transition: left 0.8s ease;
-  z-index: 0;
-}
-
-[data-theme="anime"] .experience-card:hover .experience-content::before {
-  left: 100%;
-}
-
-/* Ensure content is above scan line */
-[data-theme="anime"] .experience-header,
-[data-theme="anime"] .experience-period,
-[data-theme="anime"] .experience-description,
-[data-theme="anime"] .experience-responsibilities,
-[data-theme="anime"] .experience-technologies,
-[data-theme="anime"] .experience-achievements {
-  position: relative;
-  z-index: 1;
-}
-
-[data-theme="anime"] .experience-card:hover .experience-content {
-  background: rgba(17, 0, 32, 0.8);
-  border-color: rgba(0, 229, 255, 0.8);
-  box-shadow: 0 12px 50px rgba(255, 23, 68, 0.4),
-              0 0 60px rgba(0, 229, 255, 0.3),
-              inset 0 0 50px rgba(0, 229, 255, 0.05);
-  transform: translateY(-8px);
-}
-
-/* Header border */
-[data-theme="anime"] .experience-header {
-  border-bottom-color: rgba(0, 229, 255, 0.15);
-}
-
-/* Experience title */
-[data-theme="anime"] .experience-title {
-  background: linear-gradient(135deg, #ffffff 0%, #00e5ff 100%);
+  background: linear-gradient(135deg, #00e5ff 0%, #ff1744 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
 }
 
-[data-theme="anime"] .experience-card:hover .experience-title {
-  filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.8));
-  animation: titleShimmer 1s ease-in-out;
-}
-
-@keyframes titleShimmer {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.85; }
-}
-
-/* Company info */
-[data-theme="anime"] .company-name,
-[data-theme="anime"] .company-location {
-  color: rgba(255, 255, 255, 0.75);
+[data-theme="anime"] .section-subtitle {
+  color: rgba(255, 255, 255, 0.7);
   text-shadow: 0 0 5px rgba(0, 229, 255, 0.2);
 }
 
-[data-theme="anime"] .company-name i,
-[data-theme="anime"] .company-location i {
+/* Timeline line */
+[data-theme="anime"] .timeline-line {
+  background: linear-gradient(180deg, #ff1744 0%, #00e5ff 100%);
+  box-shadow: 0 0 15px rgba(255, 23, 68, 0.5),
+              0 0 30px rgba(0, 229, 255, 0.3);
+  opacity: 0.8;
+}
+
+/* Timeline dot */
+[data-theme="anime"] .timeline-dot {
+  background: linear-gradient(135deg, #ff1744 0%, #00e5ff 100%);
+  box-shadow: 0 0 0 8px rgba(20, 0, 35, 0.95),
+              0 0 20px rgba(255, 23, 68, 0.5),
+              0 0 35px rgba(0, 229, 255, 0.3);
+  animation: dotGlow 2s ease-in-out infinite;
+}
+
+@keyframes dotGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 8px rgba(20, 0, 35, 0.95),
+                0 0 20px rgba(255, 23, 68, 0.5),
+                0 0 35px rgba(0, 229, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(20, 0, 35, 0.95),
+                0 0 25px rgba(255, 23, 68, 0.7),
+                0 0 45px rgba(0, 229, 255, 0.5);
+  }
+}
+
+[data-theme="anime"] .experience-card:hover .timeline-dot {
+  transform: translateX(-50%) scale(1.12);
+  box-shadow: 0 0 0 8px rgba(20, 0, 35, 0.95),
+              0 0 30px rgba(255, 23, 68, 0.7),
+              0 0 50px rgba(0, 229, 255, 0.5);
+}
+
+/* Experience card */
+[data-theme="anime"] .experience-content {
+  background: rgba(17, 0, 32, 0.6);
+  border: 2px solid rgba(255, 23, 68, 0.3);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="anime"] .experience-content::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, rgba(0, 229, 255, 0.15), transparent);
+  transition: top 0.6s ease;
+}
+
+[data-theme="anime"] .experience-card:hover .experience-content::before {
+  top: 100%;
+}
+
+[data-theme="anime"] .experience-card:hover .experience-content {
+  background: rgba(17, 0, 32, 0.8);
+  border-color: rgba(0, 229, 255, 0.8);
+  box-shadow: 0 8px 30px rgba(255, 23, 68, 0.3),
+              0 0 45px rgba(0, 229, 255, 0.15);
+  transform: translateY(-3px);
+}
+
+/* Title */
+[data-theme="anime"] .experience-title {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}
+
+[data-theme=\"anime\"] .experience-card:hover .experience-title {
   color: #00e5ff;
-  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.6));
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.8);
 }
 
-/* Type badges with enhanced gradients */
-[data-theme="anime"] .type-internship {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4),
-              0 0 20px rgba(118, 75, 162, 0.3);
-  border: 1px solid rgba(118, 75, 162, 0.5);
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+/* Company */
+[data-theme="anime"] .experience-company {
+  color: #ff4081;
+  text-shadow: 0 0 5px rgba(255, 64, 129, 0.4);
 }
 
-[data-theme="anime"] .type-organizational {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4),
-              0 0 20px rgba(245, 87, 108, 0.3);
-  border: 1px solid rgba(245, 87, 108, 0.5);
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-}
-
-[data-theme="anime"] .experience-card:hover .experience-type {
-  box-shadow: 0 6px 25px rgba(240, 147, 251, 0.6),
-              0 0 30px rgba(245, 87, 108, 0.5);
-}
-
-/* Period with neon accent */
+/* Period */
 [data-theme="anime"] .experience-period {
-  color: #00e5ff;
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
-  border-bottom-color: rgba(0, 229, 255, 0.2);
-}
-
-[data-theme="anime"] .experience-period i {
-  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.8));
+  color: rgba(255, 255, 255, 0.75);
 }
 
 [data-theme="anime"] .duration {
-  color: rgba(255, 255, 255, 0.7);
-  text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
-  border-left-color: rgba(0, 229, 255, 0.2);
-}
-
-[data-theme="anime"] .duration i {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.65);
+  border-left-color: rgba(0, 229, 255, 0.3);
 }
 
 /* Description */
 [data-theme="anime"] .experience-description {
   color: rgba(255, 255, 255, 0.8);
-  text-shadow: 0 0 3px rgba(0, 229, 255, 0.1);
 }
 
-/* Responsibilities section */
+/* Responsibilities */
 [data-theme="anime"] .experience-responsibilities h4 {
   color: #ffffff;
-  text-shadow: 0 0 8px rgba(255, 23, 68, 0.4);
-}
-
-[data-theme="anime"] .experience-responsibilities h4 i {
-  color: #ff4081;
-  filter: drop-shadow(0 0 8px rgba(255, 64, 129, 0.8));
+  text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
 }
 
 [data-theme="anime"] .experience-responsibilities li {
@@ -938,7 +553,12 @@
 
 [data-theme="anime"] .experience-responsibilities li::before {
   color: #00e5ff;
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
+}
+
+/* Type badge */
+[data-theme="anime"] .type-internship,
+[data-theme="anime"] .type-organizational {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Technology tags */
@@ -947,7 +567,6 @@
   border: 1px solid rgba(0, 229, 255, 0.4);
   color: #00e5ff;
   text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
-  box-shadow: 0 2px 10px rgba(0, 229, 255, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -959,11 +578,8 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.2), 
-    transparent);
-  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.4s ease;
 }
 
 [data-theme="anime"] .tech-tag:hover::before {
@@ -973,100 +589,31 @@
 [data-theme="anime"] .tech-tag:hover {
   background: rgba(0, 229, 255, 0.25);
   border-color: rgba(0, 229, 255, 0.8);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
 }
 
-/* Achievements section */
-[data-theme="anime"] .experience-achievements {
-  background: rgba(255, 215, 0, 0.08);
-  border-left: 4px solid #FFD700;
-  box-shadow: inset 0 0 30px rgba(255, 215, 0, 0.1),
-              0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="anime"] .experience-achievements h4 {
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-}
-
-[data-theme="anime"] .experience-achievements h4 i {
-  color: #FFD700;
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
-  animation: starShine 2s ease-in-out infinite;
-}
-
-@keyframes starShine {
-  0%, 100% {
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
-    transform: scale(1);
-  }
-  50% {
-    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));
-    transform: scale(1.1);
-  }
-}
-
-[data-theme="anime"] .experience-achievements li {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-[data-theme="anime"] .experience-achievements li::before {
-  color: #FFD700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-  animation: starTwinkle 3s ease-in-out infinite;
-}
-
-@keyframes starTwinkle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-/* Responsive adjustments for anime theme */
+/* Responsive for anime theme */
 @media (max-width: 768px) {
+  [data-theme="anime"] .experience-section::before {
+    background-size: 40px 40px;
+  }
+
   [data-theme="anime"] .timeline-line {
-    box-shadow: 0 0 15px rgba(255, 23, 68, 0.5),
-                0 0 30px rgba(0, 229, 255, 0.3);
+    box-shadow: 0 0 12px rgba(255, 23, 68, 0.4),
+                0 0 25px rgba(0, 229, 255, 0.2);
   }
 
   [data-theme="anime"] .timeline-dot {
-    box-shadow: 0 0 0 8px rgba(17, 0, 32, 0.9),
-                0 0 25px rgba(255, 23, 68, 0.5),
-                0 0 40px rgba(0, 229, 255, 0.3);
-  }
-
-  [data-theme="anime"] .experience-card:hover .experience-content {
-    transform: translateY(-5px);
-  }
-
-  [data-theme="anime"] .duration {
-    border-left: none;
+    box-shadow: 0 0 0 6px rgba(20, 0, 35, 0.95),
+                0 0 15px rgba(255, 23, 68, 0.4),
+                0 0 25px rgba(0, 229, 255, 0.2);
   }
 }
 
 @media (max-width: 480px) {
-  [data-theme="anime"] .experience-section::before,
-  [data-theme="anime"] .experience-section::after {
-    animation-duration: 30s;
-  }
-
-  [data-theme="anime"] .filter-btn {
-    border-width: 1.5px;
-  }
-
-  [data-theme="anime"] .timeline-line {
-    width: 3px;
-  }
-
-  [data-theme="anime"] .timeline-dot::before {
-    animation-duration: 4s;
-  }
-
-  [data-theme="anime"] .experience-content {
-    border-width: 1.5px;
-  }
-
-  [data-theme="anime"] .tech-tag:hover {
-    transform: translateY(-2px);
+  [data-theme="anime"] .timeline-dot {
+    box-shadow: 0 0 0 5px rgba(20, 0, 35, 0.95),
+                0 0 12px rgba(255, 23, 68, 0.3),
+                0 0 20px rgba(0, 229, 255, 0.15);
   }
 }
