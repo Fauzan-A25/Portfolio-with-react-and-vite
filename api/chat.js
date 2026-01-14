@@ -48,8 +48,26 @@ export default async function handler(req, res) {
       generationConfig: { temperature: 0.7, maxOutputTokens: 500 }
     });
 
-    const prompt = `${context || ''}\n\nQ: ${message}\n\nA:`;
-    const result = await model.generateContent(prompt);
+    const systemPrompt = `You are a friendly AI assistant for a portfolio website. 
+
+IMPORTANT INSTRUCTIONS:
+- ONLY answer questions based on the provided context information below
+- If asked about something NOT in the context, politely say "I don't have that information in the portfolio"
+- Be conversational and friendly, but always accurate
+- Do not make up information or hallucinate facts
+- If you're unsure, admit it rather than guess
+- Keep responses concise (under 200 characters when possible)
+
+PORTFOLIO CONTEXT:
+${context || 'No context provided'}
+
+---
+
+User Question: ${message}
+
+Respond naturally and helpfully, staying true to the information provided above.`;
+
+    const result = await model.generateContent(systemPrompt);
     
     // ✅ FIXED: Direct access, NO await text()
     const responseText = result.response.text();

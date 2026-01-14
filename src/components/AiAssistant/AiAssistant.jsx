@@ -29,56 +29,85 @@ const AIAssistant = ({ portfolioData }) => {
     }
   }, [portfolioData?.personalInfo?.name]);
 
-  // ✅ Dynamic Context Based on Question from props
+  // ✅ Dynamic Context Based on Question from props - IMPROVED ACCURACY
   const getRelevantContext = (userMessage) => {
     if (!portfolioData) return '';
     
     const lowerMsg = userMessage.toLowerCase();
     const { personalInfo, skills, projects, experiences, education } = portfolioData;
     
-    let context = `You are a friendly and professional AI assistant for ${personalInfo?.name}'s portfolio website. Your role is to help visitors learn about ${personalInfo?.name} in a natural, conversational way.
+    let context = `ABOUT ${personalInfo?.name?.toUpperCase()}:
+- Name: ${personalInfo?.name}
+- Title: ${personalInfo?.title}
+- University: ${personalInfo?.university}
+- Location: ${personalInfo?.location}
+- Email: ${personalInfo?.email}
+- GPA: ${personalInfo?.gpa}
+- Bio: ${personalInfo?.tagline}
 
-IMPORTANT INSTRUCTIONS:
-- Be warm, friendly, and professional
-- If greeted (hi, hello, hey), respond naturally with a greeting and brief introduction
-- When answering questions, be conversational, not robotic
-- Use "he" or "${personalInfo?.name}" when referring to him
-- Keep responses concise but engaging
-- If asked about things not in your knowledge, politely say you're focused on ${personalInfo?.name}'s portfolio
-
-BASIC INFO:
-${personalInfo?.name} is a ${personalInfo?.title} at ${personalInfo?.university}. ${personalInfo?.tagline}\n\n`;
+`;
     
-    // Add relevant details based on question
-    if (skills && (lowerMsg.includes('skill') || lowerMsg.includes('tech'))) {
-      const topSkills = [
-        ...(skills.programming?.slice(0, 4).map(s => s.name) || []),
-        ...(skills.dataScience?.slice(0, 4).map(s => s.name) || [])
-      ].join(', ');
-      context += `Key skills: ${topSkills}.\n`;
+    // Add relevant details based on question - MORE DETAILED
+    if (skills && (lowerMsg.includes('skill') || lowerMsg.includes('tech') || lowerMsg.includes('expert') || lowerMsg.includes('proficient'))) {
+      if (skills.programming && skills.programming.length > 0) {
+        const progList = skills.programming.slice(0, 6).map(s => 
+          `${s.name} (${s.yearsOfExperience} years)`
+        ).join(', ');
+        context += `Programming Skills: ${progList}\n`;
+      }
+      if (skills.dataScience && skills.dataScience.length > 0) {
+        const dsList = skills.dataScience.slice(0, 6).map(s => 
+          `${s.name} (${s.yearsOfExperience} years)`
+        ).join(', ');
+        context += `Data Science & ML: ${dsList}\n`;
+      }
+      if (skills.tools && skills.tools.length > 0) {
+        const toolsList = skills.tools.slice(0, 6).map(s => s.name).join(', ');
+        context += `Tools & Platforms: ${toolsList}\n`;
+      }
     }
     
-    if (projects && lowerMsg.includes('project')) {
-      const topProjects = projects.slice(0, 3).map(p => 
-        `- ${p.title} (${p.year}): ${p.shortDescription || p.description}`
+    // Projects - WITH FULL DETAILS
+    if (projects && (lowerMsg.includes('project') || lowerMsg.includes('work') || lowerMsg.includes('build'))) {
+      const projList = projects.slice(0, 4).map(p => 
+        `• ${p.title} (${p.year}): ${p.description}. Tech: ${p.technologies?.slice(0, 3).join(', ')}. Status: ${p.status}`
       ).join('\n');
-      context += `Notable projects:\n${topProjects}\n`;
+      context += `\nProjects:\n${projList}\n`;
     }
     
-    if (experiences && (lowerMsg.includes('experience') || lowerMsg.includes('work'))) {
-      const recentExp = experiences.slice(0, 2).map(e => 
-        `- ${e.title} at ${e.company} (${e.period})`
+    // Experience - COMPLETE INFO
+    if (experiences && (lowerMsg.includes('experience') || lowerMsg.includes('work') || lowerMsg.includes('job') || lowerMsg.includes('role'))) {
+      const expList = experiences.slice(0, 3).map(e => 
+        `• ${e.title} at ${e.company} (${e.period}, ${e.duration}): ${e.description}. Key skills: ${e.technologies?.slice(0, 3).join(', ')}`
       ).join('\n');
-      context += `Recent experience:\n${recentExp}\n`;
+      context += `\nProfessional Experience:\n${expList}\n`;
     }
     
-    if (education && (lowerMsg.includes('education') || lowerMsg.includes('study'))) {
-      const edu = education[0];
-      context += `Education: ${edu.degree} at ${edu.institution} (${edu.period}).\n`;
+    // Education - FULL DETAILS
+    if (education && (lowerMsg.includes('education') || lowerMsg.includes('study') || lowerMsg.includes('university') || lowerMsg.includes('degree'))) {
+      const eduList = education.map(e => 
+        `• ${e.degree} at ${e.institution} (${e.period}). Relevant courses: ${e.relevantCourses?.slice(0, 4).join(', ')}`
+      ).join('\n');
+      context += `\nEducation:\n${eduList}\n`;
     }
     
-    if (lowerMsg.includes('contact') || lowerMsg.includes('email')) {
-      context += `Contact: ${personalInfo?.email}, ${personalInfo?.location}.\n`;
+    // Contact - EXPLICIT
+    if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('reach') || lowerMsg.includes('linkedin') || lowerMsg.includes('github')) {
+      context += `\nContact Information:
+- Email: ${personalInfo?.email}
+- Location: ${personalInfo?.location}
+- GitHub: https://github.com/Fauzan-A25
+- LinkedIn: https://linkedin.com/in/fauzanahsanudin\n`;
+    }
+    
+    // Always include full summary if no specific match
+    if (!lowerMsg.match(/skill|tech|project|work|build|experience|job|role|education|study|university|degree|contact|email|reach|linkedin|github/i)) {
+      context += `\nQUICK SUMMARY:
+${personalInfo?.name} is a ${personalInfo?.title} at ${personalInfo?.university}. 
+Specialties: Machine Learning, Data Science, Python Development
+Top Projects: ${projects?.slice(0, 2).map(p => p.title).join(', ')}
+Years of Experience: ${experiences?.length || 0}+ roles
+Contact: ${personalInfo?.email}\n`;
     }
     
     return context;
@@ -102,7 +131,7 @@ ${personalInfo?.name} is a ${personalInfo?.title} at ${personalInfo?.university}
     setIsOpen(!isOpen);
   };
 
-  // ✅ Enhanced Local Response with data from props
+  // ✅ Enhanced Local Response with data from props - MORE ACCURATE
   const getLocalResponse = (message) => {
     if (!portfolioData) return 'Portfolio data is loading...';
     
@@ -111,75 +140,80 @@ ${personalInfo?.name} is a ${personalInfo?.title} at ${personalInfo?.university}
     
     // Greetings
     if (lowerMessage.match(/^(hi|hello|hey|good morning|good afternoon|good evening|halo|hai)/i)) {
-      return `Hey there! 👋 Thanks for stopping by!\n\nI'm an AI assistant here to help you get to know **${personalInfo?.name}** better. Feel free to ask me about his skills, projects, work experience, or anything else you'd like to know about his portfolio.\n\nWhat would you like to learn about?`;
+      return `Hey! 👋 I'm here to help you learn about **${personalInfo?.name}**.\n\nI can tell you about his skills, projects, experience, or anything else from his portfolio. What would you like to know?`;
     }
     
     // How are you
     if (lowerMessage.includes('how are you') || lowerMessage.includes('how r u')) {
-      return `I'm doing great, thanks for asking! 😊\n\nI'm here and ready to help you learn more about **${personalInfo?.name}** and his work. Is there anything specific you'd like to know about his skills, projects, or experience?`;
+      return `I'm doing great! 😊 Ready to help you explore **${personalInfo?.name}'s** portfolio. What interests you?`;
     }
     
     // What can you do
     if (lowerMessage.includes('what can you') || lowerMessage.includes('how can you help')) {
-      return `Great question! I'm here to help you explore **${personalInfo?.name}'s** portfolio. I can tell you about:\n\n• 💻 His **technical skills** and expertise\n• 🚀 **Projects** he's worked on\n• 💼 His **professional experience**\n• 🎓 **Education** and academic background\n• 📧 How to **contact** him\n\nWhat interests you most?`;
+      return `I'm here to help! I can tell you about:\n\n• 💻 **Technical Skills** - Programming & Data Science expertise\n• 🚀 **Projects** - Work and portfolio pieces\n• 💼 **Experience** - Professional roles and background\n• 🎓 **Education** - University and relevant coursework\n• 📧 **Contact** - How to reach out\n\nWhat's on your mind?`;
     }
     
     // Skills
-    if (lowerMessage.includes('skill') || lowerMessage.includes('tech')) {
-      const prog = skills?.programming?.slice(0, 4).map(s => 
-        `**${s.name}** (${s.yearsOfExperience} years)`
-      ).join(', ') || 'N/A';
-      const ds = skills?.dataScience?.slice(0, 3).map(s => 
-        `**${s.name}** (${s.yearsOfExperience} years)`
-      ).join(', ') || 'N/A';
-      return `${personalInfo?.name} has a solid technical background! Here's what he's proficient in:\n\n**Programming:** ${prog}\n\n**Data Science & ML:** ${ds}\n\nHe's particularly passionate about machine learning and building data-driven applications. Want to know more about any specific technology?`;
+    if (lowerMessage.includes('skill') || lowerMessage.includes('tech') || lowerMessage.includes('expert') || lowerMessage.includes('proficient')) {
+      if (!skills?.programming || skills.programming.length === 0) {
+        return `I don't have detailed skill information available right now. You can check the skills section on the portfolio for more details!`;
+      }
+      const prog = skills.programming.slice(0, 5).map(s => `${s.name}`).join(', ') || 'Various';
+      const ds = skills.dataScience?.slice(0, 3).map(s => `${s.name}`).join(', ') || 'Data Science';
+      return `**${personalInfo?.name}** has strong technical skills:\n\n🔧 **Programming:** ${prog}\n🤖 **Data Science & ML:** ${ds}\n\nHe's particularly passionate about machine learning and building data-driven solutions. Want to know more about a specific skill?`;
     } 
     
     // Projects
-    if (lowerMessage.includes('project')) {
-      const top3 = projects?.slice(0, 3).map(p => 
-        `**${p.title}** (${p.year})\n${p.shortDescription || p.description}\n*Built with:* ${p.technologies?.slice(0, 3).join(', ')}`
-      ).join('\n\n') || 'No projects data available';
-      return `${personalInfo?.name} has worked on some really cool projects! Here are a few highlights:\n\n${top3}\n\nYou can check out his full portfolio on GitHub. Would you like to know more about any specific project?`;
+    if (lowerMessage.includes('project') || lowerMessage.includes('built') || lowerMessage.includes('build')) {
+      if (!projects || projects.length === 0) {
+        return `No project information available at the moment.`;
+      }
+      const featured = projects.filter(p => p.featured).slice(0, 3);
+      const projText = featured.map(p => `**${p.title}** (${p.year}) - ${p.shortDescription || p.description?.substring(0, 60)}`).join('\n');
+      return `Here are some of **${personalInfo?.name}'s** featured projects:\n\n${projText}\n\nEach project demonstrates expertise in different areas of data science and ML. Want details on any project?`;
     } 
     
     // Experience
-    if (lowerMessage.includes('experience') || lowerMessage.includes('work')) {
-      const recent = experiences?.slice(0, 2).map(e => 
-        `**${e.title}** at ${e.company}\n${e.period} • ${e.type}\n${e.description?.slice(0, 100)}...`
-      ).join('\n\n') || 'No experience data available';
-      return `${personalInfo?.name} has gained valuable experience through various roles:\n\n${recent}\n\nHe's actively building his professional profile while studying. Interested in learning more about his work?`;
+    if (lowerMessage.includes('experience') || lowerMessage.includes('work') || lowerMessage.includes('job') || lowerMessage.includes('role')) {
+      if (!experiences || experiences.length === 0) {
+        return `Experience information isn't available right now. Check back soon!`;
+      }
+      const exp = experiences.slice(0, 2).map(e => `**${e.title}** at ${e.company}\n${e.period}`).join('\n\n');
+      return `**${personalInfo?.name}** has experience in:\n\n${exp}\n\nHe's actively building his professional profile while developing his skills in data science. Interested in learning more?`;
     } 
     
     // Education
-    if (lowerMessage.includes('education') || lowerMessage.includes('study') || lowerMessage.includes('university')) {
-      const edu = education?.[0];
-      if (!edu) return 'Education data is loading...';
-      return `${personalInfo?.name} is currently pursuing his **${edu.degree}** at **${edu.institution}** (${edu.period}).\n\nHe's focusing on courses like ${edu.relevantCourses?.slice(0, 3).join(', ')}, and more. He's passionate about data science and actively participates in tech communities!\n\nWant to know about his projects or skills?`;
+    if (lowerMessage.includes('education') || lowerMessage.includes('study') || lowerMessage.includes('university') || lowerMessage.includes('degree')) {
+      if (!education || education.length === 0) {
+        return `Education details aren't available right now.`;
+      }
+      const edu = education[0];
+      const courses = edu.relevantCourses?.slice(0, 3).join(', ') || 'various courses';
+      return `**${personalInfo?.name}** is pursuing a **${edu.degree}** at **${edu.institution}** (${edu.period}).\n\nRelevant courses: ${courses}\n\nHe's passionate about data science and an active member of tech communities!`;
     } 
     
     // Contact
-    if (lowerMessage.includes('contact') || lowerMessage.includes('reach') || lowerMessage.includes('email')) {
-      return `Want to get in touch with ${personalInfo?.name}? Here's how:\n\n📧 **Email:** ${personalInfo?.email}\n📍 **Location:** ${personalInfo?.location}\n🎓 **University:** ${personalInfo?.university}\n\nHe's open to collaboration opportunities, project discussions, and professional connections. Feel free to reach out!`;
+    if (lowerMessage.includes('contact') || lowerMessage.includes('reach') || lowerMessage.includes('email') || lowerMessage.includes('linkedin') || lowerMessage.includes('github')) {
+      return `Want to connect with **${personalInfo?.name}**?\n\n📧 **Email:** ${personalInfo?.email}\n📍 **Location:** ${personalInfo?.location}\n\nHe's open to collaboration and professional opportunities!`;
     }
     
-    // Who is he / about
-    if (lowerMessage.includes('who') || lowerMessage.includes('about')) {
-      return `Let me tell you about **${personalInfo?.name}**! 😊\n\nHe's a **${personalInfo?.title}** currently studying at **${personalInfo?.university}**. ${personalInfo?.tagline}\n\nBased in ${personalInfo?.location}, he's passionate about data science, machine learning, and building impactful tech solutions. He's worked on multiple projects and continues to expand his skills in the field.\n\nWhat would you like to know more about - his projects, skills, or experience?`;
+    // Who is / About
+    if (lowerMessage.includes('who') || lowerMessage.includes('about') || lowerMessage.includes('tell me')) {
+      return `**${personalInfo?.name}** is a ${personalInfo?.title} at ${personalInfo?.university}, based in ${personalInfo?.location}.\n\n${personalInfo?.tagline}\n\nHe specializes in machine learning, data science, and Python development. What would you like to know more about?`;
     }
     
     // Thank you
     if (lowerMessage.includes('thank') || lowerMessage.includes('thanks')) {
-      return `You're very welcome! 😊\n\nFeel free to ask me anything else about ${personalInfo?.name}'s portfolio. I'm here to help!`;
+      return `You're welcome! 😊 Feel free to ask more about **${personalInfo?.name}'s** work and skills!`;
     }
     
     // Bye
-    if (lowerMessage.match(/^(bye|goodbye|see you|see ya|later)/i)) {
-      return `Thanks for visiting! 👋\n\nFeel free to come back anytime if you have more questions about ${personalInfo?.name}. Have a great day!`;
+    if (lowerMessage.match(/^(bye|goodbye|see you|see ya|later|gotta go)/i)) {
+      return `Thanks for visiting! 👋 Feel free to explore more or come back anytime!`;
     }
     
-    // Default
-    return `I'm here to help you learn more about **${personalInfo?.name}** and his portfolio! You can ask me about:\n\n• 💻 His **skills** and technical expertise\n• 🚀 **Projects** he's worked on\n• 💼 **Work experience** and roles\n• 🎓 **Education** background\n• 📧 How to **contact** him\n\nWhat would you like to know? Feel free to ask in your own words!`;
+    // Default - Ask for clarification
+    return `I'm here to help! I can tell you about skills, projects, experience, education, or how to contact. What would you like to know about **${personalInfo?.name}**?`;
   };
 
   // ✅ NEW: Call Serverless Function
