@@ -29,97 +29,69 @@ const AIAssistant = ({ portfolioData }) => {
     }
   }, [portfolioData?.personalInfo?.name]);
 
-  // ✅ Dynamic Context Based on Question from props - IMPROVED ACCURACY & DETAIL
+  // ✅ Dynamic Context - Optimized for efficiency & quality
   const getRelevantContext = (userMessage) => {
     if (!portfolioData) return '';
     
     const lowerMsg = userMessage.toLowerCase();
     const { personalInfo, skills, projects, experiences, education } = portfolioData;
     
-    let context = `ABOUT ${personalInfo?.name?.toUpperCase()}:
-- Name: ${personalInfo?.name}
-- Title: ${personalInfo?.title}
-- University: ${personalInfo?.university}
-- Location: ${personalInfo?.location}
-- Email: ${personalInfo?.email}
-- GPA: ${personalInfo?.gpa}
-- Subtitle: ${personalInfo?.subtitle}
-- Bio: ${personalInfo?.tagline}
+    let context = `${personalInfo?.name} - ${personalInfo?.title} at ${personalInfo?.university}
+Location: ${personalInfo?.location} | Email: ${personalInfo?.email} | GPA: ${personalInfo?.gpa}
+Bio: ${personalInfo?.tagline}
 
 `;
     
-    // Add relevant details based on question - MORE DETAILED
-    if (skills && (lowerMsg.includes('skill') || lowerMsg.includes('tech') || lowerMsg.includes('expert') || lowerMsg.includes('proficient') || lowerMsg.includes('ability') || lowerMsg.includes('knowledge'))) {
-      if (skills.programming && skills.programming.length > 0) {
-        const progList = skills.programming.slice(0, 8).map(s => 
-          `${s.name} (${s.yearsOfExperience} years of experience)`
-        ).join(', ');
-        context += `Programming Skills: ${progList}\n`;
+    // Skills
+    if (skills && lowerMsg.match(/skill|tech|expert|proficient|ability|knowledge/i)) {
+      if (skills.programming?.length > 0) {
+        const prog = skills.programming.slice(0, 6).map(s => `${s.name}`).join(', ');
+        context += `Programming: ${prog}\n`;
       }
-      if (skills.dataScience && skills.dataScience.length > 0) {
-        const dsList = skills.dataScience.slice(0, 8).map(s => 
-          `${s.name} (${s.yearsOfExperience} years of experience)`
-        ).join(', ');
-        context += `Data Science & Machine Learning: ${dsList}\n`;
+      if (skills.dataScience?.length > 0) {
+        const ds = skills.dataScience.slice(0, 5).map(s => `${s.name}`).join(', ');
+        context += `Data Science/ML: ${ds}\n`;
       }
-      if (skills.tools && skills.tools.length > 0) {
-        const toolsList = skills.tools.slice(0, 8).map(s => `${s.name}`).join(', ');
-        context += `Tools & Platforms: ${toolsList}\n`;
+      if (skills.tools?.length > 0) {
+        const tools = skills.tools.slice(0, 5).map(s => s.name).join(', ');
+        context += `Tools: ${tools}\n`;
       }
     }
     
-    // Projects - WITH FULL DETAILS
-    if (projects && (lowerMsg.includes('project') || lowerMsg.includes('work') || lowerMsg.includes('build') || lowerMsg.includes('portfolio') || lowerMsg.includes('create'))) {
-      const projList = projects.slice(0, 5).map(p => 
-        `• ${p.title} (${p.year}): ${p.description}
-   Technologies: ${p.technologies?.slice(0, 4).join(', ')}
-   Status: ${p.status}${p.highlights ? '\n   Highlights: ' + p.highlights.slice(0, 2).join(', ') : ''}`
+    // Projects
+    if (projects && lowerMsg.match(/project|work|build|portfolio|create/i)) {
+      const projList = projects.slice(0, 3).map(p => 
+        `• ${p.title} (${p.year}): ${p.description.substring(0, 120)}... Tech: ${p.technologies?.slice(0, 2).join(', ')}`
       ).join('\n');
       context += `\nProjects:\n${projList}\n`;
     }
     
-    // Experience - COMPLETE INFO
-    if (experiences && (lowerMsg.includes('experience') || lowerMsg.includes('work') || lowerMsg.includes('job') || lowerMsg.includes('role') || lowerMsg.includes('career'))) {
-      const expList = experiences.slice(0, 4).map(e => 
-        `• ${e.title} at ${e.company}
-   Period: ${e.period} (${e.duration})
-   Type: ${e.type}
-   Description: ${e.description}
-   Key Technologies: ${e.technologies?.slice(0, 4).join(', ')}${e.responsibilities ? '\n   Responsibilities: ' + e.responsibilities.slice(0, 2).join('; ') : ''}`
+    // Experience
+    if (experiences && lowerMsg.match(/experience|work|job|role|career/i)) {
+      const expList = experiences.slice(0, 3).map(e => 
+        `• ${e.title} at ${e.company} (${e.period}): ${e.description.substring(0, 100)}`
       ).join('\n');
-      context += `\nProfessional Experience:\n${expList}\n`;
+      context += `\nExperience:\n${expList}\n`;
     }
     
-    // Education - FULL DETAILS
-    if (education && (lowerMsg.includes('education') || lowerMsg.includes('study') || lowerMsg.includes('university') || lowerMsg.includes('degree') || lowerMsg.includes('course'))) {
-      const eduList = education.map(e => 
-        `• ${e.degree} at ${e.institution}
-   Period: ${e.period}
-   Relevant Courses: ${e.relevantCourses?.slice(0, 5).join(', ')}${e.gpa ? '\n   GPA: ' + e.gpa : ''}`
-      ).join('\n');
-      context += `\nEducation:\n${eduList}\n`;
+    // Education
+    if (education && lowerMsg.match(/education|study|university|degree|course/i)) {
+      const edu = education[0];
+      context += `\nEducation: ${edu.degree} at ${edu.institution} (${edu.period})
+Courses: ${edu.relevantCourses?.slice(0, 4).join(', ')}\n`;
     }
     
-    // Contact - EXPLICIT
-    if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('reach') || lowerMsg.includes('linkedin') || lowerMsg.includes('github') || lowerMsg.includes('connect')) {
-      context += `\nContact Information:
-- Email: ${personalInfo?.email}
-- Location: ${personalInfo?.location}
-- GitHub: https://github.com/Fauzan-A25
-- LinkedIn: https://linkedin.com/in/fauzanahsanudin
-- Instagram: https://instagram.com/fauzan_1718
-- CV Link: ${personalInfo?.cvLink || 'Available upon request'}\n`;
+    // Contact
+    if (lowerMsg.match(/contact|email|reach|linkedin|github|connect/i)) {
+      context += `\nContact: ${personalInfo?.email}
+GitHub: https://github.com/Fauzan-A25 | LinkedIn: https://linkedin.com/in/fauzanahsanudin\n`;
     }
     
-    // Always include full summary if no specific match
-    if (!lowerMsg.match(/skill|tech|expert|proficient|ability|knowledge|project|work|build|portfolio|create|experience|job|role|career|education|study|university|degree|course|contact|email|reach|linkedin|github|connect/i)) {
-      context += `\nCOMPREHENSIVE SUMMARY:
-${personalInfo?.name} is a ${personalInfo?.title} at ${personalInfo?.university}. 
-Specialties: Machine Learning, Data Science, Python Development, Computer Vision
-Featured Projects: ${projects?.filter(p => p.featured).slice(0, 3).map(p => p.title).join(', ')}
-Professional Roles: ${experiences?.slice(0, 2).map(e => `${e.title} at ${e.company}`).join(', ')}
-Contact: ${personalInfo?.email}
-CV: ${personalInfo?.cvLink || 'Available upon request'}\n`;
+    // Default summary
+    if (!context.match(/Programming:|Projects:|Experience:|Education:|Contact:/)) {
+      context += `\nSpecialties: ${skills?.programming?.slice(0, 3).map(s => s.name).join(', ')}
+Key Projects: ${projects?.filter(p => p.featured).slice(0, 2).map(p => p.title).join(', ')}
+Contact: ${personalInfo?.email}\n`;
     }
     
     return context;
