@@ -3,13 +3,60 @@
 // ⚠️ GANTI dengan URL deployment Apps Script Anda!
 const SHEETS_API_URL = import.meta.env.VITE_SHEETS_API_URL;
 
+// Fallback data — digunakan saat API Sheets tidak tersedia
+import {
+  personalInfo as fallbackPersonalInfo,
+  socialLinks as fallbackSocialLinks,
+  projects as fallbackProjects,
+  skills as fallbackSkills,
+  experiences as fallbackExperiences,
+  education as fallbackEducation,
+  certifications as fallbackCertifications,
+  stats as fallbackStats,
+  navLinks as fallbackNavLinks,
+  projectCategories as fallbackCategories,
+  heroTypingTexts as fallbackHeroTexts,
+  emailjsConfig as fallbackEmailJS,
+  aboutContent as fallbackAboutContent,
+  skillsContent as fallbackSkillsContent,
+  contactContent as fallbackContactContent,
+  projectsContent as fallbackProjectsContent,
+  footerContent as fallbackFooterContent,
+} from '../data/portfolioData.js';
+
 // ============================================
-// CORE FETCH FUNCTION (UPDATED - DEFENSIVE)
+// FALLBACK DATA
+// ============================================
+
+function getFallbackData() {
+  console.log('📦 Using local fallback data (API URL not configured)');
+  return {
+    personalInfo: fallbackPersonalInfo,
+    socialLinks: fallbackSocialLinks,
+    projects: fallbackProjects,
+    skills: fallbackSkills,
+    experiences: fallbackExperiences,
+    education: fallbackEducation,
+    certifications: fallbackCertifications,
+    stats: fallbackStats,
+    navLinks: fallbackNavLinks,
+    projectCategories: fallbackCategories,
+    heroTypingTexts: fallbackHeroTexts,
+    emailjsConfig: fallbackEmailJS,
+    aboutContent: fallbackAboutContent,
+    skillsContent: fallbackSkillsContent,
+    contactContent: fallbackContactContent,
+    projectsContent: fallbackProjectsContent,
+    footerContent: fallbackFooterContent,
+  };
+}
+
+// ============================================
+// CORE FETCH FUNCTION
 // ============================================
 
 /**
  * Fetch data dari satu sheet menggunakan READ API
- * FIXED: Handle various data types safely
  */
 async function fetchSheet(sheetName) {
   try {
@@ -40,12 +87,11 @@ async function fetchSheet(sheetName) {
 }
 
 // ============================================
-// DATA TRANSFORMATION FUNCTIONS (UPDATED)
+// DATA TRANSFORMATION FUNCTIONS
 // ============================================
 
 /**
  * Parse JSON strings dalam data
- * FIXED: Safely handle already-parsed values
  */
 function parseJsonFields(data, fields) {
   if (!Array.isArray(data)) return [];
@@ -176,14 +222,19 @@ function rebuildProjectsContent(projectsContentData) {
 }
 
 // ============================================
-// MAIN FETCH FUNCTION (IMPROVED ERROR HANDLING)
+// MAIN FETCH FUNCTION
 // ============================================
 
 /**
  * Fetch semua data dari Google Sheets
- * IMPROVED: Better error handling and validation
+ * FALLBACK: Jika API URL tidak dikonfigurasi, gunakan data lokal
  */
 export async function fetchAllData() {
+  // Jika API URL tidak dikonfigurasi, langsung pakai fallback
+  if (!SHEETS_API_URL || SHEETS_API_URL === 'undefined') {
+    return getFallbackData();
+  }
+
   try {
     // Fetch semua sheets secara parallel (17 sheets)
     const [
@@ -197,7 +248,6 @@ export async function fetchAllData() {
       statsData,
       navLinksData,
       categoriesData,
-      // NEW SECTIONS
       heroTypingTextsData,
       emailJSConfigData,
       aboutContentData,
@@ -216,7 +266,6 @@ export async function fetchAllData() {
       fetchSheet('Stats'),
       fetchSheet('NavLinks'),
       fetchSheet('ProjectCategories'),
-      // NEW SECTIONS
       fetchSheet('HeroTypingTexts'),
       fetchSheet('EmailJSConfig'),
       fetchSheet('AboutContent'),
@@ -226,47 +275,43 @@ export async function fetchAllData() {
       fetchSheet('FooterContent')
     ]);
     
+    // Validasi: jika SEMUA data kosong, fallback ke lokal
+    const allEmpty = [
+      personalInfoData, projectsData, skillsData, experiencesData
+    ].every(d => !d || d.length === 0);
+    
+    if (allEmpty) {
+      console.warn('⚠️ API returned empty data, using fallback');
+      return getFallbackData();
+    }
+    
     // Parse dan rebuild data dengan validasi
     const portfolioData = {
-      // Original sections
       personalInfo: personalInfoData[0] || {},
       socialLinks: socialLinksData[0] || {},
       
-      // Projects: parse JSON arrays
       projects: parseJsonFields(projectsData, [
-        'tags',
-        'technologies',
-        'features',
-        'highlights'
+        'tags', 'technologies', 'features', 'highlights'
       ]),
       
-      // Skills: rebuild nested structure
       skills: rebuildSkills(skillsData),
       
-      // Experiences: parse JSON arrays
       experiences: parseJsonFields(experiencesData, [
-        'responsibilities',
-        'technologies',
-        'achievements'
+        'responsibilities', 'technologies', 'achievements'
       ]),
       
-      // Education: parse JSON arrays
       education: parseJsonFields(educationData, [
-        'relevantCourses',
-        'achievements'
+        'relevantCourses', 'achievements'
       ]),
       
-      // Simple data (no parsing needed)
       certifications: Array.isArray(certificationsData) ? certificationsData : [],
       stats: Array.isArray(statsData) ? statsData : [],
       navLinks: Array.isArray(navLinksData) ? navLinksData : [],
       
-      // Project categories: extract category names safely
       projectCategories: Array.isArray(categoriesData) 
         ? categoriesData.map(c => c.category).filter(Boolean)
         : [],
       
-      // NEW SECTIONS
       heroTypingTexts: Array.isArray(heroTypingTextsData)
         ? heroTypingTextsData.map(item => item.text).filter(Boolean)
         : [],
@@ -279,15 +324,12 @@ export async function fetchAllData() {
     };
     
     console.log('✅ Data fetched successfully from Google Sheets!');
-    console.log('📊 Data preview:', portfolioData);
-    
     return portfolioData;
     
   } catch (error) {
-    console.error('❌ Error fetching data from Google Sheets:', error);
-    throw error; // Re-throw untuk ditangani di usePortfolioData
+    console.error('❌ Error fetching from Sheets, using fallback:', error);
+    return getFallbackData();
   }
 }
 
-// Export individual fetch function jika diperlukan
 export { fetchSheet };
