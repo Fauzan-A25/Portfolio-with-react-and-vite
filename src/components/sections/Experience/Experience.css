@@ -617,3 +617,23 @@
                 0 0 20px rgba(0, 229, 255, 0.15);
   }
 }
+
+/* Experience - timeline enhancements */
+.experience-card {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.experience-card:hover {
+  transform: translateX(6px);
+  border-color: var(--accent-color);
+}
+
+.timeline-dot {
+  transition: all 0.3s ease;
+}
+
+.experience-card:hover .timeline-dot {
+  transform: scale(1.2);
+  box-shadow: 0 0 12px rgba(0, 212, 170, 0.4);
+}
