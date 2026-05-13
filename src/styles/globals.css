@@ -627,3 +627,136 @@ code, pre {
     transition: none;
   }
 }
+
+/* ========================================
+   UI/UX IMPROVEMENTS - v2
+======================================== */
+
+/* Better typography hierarchy */
+body {
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+h2.section-title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: 0.75rem;
+}
+
+/* Section spacing */
+section {
+  padding: 120px 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 80px 0;
+  }
+}
+
+/* Section header spacing */
+.section-header {
+  margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    margin-bottom: 40px;
+  }
+}
+
+/* Gradient text accent for section subtitles */
+.section-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  max-width: 560px;
+  opacity: 0.85;
+}
+
+/* Card improvements */
+.skill-card,
+.experience-card,
+.certification-card,
+.project-card {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Better link hover */
+a:not(.btn):not(.hero-btn):not(.overlay-btn):not(.social-link) {
+  position: relative;
+}
+
+a:not(.btn):not(.hero-btn):not(.overlay-btn):not(.social-link)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-gradient);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:not(.btn):not(.hero-btn):not(.overlay-btn):not(.social-link):hover::after {
+  width: 100%;
+}
+
+/* Smooth entrance for all sections - handled by scroll reveal hook */
+/* Use .reveal class on specific elements instead of global section animation */
+
+/* Stagger animation delays for cards */
+.projects-grid .project-card:nth-child(1) { animation-delay: 0.05s; }
+.projects-grid .project-card:nth-child(2) { animation-delay: 0.1s; }
+.projects-grid .project-card:nth-child(3) { animation-delay: 0.15s; }
+.projects-grid .project-card:nth-child(4) { animation-delay: 0.2s; }
+.projects-grid .project-card:nth-child(5) { animation-delay: 0.25s; }
+.projects-grid .project-card:nth-child(6) { animation-delay: 0.3s; }
+
+/* Mobile responsive container */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Selection color */
+::selection {
+  background: var(--accent-color);
+  color: var(--primary-bg);
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  section,
+  .project-card,
+  .skill-card,
+  .experience-card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
