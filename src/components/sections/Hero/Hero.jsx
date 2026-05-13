@@ -26,15 +26,31 @@ const Hero = memo(({ personalInfo, socialLinks, heroTypingTexts }) => {
     }
   };
 
+  // Map platform names to Bootstrap Icons
+  const iconMap = {
+    github: 'bi-github',
+    linkedin: 'bi-linkedin',
+    instagram: 'bi-instagram',
+    twitter: 'bi-twitter-x',
+    youtube: 'bi-youtube',
+    email: 'bi-envelope-fill',
+    website: 'bi-globe2',
+  };
+
   const socialLinksArray = socialLinks
     ? Object.entries(socialLinks)
         .filter(([key]) => key !== 'email')
         .map(([platform, url]) => ({
           platform,
           url,
+          icon: iconMap[platform] || `bi-${platform}`,
           label: platform.charAt(0).toUpperCase() + platform.slice(1)
         }))
     : [];
+
+  // Get top 3 skills for floating tags from personalInfo (fallback)
+  // Full skills data would need to be passed as prop from App.jsx
+  const topSkills = personalInfo?.topSkills || ['Python', 'ML', 'Data'];
 
   return (
     <section id="home" className="hero-section">
@@ -129,7 +145,7 @@ const Hero = memo(({ personalInfo, socialLinks, heroTypingTexts }) => {
                       aria-label={platform}
                       title={label}
                     >
-                      <i className={`bi bi-${platform}`}></i>
+                      <i className={social.icon}></i>
                     </a>
                   ))}
                 </div>
