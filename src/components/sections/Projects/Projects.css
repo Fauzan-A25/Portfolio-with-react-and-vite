@@ -1252,3 +1252,68 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* ========================================
+   UI/PROJECTS - Enhanced hover and tech tags
+======================================== */
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 20px;
+  background: var(--accent-gradient);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+  filter: blur(8px);
+}
+.project-card:hover::before {
+  opacity: 0.3;
+}
+
+.tag {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: rgba(0, 212, 170, 0.08);
+  color: var(--accent-color);
+  border: 1px solid transparent;
+}
+.tag:hover {
+  background: rgba(0, 212, 170, 0.15);
+  transform: translateY(-1px);
+}
+
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-family: monospace;
+}
+.tech-tag:hover {
+  background: rgba(0, 212, 170, 0.08);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.08);
+  filter: brightness(1.1) saturate(1.05);
+}
+
+@supports (selector(:has(*))) {
+  .modern-btn:has(::after) {
+    overflow: hidden;
+  }
+}
