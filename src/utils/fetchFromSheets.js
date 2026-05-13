@@ -243,6 +243,35 @@ export async function fetchAllData() {
     return getFallbackData();
   }
 
+  // Coba fetch dengan timeout cepat (2s). Kalo gagal → fallback
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
+    
+    const testResponse = await fetch(
+      `${SHEETS_API_URL}?action=read&sheet=PersonalInfo`,
+      { signal: controller.signal }
+    );
+    clearTimeout(timeoutId);
+    
+    if (!testResponse.ok) {
+      console.warn('⚠️ API not responding, using fallback');
+      return getFallbackData();
+    }
+    
+    const testResult = await testResponse.json();
+    if (!testResult.success || !testResult.data?.length) {
+      console.warn('⚠️ API returned empty data, using fallback');
+      return getFallbackData();
+    }
+    
+    console.log('✅ API OK, fetching all data...');
+  } catch (error) {
+    console.warn('⚠️ API unavailable, using fallback:', error.message);
+    return getFallbackData();
+  }
+
+  // API works — fetch all 17 sheets
   try {
     // Fetch semua sheets secara parallel (17 sheets)
     const [
