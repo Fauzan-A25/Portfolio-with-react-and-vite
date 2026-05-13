@@ -29,7 +29,7 @@ export const projects = [
     shortDescription: 'ML application for predicting water safety',
     description:
       'An intelligent Streamlit-based Machine Learning application that predicts water potability using various chemical and physical parameters such as pH, sulfate concentration, and organic carbon. Built with MLPClassifier model to assess water safety for drinking purposes.',
-    image: './images/Projects/Fossil_App_Screenshot.png',
+    image: '',
     tags: ['Machine Learning', 'Streamlit', 'Python', 'MLPClassifier', 'Data Science'],
     technologies: [
       'Python 3.9+',
@@ -69,7 +69,7 @@ export const projects = [
     shortDescription: 'XGBoost model for COPPA violation detection',
     description:
       'Advanced machine learning model using XGBoost to predict COPPA (Children\'s Online Privacy Protection Act) violation risks in mobile applications. Features comprehensive data preprocessing, feature engineering, and model optimization to identify apps that may violate children\'s privacy regulations.',
-    image: './images/Projects/COPPA_Model.png',
+    image: '',
     tags: ['XGBoost', 'Classification', 'Data Science', 'Privacy', 'COPPA'],
     technologies: [
       'Python 3.9+',
@@ -111,7 +111,7 @@ export const projects = [
     shortDescription: 'Deep learning for crowd density estimation',
     description:
       'Implementation of CSRNet (Congested Scene Recognition Network) using PyTorch for accurate crowd counting and density estimation. The model can handle both sparse and dense crowds, making it suitable for various surveillance and monitoring applications.',
-    image: './images/Projects/crowd_counting_csrnet.jpg',
+    image: '',
     tags: ['Deep Learning', 'PyTorch', 'Computer Vision', 'CNN', 'CSRNet'],
     technologies: [
       'Python 3.9+',
@@ -151,7 +151,7 @@ export const projects = [
     shortDescription: 'Data visualization project on Pacific climate change and disaster patterns',
     description:
       'An interactive data visualization project created for the Pacific Dataviz Challenge, analyzing climate change impacts and disaster patterns across Pacific Island nations. The project uses open data from the Pacific Data Hub to visualize trends in natural disasters, climate risks, and their effects on Pacific communities, supporting the Blue Pacific 2050 strategy objectives.',
-    image: './images/Projects/Pacific_DataViz_Screenshot.png',
+    image: '',
     tags: ['Data Visualization', 'Climate Change', 'Open Data', 'Pacific Islands', 'Dashboard'],
     technologies: [
       'Python',
@@ -193,7 +193,7 @@ export const projects = [
     shortDescription: 'ML-powered astronomical object classification system',
     description:
       'An intelligent astronomical object classification system powered by machine learning that identifies and classifies celestial objects (stars, galaxies, and quasars) based on spectral characteristics from the Sloan Digital Sky Survey (SDSS). Built with Streamlit interface featuring multiple ML models including Random Forest, XGBoost, and LightGBM for accurate stellar classification.',
-    image: './images/Projects/AstroClassify_Screenshot.png',
+    image: '',
     tags: ['Machine Learning', 'Astronomy', 'Classification', 'Streamlit', 'Data Science'],
     technologies: [
       'Python 3.x',

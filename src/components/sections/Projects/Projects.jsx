@@ -9,7 +9,7 @@ const Projects = memo(({ projects, projectCategories, projectsContent }) => {
   const [elementRef, isVisible] = useIntersectionObserver();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [showAll, setShowAll] = useState(false);
-  const [itemsToShow] = useState(3);
+  const [itemsToShow] = useState(6);
 
 
   // ✅ Filter logic dengan limit
