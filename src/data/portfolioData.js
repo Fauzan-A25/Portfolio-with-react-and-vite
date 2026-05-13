@@ -10,7 +10,8 @@ export const personalInfo = {
   email: 'fauzanahsanudin@gmail.com',
   gpa: '3.8',
   cvLink: 'https://docs.google.com/document/d/1zm9N7lCHsZPCChdz5zjfQK4wogPMqb5g/',
-  profileImage: './images/Fauzan.png'
+  profileImage: './images/Fauzan.png',
+  topSkills: ['Python', 'PyTorch', 'NLP'],
 };
 
 export const socialLinks = {
