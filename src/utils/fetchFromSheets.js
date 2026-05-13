@@ -57,12 +57,20 @@ function getFallbackData() {
 
 /**
  * Fetch data dari satu sheet menggunakan READ API
+ * with AbortController for timeout
  */
 async function fetchSheet(sheetName) {
   try {
+    // Add timeout (8 seconds) to prevent hanging on CORS errors
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    
     const response = await fetch(
-      `${SHEETS_API_URL}?action=read&sheet=${sheetName}`
+      `${SHEETS_API_URL}?action=read&sheet=${sheetName}`,
+      { signal: controller.signal }
     );
+    
+    clearTimeout(timeoutId);
     
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -81,7 +89,7 @@ async function fetchSheet(sheetName) {
       return [];
     }
   } catch (error) {
-    console.error(`Error fetching ${sheetName}:`, error);
+    console.error(`Error fetching ${sheetName}:`, error.name === 'AbortError' ? 'Request timed out' : error);
     return [];
   }
 }
