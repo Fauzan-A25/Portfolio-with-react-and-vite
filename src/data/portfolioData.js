@@ -21,6 +21,7 @@ export const socialLinks = {
   email: 'mailto:fauzanahsanudin@gmail.com',
 };
 
+
 export const projects = [
   {
     "id": 1,
@@ -343,11 +344,7 @@ export const projects = [
     "title": "Nutriginjal Android Apps",
     "slug": "nutriginjal-android-apps",
     "shortDescription": "A capstone project for Telkom University, developing Android apps for nutrition and kidney health.",
-    "description": "This project was created as part of a capstone requirement at Telkom University, focusing on building Android applications to support nutrition and kidney health management. The goal was to provide users with tools to track dietary intake and monitor kidney-related health metrics, addressing the growing need for accessible health technology.
-
-The solution was developed using Dart and the Flutter framework, enabling cross-platform mobile app development. Key features include user-friendly interfaces for logging meals, tracking nutrient consumption, and visualizing health data. The project followed a standard Android development lifecycle, from planning and design to implementation and testing.
-
-As a capstone project, it demonstrates the application of software engineering principles and mobile development skills in a health-focused context. While specific performance metrics are not available, the project successfully met academic requirements and showcases proficiency in Dart and Flutter for building functional Android apps.",
+    "description": "This project was created as part of a capstone requirement at Telkom University, focusing on building Android applications to support nutrition and kidney health management. The goal was to provide users with tools to track dietary intake and monitor kidney-related health metrics, addressing the growing need for accessible health technology. The solution was developed using Dart and the Flutter framework, enabling cross-platform mobile app development. Key features include user-friendly interfaces for logging meals, tracking nutrient consumption, and visualizing health data. The project followed a standard Android development lifecycle, from planning and design to implementation and testing. As a capstone project, it demonstrates the application of software engineering principles and mobile development skills in a health-focused context. While specific performance metrics are not available, the project successfully met academic requirements and showcases proficiency in Dart and Flutter for building functional Android apps.",
     "image": "",
     "category": "Mobile Development",
     "status": "Completed",
@@ -390,11 +387,7 @@ As a capstone project, it demonstrates the application of software engineering p
     "title": "Chat Bot WA Assistant",
     "slug": "chat-bot-wa-assistant",
     "shortDescription": "A JavaScript-based WhatsApp assistant chatbot for automated messaging and interactions.",
-    "description": "This project addresses the need for automated customer support and messaging on WhatsApp, a widely used platform. Many businesses and individuals require a simple yet effective way to handle repetitive queries or send scheduled messages without manual effort. The goal was to create a lightweight assistant that can interact with users via WhatsApp, providing quick responses and basic task automation.
-
-The solution is a chatbot built using JavaScript, leveraging WhatsApp Web's API or similar libraries to send and receive messages. The assistant can be configured with predefined responses or triggered actions based on incoming messages. The implementation focuses on ease of use and deployment, making it accessible for personal or small-scale business use.
-
-While specific metrics are not available, the project demonstrates a functional proof-of-concept for WhatsApp automation. It can serve as a foundation for more advanced features like natural language processing or integration with external services, showing potential for scalability in real-world applications.",
+    "description": "This project addresses the need for automated customer support and messaging on WhatsApp, a widely used platform. Many businesses and individuals require a simple yet effective way to handle repetitive queries or send scheduled messages without manual effort. The goal was to create a lightweight assistant that can interact with users via WhatsApp, providing quick responses and basic task automation. The solution is a chatbot built using JavaScript, leveraging WhatsApp Web's API or similar libraries to send and receive messages. The assistant can be configured with predefined responses or triggered actions based on incoming messages. The implementation focuses on ease of use and deployment, making it accessible for personal or small-scale business use. While specific metrics are not available, the project demonstrates a functional proof-of-concept for WhatsApp automation. It can serve as a foundation for more advanced features like natural language processing or integration with external services, showing potential for scalability in real-world applications.",
     "image": "",
     "category": "Tools",
     "status": "Completed",
@@ -436,11 +429,7 @@ While specific metrics are not available, the project demonstrates a functional 
     "title": "Melodia Apps - Music Application",
     "slug": "melodia-apps",
     "shortDescription": "A JavaScript-based music application for exploring and managing melodies.",
-    "description": "Melodia Apps is a web application designed to provide users with an intuitive platform for discovering, organizing, and playing music tracks. The project aims to simplify music management by offering a clean interface for browsing melodies, creating playlists, and controlling playback. It addresses the need for a lightweight, accessible tool for music enthusiasts who want to curate their listening experience without the bloat of larger platforms.
-
-The application is built using JavaScript, leveraging modern front-end frameworks and libraries to ensure a responsive and interactive user experience. Key features include a dynamic music library, playlist creation, and a built-in audio player with basic controls. The development focused on modular code architecture to allow easy customization and future enhancements.
-
-While still in early stages, Melodia Apps demonstrates a solid foundation for a music-centric web tool. With further development, it has the potential to grow into a full-featured music streaming and organization platform. The current version showcases core functionality and a user-friendly design.",
+    "description": "Melodia Apps is a web application designed to provide users with an intuitive platform for discovering, organizing, and playing music tracks. The project aims to simplify music management by offering a clean interface for browsing melodies, creating playlists, and controlling playback. It addresses the need for a lightweight, accessible tool for music enthusiasts who want to curate their listening experience without the bloat of larger platforms. The application is built using JavaScript, leveraging modern front-end frameworks and libraries to ensure a responsive and interactive user experience. Key features include a dynamic music library, playlist creation, and a built-in audio player with basic controls. The development focused on modular code architecture to allow easy customization and future enhancements. While still in early stages, Melodia Apps demonstrates a solid foundation for a music-centric web tool. With further development, it has the potential to grow into a full-featured music streaming and organization platform. The current version showcases core functionality and a user-friendly design.",
     "image": "",
     "category": "Web Development",
     "status": "In Progress",
@@ -483,11 +472,7 @@ While still in early stages, Melodia Apps demonstrates a solid foundation for a 
     "title": "AES-256 CBC Encryption Application",
     "slug": "aes-256-cbc-encryption-application",
     "shortDescription": "A Jupyter Notebook application implementing AES-256 CBC encryption for data security.",
-    "description": "This project was developed as a course assignment for a data security class. The goal was to create a functional application that demonstrates the implementation of the Advanced Encryption Standard (AES) with a 256-bit key in Cipher Block Chaining (CBC) mode, a widely used symmetric encryption algorithm for securing sensitive data. The assignment required a hands-on approach to understanding cryptographic principles and their practical application.
-
-The solution is implemented in a Jupyter Notebook using Python, leveraging libraries such as `pycryptodome` to handle the encryption and decryption processes. The application allows users to input plaintext and a key, then outputs the ciphertext in hexadecimal format. It also includes a decryption function to verify the integrity of the process. The notebook is structured with clear code cells and explanations to facilitate learning and reproducibility.
-
-This project successfully met the course requirements, providing a clear demonstration of AES-256 CBC encryption. It serves as a practical example for students learning about cryptography and data security, showcasing the steps involved in encrypting and decrypting data using a robust industry-standard algorithm.",
+    "description": "This project was developed as a course assignment for a data security class. The goal was to create a functional application that demonstrates the implementation of the Advanced Encryption Standard (AES) with a 256-bit key in Cipher Block Chaining (CBC) mode, a widely used symmetric encryption algorithm for securing sensitive data. The assignment required a hands-on approach to understanding cryptographic principles and their practical application. The solution is implemented in a Jupyter Notebook using Python, leveraging libraries such as `pycryptodome` to handle the encryption and decryption processes. The application allows users to input plaintext and a key, then outputs the ciphertext in hexadecimal format. It also includes a decryption function to verify the integrity of the process. The notebook is structured with clear code cells and explanations to facilitate learning and reproducibility. This project successfully met the course requirements, providing a clear demonstration of AES-256 CBC encryption. It serves as a practical example for students learning about cryptography and data security, showcasing the steps involved in encrypting and decrypting data using a robust industry-standard algorithm.",
     "image": "",
     "category": "Academic",
     "status": "Completed",
@@ -529,11 +514,7 @@ This project successfully met the course requirements, providing a clear demonst
     "title": "Portfolio with React and Vite",
     "slug": "portfolio-with-react-and-vite",
     "shortDescription": "A modern, responsive portfolio website built with React and Vite.",
-    "description": "This project is a personal portfolio website designed to showcase projects, skills, and experience in a clean, modern interface. The goal was to create a fast, visually appealing, and fully responsive site that reflects a professional data science and development identity.
-
-The website was built using React for component-based architecture and Vite for rapid development and optimized builds. Styling is achieved primarily with CSS, ensuring a lightweight and customizable design. Key sections include a project gallery, skills overview, and contact information, all structured for easy navigation and content updates.
-
-The result is a deployable portfolio that loads quickly, adapts seamlessly to various screen sizes, and provides a strong foundation for future enhancements. This project demonstrates proficiency in modern frontend development tools and responsive design principles.",
+    "description": "This project is a personal portfolio website designed to showcase projects, skills, and experience in a clean, modern interface. The goal was to create a fast, visually appealing, and fully responsive site that reflects a professional data science and development identity. The website was built using React for component-based architecture and Vite for rapid development and optimized builds. Styling is achieved primarily with CSS, ensuring a lightweight and customizable design. Key sections include a project gallery, skills overview, and contact information, all structured for easy navigation and content updates. The result is a deployable portfolio that loads quickly, adapts seamlessly to various screen sizes, and provides a strong foundation for future enhancements. This project demonstrates proficiency in modern frontend development tools and responsive design principles.",
     "image": "",
     "category": "Web Development",
     "status": "Completed",
@@ -577,11 +558,7 @@ The result is a deployable portfolio that loads quickly, adapts seamlessly to va
     "title": "Customer Churn Prediction",
     "slug": "customer-churn-prediction",
     "shortDescription": "Predict customer churn using machine learning to help businesses retain clients.",
-    "description": "Customer churn is a critical issue for subscription-based businesses, leading to revenue loss and increased acquisition costs. This project aims to build a predictive model that identifies customers at high risk of churning, enabling proactive retention strategies. The dataset includes customer demographics, account information, and service usage patterns.
-
-The solution involves exploratory data analysis to uncover churn patterns, followed by feature engineering and model training using algorithms like logistic regression, random forest, and gradient boosting. The models are evaluated using accuracy, precision, recall, and ROC-AUC to ensure robust performance. The final model is deployed in a Jupyter Notebook with clear visualizations and interpretability.
-
-The project demonstrates the end-to-end pipeline for churn prediction, achieving high accuracy in identifying churners. This empowers businesses to reduce churn rates by targeting at-risk customers with personalized offers or interventions, ultimately improving customer lifetime value and profitability.",
+    "description": "Customer churn is a critical issue for subscription-based businesses, leading to revenue loss and increased acquisition costs. This project aims to build a predictive model that identifies customers at high risk of churning, enabling proactive retention strategies. The dataset includes customer demographics, account information, and service usage patterns. The solution involves exploratory data analysis to uncover churn patterns, followed by feature engineering and model training using algorithms like logistic regression, random forest, and gradient boosting. The models are evaluated using accuracy, precision, recall, and ROC-AUC to ensure robust performance. The final model is deployed in a Jupyter Notebook with clear visualizations and interpretability. The project demonstrates the end-to-end pipeline for churn prediction, achieving high accuracy in identifying churners. This empowers businesses to reduce churn rates by targeting at-risk customers with personalized offers or interventions, ultimately improving customer lifetime value and profitability.",
     "image": "",
     "category": "Data Science",
     "status": "Completed",
@@ -625,11 +602,7 @@ The project demonstrates the end-to-end pipeline for churn prediction, achieving
     "title": "Study Group Assignment 4 - Data Analysis",
     "slug": "study-group-assignment-4-data-analysis",
     "shortDescription": "A collaborative data analysis project exploring a dataset using Jupyter Notebook.",
-    "description": "This repository contains the fourth assignment for a study group, focusing on data analysis and visualization using Python. The project aims to apply foundational data science techniques to extract insights from a given dataset, reinforcing concepts learned in a collaborative learning environment.
-
-The analysis is conducted entirely within a Jupyter Notebook, leveraging libraries such as pandas and matplotlib for data manipulation and visualization. The approach involves cleaning the data, performing exploratory data analysis (EDA), and generating visualizations to identify patterns and trends.
-
-The project serves as a practical exercise in data analysis, demonstrating the ability to work with real-world datasets and communicate findings effectively. It highlights the importance of teamwork and reproducibility in data science projects.",
+    "description": "This repository contains the fourth assignment for a study group, focusing on data analysis and visualization using Python. The project aims to apply foundational data science techniques to extract insights from a given dataset, reinforcing concepts learned in a collaborative learning environment. The analysis is conducted entirely within a Jupyter Notebook, leveraging libraries such as pandas and matplotlib for data manipulation and visualization. The approach involves cleaning the data, performing exploratory data analysis (EDA), and generating visualizations to identify patterns and trends. The project serves as a practical exercise in data analysis, demonstrating the ability to work with real-world datasets and communicate findings effectively. It highlights the importance of teamwork and reproducibility in data science projects.",
     "image": "",
     "category": "Academic",
     "status": "Completed",
@@ -672,11 +645,7 @@ The project serves as a practical exercise in data analysis, demonstrating the a
     "title": "AI Model Ollama DeepSeek to Discord Bot",
     "slug": "ai-model-ollama-deepseek-to-discord-bot",
     "shortDescription": "A Discord bot that integrates Ollama's DeepSeek AI model for conversational responses.",
-    "description": "This project addresses the need for an accessible AI-powered chatbot within the Discord platform, allowing users to interact with a local large language model without relying on external cloud services. The goal was to create a seamless integration between Discord's messaging interface and the Ollama runtime for running DeepSeek models locally.
-
-The solution leverages Python with the discord.py library to build a bot that listens for commands and messages in Discord channels. It communicates with the Ollama API to load and query the DeepSeek model, processing user inputs and returning generated responses in real-time. The bot is designed to be lightweight, easy to deploy, and customizable for different server needs.
-
-As a personal project, it demonstrates practical skills in API integration, bot development, and local AI model deployment. While still in early stages, the bot successfully enables conversational interactions and can be extended with additional features like context memory or moderation filters.",
+    "description": "This project addresses the need for an accessible AI-powered chatbot within the Discord platform, allowing users to interact with a local large language model without relying on external cloud services. The goal was to create a seamless integration between Discord's messaging interface and the Ollama runtime for running DeepSeek models locally. The solution leverages Python with the discord.py library to build a bot that listens for commands and messages in Discord channels. It communicates with the Ollama API to load and query the DeepSeek model, processing user inputs and returning generated responses in real-time. The bot is designed to be lightweight, easy to deploy, and customizable for different server needs. As a personal project, it demonstrates practical skills in API integration, bot development, and local AI model deployment. While still in early stages, the bot successfully enables conversational interactions and can be extended with additional features like context memory or moderation filters.",
     "image": "",
     "category": "Tools",
     "status": "In Progress",
@@ -720,11 +689,7 @@ As a personal project, it demonstrates practical skills in API integration, bot 
     "title": "Topic Python Programming for Machine Learning Assignment - Study Group 3",
     "slug": "topic-python-programming-for-machine-learning-assignment-study-group-3",
     "shortDescription": "A course assignment on Python programming fundamentals for machine learning.",
-    "description": "This project was created to fulfill the topic assignment on Python Programming for Machine Learning as part of the GDGOC Telkom University study group. The assignment focuses on building foundational Python skills essential for data science and machine learning tasks.
-
-The solution implements core Python concepts including data structures, control flow, functions, and libraries commonly used in machine learning workflows. The notebook demonstrates practical coding exercises that reinforce understanding of Python syntax and its application to basic data manipulation and analysis.
-
-As a course assignment, this project served as a learning exercise to prepare students for more advanced machine learning topics. It provides a solid foundation for further exploration into data preprocessing, model building, and evaluation.",
+    "description": "This project was created to fulfill the topic assignment on Python Programming for Machine Learning as part of the GDGOC Telkom University study group. The assignment focuses on building foundational Python skills essential for data science and machine learning tasks. The solution implements core Python concepts including data structures, control flow, functions, and libraries commonly used in machine learning workflows. The notebook demonstrates practical coding exercises that reinforce understanding of Python syntax and its application to basic data manipulation and analysis. As a course assignment, this project served as a learning exercise to prepare students for more advanced machine learning topics. It provides a solid foundation for further exploration into data preprocessing, model building, and evaluation.",
     "image": "",
     "category": "Academic",
     "status": "Completed",
@@ -807,11 +772,7 @@ As a course assignment, this project served as a learning exercise to prepare st
     "title": "TUBES AKA - Academic Project in AKA Course",
     "slug": "tubes-aka",
     "shortDescription": "Final project for the AKA course, focusing on data analysis and modeling.",
-    "description": "This repository contains the final project for the AKA course, a core academic subject in the undergraduate curriculum. The project aims to apply theoretical concepts learned throughout the course to a practical data analysis problem. The specific problem addressed involves analyzing a given dataset to uncover patterns and insights, likely through statistical methods and machine learning techniques.
-
-The solution was developed using Jupyter Notebook, providing an interactive environment for data exploration, preprocessing, model building, and evaluation. The approach includes data cleaning, feature engineering, and the application of appropriate algorithms to achieve the project's objectives. The notebook documents the entire workflow, from data loading to final results.
-
-As a course final project, the work demonstrates the student's ability to independently apply data science methodologies to a real-world problem. While specific metrics are not available, the project successfully fulfills the academic requirements and showcases proficiency in data analysis and programming.",
+    "description": "This repository contains the final project for the AKA course, a core academic subject in the undergraduate curriculum. The project aims to apply theoretical concepts learned throughout the course to a practical data analysis problem. The specific problem addressed involves analyzing a given dataset to uncover patterns and insights, likely through statistical methods and machine learning techniques. The solution was developed using Jupyter Notebook, providing an interactive environment for data exploration, preprocessing, model building, and evaluation. The approach includes data cleaning, feature engineering, and the application of appropriate algorithms to achieve the project's objectives. The notebook documents the entire workflow, from data loading to final results. As a course final project, the work demonstrates the student's ability to independently apply data science methodologies to a real-world problem. While specific metrics are not available, the project successfully fulfills the academic requirements and showcases proficiency in data analysis and programming.",
     "image": "",
     "category": "Academic",
     "status": "Completed",
@@ -856,11 +817,7 @@ As a course final project, the work demonstrates the student's ability to indepe
     "title": "Text Editor Laba Laba Sunda",
     "slug": "text-editor-laba-laba-sunda",
     "shortDescription": "A C++ text editor built as a data structures course assignment.",
-    "description": "This project is a simple text editor developed as part of a data structures course assignment. The goal was to implement core text editing functionalities while applying fundamental data structure concepts such as linked lists, stacks, or trees to manage text operations efficiently. The editor provides basic features like inserting, deleting, and navigating text, demonstrating how theoretical concepts translate into practical software.
-
-The solution was implemented entirely in C++, leveraging its performance and low-level memory control. The architecture likely uses a doubly linked list to represent the text buffer, enabling efficient insertion and deletion at arbitrary positions. A stack-based undo/redo system may also be included to reverse actions. The code is structured to handle user input and display the current text state.
-
-As a course project, the editor successfully met its educational objectives, showcasing a working application of data structures. While it is a basic tool without advanced features like syntax highlighting or file I/O, it serves as a solid foundation for understanding how data structures underpin real-world software. The project is complete and archived, reflecting its role as a learning exercise.",
+    "description": "This project is a simple text editor developed as part of a data structures course assignment. The goal was to implement core text editing functionalities while applying fundamental data structure concepts such as linked lists, stacks, or trees to manage text operations efficiently. The editor provides basic features like inserting, deleting, and navigating text, demonstrating how theoretical concepts translate into practical software. The solution was implemented entirely in C++, leveraging its performance and low-level memory control. The architecture likely uses a doubly linked list to represent the text buffer, enabling efficient insertion and deletion at arbitrary positions. A stack-based undo/redo system may also be included to reverse actions. The code is structured to handle user input and display the current text state. As a course project, the editor successfully met its educational objectives, showcasing a working application of data structures. While it is a basic tool without advanced features like syntax highlighting or file I/O, it serves as a solid foundation for understanding how data structures underpin real-world software. The project is complete and archived, reflecting its role as a learning exercise.",
     "image": "",
     "category": "Academic",
     "status": "Completed",
@@ -902,11 +859,7 @@ As a course project, the editor successfully met its educational objectives, sho
     "title": "Web Portfolio Using Bootstrap V5",
     "slug": "web-portfolio-using-bootstrap-v5",
     "shortDescription": "A responsive personal portfolio website built with Bootstrap 5 to showcase skills and projects.",
-    "description": "The project addresses the need for a professional online presence to effectively present one's skills, projects, and experiences to potential employers or clients. A static, non-responsive website can fail to make a good impression across different devices. This portfolio aims to solve that by providing a clean, modern, and fully responsive web experience.
-
-Built entirely with Bootstrap 5, HTML, and CSS, the portfolio features a responsive grid system and pre-styled components that ensure a consistent and visually appealing layout on desktops, tablets, and mobile devices. The site includes dedicated sections for an 'About Me' biography, a skills showcase, a project gallery, and a contact form, all organized with intuitive navigation.
-
-The result is a polished, professional portfolio that effectively communicates the developer's capabilities and past work. The use of Bootstrap 5 ensures fast development and a modern aesthetic, making it easy to update and maintain. This project serves as a practical example of front-end development skills and responsive web design principles.",
+    "description": "The project addresses the need for a professional online presence to effectively present one's skills, projects, and experiences to potential employers or clients. A static, non-responsive website can fail to make a good impression across different devices. This portfolio aims to solve that by providing a clean, modern, and fully responsive web experience. Built entirely with Bootstrap 5, HTML, and CSS, the portfolio features a responsive grid system and pre-styled components that ensure a consistent and visually appealing layout on desktops, tablets, and mobile devices. The site includes dedicated sections for an 'About Me' biography, a skills showcase, a project gallery, and a contact form, all organized with intuitive navigation. The result is a polished, professional portfolio that effectively communicates the developer's capabilities and past work. The use of Bootstrap 5 ensures fast development and a modern aesthetic, making it easy to update and maintain. This project serves as a practical example of front-end development skills and responsive web design principles.",
     "image": "",
     "category": "Web Development",
     "status": "Completed",
@@ -948,11 +901,7 @@ The result is a polished, professional portfolio that effectively communicates t
     "title": "Student Academic Performance Prediction",
     "slug": "student-academic-prediction",
     "shortDescription": "Predicting student academic outcomes using machine learning on educational data.",
-    "description": "This project aims to predict student academic performance based on various features such as demographics, study habits, and past grades. The problem is critical for early intervention in educational settings, helping educators identify at-risk students and provide timely support. Using a dataset from a public educational repository, the goal was to build a model that accurately forecasts final grades or performance categories.
-
-The solution involved exploratory data analysis (EDA) to understand patterns and correlations, followed by feature engineering to prepare the data for modeling. Multiple machine learning algorithms were implemented, including linear regression, decision trees, and random forests, using Python and Jupyter Notebooks. Model performance was evaluated using metrics like mean absolute error (MAE) and accuracy, with hyperparameter tuning to optimize results.
-
-The final model achieved promising predictive accuracy, demonstrating the potential of data-driven approaches in education. This project serves as a practical example of applying data science to real-world problems, with insights that could inform personalized learning strategies and institutional policies.",
+    "description": "This project aims to predict student academic performance based on various features such as demographics, study habits, and past grades. The problem is critical for early intervention in educational settings, helping educators identify at-risk students and provide timely support. Using a dataset from a public educational repository, the goal was to build a model that accurately forecasts final grades or performance categories. The solution involved exploratory data analysis (EDA) to understand patterns and correlations, followed by feature engineering to prepare the data for modeling. Multiple machine learning algorithms were implemented, including linear regression, decision trees, and random forests, using Python and Jupyter Notebooks. Model performance was evaluated using metrics like mean absolute error (MAE) and accuracy, with hyperparameter tuning to optimize results. The final model achieved promising predictive accuracy, demonstrating the potential of data-driven approaches in education. This project serves as a practical example of applying data science to real-world problems, with insights that could inform personalized learning strategies and institutional policies.",
     "image": "",
     "category": "Data Science",
     "status": "Completed",
@@ -995,11 +944,7 @@ The final model achieved promising predictive accuracy, demonstrating the potent
     "title": "Bot Musik Discord V2",
     "slug": "bot-musik-discord-v2",
     "shortDescription": "A feature-rich Discord music bot for high-quality audio streaming from YouTube.",
-    "description": "This project addresses the need for a reliable, feature-packed music bot on Discord servers. Users often struggle with bots that have limited functionality or poor audio quality, leading to a subpar listening experience. The goal was to create a bot that offers seamless music playback with intuitive controls.
-
-Built with Node.js, discord.js v14, and yt-dlp, the bot efficiently handles queue management, multiple loop modes (track, queue, off), shuffle, volume control, and automatic playback. The use of yt-dlp ensures robust and high-quality audio streaming from YouTube, while the modular code structure allows for easy maintenance and future enhancements.
-
-The bot provides a smooth user experience with slash commands and responsive interactions. It successfully delivers reliable music streaming with minimal latency, making it a valuable addition to any Discord community. This project demonstrates proficiency in JavaScript, asynchronous programming, and API integration.",
+    "description": "This project addresses the need for a reliable, feature-packed music bot on Discord servers. Users often struggle with bots that have limited functionality or poor audio quality, leading to a subpar listening experience. The goal was to create a bot that offers seamless music playback with intuitive controls. Built with Node.js, discord.js v14, and yt-dlp, the bot efficiently handles queue management, multiple loop modes (track, queue, off), shuffle, volume control, and automatic playback. The use of yt-dlp ensures robust and high-quality audio streaming from YouTube, while the modular code structure allows for easy maintenance and future enhancements. The bot provides a smooth user experience with slash commands and responsive interactions. It successfully delivers reliable music streaming with minimal latency, making it a valuable addition to any Discord community. This project demonstrates proficiency in JavaScript, asynchronous programming, and API integration.",
     "image": "",
     "category": "Tools",
     "status": "Completed",
@@ -1044,11 +989,7 @@ The bot provides a smooth user experience with slash commands and responsive int
     "title": "Go Library Manager",
     "slug": "go-library-manager",
     "shortDescription": "A Go-based library management system for tracking books, members, and borrowing operations.",
-    "description": "This project addresses the need for a simple yet effective library management solution, particularly in educational or small-scale settings. The goal was to create a command-line application that handles core library operations such as adding and removing books, registering members, and managing book checkouts and returns, while demonstrating practical use of data structures and algorithms.
-
-The system is built entirely in Go, leveraging its standard library for data handling and file I/O. It implements essential data structures like linked lists, hash maps, and sorting algorithms to efficiently manage book inventories, member records, and borrowing transactions. The design follows modular principles, separating concerns into packages for books, members, and transactions.
-
-As a course project, it successfully showcases the application of algorithmic concepts to a real-world problem. The system handles concurrent borrowing scenarios and maintains data integrity through validation checks. While not deployed in production, it serves as a solid foundation for further development, such as adding a web interface or database backend.",
+    "description": "This project addresses the need for a simple yet effective library management solution, particularly in educational or small-scale settings. The goal was to create a command-line application that handles core library operations such as adding and removing books, registering members, and managing book checkouts and returns, while demonstrating practical use of data structures and algorithms. The system is built entirely in Go, leveraging its standard library for data handling and file I/O. It implements essential data structures like linked lists, hash maps, and sorting algorithms to efficiently manage book inventories, member records, and borrowing transactions. The design follows modular principles, separating concerns into packages for books, members, and transactions. As a course project, it successfully showcases the application of algorithmic concepts to a real-world problem. The system handles concurrent borrowing scenarios and maintains data integrity through validation checks. While not deployed in production, it serves as a solid foundation for further development, such as adding a web interface or database backend.",
     "image": "",
     "category": "Tools",
     "status": "Completed",
@@ -1087,6 +1028,7 @@ As a course project, it successfully showcases the application of algorithmic co
     ]
   }
 ];
+
 
 export const skills = {
   programming: [
