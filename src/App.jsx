@@ -159,12 +159,11 @@ function App() {
   
   return (
     <>
-      <LoadingScreen />
       <BackgroundMusic />
       <AiAssistant portfolioData={portfolioData} />
+      <AnimeEffects />
       <Navbar navLinks={portfolioData.navLinks} />
       <ThemeToggle />
-      {/* <AnimeEffects /> */}
       <ScrollToTop />
       
       <Suspense
