@@ -135,7 +135,7 @@ const Hero = memo(({ personalInfo, socialLinks, heroTypingTexts }) => {
               <div className="hero-social">
                 <span className="social-label">Connect with me:</span>
                 <div className="social-links">
-                  {socialLinksArray.map(({ platform, url, label }) => (
+                  {socialLinksArray.map(({ platform, url, icon, label }) => (
                     <a
                       key={platform}
                       href={url}
@@ -145,7 +145,7 @@ const Hero = memo(({ personalInfo, socialLinks, heroTypingTexts }) => {
                       aria-label={platform}
                       title={label}
                     >
-                      <i className={social.icon}></i>
+                      <i className={icon}></i>
                     </a>
                   ))}
                 </div>
