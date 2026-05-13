@@ -624,9 +624,14 @@
   transition: all 0.3s ease;
 }
 
-.experience-card:hover {
+/* Odd cards (right side) - slide right on hover */
+.experience-card:nth-child(odd):hover {
   transform: translateX(6px);
-  border-color: var(--accent-color);
+}
+
+/* Even cards (left side) - slide left on hover */
+.experience-card:nth-child(even):hover {
+  transform: translateX(-6px);
 }
 
 .timeline-dot {
