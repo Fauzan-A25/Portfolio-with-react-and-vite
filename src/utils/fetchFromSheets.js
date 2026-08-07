@@ -1,77 +1,28 @@
 // src/utils/fetchFromSheets.js
 
 // ⚠️ GANTI dengan URL deployment Apps Script Anda!
-const SHEETS_API_URL = import.meta.env.VITE_SHEETS_API_URL;
-
-// Fallback data — digunakan saat API Sheets tidak tersedia
-import {
-  personalInfo as fallbackPersonalInfo,
-  socialLinks as fallbackSocialLinks,
-  projects as fallbackProjects,
-  skills as fallbackSkills,
-  experiences as fallbackExperiences,
-  education as fallbackEducation,
-  certifications as fallbackCertifications,
-  stats as fallbackStats,
-  navLinks as fallbackNavLinks,
-  projectCategories as fallbackCategories,
-  heroTypingTexts as fallbackHeroTexts,
-  emailjsConfig as fallbackEmailJS,
-  aboutContent as fallbackAboutContent,
-  skillsContent as fallbackSkillsContent,
-  contactContent as fallbackContactContent,
-  projectsContent as fallbackProjectsContent,
-  footerContent as fallbackFooterContent,
-} from '../data/portfolioData.js';
+const SHEETS_API_URL = process.env.NEXT_PUBLIC_SHEETS_API_URL;
 
 // ============================================
-// FALLBACK DATA
+// CORE FETCH FUNCTION (UPDATED - DEFENSIVE)
 // ============================================
 
-function getFallbackData() {
-  console.log('📦 Using local fallback data (API URL not configured)');
-  return {
-    personalInfo: fallbackPersonalInfo,
-    socialLinks: fallbackSocialLinks,
-    projects: fallbackProjects,
-    skills: fallbackSkills,
-    experiences: fallbackExperiences,
-    education: fallbackEducation,
-    certifications: fallbackCertifications,
-    stats: fallbackStats,
-    navLinks: fallbackNavLinks,
-    projectCategories: fallbackCategories,
-    heroTypingTexts: fallbackHeroTexts,
-    emailjsConfig: fallbackEmailJS,
-    aboutContent: fallbackAboutContent,
-    skillsContent: fallbackSkillsContent,
-    contactContent: fallbackContactContent,
-    projectsContent: fallbackProjectsContent,
-    footerContent: fallbackFooterContent,
-  };
-}
-
-// ============================================
-// CORE FETCH FUNCTION
-// ============================================
+// Apps Script can stall indefinitely (cold start, quota, a shared doc being
+// edited). Without a deadline the visitor sits on the loading screen forever,
+// so give up and let the caller fall back to the bundled data.
+const REQUEST_TIMEOUT_MS = 8000;
 
 /**
  * Fetch data dari satu sheet menggunakan READ API
- * with AbortController for timeout
+ * FIXED: Handle various data types safely
  */
-async function fetchSheet(sheetName) {
+async function fetchSheet(sheetName, init = {}) {
   try {
-    // Add timeout (8 seconds) to prevent hanging on CORS errors
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
-    
     const response = await fetch(
       `${SHEETS_API_URL}?action=read&sheet=${sheetName}`,
-      { signal: controller.signal }
+      { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS), ...init }
     );
-    
-    clearTimeout(timeoutId);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -89,17 +40,18 @@ async function fetchSheet(sheetName) {
       return [];
     }
   } catch (error) {
-    console.error(`Error fetching ${sheetName}:`, error.name === 'AbortError' ? 'Request timed out' : error);
+    console.error(`Error fetching ${sheetName}:`, error);
     return [];
   }
 }
 
 // ============================================
-// DATA TRANSFORMATION FUNCTIONS
+// DATA TRANSFORMATION FUNCTIONS (UPDATED)
 // ============================================
 
 /**
  * Parse JSON strings dalam data
+ * FIXED: Safely handle already-parsed values
  */
 function parseJsonFields(data, fields) {
   if (!Array.isArray(data)) return [];
@@ -230,48 +182,24 @@ function rebuildProjectsContent(projectsContentData) {
 }
 
 // ============================================
-// MAIN FETCH FUNCTION
+// MAIN FETCH FUNCTION (IMPROVED ERROR HANDLING)
 // ============================================
 
 /**
  * Fetch semua data dari Google Sheets
- * FALLBACK: Jika API URL tidak dikonfigurasi, gunakan data lokal
+ * IMPROVED: Better error handling and validation
  */
-export async function fetchAllData() {
-  // Jika API URL tidak dikonfigurasi, langsung pakai fallback
-  if (!SHEETS_API_URL || SHEETS_API_URL === 'undefined') {
-    return getFallbackData();
+export async function fetchAllData(init = {}) {
+  // Without the endpoint there is nothing to fetch; bail so the caller falls
+  // straight back to the bundled data instead of firing 17 doomed requests.
+  if (!SHEETS_API_URL) {
+    throw new Error('NEXT_PUBLIC_SHEETS_API_URL is not set');
   }
 
-  // Coba fetch dengan timeout cepat (2s). Kalo gagal → fallback
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2000);
-    
-    const testResponse = await fetch(
-      `${SHEETS_API_URL}?action=read&sheet=PersonalInfo`,
-      { signal: controller.signal }
-    );
-    clearTimeout(timeoutId);
-    
-    if (!testResponse.ok) {
-      console.warn('⚠️ API not responding, using fallback');
-      return getFallbackData();
-    }
-    
-    const testResult = await testResponse.json();
-    if (!testResult.success || !testResult.data?.length) {
-      console.warn('⚠️ API returned empty data, using fallback');
-      return getFallbackData();
-    }
-    
-    console.log('✅ API OK, fetching all data...');
-  } catch (error) {
-    console.warn('⚠️ API unavailable, using fallback:', error.message);
-    return getFallbackData();
-  }
+  // `init` carries the server-side cache directive (`next.revalidate`); it is
+  // inert in the browser, so both callers share this function unchanged.
+  const get = (sheet) => fetchSheet(sheet, init);
 
-  // API works — fetch all 17 sheets
   try {
     // Fetch semua sheets secara parallel (17 sheets)
     const [
@@ -285,6 +213,7 @@ export async function fetchAllData() {
       statsData,
       navLinksData,
       categoriesData,
+      // NEW SECTIONS
       heroTypingTextsData,
       emailJSConfigData,
       aboutContentData,
@@ -293,62 +222,67 @@ export async function fetchAllData() {
       projectsContentData,
       footerContentData
     ] = await Promise.all([
-      fetchSheet('PersonalInfo'),
-      fetchSheet('SocialLinks'),
-      fetchSheet('Projects'),
-      fetchSheet('Skills'),
-      fetchSheet('Experiences'),
-      fetchSheet('Education'),
-      fetchSheet('Certifications'),
-      fetchSheet('Stats'),
-      fetchSheet('NavLinks'),
-      fetchSheet('ProjectCategories'),
-      fetchSheet('HeroTypingTexts'),
-      fetchSheet('EmailJSConfig'),
-      fetchSheet('AboutContent'),
-      fetchSheet('SkillsContent'),
-      fetchSheet('ContactContent'),
-      fetchSheet('ProjectsContent'),
-      fetchSheet('FooterContent')
+      get('PersonalInfo'),
+      get('SocialLinks'),
+      get('Projects'),
+      get('Skills'),
+      get('Experiences'),
+      get('Education'),
+      get('Certifications'),
+      get('Stats'),
+      get('NavLinks'),
+      get('ProjectCategories'),
+      // NEW SECTIONS
+      get('HeroTypingTexts'),
+      get('EmailJSConfig'),
+      get('AboutContent'),
+      get('SkillsContent'),
+      get('ContactContent'),
+      get('ProjectsContent'),
+      get('FooterContent')
     ]);
-    
-    // Validasi: jika SEMUA data kosong, fallback ke lokal
-    const allEmpty = [
-      personalInfoData, projectsData, skillsData, experiencesData
-    ].every(d => !d || d.length === 0);
-    
-    if (allEmpty) {
-      console.warn('⚠️ API returned empty data, using fallback');
-      return getFallbackData();
-    }
     
     // Parse dan rebuild data dengan validasi
     const portfolioData = {
+      // Original sections
       personalInfo: personalInfoData[0] || {},
       socialLinks: socialLinksData[0] || {},
       
+      // Projects: parse JSON arrays
       projects: parseJsonFields(projectsData, [
-        'tags', 'technologies', 'features', 'highlights'
+        'tags',
+        'technologies',
+        'features',
+        'highlights'
       ]),
       
+      // Skills: rebuild nested structure
       skills: rebuildSkills(skillsData),
       
+      // Experiences: parse JSON arrays
       experiences: parseJsonFields(experiencesData, [
-        'responsibilities', 'technologies', 'achievements'
+        'responsibilities',
+        'technologies',
+        'achievements'
       ]),
       
+      // Education: parse JSON arrays
       education: parseJsonFields(educationData, [
-        'relevantCourses', 'achievements'
+        'relevantCourses',
+        'achievements'
       ]),
       
+      // Simple data (no parsing needed)
       certifications: Array.isArray(certificationsData) ? certificationsData : [],
       stats: Array.isArray(statsData) ? statsData : [],
       navLinks: Array.isArray(navLinksData) ? navLinksData : [],
       
+      // Project categories: extract category names safely
       projectCategories: Array.isArray(categoriesData) 
         ? categoriesData.map(c => c.category).filter(Boolean)
         : [],
       
+      // NEW SECTIONS
       heroTypingTexts: Array.isArray(heroTypingTextsData)
         ? heroTypingTextsData.map(item => item.text).filter(Boolean)
         : [],
@@ -361,12 +295,15 @@ export async function fetchAllData() {
     };
     
     console.log('✅ Data fetched successfully from Google Sheets!');
+    console.log('📊 Data preview:', portfolioData);
+    
     return portfolioData;
     
   } catch (error) {
-    console.error('❌ Error fetching from Sheets, using fallback:', error);
-    return getFallbackData();
+    console.error('❌ Error fetching data from Google Sheets:', error);
+    throw error; // Re-throw untuk ditangani di usePortfolioData
   }
 }
 
+// Export individual fetch function jika diperlukan
 export { fetchSheet };

@@ -1,0 +1,272 @@
+.mp {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  transition: opacity 0.35s ease, translate 0.35s var(--ease);
+}
+
+/* Once the hero scrolls away the player parks in the corner. */
+.mp[data-docked='true'] {
+  position: fixed;
+  right: clamp(14px, 2.5vw, 24px);
+  bottom: clamp(14px, 2.5vw, 24px);
+  left: auto;
+  top: auto;
+  z-index: 75;
+  width: auto;
+}
+
+.mp[data-docked='true'][data-open='true'] {
+  width: min(340px, calc(100vw - 28px));
+}
+
+/* ---------- collapsed pill ---------- */
+
+.mp__pill {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+  color: var(--mut);
+  cursor: pointer;
+  animation: mp-pop 0.3s var(--ease) both;
+  transition: border-color 0.28s, transform 0.28s var(--ease);
+}
+
+.mp__pill:hover {
+  border-color: var(--accLine);
+  transform: translateY(-2px);
+}
+
+@keyframes mp-pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---------- expanded card ---------- */
+
+.mp__card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px 12px 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--cardShadow);
+  transform-origin: 100% 50%;
+  animation: mp-expand 0.3s var(--ease) both;
+}
+
+@keyframes mp-expand {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.mp__art {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 13px;
+  border: 1px solid var(--line);
+  background: var(--surface2);
+}
+
+.mp__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mp__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mp__title {
+  font: 500 13px/1.3 var(--font-sans), sans-serif;
+  color: var(--txt);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mp__meta {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.mp__time {
+  font-size: 10.5px;
+  line-height: 1;
+  color: var(--mut);
+  font-variant-numeric: tabular-nums;
+}
+
+.mp__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--mut);
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.mp__close:hover {
+  color: var(--acc);
+  border-color: var(--accLine);
+}
+
+/* ---------- seek bar ---------- */
+
+.mp__bar {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 14px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mp__bar-track,
+.mp__bar-fill {
+  position: absolute;
+  top: 6px;
+  height: 3px;
+  border-radius: 999px;
+  display: block;
+}
+
+.mp__bar-track {
+  left: 0;
+  right: 0;
+  background: var(--line);
+}
+
+.mp__bar-fill {
+  left: 0;
+  background: var(--acc);
+}
+
+.mp__bar-knob {
+  position: absolute;
+  top: 2.5px;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: var(--acc);
+  display: block;
+}
+
+/* ---------- controls ---------- */
+
+.mp__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mp__play {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--acc);
+  border-radius: 50%;
+  background: var(--acc);
+  color: var(--onAcc);
+  cursor: pointer;
+  transition: transform 0.25s var(--ease);
+}
+
+.mp__play:hover {
+  transform: scale(1.06);
+}
+
+.mp__volume {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  color: var(--mut);
+}
+
+.mp__volume input {
+  flex: 1 1 auto;
+  min-width: 60px;
+  max-width: 110px;
+  accent-color: var(--acc);
+}
+
+/* ---------- equalizer ---------- */
+
+.mp__eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 22px;
+}
+
+.mp__eq-bar {
+  width: 3px;
+  border-radius: 2px;
+  background: var(--mut);
+  display: block;
+  transition: height 0.3s, background 0.3s;
+}
+
+.mp__eq-bar[data-on='true'] {
+  background: var(--acc);
+}
+
+.mp__pill .mp__eq {
+  height: 20px;
+}
+
+.mp__pill .mp__eq-bar {
+  width: 2.8px;
+}

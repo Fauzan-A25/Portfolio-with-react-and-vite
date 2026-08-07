@@ -1,138 +1,116 @@
-import { memo } from 'react';
-import PropTypes from 'prop-types';
-import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
+'use client';
+
+import { useMemo, useRef } from 'react';
+import { useProof } from '@/components/ui/ProofModal/ProofModal';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useReveal } from '@/hooks/useReveal';
 import './Certifications.css';
 
-const Certifications = memo(({ certifications }) => {
-  const [elementRef, isVisible] = useIntersectionObserver();
+// Competition certificates rarely say "competition" — they carry the event's
+// name instead, so match the events too.
+const COMPETITION = /competition|kompetisi|lomba|contest|compfest|competitive|gelar\s*rasa|find\s*it/i;
+
+/** Builds the "N sertifikat / N dengan dokumen / N kompetisi" summary row. */
+function summarize(items) {
+  return [
+    { value: items.length, label: 'Sertifikat' },
+    { value: items.filter((c) => c.proofKey).length, label: 'Dengan dokumen' },
+    {
+      value: items.filter((c) => COMPETITION.test(`${c.name} ${c.issuer}`)).length,
+      label: 'Kompetisi',
+    },
+  ];
+}
+
+export default function Certifications({ certifications = [] }) {
+  const rootRef = useRef(null);
+  const reduced = useReducedMotion();
+  const { openProof, proofs } = useProof();
+
+  useReveal(rootRef, { enabled: !reduced });
+
+  // Documented certificates first — the page leads with what it can prove.
+  const items = useMemo(() => {
+    const withDoc = certifications.filter((c) => c.proofKey && proofs[c.proofKey]);
+    const without = certifications.filter((c) => !c.proofKey || !proofs[c.proofKey]);
+    return [...withDoc, ...without];
+  }, [certifications, proofs]);
+
+  const stats = useMemo(() => summarize(items), [items]);
+
+  if (!items.length) return null;
 
   return (
-    <section 
-      id="certifications" 
-      className={`certifications-section ${isVisible ? 'animate-in' : ''}`}
-      ref={elementRef}
-    >
-      <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">
-            <i className="bi bi-award"></i> Certifications & Achievements
-          </h2>
-          <p className="section-subtitle">
-            Professional certifications and recognition earned throughout my journey
-          </p>
+    <section id="certifications" ref={rootRef} className="section section--raised">
+      <div className="wrap">
+        <div className="section-head" data-reveal="">
+          <span className="section-num mono">04</span>
+          <h2 className="section-title">Certifications</h2>
         </div>
+        <p className="section-lead cert__lead" data-reveal="" data-d="50">
+          Dokumen asli, bukan klaim. Klik salah satu untuk melihat versi penuh beserta nomor
+          sertifikatnya.
+        </p>
 
-        <div className="certifications-grid">
-          {certifications?.map((cert, index) => (
-            <div 
-              key={cert.id} 
-              className={`certification-card ${isVisible ? 'fade-in' : ''}`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              {/* Icon */}
-              <div className="cert-icon-wrapper">
-                <i className="bi bi-patch-check"></i>
-                <div className="cert-glow"></div>
-              </div>
-
-              {/* Content */}
-              <div className="cert-content">
-                <h3 className="cert-name">{cert.name}</h3>
-                
-                <div className="cert-issuer">
-                  <i className="bi bi-building"></i>
-                  <span>{cert.issuer}</span>
-                </div>
-
-                {cert.date && cert.date !== 'N/A' && (
-                  <div className="cert-date">
-                    <i className="bi bi-calendar-check"></i>
-                    <span>Issued: {cert.date}</span>
-                  </div>
-                )}
-
-                {cert.credentialId && cert.credentialId !== 'N/A' && (
-                  <div className="cert-credential">
-                    <i className="bi bi-key"></i>
-                    <span className="credential-id">ID: {cert.credentialId}</span>
-                  </div>
-                )}
-
-                {cert.url && (
-                  <a 
-                    href={cert.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="cert-verify-btn"
-                  >
-                    <i className="bi bi-box-arrow-up-right"></i>
-                    Verify Certificate
-                  </a>
-                )}
-              </div>
-
-              {/* Badge Decoration */}
-              <div className="cert-badge">
-                <i className="bi bi-trophy"></i>
-              </div>
+        <div className="cert__stats" data-reveal="" data-d="80">
+          {stats.map((s) => (
+            <div key={s.label} className="cert__stat">
+              <span className="cert__stat-value">{s.value}</span>
+              <span className="cert__stat-label mono">{s.label}</span>
             </div>
           ))}
         </div>
 
-        {/* Stats Summary */}
-        {certifications && certifications.length > 0 && (
-          <div className="cert-stats">
-            <div className="stat-item">
-              <i className="bi bi-patch-check-fill"></i>
-              <div className="stat-content">
-                <span className="stat-value">{certifications.length}</span>
-                <span className="stat-label">Total Certifications</span>
-              </div>
-            </div>
-            <div className="stat-item">
-              <i className="bi bi-trophy-fill"></i>
-              <div className="stat-content">
-                <span className="stat-value">
-                  {certifications.filter(c => c.name.includes('Competition')).length}
+        <div className="cert__grid">
+          {items.map((c, i) => {
+            const proof = c.proofKey ? proofs[c.proofKey] : null;
+            const caption = [c.issuer, c.role, c.credentialId && `No. ${c.credentialId}`]
+              .filter((v) => v && v !== 'N/A')
+              .join(' · ');
+
+            if (!proof) {
+              return (
+                <div
+                  key={c.id ?? c.name}
+                  className="cert__card cert__card--empty"
+                  data-reveal=""
+                  data-d={i * 55}
+                >
+                  <span className="cert__empty-mark mono">—</span>
+                  <span className="cert__title">{c.name}</span>
+                  <span className="cert__caption mono">
+                    {caption || c.issuer} · dokumen belum diunggah
+                  </span>
+                </div>
+              );
+            }
+
+            return (
+              <button
+                key={c.id ?? c.name}
+                type="button"
+                className="cert__card"
+                data-reveal=""
+                data-d={i * 55}
+                onClick={() => openProof(c.proofKey)}
+                aria-label={`Lihat sertifikat ${c.name}`}
+              >
+                <span className="cert__thumb">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={proof.image} alt="" loading="lazy" className="cert__img" />
+                  {c.date && c.date !== 'N/A' && (
+                    <span className="cert__year mono">{String(c.date).slice(-4)}</span>
+                  )}
                 </span>
-                <span className="stat-label">Competition Awards</span>
-              </div>
-            </div>
-            <div className="stat-item">
-              <i className="bi bi-mortarboard-fill"></i>
-              <div className="stat-content">
-                <span className="stat-value">
-                  {certifications.filter(c => 
-                    c.issuer.includes('MySkill') || c.name.includes('Belajar')
-                  ).length}
+                <span className="cert__meta">
+                  <span className="cert__title">{c.name}</span>
+                  <span className="cert__caption mono">{caption}</span>
                 </span>
-                <span className="stat-label">Learning Certificates</span>
-              </div>
-            </div>
-          </div>
-        )}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
-});
-
-Certifications.displayName = 'Certifications';
-
-Certifications.propTypes = {
-  certifications: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      issuer: PropTypes.string,
-      date: PropTypes.string,
-      credentialId: PropTypes.string,
-      url: PropTypes.string,
-    })
-  ),
-};
-
-Certifications.defaultProps = {
-  certifications: [],
-};
-
-export default Certifications;
+}

@@ -1,70 +1,38 @@
-import { memo } from 'react';
-import PropTypes from 'prop-types';
 import './Footer.css';
 
-const Footer = memo(({ personalInfo, socialLinks, footerContent }) => {
-  const currentYear = new Date().getFullYear();
-
-  const socialLinksArray = socialLinks
-    ? Object.entries(socialLinks)
-        .filter(([key]) => key !== 'email')
-        .map(([platform, url]) => ({
-          icon: `bi-${platform}`,
-          url,
-          label: platform.charAt(0).toUpperCase() + platform.slice(1),
-        }))
-    : [];
+export default function Footer({ personalInfo = {}, socialLinks = {}, footerContent = {} }) {
+  const links = [
+    ['GitHub', socialLinks.github],
+    ['LinkedIn', socialLinks.linkedin],
+    ['Instagram', socialLinks.instagram],
+    ['Email', personalInfo.email ? `mailto:${personalInfo.email}` : null],
+  ].filter(([, href]) => Boolean(href));
 
   return (
-    <footer className="footer">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-3 col-md-6">
-            <div className="footer-section">
-              <div className="footer-newsletter">
-                <p>"{footerContent?.quote || 'Keep learning, keep growing.'}"</p>
-              </div>
-            </div>
-          </div>
-
-
+    <footer className="ft">
+      <div className="ft__inner">
+        <div className="ft__lead">
+          {footerContent.quote && <p className="ft__quote">“{footerContent.quote}”</p>}
+          <p className="ft__copy mono">
+            © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
+          </p>
         </div>
 
-        <div className="footer-bottom">
-          <p className="copyright">
-            © {currentYear} {personalInfo?.name || 'Portfolio'}. All rights reserved.
-          </p>
+        <div className="ft__links">
+          {links.map(([label, href]) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith('mailto:') ? undefined : '_blank'}
+              rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+              data-peek={href.startsWith('mailto:') ? undefined : href}
+              className="pill"
+            >
+              {label}
+            </a>
+          ))}
         </div>
       </div>
     </footer>
   );
-});
-
-Footer.displayName = 'Footer';
-
-Footer.propTypes = {
-  personalInfo: PropTypes.shape({
-    name: PropTypes.string,
-  }),
-  socialLinks: PropTypes.shape({
-    github: PropTypes.string,
-    linkedin: PropTypes.string,
-    instagram: PropTypes.string,
-    email: PropTypes.string,
-  }),
-  footerContent: PropTypes.shape({
-    quote: PropTypes.string,
-  }),
-};
-
-Footer.defaultProps = {
-  personalInfo: {
-    name: 'Portfolio',
-  },
-  socialLinks: {},
-  footerContent: {
-    quote: 'Keep learning, keep growing.',
-  },
-};
-
-export default Footer;
+}

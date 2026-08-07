@@ -1,0 +1,7 @@
+{
+  "enabledPlugins": {
+    "claude-seo@agricidaniel-claude-seo": true,
+    "engineering-skills@claude-code-skills": true,
+    "engineering-advanced-skills@claude-code-skills": true
+  }
+}
