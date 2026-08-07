@@ -1,125 +1,38 @@
-.scroll-to-top {
+.to-top {
   position: fixed;
-  bottom: 100px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background: var(--accent-gradient);
-  border: none;
-  border-radius: 50%;
+  left: clamp(14px, 2.5vw, 24px);
+  bottom: clamp(14px, 2.5vw, 24px);
+  z-index: 70;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  backdrop-filter: blur(12px);
+  color: var(--mut);
   cursor: pointer;
-  color: white;
-  font-size: 20px;
-  transition: all 0.3s ease;
-  z-index: 998;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  box-shadow: 0 4px 20px rgba(0, 212, 170, 0.4);
+  box-shadow: var(--shadow);
+  animation: to-top-in 0.25s var(--ease) both;
+  transition: color 0.25s, border-color 0.25s, transform 0.25s;
 }
 
-.scroll-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.scroll-to-top:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 30px rgba(0, 212, 170, 0.6);
-}
-
-/* Anime theme styling */
-[data-theme="anime"] .scroll-to-top {
-  background: linear-gradient(135deg, #ff1744 0%, #f50057 50%, #ff4081 100%);
-  box-shadow: 0 4px 20px rgba(255, 23, 68, 0.5),
-              0 0 15px rgba(245, 0, 87, 0.4);
-  border: 2px solid rgba(255, 64, 129, 0.6);
-  animation: animeFloat 3s ease-in-out infinite;
-}
-
-[data-theme="anime"] .scroll-to-top.visible {
-  animation: animeFloat 3s ease-in-out infinite, 
-             neonGlowPulse 2s ease-in-out infinite;
-}
-
-[data-theme="anime"] .scroll-to-top:hover {
-  transform: translateY(-8px) scale(1.1);
-  background: linear-gradient(135deg, #ff1744 0%, #00e5ff 100%);
-  box-shadow: 0 8px 40px rgba(255, 23, 68, 0.7),
-              0 0 25px rgba(0, 229, 255, 0.6),
-              inset 0 0 15px rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(0, 229, 255, 0.8);
-}
-
-/* Icon glow effect for anime theme */
-[data-theme="anime"] .scroll-to-top i {
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
-  animation: iconBounce 1s ease-in-out infinite;
-}
-
-[data-theme="anime"] .scroll-to-top:hover i {
-  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 1));
+.to-top:hover {
+  color: var(--acc);
+  border-color: var(--accLine);
   transform: translateY(-2px);
 }
 
-/* Floating animation */
-@keyframes animeFloat {
-  0%, 100% {
-    transform: translateY(0);
+@keyframes to-top-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* Neon glow pulse animation */
-@keyframes neonGlowPulse {
-  0%, 100% {
-    box-shadow: 0 4px 20px rgba(255, 23, 68, 0.5),
-                0 0 15px rgba(245, 0, 87, 0.4);
-  }
-  50% {
-    box-shadow: 0 4px 30px rgba(255, 23, 68, 0.8),
-                0 0 25px rgba(245, 0, 87, 0.7);
-  }
-}
-
-/* Icon bounce animation */
-@keyframes iconBounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-}
-
-/* Add trail effect on click for anime theme */
-[data-theme="anime"] .scroll-to-top:active {
-  transform: translateY(-3px) scale(0.95);
-  box-shadow: 0 4px 15px rgba(255, 23, 68, 0.9),
-              0 0 20px rgba(0, 229, 255, 0.8);
-}
-
-@media (max-width: 768px) {
-  .scroll-to-top {
-    bottom: 80px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
-    font-size: 18px;
-  }
-
-  [data-theme="anime"] .scroll-to-top {
-    border: 1.5px solid rgba(255, 64, 129, 0.6);
-  }
-
-  /* Reduce animation intensity on mobile for performance */
-  [data-theme="anime"] .scroll-to-top.visible {
-    animation: animeFloat 3s ease-in-out infinite;
+  to {
+    opacity: 1;
+    transform: none;
   }
 }

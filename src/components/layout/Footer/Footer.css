@@ -1,303 +1,45 @@
-.footer {
-  background: var(--secondary-bg);
-  padding: 60px 0 30px;
-  border-top: 1px solid var(--glass-border);
+.ft {
+  position: relative;
+  padding: clamp(44px, 6vw, 68px) clamp(20px, 5vw, 48px);
 }
 
-.footer-section {
-  margin-bottom: 30px;
-}
-
-.footer-brand {
-  font-size: 24px;
-  font-weight: 700;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 15px;
-}
-
-.footer-description {
-  color: var(--text-secondary);
-  line-height: 1.8;
-  margin-bottom: 15px;
-  font-size: 14px;
-}
-
-.footer-location {
-  color: var(--text-secondary);
-  font-size: 14px;
+.ft__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
   display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.footer-location i {
-  color: var(--accent-color);
-}
-
-.footer-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 20px;
-}
-
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-links li {
-  margin-bottom: 12px;
-}
-
-.footer-links a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-
-.footer-links a:hover {
-  color: var(--accent-color);
-  transform: translateX(5px);
-}
-
-.footer-contact {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-contact li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-  color: var(--text-secondary);
-  font-size: 14px;
-}
-
-.footer-contact i {
-  color: var(--accent-color);
-  font-size: 16px;
-}
-
-.footer-contact a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footer-contact a:hover {
-  color: var(--accent-color);
-}
-
-
-
-.footer-newsletter p {
-  color: var(--text-secondary);
-  font-size: 13px;
-  margin: 0;
-}
-
-.footer-bottom {
-  margin-top: 40px;
-  padding-top: 30px;
-  border-top: 1px solid var(--glass-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 24px;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
-.copyright,
-.made-with {
-  color: var(--text-secondary);
-  font-size: 14px;
-  margin: 0;
+.ft__lead {
+  flex: 1 1 380px;
+  min-width: min(100%, 280px);
 }
 
-.made-with i {
-  color: #ff006e;
-  animation: heartbeat 1.5s infinite;
+.ft__quote {
+  margin-bottom: 18px;
+  max-width: 520px;
+  font-size: clamp(17px, 2.4vw, 22px);
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  color: var(--txt);
+  text-wrap: pretty;
 }
 
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  25% { transform: scale(1.2); }
+.ft__copy {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--mut);
 }
 
-/* ========== ANIME THEME STYLES ========== */
-
-[data-theme="anime"] .footer {
-  background: linear-gradient(180deg, 
-    rgba(17, 0, 32, 0.95) 0%, 
-    rgba(35, 0, 60, 0.98) 100%);
-  border-top: 2px solid rgba(255, 23, 68, 0.3);
-  position: relative;
-  overflow: hidden;
+.ft__links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-/* Animated background pattern for anime theme */
-[data-theme="anime"] .footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 50px,
-      rgba(0, 229, 255, 0.03) 50px,
-      rgba(0, 229, 255, 0.03) 51px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 50px,
-      rgba(255, 23, 68, 0.03) 50px,
-      rgba(255, 23, 68, 0.03) 51px
-    );
-  pointer-events: none;
-  animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(50px, 50px); }
-}
-
-[data-theme="anime"] .footer-brand {
-  background: linear-gradient(135deg, #ff1744 0%, #00e5ff 50%, #ff4081 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 8px rgba(255, 23, 68, 0.3));
-  animation: brandGlow 3s ease-in-out infinite;
-}
-
-@keyframes brandGlow {
-  0%, 100% {
-    filter: drop-shadow(0 0 8px rgba(255, 23, 68, 0.3));
-  }
-  50% {
-    filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.5));
-  }
-}
-
-[data-theme="anime"] .footer-description,
-[data-theme="anime"] .footer-newsletter p {
-  color: rgba(255, 255, 255, 0.7);
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
-}
-
-[data-theme="anime"] .footer-title {
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(255, 23, 68, 0.4);
-  border-bottom: 2px solid transparent;
-  border-image: linear-gradient(90deg, #ff1744, #00e5ff) 1;
-  padding-bottom: 10px;
-}
-
-[data-theme="anime"] .footer-location i,
-[data-theme="anime"] .footer-contact i {
-  color: #00e5ff;
-  filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.6));
-  animation: iconPulse 2s ease-in-out infinite;
-}
-
-@keyframes iconPulse {
-  0%, 100% {
-    filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.6));
-  }
-  50% {
-    filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.9));
-  }
-}
-
-[data-theme="anime"] .footer-links a {
-  color: rgba(255, 255, 255, 0.7);
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-[data-theme="anime"] .footer-links a::before {
-  content: '▸';
-  position: absolute;
-  left: -15px;
-  opacity: 0;
-  color: #ff4081;
-  transition: all 0.3s ease;
-}
-
-[data-theme="anime"] .footer-links a:hover {
-  color: #00e5ff;
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
-  transform: translateX(8px);
-}
-
-[data-theme="anime"] .footer-links a:hover::before {
-  opacity: 1;
-  left: -20px;
-}
-
-[data-theme="anime"] .footer-contact a {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-[data-theme="anime"] .footer-contact a:hover {
-  color: #ff4081;
-  text-shadow: 0 0 8px rgba(255, 64, 129, 0.6);
-}
-
-
-
-[data-theme="anime"] .footer-bottom {
-  border-top: 1px solid rgba(255, 23, 68, 0.2);
-  position: relative;
-}
-
-[data-theme="anime"] .copyright,
-[data-theme="anime"] .made-with {
-  color: rgba(255, 255, 255, 0.6);
-  text-shadow: 0 0 5px rgba(0, 229, 255, 0.2);
-}
-
-[data-theme="anime"] .made-with i {
-  color: #ff4081;
-  filter: drop-shadow(0 0 8px rgba(255, 64, 129, 0.8));
-}
-
-/* Sparkle effect on hover for anime theme */
-[data-theme="anime"] .footer-links a:hover {
-  animation: sparkle 0.6s ease-in-out;
-}
-
-@keyframes sparkle {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.5); }
-}
-
-@media (max-width: 768px) {
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  [data-theme="anime"] .footer {
-    padding: 40px 0 20px;
-  }
-
-  [data-theme="anime"] .footer::before {
-    animation: gridMove 30s linear infinite;
-  }
+.ft__links .pill {
+  padding: 9px 15px;
 }

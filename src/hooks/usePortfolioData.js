@@ -1,60 +1,60 @@
-// src/hooks/usePortfolioData.js
-import { useState, useEffect } from 'react';
-import { fetchAllData } from '../utils/fetchFromSheets';
+'use client';
 
-// Helper untuk bikin pesan error yang lebih ramah
-function getFriendlyErrorMessage(error) {
-  if (!error) return 'Unknown error';
-  if (error.includes('Failed to fetch')) {
-    return 'Cannot reach Google Sheets API. Please check your internet connection or try again later.';
+import { useEffect, useState } from 'react';
+import { fetchAllData } from '@/utils/fetchFromSheets';
+import { mergeWithLocal } from '@/utils/mergePortfolioData';
+import localData from '@/data/portfolioData';
+
+function friendlyError(message) {
+  if (!message) return 'Unknown error';
+  if (message.includes('Failed to fetch')) {
+    return 'Cannot reach the Google Sheets API. Check your connection or try again later.';
   }
-  if (error.includes('NetworkError')) {
-    return 'Network error occurred while fetching data.';
-  }
-  return error;
+  if (message.includes('NetworkError')) return 'Network error while fetching data.';
+  return message;
 }
 
-export function usePortfolioData() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+/**
+ * Normally the page is resolved on the server (see lib/portfolio.js) and handed
+ * in as `initialData`; in that case this hook does nothing but pass it through,
+ * so there is no second fetch and no loading flash.
+ *
+ * The client-fetch branch is the fallback for any render that has no server
+ * data to start from.
+ */
+export function usePortfolioData(initialData = null) {
+  const [data, setData] = useState(initialData);
+  const [loading, setLoading] = useState(!initialData);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (initialData) return undefined;
+
     let cancelled = false;
 
-    async function loadData() {
+    (async () => {
       try {
-        setLoading(true);
-        setError(null);
-
-        const portfolioDataSheets = await fetchAllData();
-
-        if (!portfolioDataSheets) {
-          throw new Error('Portfolio data is empty or invalid');
-        }
-
-        if (!cancelled) {
-          setData(portfolioDataSheets);
-        }
+        const remote = await fetchAllData();
+        if (!cancelled) setData(mergeWithLocal(remote));
       } catch (err) {
+        console.error('[PortfolioData] Fetch failed, using bundled data:', err);
         if (!cancelled) {
-          console.error('[PortfolioData] Fetch error:', err);
-          setError(getFriendlyErrorMessage(err.message || String(err)));
+          // The bundled copy is complete, so a failed fetch degrades rather
+          // than blocks — the visitor still sees the whole portfolio.
+          setData(localData);
+          setError(null);
         }
       } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
+        if (!cancelled) setLoading(false);
       }
-    }
+    })();
 
-    loadData();
-
-    // Cleanup untuk mencegah update state setelah unmount
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [initialData]);
 
   return { data, loading, error };
 }
+
+export { friendlyError };

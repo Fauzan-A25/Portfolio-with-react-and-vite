@@ -1,16 +1,23 @@
-// Portfolio Data - Centralized data management for better maintainability
+// Portfolio Data — local source of truth.
+//
+// Google Sheets is the live source (see utils/fetchFromSheets.js); everything
+// here is the fallback that ships with the build, so the site renders fully
+// even when the API is unreachable. Keys the sheet does not provide — `proofs`,
+// `proofKey`, `focus` — are only ever defined here.
 
 export const personalInfo = {
   name: 'Fauzan Ahsanudin Alfikri',
   title: 'Data Science Student',
   subtitle: 'Machine Learning Enthusiast | Python Developer',
-  tagline: 'Passionate about turning data into insights and solving real-world problems through technology',
+  tagline:
+    'Passionate about turning data into insights and solving real-world problems through technology',
   university: 'Telkom University',
   location: 'Bandung, Indonesia',
+  focus: 'NLP · Computer Vision · ML Pipelines',
   email: 'fauzanahsanudin@gmail.com',
   gpa: '3.8',
   cvLink: 'https://docs.google.com/document/d/1zm9N7lCHsZPCChdz5zjfQK4wogPMqb5g/',
-  profileImage: './images/Fauzan.png'
+  profileImage: '/images/Fauzan-slice.png',
 };
 
 export const socialLinks = {
@@ -20,666 +27,493 @@ export const socialLinks = {
   email: 'mailto:fauzanahsanudin@gmail.com',
 };
 
+/**
+ * Documents behind the claims made on the page. Keyed so About and
+ * Certifications can both open the same lightbox entry.
+ *
+ * `match` links a proof to a certification row coming from Google Sheets,
+ * where titles are phrased loosely ("Peserta GELAR RASA 2025" vs "GELAR RASA
+ * 2025"). It is tested against the row's name + issuer + date combined.
+ */
+export const proofs = {
+  'adikara-photo': {
+    title: 'Penyerahan Juara 3 — Divisi Data Mining ADIKARA 2025',
+    note: 'Ajang Digital Kreatif Mahasiswa Informatika 2025 · Telkom University',
+    image: '/images/foto-menang-adikara.jpeg',
+  },
+  'adikara-cert': {
+    title: 'Sertifikat Juara 3 Divisi Data Mining',
+    note: 'No. 027/AKD6/IF-DEK/2026 · kode unik A25C0013',
+    image: '/images/proof-adikara-certificate.jpeg',
+  },
+  teaching: {
+    title: 'Asisten Dosen — Sistem Cerdas',
+    note: 'Fakultas Informatika, Telkom University · 2026',
+    image: '/images/proof-teaching.jpeg',
+  },
+  'findit-2025': {
+    match: /find\s*it|data analyst competition/i,
+    title: 'Data Analyst Competition FIND IT! 2025',
+    note: 'KMTETI FT UGM · Peserta · Sleman, 17 Mei 2025',
+    image: '/images/cert-findit-2025.jpeg',
+  },
+  compfest17: {
+    match: /compfest\s*17|data analytics dash/i,
+    title: 'Data Analytics Dash — COMPFEST 17',
+    note: 'Universitas Indonesia · Participant · COMPFEST 17',
+    image: '/images/cert-compfest17.jpeg',
+  },
+  'gelarrasa-2025': {
+    match: /gelar\s*rasa[^0-9]*2025/i,
+    title: 'GELAR RASA 2025',
+    note: 'UPN “Veteran” Jawa Timur · Peserta · No. 655/UN63.7/TU/2025',
+    image: '/images/cert-gelarrasa-2025.jpeg',
+  },
+  compfest16: {
+    match: /compfest\s*16|senior competitive programming/i,
+    title: 'Senior Competitive Programming — COMPFEST 16',
+    note: 'Universitas Indonesia · Participant · COMPFEST 16',
+    image: '/images/cert-compfest16.jpeg',
+  },
+  'gelarrasa-2024': {
+    match: /gelar\s*rasa[^0-9]*2024/i,
+    title: 'GELAR RASA 2024',
+    note: 'UPN “Veteran” Jawa Timur · Peserta · No. 1846/UN63.7/2024',
+    image: '/images/cert-gelarrasa-2024.jpeg',
+  },
+  'aiesec-2024': {
+    match: /aiesec/i,
+    title: 'Youth Today × Join AIESEC 2024',
+    note: 'AIESEC in Bandung · Delegate · No. 1062/TM-BDG/C/X/2024',
+    image: '/images/cert-aiesec-2024.jpeg',
+  },
+};
+
 export const projects = [
   {
     id: 1,
-    title: 'Fossil - Water Potability Prediction',
-    slug: 'fossil-water-potability',
-    shortDescription: 'ML application for predicting water safety',
+    title: 'Fossil — Water Potability Prediction',
     description:
-      'An intelligent Streamlit-based Machine Learning application that predicts water potability using various chemical and physical parameters such as pH, sulfate concentration, and organic carbon. Built with MLPClassifier model to assess water safety for drinking purposes.',
-    image: './images/Projects/Fossil_App_Screenshot.png',
-    tags: ['Machine Learning', 'Streamlit', 'Python', 'MLPClassifier', 'Data Science'],
-    technologies: [
-      'Python 3.9+',
-      'Streamlit',
-      'Scikit-learn',
-      'Pandas',
-      'NumPy',
-      'Matplotlib',
-    ],
-    features: [
-      'Real-time water quality prediction',
-      'Interactive parameter input',
-      'Visual data analysis',
-      'Model performance metrics',
-      'User-friendly interface',
-    ],
+      'Streamlit ML app that predicts water potability from chemical and physical parameters using an MLPClassifier. 89% accuracy across 3,276 samples.',
+    image: 'https://drive.google.com/thumbnail?id=1MNgX_ecN6bDlplqUxACGC-kCxn2VVL_b&sz=w800',
+    technologies: ['Streamlit', 'Scikit-learn', 'Pandas'],
     category: 'Machine Learning',
-    status: 'Completed',
     year: 2024,
-    duration: '2 months',
-    role: 'Full Stack Developer',
+    duration: '2 mo',
     teamSize: 3,
     githubUrl: 'https://github.com/Fauzan-A25/FOSSIL_GDGoC-TUBES',
     demoUrl: 'https://fossil-water-app.streamlit.app',
-    videoUrl: null,
     featured: true,
-    highlights: [
-      'Achieved 89% accuracy in water potability prediction',
-      'Deployed on Streamlit Cloud for public access',
-      'Processed 3,276 water quality samples',
-    ],
   },
   {
     id: 2,
     title: 'COPPA Risk Prediction Model',
-    slug: 'coppa-risk-prediction',
-    shortDescription: 'XGBoost model for COPPA violation detection',
     description:
-      'Advanced machine learning model using XGBoost to predict COPPA (Children\'s Online Privacy Protection Act) violation risks in mobile applications. Features comprehensive data preprocessing, feature engineering, and model optimization to identify apps that may violate children\'s privacy regulations.',
-    image: './images/Projects/COPPA_Model.png',
-    tags: ['XGBoost', 'Classification', 'Data Science', 'Privacy', 'COPPA'],
-    technologies: [
-      'Python 3.9+',
-      'XGBoost',
-      'Pandas',
-      'NumPy',
-      'Scikit-learn',
-      'SHAP',
-      'Matplotlib',
-      'Seaborn',
-    ],
-    features: [
-      'Advanced feature engineering',
-      'XGBoost classification model',
-      'SHAP value analysis for interpretability',
-      'Comprehensive data preprocessing',
-      'Model performance evaluation',
-    ],
+      'XGBoost model predicting COPPA violation risk in mobile apps, with SHAP for explainability. 92% accuracy across 10,000+ applications.',
+    image: 'https://drive.google.com/thumbnail?id=15zIwGLfO5luTSJuBbaVzeusAXttw4dQC&sz=w800',
+    technologies: ['XGBoost', 'SHAP', 'Seaborn'],
     category: 'Data Science',
-    status: 'Completed',
     year: 2025,
-    duration: '1 months',
-    role: 'Data Scientist',
+    duration: '1 mo',
     teamSize: 1,
     githubUrl: 'https://github.com/Fauzan-A25/coppa-risk-prediction-findit2025-fauzan',
     demoUrl: null,
-    videoUrl: null,
     featured: true,
-    highlights: [
-      'Developed predictive model with 92% accuracy',
-      'Analyzed 10,000+ mobile applications',
-      'Implemented SHAP for model explainability',
-    ],
   },
   {
     id: 3,
     title: 'Crowd Counting with CSRNet',
-    slug: 'crowd-counting-csrnet',
-    shortDescription: 'Deep learning for crowd density estimation',
     description:
-      'Implementation of CSRNet (Congested Scene Recognition Network) using PyTorch for accurate crowd counting and density estimation. The model can handle both sparse and dense crowds, making it suitable for various surveillance and monitoring applications.',
-    image: './images/Projects/crowd_counting_csrnet.jpg',
-    tags: ['Deep Learning', 'PyTorch', 'Computer Vision', 'CNN', 'CSRNet'],
-    technologies: [
-      'Python 3.9+',
-      'PyTorch',
-      'OpenCV',
-      'NumPy',
-      'Matplotlib',
-      'CUDA',
-    ],
-    features: [
-      'Accurate crowd density estimation',
-      'Handles sparse and dense scenes',
-      'Real-time inference capability',
-      'Pre-trained model support',
-      'Visualization tools',
-    ],
+      'CSRNet in PyTorch for crowd density estimation on sparse and dense scenes. Trained on ShanghaiTech, MAE 68.2 on Part A.',
+    image: 'https://drive.google.com/thumbnail?id=15j18nDquKe53cXk8P5EVYKpxtB701T0j&sz=w800',
+    technologies: ['PyTorch', 'OpenCV', 'CUDA'],
     category: 'Computer Vision',
-    status: 'Completed',
     year: 2025,
-    duration: '1 weeks',
-    role: 'ML Engineer',
+    duration: '1 wk',
     teamSize: 1,
     githubUrl: 'https://github.com/Fauzan-A25/crowd-counting-with-csrnet-competition-hology',
     demoUrl: null,
-    videoUrl: null,
     featured: true,
-    highlights: [
-      'Trained on ShanghaiTech dataset',
-      'Achieved MAE of 68.2 on Part A',
-      'Optimized learning rate to 1e-4',
-    ],
   },
   {
     id: 4,
-    title: 'Pacific Data Viz Challenge - Climate Change & Disasters',
-    slug: 'pacific-dataviz-climate-disasters',
-    shortDescription: 'Data visualization project on Pacific climate change and disaster patterns',
+    title: 'GenZ Financial Literacy Dashboard',
     description:
-      'An interactive data visualization project created for the Pacific Dataviz Challenge, analyzing climate change impacts and disaster patterns across Pacific Island nations. The project uses open data from the Pacific Data Hub to visualize trends in natural disasters, climate risks, and their effects on Pacific communities, supporting the Blue Pacific 2050 strategy objectives.',
-    image: './images/Projects/Pacific_DataViz_Screenshot.png',
-    tags: ['Data Visualization', 'Climate Change', 'Open Data', 'Pacific Islands', 'Dashboard'],
-    technologies: [
-      'Python',
-      'Pandas',
-      'Plotly/Matplotlib',
-      'JavaScript',
-      'D3.js',
-      'HTML/CSS',
-    ],
-    features: [
-      'Interactive climate change visualizations',
-      'Disaster pattern analysis across Pacific regions',
-      'Time-series data exploration',
-      'Geographic heat maps',
-      'Comparative regional statistics',
-      'Responsive dashboard design',
-    ],
+      'React and Recharts analytics dashboard covering five literacy dimensions, with filtering across 38 Indonesian provinces and CSV export.',
+    image: 'https://drive.google.com/thumbnail?id=1HjqCn7kwTuYcA7Td8NRWAJijQONhSmvn&sz=w800',
+    technologies: ['TypeScript', 'Recharts', 'Zustand'],
     category: 'Data Visualization',
-    status: 'Completed',
     year: 2025,
-    duration: '3 months',
-    role: 'Data Visualization Developer',
+    duration: '1 mo',
     teamSize: 1,
-    githubUrl: 'https://github.com/Fauzan-A25/Pacific-Data-Viz-challenge_Climate-Change-And-Disasters',
-    demoUrl: null,
-    videoUrl: null,
+    githubUrl: 'https://github.com/Fauzan-A25/dashboard-analisis-sigacorr',
+    demoUrl: 'https://fauzan-a25.github.io/dashboard-analisis-sigacorr/',
     featured: true,
-    highlights: [
-      'Participated in Pacific Dataviz Challenge competition',
-      'Analyzed climate and disaster data from Pacific Data Hub',
-      'Created compelling visual narratives for Pacific Island climate issues',
-      'Contributed to Blue Pacific 2050 strategy awareness',
-    ],
   },
   {
     id: 5,
-    title: 'AstroClassify - Stellar Classification System',
-    slug: 'astroclassify-stellar-classification',
-    shortDescription: 'ML-powered astronomical object classification system',
+    title: 'AstroClassify — Stellar Classification',
     description:
-      'An intelligent astronomical object classification system powered by machine learning that identifies and classifies celestial objects (stars, galaxies, and quasars) based on spectral characteristics from the Sloan Digital Sky Survey (SDSS). Built with Streamlit interface featuring multiple ML models including Random Forest, XGBoost, and LightGBM for accurate stellar classification.',
-    image: './images/Projects/AstroClassify_Screenshot.png',
-    tags: ['Machine Learning', 'Astronomy', 'Classification', 'Streamlit', 'Data Science'],
-    technologies: [
-      'Python 3.x',
-      'Streamlit',
-      'Scikit-learn',
-      'XGBoost',
-      'LightGBM',
-      'Pandas',
-      'NumPy',
-      'Matplotlib',
-    ],
-    features: [
-      'Upload and process astronomical observation data (CSV)',
-      'Automatic data preprocessing pipeline',
-      'Multiple ML model selection (Random Forest, XGBoost, LightGBM)',
-      'Interactive classification visualizations',
-      'Confusion matrix and classification reports',
-      'Export prediction results',
-      'Real-time celestial object classification',
-    ],
+      'Classifies galaxies, stars, and quasars from SDSS spectral data with Random Forest, XGBoost, and LightGBM behind a Streamlit interface.',
+    image: 'https://drive.google.com/thumbnail?id=1ff0HQZp-cSbtA7Z-5MMRYntikp09Ju7C&sz=w800',
+    technologies: ['LightGBM', 'Streamlit', 'XGBoost'],
     category: 'Machine Learning',
-    status: 'Completed',
     year: 2024,
-    duration: '2 months',
-    role: 'ML Developer',
+    duration: '2 mo',
     teamSize: 2,
     githubUrl: 'https://github.com/Fauzan-A25/AstroClassify',
     demoUrl: null,
-    videoUrl: null,
     featured: true,
-    highlights: [
-      'Trained on SDSS spectral observation dataset',
-      'Three-class classification: GALAXY, STAR, and QSO (Quasar)',
-      'Implemented ensemble learning with multiple optimized models',
-      'Comprehensive model evaluation with confusion matrices and reports',
-      'Interactive Streamlit dashboard for astronomy enthusiasts and researchers',
-    ],
-  }
+  },
+  {
+    id: 6,
+    title: 'Smart Face Anti-Spoofing',
+    description:
+      'Liveness detection against printed photos, screen replays, and masks, with live webcam inference for facial recognition pipelines.',
+    image: 'https://drive.google.com/thumbnail?id=1yX95ip3J-i-XqxZX4Q4qmucjNuG8V0BP&sz=w800',
+    technologies: ['PyTorch', 'OpenCV', 'NumPy'],
+    category: 'Computer Vision',
+    year: 2025,
+    duration: '2 mo',
+    teamSize: 2,
+    githubUrl: 'https://github.com/FaarisKhairrudin/Smart-Face-AntiSpoofing',
+    demoUrl: null,
+    featured: true,
+  },
+  {
+    id: 7,
+    title: 'Pacific Data Viz — Climate & Disasters',
+    description:
+      'Interactive visual narrative on climate risk across Pacific Island nations using Pacific Data Hub open data, built for the Pacific Dataviz Challenge.',
+    image: 'https://drive.google.com/thumbnail?id=1fuV_ZSnRbq31JD96f_cGES5RXrgyvNl-&sz=w800',
+    technologies: ['D3.js', 'Plotly', 'Pandas'],
+    category: 'Data Visualization',
+    year: 2025,
+    duration: '3 mo',
+    teamSize: 1,
+    githubUrl:
+      'https://github.com/Fauzan-A25/Pacific-Data-Viz-challenge_Climate-Change-And-Disasters',
+    demoUrl: null,
+    featured: true,
+  },
 ];
 
 export const skills = {
   programming: [
-    {
-      name: 'Python',
-      icon: 'bi-file-code',
-      color: '#3776AB',
-      yearsOfExperience: 2,
-      description: 'Machine Learning, Data Analysis, Backend Development',
-      projects: ['CSRNet Crowd Counting', 'FindIT2025', 'ML Pipeline', 'Data Science Portfolio']
-    },
-    {
-      name: 'JavaScript',
-      icon: 'bi-braces',
-      color: '#F7DF1E',
-      yearsOfExperience: 1,
-      description: 'React, Node.js, Full-stack Web Development',
-      projects: ['Portfolio Website', 'E-commerce Dashboard', 'Real-time Chat App']
-    },
-    {
-      name: 'Java',
-      icon: 'bi-cup-hot',
-      color: '#007396',
-      yearsOfExperience: 1,
-      description: 'OOP, Spring Boot, Android Development',
-      projects: ['Mobile App', 'Backend API', 'University Projects']
-    },
-    {
-      name: 'SQL',
-      icon: 'bi-database',
-      color: '#4479A1',
-      yearsOfExperience: 2,
-      description: 'PostgreSQL, MySQL, Database Design & Optimization',
-      projects: ['E-commerce Database', 'Analytics Dashboard', 'Supabase Integration']
-    }
+    { name: 'Python', yearsOfExperience: 3, description: 'ML, data analysis, backend' },
+    { name: 'JavaScript', yearsOfExperience: 2, description: 'React, Node.js' },
+    { name: 'TypeScript', yearsOfExperience: 1, description: 'Typed React dashboards' },
+    { name: 'Go', yearsOfExperience: 1, description: 'Services and tooling' },
+    { name: 'C++', yearsOfExperience: 1, description: 'Competitive programming' },
+    { name: 'Dart', yearsOfExperience: 1, description: 'Flutter apps' },
   ],
-  
   dataScience: [
-    {
-      name: 'TensorFlow',
-      icon: 'bi-diagram-3',
-      color: '#FF6F00',
-      yearsOfExperience: 2,
-      description: 'Deep Learning, Computer Vision, Model Training',
-      projects: ['CSRNet Implementation', 'Image Classification', 'Neural Networks']
-    },
-    {
-      name: 'PyTorch',
-      icon: 'bi-lightning',
-      color: '#EE4C2C',
-      yearsOfExperience: 2,
-      description: 'Research Projects, Model Fine-tuning',
-      projects: ['Crowd Counting Research', 'Transfer Learning']
-    },
-    {
-      name: 'Pandas & NumPy',
-      icon: 'bi-table',
-      color: '#150458',
-      yearsOfExperience: 2,
-      description: 'Data Manipulation, Statistical Analysis',
-      projects: ['Data Preprocessing Pipeline', 'Analytics Tools', 'Research Analysis']
-    },
-    {
-      name: 'Scikit-learn',
-      icon: 'bi-graph-up',
-      color: '#F7931E',
-      yearsOfExperience: 2,
-      description: 'Classical ML, Model Evaluation, Feature Engineering',
-      projects: ['Prediction Models', 'Classification Tasks', 'Academic Projects']
-    }
+    { name: 'PyTorch', yearsOfExperience: 2, description: 'Research models, fine-tuning' },
+    { name: 'Natural Language Processing', yearsOfExperience: 2, description: 'NER, argument mining' },
+    { name: 'Deep Learning', yearsOfExperience: 2, description: 'CNNs and transformers' },
+    { name: 'Machine Learning', yearsOfExperience: 2, description: 'Classical ML pipelines' },
+    { name: 'Data Analysis', yearsOfExperience: 2, description: 'Pandas, statistical evaluation' },
+    { name: 'Neural Network', yearsOfExperience: 2, description: 'Architecture design' },
+    { name: 'Named Entity Recognition', yearsOfExperience: 1, description: 'Sequence labelling' },
+    { name: 'Argument Mining', yearsOfExperience: 1, description: 'Discourse structure' },
   ],
-  
   tools: [
-    {
-      name: 'Git & GitHub',
-      icon: 'bi-git',
-      color: '#F05032',
-      yearsOfExperience: 3,
-      description: 'Version Control, Collaboration, CI/CD',
-      projects: ['All Projects', 'Open Source Contributions']
-    },
-    {
-      name: 'React',
-      icon: 'bi-bootstrap',
-      color: '#61DAFB',
-      yearsOfExperience: 1,
-      description: 'Component Architecture, Hooks, State Management',
-      projects: ['Portfolio Website', 'Web Applications', 'UI Components']
-    },
-    {
-      name: 'Docker',
-      icon: 'bi-box-seam',
-      color: '#2496ED',
-      yearsOfExperience: 1,
-      description: 'Containerization, Deployment, Environment Setup',
-      projects: ['ML Model Deployment', 'Development Environments']
-    },
-    {
-      name: 'Jupyter Notebook',
-      icon: 'bi-journal-code',
-      color: '#F37626',
-      yearsOfExperience: 2,
-      description: 'Data Analysis, Research Documentation, Prototyping',
-      projects: ['Data Science Projects', 'Research Experiments', 'Tutorials']
-    }
+    { name: 'Linux', yearsOfExperience: 3, description: 'Daily driver, servers' },
+    { name: 'Git', yearsOfExperience: 2, description: 'Version control, collaboration' },
+    { name: 'Docker', yearsOfExperience: 1, description: 'Reproducible ML environments' },
+    { name: 'Data Management', yearsOfExperience: 2, description: 'Collection and reporting' },
+    { name: 'Video Production', yearsOfExperience: 2, description: 'Organisational content' },
+    { name: 'Video Editing', yearsOfExperience: 2, description: 'Post-production' },
   ],
-  
   soft: [
-    {
-      name: 'Problem Solving',
-      icon: 'bi-lightbulb',
-      color: '#FFD700',
-      yearsOfExperience: 3,
-      description: 'Analytical thinking, Algorithm design, Debugging',
-      projects: ['All Technical Projects']
-    },
-    {
-      name: 'Research & Analysis',
-      icon: 'bi-search',
-      color: '#9C27B0',
-      yearsOfExperience: 2,
-      description: 'Academic research, Literature review, Data interpretation',
-      projects: ['Academic Papers', 'Research Projects', 'Journal Analysis']
-    },
-    {
-      name: 'Documentation',
-      icon: 'bi-file-text',
-      color: '#00BCD4',
-      yearsOfExperience: 3,
-      description: 'Technical writing, Code documentation, README creation',
-      projects: ['GitHub Projects', 'Technical Reports', 'API Documentation']
-    },
-    {
-      name: 'Team Collaboration',
-      icon: 'bi-people',
-      color: '#4CAF50',
-      yearsOfExperience: 4,
-      description: 'Agile methodologies, Code reviews, Communication',
-      projects: ['Group Projects', 'Open Source', 'Academic Teams']
-    }
-  ]
+    { name: 'Leadership', yearsOfExperience: 3, description: 'Department and team lead' },
+    { name: 'Teamwork', yearsOfExperience: 3, description: 'Cross-division collaboration' },
+    { name: 'Communication', yearsOfExperience: 3, description: 'Public relations, teaching' },
+    { name: 'Problem Solving', yearsOfExperience: 3, description: 'Analytical thinking' },
+    { name: 'Event Management', yearsOfExperience: 2, description: 'Committee coordination' },
+  ],
 };
 
 export const experiences = [
   {
     id: 1,
-    title: 'Brand Sales Officer',
-    company: 'PT Bank Muamalat Indonesia',
-    location: 'Indonesia',
-    period: 'Jun 2025 - Present',
-    duration: '5 months',
-    type: 'Internship',
+    title: 'Asisten Laboratorium NLP',
+    company: 'Universitas Telkom',
+    companyUrl: 'https://telkomuniversity.ac.id',
+    location: 'Bandung',
+    period: 'Dec 2024 — Present',
+    duration: '1 yr 6 mos',
+    type: 'Part-time',
     description:
-      'Supporting sales team in offering Islamic banking products including account opening, savings, and financing services.',
-    responsibilities: [
-      'Assisted sales team in promoting Islamic banking products',
-      'Supported account opening and customer onboarding processes',
-      'Provided product information on savings and financing options',
-      'Collaborated with team members to achieve sales targets',
-    ],
-    technologies: ['Banking Systems', 'Customer Relations', 'Sales Tools'],
-    achievements: [
-      'Contributed to Islamic banking product promotion',
-      'Enhanced understanding of Sharia-compliant financial services',
-    ],
+      'Membimbing mahasiswa Sains Data dalam NLP menggunakan Python dan PyTorch. Fokus pada NER, Argument Mining, dan Neural Network.',
+    responsibilities: ['Membimbing praktikum NLP', 'Mengembangkan proyek penelitian NER'],
+    technologies: ['Python', 'PyTorch', 'NLP', 'NER'],
   },
   {
     id: 2,
-    title: 'Head of Public Relations Department',
+    title: 'Steering Committee (Pendataan)',
     company: 'PRADA Telkom University',
-    location: 'Bandung, Indonesia',
-    period: 'Dec 2024 - Jun 2025',
-    duration: '7 months',
-    type: 'Organizational',
+    location: 'Bandung',
+    period: 'Sep 2025 — Present',
+    duration: '9 mos',
+    type: 'Organization',
     description:
-      'Led the Public Relations Department for Idul Adha PRADA 1446 H, managing external communications and stakeholder engagement.',
-    responsibilities: [
-      'Managed external communications and media relations',
-      'Coordinated with stakeholders for event promotion',
-      'Developed communication strategies for religious events',
-      'Led PR team to ensure effective messaging',
-    ],
-    technologies: ['Communication Tools', 'Social Media', 'Event Management'],
-    achievements: [
-      'Successfully led PR initiatives for major religious event',
-      'Enhanced organizational visibility and engagement',
-    ],
+      'Berperan sebagai pengawas dan penasihat strategis dalam sistem pendataan kegiatan PRADA Telkom University.',
+    responsibilities: [],
+    technologies: [],
   },
   {
     id: 3,
-    title: 'Kader Pengembangan Sumber Daya Manusia (PSDM)',
-    company: 'Al-Fath Universitas Telkom',
-    location: 'Bandung, Indonesia',
-    period: 'Jan 2025 - Present',
-    duration: '10 months',
-    type: 'Organizational',
-    description:
-      'Contributing to human resource development initiatives within the Al-Fath organization at Faculty of Informatics.',
-    responsibilities: [
-      'Participated in HR development programs',
-      'Supported organizational capacity building',
-      'Collaborated on member training initiatives',
-      'Contributed to organizational growth strategies',
-    ],
-    technologies: ['HR Management', 'Team Collaboration', 'Training Tools'],
-    achievements: [
-      'Enhanced organizational human resource capabilities',
-      'Contributed to member development programs',
-    ],
+    title: 'Brand Sales Officer',
+    company: 'PT Bank Muamalat Indonesia',
+    companyUrl: 'https://www.bankmuamalat.co.id',
+    location: '',
+    period: 'Jun 2025 — Aug 2025',
+    duration: '3 mos',
+    type: 'Internship',
+    description: 'Mendukung tim sales dalam menawarkan produk perbankan syariah.',
+    responsibilities: [],
+    technologies: [],
   },
   {
     id: 4,
-    title: 'Kader Media Fakultas Informatika',
-    company: 'Al-Fath Universitas Telkom',
-    location: 'Bandung, Indonesia',
-    period: 'Nov 2023 - Jan 2025',
-    duration: '1 year 3 months',
-    type: 'Organizational',
+    title: 'Head of Public Relations',
+    company: 'PRADA Telkom University',
+    location: 'Bandung',
+    period: 'Dec 2024 — Jun 2025',
+    duration: '7 mos',
+    type: 'Organization',
     description:
-      'Created high-quality video content supporting organizational media initiatives, managing conceptualization, production, and editing processes.',
-    responsibilities: [
-      'Developed creative video content concepts',
-      'Performed video shooting and editing for events',
-      'Ensured brand consistency across media content',
-      'Collaborated with media team on content strategy',
-      'Highlighted organizational values and mission through visual storytelling',
-    ],
-    technologies: ['Video Editing', 'Adobe Premiere', 'Content Creation', 'Multimedia Production'],
-    achievements: [
-      'Produced high-quality video content for organizational events',
-      'Enhanced organizational media presence',
-      'Strengthened content strategy contributing to Al-Fath success',
-    ],
+      'Memimpin Humas untuk Idul Adha PRADA 1446 H. Koordinasi komunikasi, dokumentasi, dan publikasi acara.',
+    responsibilities: [],
+    technologies: [],
   },
   {
     id: 5,
-    title: 'Data Manager - Multiple Events',
-    company: 'ISLAH Telkom University',
-    location: 'Bandung, Indonesia',
-    period: 'Oct 2024 - Oct 2024',
-    duration: '1 month',
-    type: 'Organizational',
+    title: 'Kader PSDM & Kader Media',
+    company: 'Al-Fath Universitas Telkom',
+    location: 'Bandung',
+    period: 'Nov 2023 — Feb 2026',
+    duration: '2 yrs 4 mos',
+    type: 'Organization',
     description:
-      'Managed comprehensive data operations for ISLAH 1 2024 events including Big Class and Small Class sessions, ensuring accurate tracking and reporting.',
-    responsibilities: [
-      'Oversaw event data management for participants and speakers',
-      'Organized registration databases and documentation',
-      'Ensured accurate tracking and reporting of participant information',
-      'Coordinated with event teams for smooth operations',
-      'Supported event evaluation through data analysis',
-    ],
-    technologies: ['Excel', 'Data Management', 'Database Systems', 'Analytics'],
-    achievements: [
-      'Managed data for multiple simultaneous event sessions',
-      'Ensured data accuracy supporting successful event execution',
-      'Streamlined data processes for leadership development program',
-    ],
+      'Kader PSDM (Jan 2025 – Feb 2026) dan Kader Media (Nov 2023 – Jan 2025). Bertanggung jawab atas pengembangan SDM serta produksi konten video.',
+    responsibilities: [],
+    technologies: ['Video Production', 'Video Editing'],
   },
   {
     id: 6,
-    title: 'Organizing Committee Member',
-    company: 'ISLAH Telkom University',
-    location: 'Bandung, Indonesia',
-    period: 'Jul 2024 - Nov 2024',
-    duration: '5 months',
-    type: 'Organizational',
+    title: 'Active Member — GDGoC',
+    company: 'GDGoC Telkom University',
+    location: 'Bandung',
+    period: 'Dec 2024 — Jun 2025',
+    duration: '7 mos',
+    type: 'Organization',
     description:
-      'Managed post-form data processing for Evodis Islah 1 2024, ensuring data accuracy, security, and accessibility.',
-    responsibilities: [
-      'Managed and streamlined post-form data processing',
-      'Ensured data accuracy, storage, and accessibility',
-      'Coordinated with team on secure data storage solutions',
-      'Enabled real-time data analysis and efficient workflow',
-    ],
-    technologies: ['Data Processing', 'Database Management', 'Excel', 'Data Security'],
-    achievements: [
-      'Enhanced data management skills in dynamic event environment',
-      'Improved team collaboration and problem-solving capabilities',
-    ],
+      'Anggota aktif GDGoC Telkom University. Berpartisipasi dalam workshop dan proyek teknologi Google.',
+    responsibilities: [],
+    technologies: [],
   },
   {
     id: 7,
-    title: 'Anggota Divisi Pendataan PMB 2024',
-    company: 'Al-Fath Universitas Telkom',
-    location: 'Bandung, Indonesia',
-    period: 'Jul 2024 - Oct 2024',
-    duration: '4 months',
-    type: 'Organizational',
+    title: 'Organizing Committee & Data Manager',
+    company: 'ISLAH Telkom University',
+    location: 'Bandung',
+    period: 'Jul 2024 — Nov 2024',
+    duration: '5 mos',
+    type: 'Organization',
     description:
-      'Served as committee member in Data Division for PMB 2024, managing participant data collection and organization.',
-    responsibilities: [
-      'Collected and managed participant data',
-      'Recorded and organized information systematically',
-      'Ensured data accuracy for smooth event operations',
-      'Contributed to enhanced participant experience through effective data handling',
-    ],
-    technologies: ['Data Entry', 'Excel', 'Database Management', 'Documentation'],
-    achievements: [
-      'Maintained accurate and well-organized participant database',
-      'Supported seamless event operations through data management',
-    ],
+      'Panitia Penyelenggara dan Manajer Data untuk Evodis Islah 1 2024. Mengelola pendataan dan pelaporan peserta.',
+    responsibilities: ['Mengelola pendataan peserta', 'Koordinasi acara'],
+    technologies: [],
+  },
+  {
+    id: 8,
+    title: 'Anggota Divisi Pendataan',
+    company: 'PMB 2024',
+    location: 'Bandung',
+    period: 'Jul 2024 — Oct 2024',
+    duration: '4 mos',
+    type: 'Committee',
+    description: 'Mengumpulkan dan mengelola data peserta untuk acara PMB 2024.',
+    responsibilities: [],
+    technologies: [],
   },
 ];
-
 
 export const education = [
   {
     id: 1,
-    degree: 'Bachelor of Data Science (S.Si.D.)',
+    degree: 'S1 Sains Data',
     institution: 'Telkom University',
+    period: '2023 — Present',
     location: 'Bandung, Indonesia',
-    period: '2023 - 2027',
-    gpa: 'N/A',
-    status: 'In Progress',
     relevantCourses: [
       'Machine Learning',
-      'Data Analytics',
-      'Database Management',
-      'Statistical Analysis',
-      'Programming',
-      'Big Data',
-    ],
-    achievements: [
-      'Active member of GDGoC Telkom University (Dec 2024 - Jun 2025)',
-      'Data Analyst Competition FIND IT! 2025 participant',
-      'Multiple organizational leadership roles',
+      'Natural Language Processing',
+      'Computer Vision',
+      'Statistika',
+      'Basis Data',
     ],
   },
 ];
 
-
 export const certifications = [
   {
     id: 1,
-    name: 'MySkill Certified INLINE ELEMENTS',
-    issuer: 'MySkill',
-    date: 'N/A',
+    name: 'Data Analyst Competition FIND IT! 2025',
+    issuer: 'KMTETI FT UGM',
+    role: 'Peserta',
+    date: '17 Mei 2025',
     credentialId: 'N/A',
+    proofKey: 'findit-2025',
     url: null,
   },
   {
     id: 2,
-    name: 'Certificate of Recognition as Delegate',
-    issuer: 'Youth Today X Join AIESEC 2024',
-    date: '2024',
+    name: 'Data Analytics Dash — COMPFEST 17',
+    issuer: 'Universitas Indonesia',
+    role: 'Participant',
+    date: '2025',
     credentialId: 'N/A',
+    proofKey: 'compfest17',
     url: null,
   },
   {
     id: 3,
-    name: 'Data Analyst Competition FIND IT! 2025',
-    issuer: 'Competition Certificate',
+    name: 'GELAR RASA 2025',
+    issuer: 'UPN “Veteran” Jawa Timur',
+    role: 'Peserta',
     date: '2025',
-    credentialId: 'N/A',
+    credentialId: '655/UN63.7/TU/2025',
+    proofKey: 'gelarrasa-2025',
     url: null,
   },
   {
     id: 4,
-    name: 'Belajar Dasar AI',
-    issuer: 'Online Learning Platform',
-    date: 'N/A',
+    name: 'Senior Competitive Programming — COMPFEST 16',
+    issuer: 'Universitas Indonesia',
+    role: 'Participant',
+    date: '2024',
     credentialId: 'N/A',
+    proofKey: 'compfest16',
     url: null,
   },
   {
     id: 5,
-    name: 'MySkill Certified Browse, HTTP, DNS, and Hosting',
+    name: 'GELAR RASA 2024',
+    issuer: 'UPN “Veteran” Jawa Timur',
+    role: 'Peserta',
+    date: '2024',
+    credentialId: '1846/UN63.7/2024',
+    proofKey: 'gelarrasa-2024',
+    url: null,
+  },
+  {
+    id: 6,
+    name: 'Youth Today × Join AIESEC 2024',
+    issuer: 'AIESEC in Bandung',
+    role: 'Delegate',
+    date: '2024',
+    credentialId: '1062/TM-BDG/C/X/2024',
+    proofKey: 'aiesec-2024',
+    url: null,
+  },
+  {
+    id: 7,
+    name: 'MySkill Certified: Inline Elements',
     issuer: 'MySkill',
+    role: '',
     date: 'N/A',
     credentialId: 'N/A',
+    proofKey: null,
+    url: null,
+  },
+  {
+    id: 8,
+    name: 'Belajar Dasar AI',
+    issuer: 'Online learning',
+    role: '',
+    date: 'N/A',
+    credentialId: 'N/A',
+    proofKey: null,
     url: null,
   },
 ];
 
 export const stats = [
-  { icon: 'bi-code-slash', value: '15+', label: 'Projects', color: '#00a8e8' },
-  { icon: 'bi-trophy', value: '5+', label: 'Competitions', color: '#7b2cbf' },
+  { value: '15+', label: 'Projects shipped' },
+  { value: '5+', label: 'Competitions' },
+  { value: '25', label: 'Tracked skills' },
 ];
 
-// Navigation links
 export const navLinks = [
   { id: 'home', label: 'Home', href: '#home' },
   { id: 'about', label: 'About', href: '#about' },
   { id: 'skills', label: 'Skills', href: '#skills' },
   { id: 'experience', label: 'Experience', href: '#experience' },
-  { id: 'certifications', label: 'Certifications', href: '#certifications' },
+  { id: 'certifications', label: 'Certificates', href: '#certifications' },
   { id: 'projects', label: 'Projects', href: '#projects' },
   { id: 'contact', label: 'Contact', href: '#contact' },
 ];
 
-// Filter categories for projects
 export const projectCategories = [
   'All',
   'Machine Learning',
   'Data Science',
   'Computer Vision',
-  'Natural Language Processing',
   'Data Visualization',
 ];
 
-// Hero section typing texts
 export const heroTypingTexts = [
   'Machine Learning Enthusiast',
   'Python Developer',
+  'NLP Research Assistant',
 ];
 
-// EmailJS Configuration
 export const emailjsConfig = {
   serviceId: 'service_e0byds5',
   templateId: 'template_jtsltyj',
   publicKey: '_RI8Nk23mYc9B8ZeX',
 };
 
-// About Section Content
 export const aboutContent = {
   paragraphs: [
     {
       id: 1,
-      text: 'Third-year undergraduate student of Data Science at {university} with strong skills in data analysis, statistical evaluation, and problem-solving. Actively involved in academic activities with excellent attention to detail and observation skills.',
+      text: 'Third-year undergraduate student of Data Science at {university} specializing in Machine Learning, Natural Language Processing (NLP), and Computer Vision. Currently serving as a Teaching Assistant for the Sistem Cerdas course, demonstrating strong academic leadership, excellent attention to detail, and a solid foundation in intelligent systems.',
     },
     {
       id: 2,
-      text: 'Proficient in programming with Python for data processing and analysis. Experienced in participating in various Data Science competitions, demonstrating strong analytical and critical thinking skills. A collaborative team player dedicated to delivering accurate and reliable data insights.',
+      text: 'Proficient in Python, C++, and SQL with hands-on experience building end-to-end ML pipelines using MLflow and Docker. Proven track record in data science competitions, including securing 3rd Place in the Data Mining Division at ADIKARA 2025. A collaborative team player dedicated to delivering accurate data insights and impactful predictive analytics solutions.',
     },
   ],
   highlights: [
     {
       id: 1,
-      icon: 'bi-check-circle-fill',
-      text: 'Strong analytical and problem-solving skills',
+      text: 'Award-winning data mining competitor (3rd Place ADIKARA 2025)',
+      proofKey: 'adikara-cert',
+      proofLabel: 'Sertifikat',
     },
     {
       id: 2,
-      icon: 'bi-check-circle-fill',
-      text: 'Experience in ML competitions and projects',
+      text: 'Expertise in NLP, Computer Vision, and end-to-end ML pipelines',
+      link: 'projects',
+      linkLabel: '7 proyek',
     },
     {
       id: 3,
-      icon: 'bi-check-circle-fill',
-      text: 'Team collaboration and communication',
+      text: 'Academic leadership as a Teaching Assistant — Sistem Cerdas, 2026',
+      proofKey: 'teaching',
+      proofLabel: 'Dokumentasi',
     },
   ],
 };
 
-// Skills Section Content
 export const skillsContent = {
   title: 'Skills & Expertise',
-  subtitle: 'Technologies and tools I work with, measured by years of hands-on experience',
+  subtitle:
+    'Technologies and tools I work with, measured by years of hands-on experience.',
   categoryTitles: {
     programming: 'Programming Languages',
     dataScience: 'Data Science & ML',
@@ -688,33 +522,21 @@ export const skillsContent = {
   },
 };
 
-// Contact Section Content
 export const contactContent = {
-  title: 'Get In Touch',
+  title: 'Get in touch',
   subtitle: "Have a project in mind? Let's work together to create something amazing",
   leftSection: {
     title: 'Contact Me',
-    description: "Feel free to reach out through any of these channels. I'm always open to discussing new projects and opportunities.",
+    description:
+      "Have a project in mind? Feel free to reach out through any of these channels. I'm always open to discussing new projects and opportunities.",
   },
   form: {
-    name: {
-      label: 'Your Name',
-      placeholder: 'John Doe',
-    },
-    email: {
-      label: 'Your Email',
-      placeholder: 'john@example.com',
-    },
-    subject: {
-      label: 'Subject',
-      placeholder: 'Project Inquiry',
-    },
-    message: {
-      label: 'Message',
-      placeholder: 'Tell me about your project...',
-    },
-    submit: 'Send Message',
-    sending: 'Sending...',
+    name: { label: 'Your name', placeholder: 'John Doe' },
+    email: { label: 'Your email', placeholder: 'john@example.com' },
+    subject: { label: 'Subject', placeholder: 'Project Inquiry' },
+    message: { label: 'Message', placeholder: 'Tell me about your project...' },
+    submit: 'Send message',
+    sending: 'Sending…',
   },
   messages: {
     success: 'Thank you! Your message has been sent successfully.',
@@ -722,25 +544,21 @@ export const contactContent = {
   },
 };
 
-// Projects Section Content
 export const projectsContent = {
   featuredTitle: 'Featured Projects',
   allTitle: 'All Projects',
-  subtitle: 'Showcasing latest work in data science and machine learning',
-  allSubtitle: 'Displaying all {count} projects{category}',
-  viewAllButton: 'View All Projects ({count})',
-  showLessButton: 'Show Less',
+  subtitle: 'Showcasing latest work in data science and machine learning.',
   noProjects: 'No projects found in this category',
 };
 
-// Footer Section Content
 export const footerContent = {
   quote: 'Data is the new oil. But like oil, data is useless unless refined.',
 };
 
-export default {
+const portfolioData = {
   personalInfo,
   socialLinks,
+  proofs,
   projects,
   skills,
   experiences,
@@ -757,3 +575,5 @@ export default {
   projectsContent,
   footerContent,
 };
+
+export default portfolioData;

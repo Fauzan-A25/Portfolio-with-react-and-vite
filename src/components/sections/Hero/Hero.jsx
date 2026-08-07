@@ -1,135 +1,284 @@
-import { memo } from 'react';
-import PropTypes from 'prop-types';
-import { useTypingEffect } from '../../../hooks/useTypingEffect';
+'use client';
+
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import MusicPlayer from '@/components/BackgroundMusic/MusicPlayer';
+import { scrollToSection } from '@/components/layout/Navbar/Navbar';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useTypingEffect } from '@/hooks/useTypingEffect';
 import './Hero.css';
 
-const Hero = memo(({ personalInfo, socialLinks, heroTypingTexts }) => {
-  // Use the typing effect with rotating texts
-  const { displayText } = useTypingEffect(
-    heroTypingTexts || ['Developer', 'Designer'],
-    80,      // typing speed
-    50,      // delete speed
-    2000     // delay between texts
+/**
+ * The hero is composed on a 1180x706 art board: every block is placed by
+ * fraction-of-width (x/w) and art-board pixels (y), then scaled by `--k`.
+ * Below 960px the whole thing collapses to a plain vertical stack.
+ */
+const ART_W = 1180;
+const ART_H = 706;
+const WIDE_AT = 960;
+
+const PLACEMENT = {
+  name: { x: 0, w: 0.44, y: 348, px: 15 },
+  photo: { x: 0.34, w: 0.33, y: 10, px: 6 },
+  info: { x: 0, w: 0.285, y: 62, px: 26 },
+  cta: { x: 0, w: 0.42, y: 608, px: 11 },
+  player: { x: 0.694, w: 0.306, y: 452, px: 30 },
+};
+
+const DECOR = {
+  a: { x: 0.215, w: 0.155, y: 20, h: 134 },
+  b: { x: 0.585, w: 0.13, y: 132, h: 76 },
+  c: { x: 0.25, w: 0.085, y: 336, h: 196 },
+  v: { x: 0.885, w: 0, y: 48, h: 0 },
+};
+
+const vars = (spec) => ({
+  '--x': spec.x,
+  '--w': spec.w,
+  '--y': spec.y,
+  '--h': spec.h ?? 0,
+  '--px': spec.px ?? 0,
+});
+
+const ArrowIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+    <path d="M2 11 11 2M4.6 2H11v6.4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+  </svg>
+);
+
+export default function Hero({ personalInfo = {}, socialLinks = {}, heroTypingTexts = [] }) {
+  const reduced = useReducedMotion();
+  const typed = useTypingEffect(heroTypingTexts, { reduced });
+
+  const sectionRef = useRef(null);
+  const stageRef = useRef(null);
+  const nameRef = useRef(null);
+
+  const [wide, setWide] = useState(false);
+  const [k, setK] = useState(1);
+  const [ctaTop, setCtaTop] = useState(PLACEMENT.cta.y);
+  const [stageH, setStageH] = useState(ART_H);
+  const [docked, setDocked] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  // Measure the stage and re-derive the art-board scale.
+  useLayoutEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const measure = () => {
+      const W = stage.clientWidth || ART_W;
+      const isWide = W >= WIDE_AT;
+      const scale = W / ART_W;
+
+      setWide(isWide);
+      setK(scale);
+
+      if (!isWide) {
+        setStageH(0);
+        return;
+      }
+
+      // The CTA sits under the name, whose height depends on how the title wraps.
+      const nameH = nameRef.current?.offsetHeight ?? 0;
+      const top = Math.round(PLACEMENT.name.y * scale + nameH + 26 * scale);
+      setCtaTop(top);
+
+      const ctaH = stage.querySelector('[data-hero="cta"]')?.offsetHeight ?? 0;
+      setStageH(Math.max(Math.round(ART_H * scale), top + ctaH + Math.round(24 * scale)));
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(stage);
+    return () => ro.disconnect();
+  }, [typed]);
+
+  // Reveal the composed blocks once, staggered.
+  useEffect(() => {
+    const id = setTimeout(() => setReady(true), reduced ? 0 : 700);
+    return () => clearTimeout(id);
+  }, [reduced]);
+
+  // Dock the player when the hero leaves the viewport.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const onScroll = () => setDocked(section.getBoundingClientRect().bottom < 90);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Pointer parallax, throttled to one frame.
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage || !wide || reduced || !ready) return;
+
+    let frame = 0;
+    const onMove = (e) => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const r = stage.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;
+        const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+        const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+        stage.style.setProperty('--dx', dx.toFixed(3));
+        stage.style.setProperty('--dy', dy.toFixed(3));
+      });
+    };
+
+    window.addEventListener('mousemove', onMove, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('mousemove', onMove);
+      stage.style.removeProperty('--dx');
+      stage.style.removeProperty('--dy');
+    };
+  }, [wide, reduced, ready]);
+
+  const onNav = useCallback(
+    (e, id) => {
+      e.preventDefault();
+      scrollToSection(id, reduced);
+    },
+    [reduced],
   );
 
-  const handleCVDownload = () => {
-    if (personalInfo?.cvLink) {
-      window.open(personalInfo.cvLink, '_blank');
-    }
-  };
+  const photoSrc = personalInfo.profileImage || '/images/Fauzan-slice.png';
+  const photoName = photoSrc.split('/').pop();
 
-  const scrollToContact = (e) => {
-    e.preventDefault();
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const socialLinksArray = socialLinks
-    ? Object.entries(socialLinks)
-        .filter(([key]) => key !== 'email')
-        .map(([platform, url]) => ({
-          platform,
-          url,
-          label: platform.charAt(0).toUpperCase() + platform.slice(1)
-        }))
-    : [];
+  const socials = [
+    ['GitHub', socialLinks.github],
+    ['LinkedIn', socialLinks.linkedin],
+    ['Instagram', socialLinks.instagram],
+  ].filter(([, href]) => Boolean(href));
 
   return (
-    <section id="home" className="hero-section">
-      {/* Animated Background */}
-      <div className="hero-background">
-        <div className="gradient-circle circle-1"></div>
-        <div className="gradient-circle circle-2"></div>
-        <div className="gradient-circle circle-3"></div>
-        <div className="hero-grid"></div>
-      </div>
+    <section id="home" ref={sectionRef} className="hero">
+      <div className="hero__glow" aria-hidden="true" />
 
-      <div className="container">
-        <div className="hero-content">
-          {/* Left Side - Text Content */}
-          <div className="hero-text-content">
-            {/* Greeting */}
-            <div className="hero-greeting">
-              <span className="wave">👋</span>
-              <span className="greeting-text">Hello, I'm</span>
+      <div className="hero__inner">
+        <div
+          ref={stageRef}
+          className="hero__stage"
+          data-wide={wide}
+          data-ready={ready}
+          style={{ '--k': k, height: wide && stageH ? `${stageH}px` : undefined }}
+        >
+          {/* --- decorative plates, wide layout only --- */}
+          <div className="hero__deco hero__deco--a" style={vars(DECOR.a)} aria-hidden="true" />
+          <div className="hero__deco hero__deco--b" style={vars(DECOR.b)} aria-hidden="true" />
+          <div className="hero__deco hero__deco--c" style={vars(DECOR.c)} aria-hidden="true" />
+          <div className="hero__deco hero__deco--v mono" style={vars(DECOR.v)} aria-hidden="true">
+            Data Science · Portfolio 2026
+          </div>
+
+          {/* --- name + typed role --- */}
+          <div
+            ref={nameRef}
+            className="hero__block hero__name"
+            data-hero="name"
+            style={vars(PLACEMENT.name)}
+          >
+            <div className="hero__kicker">
+              <span className="hero__rule" aria-hidden="true" />
+              <span className="hero__kicker-text mono">
+                Data Science · {personalInfo.university || 'Telkom University'}
+              </span>
             </div>
 
-            {/* Name */}
-            <h1 className="hero-name">
-              {personalInfo?.name || 'Your Name'}
-            </h1>
+            <h1 className="hero__title">{personalInfo.name || 'Fauzan Ahsanudin Alfikri'}</h1>
 
-            {/* Animated Title - Single Line with Typing Effect */}
-            <div className="hero-title-wrapper">
-              <h2 className="hero-title">
-                <span className="title-static">
-                  {personalInfo?.title || 'Developer'}
+            <div className="hero__typed mono">
+              <span className="hero__caret-mark" aria-hidden="true">
+                &gt;
+              </span>
+              <span>{typed}</span>
+              <span className="hero__caret" aria-hidden="true" />
+            </div>
+          </div>
+
+          {/* --- portrait --- */}
+          <div className="hero__block hero__photo" data-hero="photo" style={vars(PLACEMENT.photo)}>
+            <div className="hero__photo-frame">
+              <div className="hero__photo-border" aria-hidden="true" />
+              {['tl', 'tr', 'bl', 'br'].map((corner) => (
+                <span key={corner} className={`hero__corner hero__corner--${corner}`} aria-hidden="true" />
+              ))}
+              <span className="hero__photo-tag mono">{photoName}</span>
+              <div className="hero__photo-media">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={photoSrc} alt={personalInfo.name || 'Portrait'} className="hero__photo-img" />
+              </div>
+            </div>
+          </div>
+
+          {/* --- information card --- */}
+          <div className="hero__block hero__info" data-hero="info" style={vars(PLACEMENT.info)}>
+            <div className="hero__info-card">
+              <div className="hero__info-head">
+                <span className="hero__info-icon mono" aria-hidden="true">
+                  i
                 </span>
-                <span className="title-separator"> | </span>
-                <span className="title-dynamic">{displayText}</span>
-                <span className="cursor-blink">|</span>
-              </h2>
-            </div>
-
-            {/* Tagline */}
-            <p className="hero-tagline">
-              {personalInfo?.tagline || 'Building amazing things with code'}
-            </p>
-
-            {/* Info Cards */}
-            <div className="hero-info-cards">
-              {personalInfo?.university && (
-                <div className="info-card">
-                  <i className="bi bi-mortarboard-fill"></i>
-                  <div className="info-content">
-                    <span className="info-label">Studying at</span>
-                    <span className="info-value">{personalInfo.university}</span>
-                  </div>
+                <span className="eyebrow">Information</span>
+              </div>
+              {[
+                ['Studying at', personalInfo.university || 'Telkom University'],
+                ['Based in', personalInfo.location || 'Bandung, Indonesia'],
+                ['Focus', personalInfo.focus || 'NLP · Computer Vision · ML Pipelines'],
+              ].map(([label, value]) => (
+                <div key={label} className="hero__info-row">
+                  <span className="hero__info-label mono">{label}</span>
+                  <span className="hero__info-value">{value}</span>
                 </div>
-              )}
-              {personalInfo?.location && (
-                <div className="info-card">
-                  <i className="bi bi-geo-alt-fill"></i>
-                  <div className="info-content">
-                    <span className="info-label">Based in</span>
-                    <span className="info-value">{personalInfo.location}</span>
-                  </div>
-                </div>
-              )}
+              ))}
             </div>
+          </div>
 
-            {/* Action Buttons */}
-            <div className="hero-actions">
-              {personalInfo?.cvLink && (
-                <button className="hero-btn btn-primary" onClick={handleCVDownload}>
-                  <i className="bi bi-download"></i>
+          {/* --- calls to action --- */}
+          <div className="hero__block hero__cta" data-hero="cta" style={vars(PLACEMENT.cta)}>
+            <div className="hero__cta-row">
+              {personalInfo.cvLink && (
+                <a
+                  href={personalInfo.cvLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-peek={personalInfo.cvLink}
+                  className="btn btn--primary"
+                >
                   <span>Download CV</span>
-                </button>
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                    <path
+                      d="M6.5 1v9M2.8 6.6 6.5 10.3l3.7-3.7M1.5 12h10"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </a>
               )}
-              <a href="#contact" className="hero-btn btn-secondary" onClick={scrollToContact}>
-                <i className="bi bi-envelope"></i>
-                <span>Get In Touch</span>
+              <a href="#contact" className="btn" onClick={(e) => onNav(e, 'contact')}>
+                <span>Get in touch</span>
+                <ArrowIcon />
               </a>
             </div>
 
-            {/* Social Links */}
-            {socialLinksArray.length > 0 && (
-              <div className="hero-social">
-                <span className="social-label">Connect with me:</span>
-                <div className="social-links">
-                  {socialLinksArray.map(({ platform, url, label }) => (
+            {socials.length > 0 && (
+              <div className="hero__social">
+                <span className="hero__social-label mono">Elsewhere</span>
+                <div className="hero__social-links">
+                  {socials.map(([label, href]) => (
                     <a
-                      key={platform}
-                      href={url}
+                      key={label}
+                      href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="social-link"
-                      aria-label={platform}
-                      title={label}
+                      data-peek={href}
+                      className="pill"
                     >
-                      <i className={`bi bi-${platform}`}></i>
+                      {label}
                     </a>
                   ))}
                 </div>
@@ -137,91 +286,17 @@ const Hero = memo(({ personalInfo, socialLinks, heroTypingTexts }) => {
             )}
           </div>
 
-          {/* Right Side - Profile Image */}
-          <div className="hero-image-section">
-            <div className="hero-image-container">
-              {/* Decorative Elements */}
-              <div className="image-decoration decoration-1"></div>
-              <div className="image-decoration decoration-2"></div>
-              
-              {/* Profile Image */}
-              <div className="profile-image-wrapper">
-                <div className="profile-image-border">
-                  <img
-                    src={personalInfo?.profileImage || 'https://via.placeholder.com/500/1a1a1a/00d4aa?text=Profile'}
-                    alt={personalInfo?.name || 'Profile'}
-                    className="profile-image"
-                    loading="eager"
-                  />
-                </div>
-              </div>
-
-              {/* Floating Skill Tags */}
-              <div className="floating-tag tag-1">
-                <i className="bi bi-code-slash"></i>
-                <span>Python</span>
-              </div>
-              <div className="floating-tag tag-2">
-                <i className="bi bi-graph-up"></i>
-                <span>ML</span>
-              </div>
-              <div className="floating-tag tag-3">
-                <i className="bi bi-database"></i>
-                <span>Data</span>
-              </div>
-
-              {/* Status Badge */}
-              <div className="status-badge">
-                <span className="status-dot"></span>
-                <span>Available for work</span>
-              </div>
-            </div>
+          {/* --- ambient player --- */}
+          <div
+            className="hero__block hero__player"
+            data-hero="player"
+            data-docked={docked}
+            style={vars(PLACEMENT.player)}
+          >
+            <MusicPlayer src="/audio/teman-ryo.mp3" title="teman-ryo" docked={docked} />
           </div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <div className="scroll-indicator">
-        <a href="#about" aria-label="Scroll to about section">
-          <div className="scroll-mouse">
-            <div className="scroll-wheel"></div>
-          </div>
-          <span className="scroll-text">Scroll Down</span>
-        </a>
-      </div>
     </section>
   );
-});
-
-Hero.displayName = 'Hero';
-
-Hero.propTypes = {
-  personalInfo: PropTypes.shape({
-    name: PropTypes.string,
-    title: PropTypes.string,
-    tagline: PropTypes.string,
-    university: PropTypes.string,
-    location: PropTypes.string,
-    cvLink: PropTypes.string,
-    profileImage: PropTypes.string,
-  }),
-  socialLinks: PropTypes.shape({
-    github: PropTypes.string,
-    linkedin: PropTypes.string,
-    instagram: PropTypes.string,
-    email: PropTypes.string,
-  }),
-  heroTypingTexts: PropTypes.arrayOf(PropTypes.string),
-};
-
-Hero.defaultProps = {
-  personalInfo: {
-    name: 'Your Name',
-    title: 'Developer',
-    tagline: 'Building amazing things with code',
-  },
-  socialLinks: {},
-  heroTypingTexts: ['Developer', 'Designer', 'Creator'],
-};
-
-export default Hero;
+}

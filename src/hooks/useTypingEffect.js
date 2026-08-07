@@ -1,56 +1,49 @@
-import { useState, useEffect, useRef } from 'react';
+'use client';
 
-export const useTypingEffect = (texts, speed = 50, deleteSpeed = 30, delay = 2000) => {
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
-  const timeoutRef = useRef(null);
+import { useEffect, useState } from 'react';
+
+/**
+ * Types each phrase out, holds, deletes, then moves to the next.
+ * With reduced motion it settles on the first phrase and stops.
+ */
+export function useTypingEffect(phrases, { reduced = false } = {}) {
+  const list = Array.isArray(phrases) && phrases.length ? phrases : [''];
+  const [text, setText] = useState(list[0]);
 
   useEffect(() => {
-    // Handle array of texts (rotating) or single text
-    const textArray = Array.isArray(texts) ? texts : [texts];
-    const currentText = textArray[currentIndex];
+    if (reduced) {
+      setText(list[0]);
+      return undefined;
+    }
 
-    const handleTyping = () => {
-      if (!isDeleting) {
-        // Typing phase
-        if (displayText.length < currentText.length) {
-          setDisplayText(currentText.substring(0, displayText.length + 1));
-          timeoutRef.current = setTimeout(handleTyping, speed);
-        } else {
-          // Finished typing current text
-          setIsComplete(true);
-          
-          // If multiple texts, wait then start deleting
-          if (textArray.length > 1) {
-            timeoutRef.current = setTimeout(() => {
-              setIsDeleting(true);
-              setIsComplete(false);
-            }, delay);
-          }
-        }
-      } else {
-        // Deleting phase
-        if (displayText.length > 0) {
-          setDisplayText(currentText.substring(0, displayText.length - 1));
-          timeoutRef.current = setTimeout(handleTyping, deleteSpeed);
-        } else {
-          // Finished deleting, move to next text
-          setIsDeleting(false);
-          setCurrentIndex((prev) => (prev + 1) % textArray.length);
-        }
+    let i = 0;
+    let j = 0;
+    let deleting = false;
+    let timer;
+
+    setText('');
+
+    const tick = () => {
+      const word = list[i];
+      j = deleting ? j - 1 : j + 1;
+      setText(word.slice(0, j));
+
+      let delay = deleting ? 34 : 62;
+      if (!deleting && j === word.length) {
+        deleting = true;
+        delay = 1700;
+      } else if (deleting && j === 0) {
+        deleting = false;
+        i = (i + 1) % list.length;
+        delay = 320;
       }
+      timer = setTimeout(tick, delay);
     };
 
-    timeoutRef.current = setTimeout(handleTyping, isDeleting ? deleteSpeed : speed);
+    timer = setTimeout(tick, 900);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reduced, list.join('|')]);
 
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, [displayText, currentIndex, isDeleting, texts, speed, deleteSpeed, delay]);
-
-  return { displayText, isComplete, currentIndex };
-};
+  return text;
+}

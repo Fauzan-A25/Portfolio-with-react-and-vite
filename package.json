@@ -2,54 +2,26 @@
   "name": "portfolio-react",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "start": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "serve": "vite preview --port 3000"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@google/generative-ai": "^0.24.1",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.4.2",
-    "aos": "^2.3.4",
-    "gsap": "^3.12.5",
+    "next": "^16.3.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-howler": "^5.2.0",
     "react-markdown": "^10.1.0",
-    "react-player": "^3.3.3",
-    "react-youtube": "^10.1.0",
-    "remark-gfm": "^4.0.1",
-    "swiper": "^11.1.14",
-    "three": "^0.182.0"
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^9.39.2",
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.26",
-    "gh-pages": "^6.1.1",
-    "vite": "^7.3.0"
-  },
-  "vercel": {
-    "buildCommand": "npm run build",
-    "outputDirectory": "dist",
-    "framework": "vite",
-    "functions": {
-      "api/chat.js": {
-        "runtime": "nodejs18.x",
-        "maxDuration": 30
-      }
-    }
+    "eslint-plugin-react-refresh": "^0.4.26"
   }
 }

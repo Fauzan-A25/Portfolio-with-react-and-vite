@@ -1,22 +1,28 @@
 // src/utils/fetchFromSheets.js
 
 // ⚠️ GANTI dengan URL deployment Apps Script Anda!
-const SHEETS_API_URL = import.meta.env.VITE_SHEETS_API_URL;
+const SHEETS_API_URL = process.env.NEXT_PUBLIC_SHEETS_API_URL;
 
 // ============================================
 // CORE FETCH FUNCTION (UPDATED - DEFENSIVE)
 // ============================================
 
+// Apps Script can stall indefinitely (cold start, quota, a shared doc being
+// edited). Without a deadline the visitor sits on the loading screen forever,
+// so give up and let the caller fall back to the bundled data.
+const REQUEST_TIMEOUT_MS = 8000;
+
 /**
  * Fetch data dari satu sheet menggunakan READ API
  * FIXED: Handle various data types safely
  */
-async function fetchSheet(sheetName) {
+async function fetchSheet(sheetName, init = {}) {
   try {
     const response = await fetch(
-      `${SHEETS_API_URL}?action=read&sheet=${sheetName}`
+      `${SHEETS_API_URL}?action=read&sheet=${sheetName}`,
+      { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS), ...init }
     );
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -183,7 +189,17 @@ function rebuildProjectsContent(projectsContentData) {
  * Fetch semua data dari Google Sheets
  * IMPROVED: Better error handling and validation
  */
-export async function fetchAllData() {
+export async function fetchAllData(init = {}) {
+  // Without the endpoint there is nothing to fetch; bail so the caller falls
+  // straight back to the bundled data instead of firing 17 doomed requests.
+  if (!SHEETS_API_URL) {
+    throw new Error('NEXT_PUBLIC_SHEETS_API_URL is not set');
+  }
+
+  // `init` carries the server-side cache directive (`next.revalidate`); it is
+  // inert in the browser, so both callers share this function unchanged.
+  const get = (sheet) => fetchSheet(sheet, init);
+
   try {
     // Fetch semua sheets secara parallel (17 sheets)
     const [
@@ -206,24 +222,24 @@ export async function fetchAllData() {
       projectsContentData,
       footerContentData
     ] = await Promise.all([
-      fetchSheet('PersonalInfo'),
-      fetchSheet('SocialLinks'),
-      fetchSheet('Projects'),
-      fetchSheet('Skills'),
-      fetchSheet('Experiences'),
-      fetchSheet('Education'),
-      fetchSheet('Certifications'),
-      fetchSheet('Stats'),
-      fetchSheet('NavLinks'),
-      fetchSheet('ProjectCategories'),
+      get('PersonalInfo'),
+      get('SocialLinks'),
+      get('Projects'),
+      get('Skills'),
+      get('Experiences'),
+      get('Education'),
+      get('Certifications'),
+      get('Stats'),
+      get('NavLinks'),
+      get('ProjectCategories'),
       // NEW SECTIONS
-      fetchSheet('HeroTypingTexts'),
-      fetchSheet('EmailJSConfig'),
-      fetchSheet('AboutContent'),
-      fetchSheet('SkillsContent'),
-      fetchSheet('ContactContent'),
-      fetchSheet('ProjectsContent'),
-      fetchSheet('FooterContent')
+      get('HeroTypingTexts'),
+      get('EmailJSConfig'),
+      get('AboutContent'),
+      get('SkillsContent'),
+      get('ContactContent'),
+      get('ProjectsContent'),
+      get('FooterContent')
     ]);
     
     // Parse dan rebuild data dengan validasi

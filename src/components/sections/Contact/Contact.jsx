@@ -1,319 +1,172 @@
-import { memo, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
+'use client';
+
+import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useReveal } from '@/hooks/useReveal';
 import './Contact.css';
 
-const Contact = memo(({ personalInfo, socialLinks, emailjsConfig, contactContent }) => {
-  const [elementRef, isVisible] = useIntersectionObserver();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-  const [formStatus, setFormStatus] = useState({ type: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+const IDLE = { state: 'idle', message: '' };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+export default function Contact({
+  personalInfo = {},
+  socialLinks = {},
+  contactContent = {},
+  emailjsConfig = {},
+}) {
+  const rootRef = useRef(null);
+  const formRef = useRef(null);
+  const reduced = useReducedMotion();
 
-  const handleSubmit = async (e) => {
+  useReveal(rootRef, { enabled: !reduced });
+
+  const [status, setStatus] = useState(IDLE);
+
+  const copy = contactContent.form || {};
+  const messages = contactContent.messages || {};
+  const configured = Boolean(
+    emailjsConfig.serviceId && emailjsConfig.templateId && emailjsConfig.publicKey,
+  );
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setFormStatus({ type: '', message: '' });
+    if (status.state === 'sending') return;
+
+    if (!configured) {
+      setStatus({
+        state: 'error',
+        message: 'Email service is not configured yet — please use the email address above.',
+      });
+      return;
+    }
+
+    setStatus({ state: 'sending', message: '' });
 
     try {
-      await emailjs.send(
-        emailjsConfig?.serviceId,
-        emailjsConfig?.templateId,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          to_name: personalInfo?.name,
-        },
-        emailjsConfig?.publicKey
+      await emailjs.sendForm(
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
+        formRef.current,
+        emailjsConfig.publicKey,
       );
-
-      setFormStatus({
-        type: 'success',
-        message: contactContent?.messages?.success || 'Message sent successfully!',
+      setStatus({
+        state: 'success',
+        message: messages.success || 'Thank you! Your message has been sent successfully.',
       });
-      setFormData({ name: '', email: '', subject: '', message: '' });
-
-      // Auto-hide success message after 5 seconds
-      setTimeout(() => {
-        setFormStatus({ type: '', message: '' });
-      }, 5000);
-    } catch (error) {
-      console.error('EmailJS Error:', error);
-      setFormStatus({
-        type: 'error',
-        message: contactContent?.messages?.error || 'Failed to send message. Please try again.',
+      formRef.current.reset();
+    } catch (err) {
+      console.error('[Contact] EmailJS error:', err);
+      setStatus({
+        state: 'error',
+        message: messages.error || 'Something went wrong. Please try again or email me directly.',
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
-  const contactInfo = [
-    {
-      icon: 'bi-envelope-fill',
-      title: 'Email',
-      value: personalInfo?.email,
-      link: `mailto:${personalInfo?.email}`,
-    },
-    {
-      icon: 'bi-geo-alt-fill',
-      title: 'Location',
-      value: personalInfo?.location,
-      link: null,
-    },
+  const rows = [
+    ['Email', <a key="e" href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>],
+    ['Location', <span key="l" className="ct__value">{personalInfo.location}</span>],
+    [
+      'Social',
+      <span key="s" className="ct__socials">
+        {socialLinks.github && (
+          <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" data-peek={socialLinks.github}>
+            GitHub
+          </a>
+        )}
+        {socialLinks.linkedin && (
+          <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" data-peek={socialLinks.linkedin}>
+            LinkedIn
+          </a>
+        )}
+      </span>,
+    ],
   ];
 
-  const socialLinksArray = socialLinks
-    ? Object.entries(socialLinks)
-        .filter(([key]) => key !== 'email')
-        .map(([platform, url]) => ({
-          icon: `bi-${platform}`,
-          url,
-          label: platform.charAt(0).toUpperCase() + platform.slice(1),
-        }))
-    : [];
-
   return (
-    <section 
-      id="contact" 
-      ref={elementRef}
-      className={`contact-section ${isVisible ? 'animate-in' : ''}`}
-    >
-      <div className="container">
-        <h2 className="section-title" data-aos="fade-down">
-          {contactContent?.title || 'Get In Touch'}
-        </h2>
-        <p className="section-subtitle" data-aos="fade-down" data-aos-delay="100">
-          {contactContent?.subtitle || "Let's work together"}
-        </p>
+    <section id="contact" ref={rootRef} className="section section--raised section--clip">
+      <div className="wrap">
+        <div className="section-head" data-reveal="">
+          <span className="section-num mono">06</span>
+          <h2 className="section-title">Get in touch</h2>
+        </div>
 
-        <div className="row">
-          <div className="col-lg-5" data-aos="fade-right" data-aos-delay="200">
-            <div className="contact-info-container">
-              <h3 className="contact-info-title">
-                {contactContent?.leftSection?.title || 'Contact Me'}
-              </h3>
-              <p className="contact-info-text">
-                {contactContent?.leftSection?.description || 'Feel free to reach out!'}
-              </p>
+        <div className="ct__grid">
+          <div className="ct__aside">
+            <p className="ct__intro" data-reveal="" data-d="60">
+              {contactContent.leftSection?.description ||
+                "Have a project in mind? Feel free to reach out through any of these channels. I'm always open to discussing new projects and opportunities."}
+            </p>
 
-              {/* Contact Info Items */}
-              <div className="contact-info-list">
-                {contactInfo.map((info, index) => (
-                  info.value && (
-                    <div key={index} className="contact-info-item">
-                      <div className="contact-icon">
-                        <i className={`bi ${info.icon}`}></i>
-                      </div>
-                      <div className="contact-details">
-                        <h4>{info.title}</h4>
-                        {info.link ? (
-                          <a href={info.link}>{info.value}</a>
-                        ) : (
-                          <p>{info.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  )
-                ))}
-              </div>
-
-
+            <div className="ct__rows" data-reveal="" data-d="110">
+              {rows.map(([label, value]) => (
+                <div key={label} className="ct__row">
+                  <span className="ct__label mono">{label}</span>
+                  {value}
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="col-lg-7" data-aos="fade-left" data-aos-delay="300">
-            <form className="contact-form glass-card" onSubmit={handleSubmit}>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="name">
-                      {contactContent?.form?.name?.label || 'Your Name'}
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="form-control"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder={contactContent?.form?.name?.placeholder || 'John Doe'}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="email">
-                      {contactContent?.form?.email?.label || 'Your Email'}
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      className="form-control"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder={contactContent?.form?.email?.placeholder || 'john@example.com'}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="subject">
-                  {contactContent?.form?.subject?.label || 'Subject'}
-                </label>
+          <form ref={formRef} onSubmit={onSubmit} className="ct__form" data-reveal="" data-d="140">
+            <div className="ct__pair">
+              <label className="ct__field">
+                <span className="ct__field-label mono">{copy.name?.label || 'Your name'}</span>
                 <input
                   type="text"
-                  id="subject"
-                  name="subject"
-                  className="form-control"
-                  value={formData.subject}
-                  onChange={handleChange}
+                  name="name"
                   required
-                  placeholder={contactContent?.form?.subject?.placeholder || 'Project Inquiry'}
+                  autoComplete="name"
+                  placeholder={copy.name?.placeholder || 'John Doe'}
                 />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="message">
-                  {contactContent?.form?.message?.label || 'Message'}
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  className="form-control"
-                  rows="6"
-                  value={formData.message}
-                  onChange={handleChange}
+              </label>
+              <label className="ct__field">
+                <span className="ct__field-label mono">{copy.email?.label || 'Your email'}</span>
+                <input
+                  type="email"
+                  name="email"
                   required
-                  placeholder={contactContent?.form?.message?.placeholder || 'Tell me about your project...'}
-                ></textarea>
-              </div>
+                  autoComplete="email"
+                  placeholder={copy.email?.placeholder || 'john@example.com'}
+                />
+              </label>
+            </div>
 
-              {formStatus.message && (
-                <div className={`form-status ${formStatus.type}`}>
-                  <i className={`bi ${formStatus.type === 'success' ? 'bi-check-circle-fill' : 'bi-x-circle-fill'}`}></i>
-                  {formStatus.message}
-                </div>
-              )}
+            <label className="ct__field">
+              <span className="ct__field-label mono">{copy.subject?.label || 'Subject'}</span>
+              <input
+                type="text"
+                name="subject"
+                placeholder={copy.subject?.placeholder || 'Project Inquiry'}
+              />
+            </label>
 
-              <button 
-                type="submit" 
-                className="modern-btn btn-submit"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <span className="spinner-border spinner-border-sm me-2"></span>
-                    {contactContent?.form?.sending || 'Sending...'}
-                  </>
-                ) : (
-                  <>
-                    <i className="bi bi-send me-2"></i>
-                    {contactContent?.form?.submit || 'Send Message'}
-                  </>
-                )}
-              </button>
-            </form>
-          </div>
+            <label className="ct__field">
+              <span className="ct__field-label mono">{copy.message?.label || 'Message'}</span>
+              <textarea
+                name="message"
+                rows={5}
+                required
+                placeholder={copy.message?.placeholder || 'Tell me about your project...'}
+              />
+            </label>
+
+            <button
+              type="submit"
+              className="btn btn--primary ct__submit"
+              disabled={status.state === 'sending'}
+            >
+              {status.state === 'sending'
+                ? copy.sending || 'Sending…'
+                : copy.submit || 'Send message'}
+            </button>
+
+            <p className="ct__status mono" data-state={status.state} role="status" aria-live="polite">
+              {status.message}
+            </p>
+          </form>
         </div>
       </div>
     </section>
   );
-});
-
-Contact.displayName = 'Contact';
-
-Contact.propTypes = {
-  personalInfo: PropTypes.shape({
-    name: PropTypes.string,
-    email: PropTypes.string,
-    location: PropTypes.string,
-  }),
-  socialLinks: PropTypes.shape({
-    github: PropTypes.string,
-    linkedin: PropTypes.string,
-    instagram: PropTypes.string,
-    email: PropTypes.string,
-  }),
-  emailjsConfig: PropTypes.shape({
-    serviceId: PropTypes.string,
-    templateId: PropTypes.string,
-    publicKey: PropTypes.string,
-  }),
-  contactContent: PropTypes.shape({
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    leftSection: PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string,
-    }),
-    form: PropTypes.shape({
-      name: PropTypes.shape({
-        label: PropTypes.string,
-        placeholder: PropTypes.string,
-      }),
-      email: PropTypes.shape({
-        label: PropTypes.string,
-        placeholder: PropTypes.string,
-      }),
-      subject: PropTypes.shape({
-        label: PropTypes.string,
-        placeholder: PropTypes.string,
-      }),
-      message: PropTypes.shape({
-        label: PropTypes.string,
-        placeholder: PropTypes.string,
-      }),
-      submit: PropTypes.string,
-      sending: PropTypes.string,
-    }),
-    messages: PropTypes.shape({
-      success: PropTypes.string,
-      error: PropTypes.string,
-    }),
-  }),
-};
-
-Contact.defaultProps = {
-  personalInfo: {},
-  socialLinks: {},
-  emailjsConfig: {},
-  contactContent: {
-    title: 'Get In Touch',
-    subtitle: "Let's work together",
-    leftSection: {
-      title: 'Contact Me',
-      description: 'Feel free to reach out!',
-    },
-    form: {
-      name: { label: 'Your Name', placeholder: 'John Doe' },
-      email: { label: 'Your Email', placeholder: 'john@example.com' },
-      subject: { label: 'Subject', placeholder: 'Project Inquiry' },
-      message: { label: 'Message', placeholder: 'Tell me about your project...' },
-      submit: 'Send Message',
-      sending: 'Sending...',
-    },
-    messages: {
-      success: 'Message sent successfully!',
-      error: 'Failed to send message. Please try again.',
-    },
-  },
-};
-
-export default Contact;
+}

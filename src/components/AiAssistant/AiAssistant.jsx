@@ -1,11 +1,74 @@
-// src/components/AIAssistant/AIAssistant.jsx
+'use client';
+
+// src/components/AiAssistant/AiAssistant.jsx
 import React, { useState, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import './AiAssistant.css';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-const AIAssistant = ({ portfolioData }) => {
+/* Inline icons — the project no longer loads an icon webfont. */
+const Icon = {
+  bot: (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <rect x="2.5" y="5" width="11" height="8.5" rx="2.5" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M8 2.2v2.6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <circle cx="8" cy="1.8" r="1" fill="currentColor" />
+      <circle cx="6" cy="9" r="1" fill="currentColor" />
+      <circle cx="10" cy="9" r="1" fill="currentColor" />
+    </svg>
+  ),
+  close: (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  ),
+  send: (
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M14 2 7 9M14 2l-4.5 12-2.5-5L2 6.5 14 2Z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  code: (
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path
+        d="M5 3 1.8 7 5 11M9 3l3.2 4L9 11"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  folder: (
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path
+        d="M1.8 11V3.4h3.4l1.2 1.5h5.8V11H1.8Z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  briefcase: (
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <rect x="1.8" y="4.4" width="10.4" height="7" rx="1.4" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M5 4.4V3.2h4v1.2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
+  ),
+  info: (
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <circle cx="7" cy="7" r="5.3" stroke="currentColor" strokeWidth="1.3" />
+      <path d="M7 6.2v3.4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      <circle cx="7" cy="4.4" r="0.75" fill="currentColor" />
+    </svg>
+  ),
+};
+
+const AIAssistant = ({ portfolioData = null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -299,9 +362,9 @@ Contact: ${personalInfo?.email}\n`;
   };
 
   const quickActions = [
-    { text: 'Tell me about skills', icon: 'fa-code' },
-    { text: 'Show me projects', icon: 'fa-folder-open' },
-    { text: 'What\'s the experience?', icon: 'fa-briefcase' }
+    { text: 'Tell me about skills', icon: Icon.code },
+    { text: 'Show me projects', icon: Icon.folder },
+    { text: "What's the experience?", icon: Icon.briefcase },
   ];
 
   const handleQuickAction = (text) => {
@@ -323,7 +386,7 @@ Contact: ${personalInfo?.email}\n`;
         onClick={toggleChat}
         aria-label="Toggle AI Assistant"
       >
-        <i className={`fas ${isOpen ? 'fa-times' : 'fa-robot'}`}></i>
+        {isOpen ? Icon.close : Icon.bot}
         {!isOpen && <span className="button-pulse"></span>}
       </button>
 
@@ -332,7 +395,7 @@ Contact: ${personalInfo?.email}\n`;
           <div className="chat-header">
             <div className="header-info">
               <div className="bot-avatar">
-                <i className="fas fa-robot"></i>
+                {Icon.bot}
               </div>
               <div className="header-text">
                 <h3>AI Assistant</h3>
@@ -348,7 +411,7 @@ Contact: ${personalInfo?.email}\n`;
                 onClick={toggleChat}
                 aria-label="Close chat"
               >
-                <i className="fas fa-times"></i>
+                {Icon.close}
               </button>
             </div>
           </div>
@@ -359,7 +422,7 @@ Contact: ${personalInfo?.email}\n`;
                 <div key={index} className={`message ${msg.type}`}>
                   {msg.type === 'bot' && (
                     <div className="message-avatar">
-                      <i className="fas fa-robot"></i>
+                      {Icon.bot}
                     </div>
                   )}
                   <div className="message-content">
@@ -400,7 +463,7 @@ Contact: ${personalInfo?.email}\n`;
               {isTyping && (
                 <div className="message bot">
                   <div className="message-avatar">
-                    <i className="fas fa-robot"></i>
+                    {Icon.bot}
                   </div>
                   <div className="message-content">
                     <div className="message-bubble typing-indicator">
@@ -424,7 +487,7 @@ Contact: ${personalInfo?.email}\n`;
                     className="quick-action-btn"
                     onClick={() => handleQuickAction(action.text)}
                   >
-                    <i className={`fas ${action.icon}`}></i>
+                    {action.icon}
                     {action.text}
                   </button>
                 ))}
@@ -449,11 +512,11 @@ Contact: ${personalInfo?.email}\n`;
                 disabled={!inputValue.trim() || isTyping}
                 aria-label="Send message"
               >
-                <i className="fas fa-paper-plane"></i>
+                {Icon.send}
               </button>
             </form>
             <p className="footer-note">
-              <i className="fas fa-info-circle"></i>
+              {Icon.info}
               AI-Powered Assistant • May not be 100% accurate
             </p>
           </div>
@@ -461,20 +524,6 @@ Contact: ${personalInfo?.email}\n`;
       )}
     </>
   );
-};
-
-AIAssistant.propTypes = {
-  portfolioData: PropTypes.shape({
-    personalInfo: PropTypes.object,
-    skills: PropTypes.object,
-    projects: PropTypes.array,
-    experiences: PropTypes.array,
-    education: PropTypes.array,
-  }),
-};
-
-AIAssistant.defaultProps = {
-  portfolioData: null,
 };
 
 export default AIAssistant;

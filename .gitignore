@@ -1,5 +1,5 @@
 # ============================================
-# VITE + VERCEL + REACT PORTFOLIO
+# NEXT.JS + VERCEL PORTFOLIO
 # ============================================
 
 # Dependencies
@@ -8,14 +8,14 @@ npm-debug.log*
 yarn-debug.log*
 pnpm-debug.log*
 
-# Production builds
-dist/
-build/
+# Next.js
+.next/
+out/
+next-env.d.ts
 
-# Vite
-.vite/
-.cache/
-.vite-inspect/
+# Build output
+build/
+dist/
 
 # Vercel
 .vercel/
@@ -27,8 +27,11 @@ build/
 .env.development.local
 .env.test.local
 
-# ⚠️ IMPORTANT: Commit .env.example (template)
-# ⚠️ IMPORTANT: Commit api/ folder (serverless functions)
+# Tooling / scratch
+.playwright-mcp/
+.cache/
+coverage/
+graphify-out/
 
 # OS generated files
 .DS_Store
@@ -58,16 +61,13 @@ logs/
 *.tar.gz
 *.rej
 *.orig
-
-# OS-specific
 *~
 
 # ============================================
-# ✅ MUST COMMIT (do NOT ignore):
-# - api/**/*.js         (Vercel serverless functions)
-# - src/**              (Frontend source code)
-# - .env.example        (Environment template)
-# - package.json        (Dependencies)
-# - vite.config.js      (Vite config)
-# - vercel.json         (Vercel config)
+# MUST COMMIT (do NOT ignore):
+# - src/app/**          (routes, layout, API route handlers)
+# - src/components/**   (UI)
+# - public/**           (images, audio, favicon)
+# - next.config.mjs, jsconfig.json, package.json
+# - .env.example        (environment template)
 # ============================================
