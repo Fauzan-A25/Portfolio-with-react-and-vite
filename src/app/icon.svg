@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- FA monogram, enclosed. The plate is fixed dark rather than theme-aware:
+       a favicon sits on browser chrome we do not control, and one high-contrast
+       asset beats two that each fail on the other background. -->
+  <rect width="32" height="32" rx="7.5" fill="#0c0c0d"/>
+  <g fill="none" stroke="#f3f3f4" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7.4 24V9.2h6.6"/>
+    <path d="M7.4 16.6h5.2"/>
+    <path d="M17.4 24l5-14.8 5 14.8"/>
+    <path d="M19.3 18.4h6.2"/>
+  </g>
+</svg>

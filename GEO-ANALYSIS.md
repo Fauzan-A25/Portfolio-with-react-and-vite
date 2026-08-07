@@ -1,7 +1,7 @@
 # SEO / GEO Analysis — Portfolio
 
 **Target:** `src/app` (Next.js 16.3 App Router)
-**Date:** 2026-08-07
+**Date:** 2026-08-07 · revised same day after the JSON migration (§0)
 **Framing:** Google's position is that optimizing for generative AI search *is*
 SEO. Nothing below is a separate "GEO discipline" — it is SEO fundamentals
 applied to surfaces that don't run JavaScript.
@@ -17,6 +17,35 @@ applied to surfaces that don't run JavaScript.
 | Structural readability | 20% | 12/20 | 15/20 | Clean headings; few tables/lists |
 | Authority & brand signals | 20% | 6/20 | 15/20 | Schema + `sameAs` now present; off-site is still empty |
 | Multi-modal | 15% | 7/15 | 11/15 | Images yes, video no |
+
+---
+
+## 0. Content moved from Google Sheets to a JSON file
+
+The sheet is gone. `src/data/portfolio.json` is now the single source of truth,
+imported directly at build time. Deleted: `utils/fetchFromSheets.js`,
+`utils/mergePortfolioData.js`, `hooks/usePortfolioData.js`,
+`data/portfolioData.js`, and the `NEXT_PUBLIC_SHEETS_API_URL` variable.
+
+The live sheet was read one last time and frozen into the JSON, so nothing was
+lost — all 23 projects, 8 certifications and 8 roles carried over, including
+the rows that only existed remotely.
+
+What this buys, in SEO terms:
+
+| | Before | After |
+|---|---|---|
+| Page mode | ISR, revalidate 3600 | Fully static (`force-static`) |
+| Build depends on | A third-party Apps Script being up | Nothing |
+| Failure mode | Sheet down → bundled fallback, silently different content | None |
+| Content drift | Schema built from sheet, fallback from JS file | One file feeds page, schema and llms.txt |
+
+The sheet was also actively corrupting data: `personalInfo.gpa` was reaching
+the page as `2025-08-02T17:00:00.000Z`, because Apps Script coerced the `3.8`
+cell into a date. That value was being fed to the AI assistant as fact. It is
+now `"3.8"`. This class of bug cannot recur in JSON.
+
+**Editing from now on:** open `src/data/portfolio.json`, edit, commit, redeploy.
 
 ---
 
@@ -43,17 +72,11 @@ decoration on an empty page.
 
 ### Fix
 
-Data resolution moved to the server:
+Data resolution moved off the client entirely:
 
-- `src/lib/portfolio.js` — `getPortfolioData()` fetches the sheets server-side
-  with `next: { revalidate: 3600 }`, merges with the bundled copy, and **never
-  throws**; a slow or dead Apps Script degrades to local data.
-- `src/utils/mergePortfolioData.js` — the merge logic, extracted so the server
-  loader and the client hook produce byte-identical data (no hydration drift).
-- `src/app/page.jsx` — now an `async` server component. Passes `initialData`
-  down; ISR at 1 hour.
-- `src/hooks/usePortfolioData.js` — passes `initialData` straight through when
-  present. No second fetch, no loading flash.
+- `src/lib/portfolio.js` — `getPortfolioData()` returns the imported JSON. No
+  network call, so there is no failure path to degrade through.
+- `src/app/page.jsx` — a server component, `force-static`. Passes `data` down.
 - `src/components/PortfolioApp.jsx` — sections are static imports again. They
   are page content; lazy-loading them was what hid them.
 
@@ -73,11 +96,9 @@ count 0.
 
 ### Side effect worth knowing
 
-The LoadingScreen is now effectively dead on the happy path — the server sends a
-finished page, so there is nothing to wait for. It stays in the tree as the
-fallback for a render with no server data. This is a straight upgrade (content
-appears immediately instead of after a round-trip), but it does mean you will
-rarely see that screen again.
+The LoadingScreen can no longer appear. The page is static and the data is
+imported, so there is nothing to wait for and nothing to fail. It stays in the
+tree only as a guard against a malformed `portfolio.json`.
 
 ---
 
@@ -163,20 +184,129 @@ dark palette (`next/og`, no new dependency, 48 KB PNG). Rendered and inspected.
 
 `src/app/sitemap.js` → `/sitemap.xml`, one URL, `lastModified` = build time.
 
-All four endpoints verified over HTTP: `200` with correct content types.
+All endpoints verified over HTTP: `200` with correct content types.
+
+---
+
+## 6. Brand mark
+
+There was no logo — the nav showed a 9px square and the string "FAA", and the
+favicon was a different design again (a square plus the letters "FA" in
+`system-ui`). Three surfaces, three unrelated marks.
+
+`src/components/ui/Logo/Logo.jsx` now holds one geometric FA monogram in two
+lockups:
+
+- `LogoMark` — open, stroked, painted with `currentColor` so a single asset
+  covers both themes. In the nav at 19px, next to the wordmark.
+- `LogoPlate` — the same glyph on a filled plate, for surfaces whose background
+  is not ours to control.
+
+Construction: the F's middle arm and the A's crossbar share one line (y=16.6),
+which is what fuses two initials into a single glyph; the A's apex overshoots
+the F's cap line by ~1.2 units, because pointed shapes read as short when they
+are mathematically level. Stroked at one weight so it holds at 16px — verified
+by rendering at 16/20/24/32/64/128 in both themes.
+
+Applied to every surface at once:
+
+| Surface | Source | Result |
+|---|---|---|
+| Nav | `LogoMark` + wordmark | Mark + **"Fauzan Ahsanudin"**, not "FAA" |
+| Favicon | `src/app/icon.svg` | `<link rel="icon">`, SVG, theme-independent |
+| iOS home screen | `src/app/apple-icon.jsx` | 180×180 PNG, was missing entirely |
+| Share card | `opengraph-image.jsx` | Mark now heads the 1200×630 card |
+
+Two things worth noting. The wordmark changed from the initials `FAA` to the
+full name: the nav is the one place the brand string appears above the fold on
+every screen, and **"Fauzan Ahsanudin"** is what an answer engine resolves this
+page to — `FAA` matches an aviation authority.
+
+And `metadata.icons` was removed from `layout.jsx`. Declaring it overrides the
+`app/` file convention wholesale, which is why `apple-icon.jsx` compiled, served
+`200 image/png`, and still emitted no `<link>` tag. Both tags are present now:
+
+```
+<link rel="icon" href="/icon.svg?…" sizes="any" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/apple-icon?…" type="image/png" sizes="180x180"/>
+```
+
+---
+
+## 7. Fixed: project descriptions now reach the HTML
+
+**The finding.** The Projects section is a carousel: it rendered the *active*
+slide's `<h3>` and description, and the other 22 existed in the DOM only as an
+`aria-label` on a button. Titles were indexable; the prose that makes them
+worth citing — *"89% accuracy across 3,276 samples"*, *"92% accuracy across
+10,000+ applications"* — was not.
+
+**The fix.** `src/components/sections/Projects/ProjectIndex.jsx` renders every
+project below the stack, built on native `<details>`: full description,
+a `Results` list from `highlights`, the stack, and both links. No JavaScript is
+involved in getting the text into the document — the browser handles the
+disclosure, plus keyboard access and find-in-page for free. It follows the same
+category filter as the carousel, so the two never disagree.
+
+This is **not** hidden text. It is user-facing content behind an ordinary
+disclosure control, the same pattern as any FAQ accordion, and Google indexes
+collapsed content at full weight. Nothing in it was written for crawlers that a
+reader would not also want — 23 projects in a card stack was poor browsing UX
+independently of any of this.
+
+Measured before and after, on the built output:
+
+| | Before | After |
+|---|---|---|
+| Project descriptions in visible HTML | 1 / 23 | **23 / 23** |
+| `highlights` (the citable claims) in HTML | 0 / 23 | **23 / 23** |
+| `shortDescription` in HTML | 0 / 23 | **23 / 23** |
+| Visible words on the page | 946 | **5,028** |
+| Heading structure | h1:1 h2:6 h3:1 | h1:1 h2:6 h3:2 **h4:23 h5:23** |
+| HTML size | 198 KB | 257 KB |
+
+The heading row matters as much as the word count: the page went from three
+heading levels to five, giving an extractor 46 new labelled anchors where it
+previously had a flat wall. That also closes the "only one `<h3>`" note below.
+
+Two data typos surfaced once the durations became visible — `"1 months"` and
+`"1 weeks"`, both sheet-era — and are corrected in `portfolio.json`.
+
+Verified in a real browser against `next start`: 0 console errors, 0 hydration
+warnings, no horizontal overflow at 390px, correct in both themes, and the
+filter keeps stack and index in sync (Computer Vision → 2 cards, 2 entries).
+
+### Smaller open items found in the same pass
+
+- **16 of 17 `<img>` have `alt=""`.** Correct for the card-stack thumbnails
+  (the wrapping button carries `aria-label`, so alt text would double-announce),
+  but it means Google Images has nothing to index for any project or
+  certificate. A descriptive `alt` on the certificate images specifically would
+  be a free win.
+- **No `width`/`height` on any `<img>`.** Every image is unsized, so each one is
+  a CLS contribution as it loads. Cheapest Core Web Vitals fix available here.
+- ~~**One `<h3>` on the whole page.**~~ Closed by §7 — the index adds 23 `h4`
+  and 23 `h5`, so the page now runs h1→h5.
 
 ---
 
 ## Top 5 highest-impact remaining changes
 
-These are the ones I could not make from the codebase.
+Items 1 and 4 are now done; 2, 3 and 5 need work outside the codebase.
 
-1. **Set `NEXT_PUBLIC_SITE_URL` before you deploy.** Right now every canonical
-   URL, every `og:url`, every schema `@id`, the sitemap and robots.txt all point
-   at `https://fauzan-a25.github.io`. If the live site is a Vercel domain,
-   everything above is pointing at the wrong place and the canonical tag alone
-   can suppress the real page. This is the single highest-priority item in this
-   document.
+1. ~~**Set `NEXT_PUBLIC_SITE_URL`.**~~ **Done.** The production domain is
+   `https://portfolio.fauzanahsan.my.id` (verified live, `200`). It is set in
+   `.env.local` and is now also the hardcoded fallback in `src/lib/site.js`, so
+   a build that forgets the variable still emits correct URLs rather than
+   poisoning them. Canonical, `og:url`, `og:image`, all four schema `@id`s, the
+   sitemap and robots.txt were re-verified against the new origin.
+
+   The old `https://fauzan-a25.github.io` was returning **404** at the root, so
+   every canonical tag was pointing at a dead URL — which tells Google the real
+   page is a duplicate of something that does not exist. It survives in the
+   data in exactly one place, as the `demoUrl` of the GenZ dashboard, and that
+   URL is fine: GitHub Pages project sites serve without a user root page
+   (checked, `200`).
 2. **Build off-site brand mentions.** Ahrefs' 75,000-brand study found brand
    mentions correlate with AI citations ~3× more strongly than backlinks
    (YouTube ≈ 0.737, Domain Rating ≈ 0.266). A portfolio with zero presence on
@@ -190,16 +320,15 @@ These are the ones I could not make from the codebase.
    third-person bio paragraph. An `<h2>` phrased as a question — *"What does
    Fauzan work on?"* — followed by a 150-word self-contained answer would give
    an extractor a clean block to lift.
-4. **Add a projects comparison table.** Twenty-three projects currently exist
-   only as a card stack. A table (project · domain · stack · result) is the
-   single most extractable structure for an AI answer, and the data is already
-   there — `title`, `category`, `technologies`, and the accuracy figures in the
-   descriptions.
+4. ~~**Add a projects comparison table.**~~ **Done** — see §7. The full project
+   index carries `title`, `shortDescription`, `category`, `year`, `role`,
+   `duration`, the full description, `highlights` and `technologies` for all 23
+   projects, in the HTML.
 5. **Keep `dateModified` moving.** Content under 3 months old is ~3× more likely
    to be cited; pages stale 6+ months lose eligibility. Right now `dateModified`
    is the build timestamp, so a redeploy refreshes it — but that is a technical
-   date, not a content date. Updating the sheet quarterly (a new project, a new
-   certification) is what actually earns the freshness signal.
+   date, not a content date. Editing `portfolio.json` quarterly (a new project,
+   a new certification) is what actually earns the freshness signal.
 
 ---
 
@@ -216,9 +345,12 @@ These are the ones I could not make from the codebase.
   exactly what gets quoted. Keep writing them that way.
 - **`/api/chat` is `Disallow`ed** in robots.txt. Intentional — it is a POST
   endpoint with no indexable content and a per-request model cost.
-- **Sheet still missing 3 certification rows** (COMPFEST 16, COMPFEST 17, GELAR
-  RASA 2024). They render from the bundled fallback and appear in the schema, so
-  nothing is lost — but the sheet is not the full picture.
+- **`stats` has two entries, not three.** The sheet's `Stats` rows overrode the
+  bundled three, dropping "25 tracked skills"; the freeze preserved what was
+  actually rendering. Both surviving entries also still carry `icon` and
+  `color` fields (`bi-code-slash`, `#00a8e8`) left over from the Bootstrap-icon
+  era, which nothing reads. Worth a tidy while editing the JSON — and "15+
+  projects" understates a 23-project list.
 
 ---
 
@@ -232,6 +364,17 @@ curl -s localhost:3311/robots.txt
 curl -s localhost:3311/sitemap.xml
 curl -s localhost:3311/llms.txt | head -40
 curl -sI localhost:3311/opengraph-image        # image/png, 1200x630
+curl -sI localhost:3311/apple-icon             # image/png, 180x180
+curl -sI localhost:3311/icon.svg               # image/svg+xml
+
+# How much of the content actually reaches a text extractor:
+node -e "const h=require('fs').readFileSync('.next/server/app/index.html','utf8');
+const t=h.split('<body')[1].replace(/<script[\s\S]*?<\/script>/g,' ')
+ .replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');
+const d=require('./src/data/portfolio.json');
+console.log('descriptions in HTML:',
+  d.projects.filter(p=>t.includes((p.description||'').slice(0,60))).length,
+  '/', d.projects.length);"
 
 # What a JS-less crawler sees:
 node -e "const h=require('fs').readFileSync('.next/server/app/index.html','utf8');

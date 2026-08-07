@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTheme } from '@/context/ThemeContext';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { LogoMark } from '@/components/ui/Logo/Logo';
 import './Navbar.css';
 
 const LINKS = [
@@ -80,9 +81,17 @@ export default function Navbar() {
   return (
     <nav className="nav" aria-label="Section navigation">
       <div className="nav__shell" data-scrolled={scrolled}>
-        <a href="#home" className="nav__brand" onClick={(e) => onNav(e, 'home')}>
-          <span className="nav__mark" aria-hidden="true" />
-          <span className="nav__wordmark">FAA</span>
+        <a
+          href="#home"
+          className="nav__brand"
+          aria-label="Fauzan Ahsanudin Alfikri — back to top"
+          onClick={(e) => onNav(e, 'home')}
+        >
+          <LogoMark size={19} className="nav__mark" />
+          {/* The full name, not initials: it is the brand string search and AI
+              answer engines resolve this page to. Hidden on narrow screens by
+              CSS, where the mark carries the lockup alone. */}
+          <span className="nav__wordmark">Fauzan Ahsanudin</span>
         </a>
 
         <div ref={trackRef} className="nav__track no-bar">

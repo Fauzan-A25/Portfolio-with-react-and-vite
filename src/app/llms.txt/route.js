@@ -1,7 +1,8 @@
 import { getPortfolioData } from '@/lib/portfolio';
 import { SITE_URL } from '@/lib/site';
 
-export const revalidate = 3600;
+// Built from the same static JSON as the page, so it is prerendered too.
+export const dynamic = 'force-static';
 
 /**
  * /llms.txt — a plain-text digest for AI agents.
@@ -11,13 +12,13 @@ export const revalidate = 3600;
  * requesting it. It costs nothing to serve and some smaller agents do read it,
  * but the SSR HTML and the JSON-LD graph are what actually do the work here.
  */
-export async function GET() {
-  const data = await getPortfolioData();
+export function GET() {
+  const data = getPortfolioData();
   const info = data.personalInfo || {};
   const social = data.socialLinks || {};
 
-  // Sheet-authored descriptions run to several paragraphs; a bullet list needs
-  // them on one line or the structure falls apart.
+  // Project descriptions run to several paragraphs; a bullet list needs them on
+  // one line or the structure falls apart.
   const oneLine = (s) => (s || '').replace(/\s+/g, ' ').trim();
 
   const summary = (data.aboutContent?.paragraphs || [])

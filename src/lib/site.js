@@ -6,10 +6,14 @@
  * Precedence:
  *   1. NEXT_PUBLIC_SITE_URL      — set this to the production domain.
  *   2. VERCEL_PROJECT_PRODUCTION_URL — injected by Vercel automatically.
- *   3. The old GitHub Pages host, kept only so local builds have something
- *      well-formed to resolve against. Replace it via (1) before launch.
+ *   3. The production domain, hardcoded, so a build that forgets the variable
+ *      still emits correct canonical URLs instead of poisoning them.
+ *
+ * The previous fallback was `https://fauzan-a25.github.io`, a host that now
+ * returns 404. A canonical tag pointing at a dead URL is worse than none: it
+ * tells Google the real page is a duplicate of something that does not exist.
  */
-const FALLBACK = 'https://fauzan-a25.github.io';
+const FALLBACK = 'https://portfolio.fauzanahsan.my.id';
 
 function resolveSiteUrl() {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;

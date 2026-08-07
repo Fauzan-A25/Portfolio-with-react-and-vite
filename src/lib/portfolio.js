@@ -1,21 +1,20 @@
-import portfolioData from '@/data/portfolio/index';
+import data from '@/data/portfolio.json';
 
 /**
- * Drops sheet-level RegExp objects that React cannot serialise across the
- * server/client boundary.  `match` strings in proofs.json are for the now-
- * removed Sheets merge path and are unused by components, so they are safe
- * to strip before handing the data to the page.
+ * The portfolio content, resolved at build time from `src/data/portfolio.json`.
+ *
+ * That file is the single source of truth: edit it, commit, redeploy. There is
+ * no network call here on purpose — the page is fully static, so the HTML a
+ * crawler receives can never be a loading screen or a degraded fallback. AI
+ * crawlers (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot) do not execute
+ * JavaScript, so anything resolved after first paint is invisible to them.
+ *
+ * Previously this fetched a Google Sheet through Apps Script. That is gone:
+ * the sheet silently coerced values (a "3.8" GPA cell arrived as a Date), the
+ * endpoint could 404 without warning, and every render depended on it being up.
  */
-function serialisable(data) {
-  const proofs = Object.fromEntries(
-    Object.entries(data.proofs || {}).map(([key, { match, ...rest }]) => [key, rest]),
-  );
-  return { ...data, proofs };
+export function getPortfolioData() {
+  return data;
 }
 
-/** Pure JSON portfolio data — zero runtime fetches. */
-export async function getPortfolioData() {
-  return serialisable(portfolioData);
-}
-
-export const REVALIDATE_SECONDS = 3600; // ISR: 1 hour
+export default data;

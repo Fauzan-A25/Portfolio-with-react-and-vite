@@ -1,73 +1,67 @@
 #!/usr/bin/env bash
-# edit.sh — Quick-edit portfolio JSON data files.
+# edit.sh — Quick-edit portfolio data (src/data/portfolio.json).
 #
 # Usage:
-#   ./scripts/edit.sh              List all editable files
-#   ./scripts/edit.sh projects     Open projects.json in $EDITOR (or nano)
-#   ./scripts/edit.sh personal     Open personal.json
-#   ./scripts/edit.sh skills       Open skills.json
+#   ./scripts/edit.sh               Open the whole portfolio.json in $EDITOR
+#   ./scripts/edit.sh projects      Open only the projects section
+#   ./scripts/edit.sh skills        Open only the skills section
+#   ./scripts/edit.sh certifications
+#   ./scripts/edit.sh <any-key>     personalInfo, socialLinks, experiences,
+#                                   education, proofs, stats, heroTypingTexts,
+#                                   aboutContent, contactContent, ...
 #
-# Shortcuts (one letter):
-#   p  = personal    x  = experiences   c  = certifications
-#   s  = skills      e  = education      n  = nav
-#   j  = projects    a  = about          h  = hero
-#   l  = social      f  = footer         k  = contact
+# After saving, the section is merged back into portfolio.json with proper
+# formatting. Then rebuild (npm run build) and redeploy.
 set -euo pipefail
 
-DATA_DIR="$(cd "$(dirname "$0")/../src/data/portfolio" && pwd)"
+DATA_FILE="$(cd "$(dirname "$0")/../src/data" && pwd)/portfolio.json"
 EDITOR="${EDITOR:-nano}"
-
-declare -A FILES=(
-  [personal]=personal.json
-  [social]=social.json
-  [proofs]=proofs.json
-  [projects]=projects.json
-  [skills]=skills.json
-  [experiences]=experiences.json
-  [education]=education.json
-  [certifications]=certifications.json
-  [stats]=stats.json
-  [nav]=nav.json
-  [hero]=hero.json
-  [emailjs]=emailjs.json
-  [about]=about.json
-  [skills-content]=skills-content.json
-  [contact]=contact.json
-  [projects-content]=projects-content.json
-  [footer]=footer.json
-)
-
-# Shortcuts
-declare -A SHORTCUTS=(
-  [p]=personal [s]=skills [j]=projects [x]=experiences
-  [e]=education [c]=certifications [a]=about [h]=hero
-  [l]=social [f]=footer [k]=contact [n]=nav
-)
+TMP_FILE="$(mktemp /tmp/portfolio-edit.XXXXXX.json)"
+trap 'rm -f "$TMP_FILE"' EXIT
 
 key="${1:-}"
 
-# Resolve shortcut
-[[ -n "$key" ]] && key="${SHORTCUTS[$key]:-$key}"
-
 if [[ -z "$key" ]]; then
-  echo "=== Portfolio Data Files ==="
+  echo "=== portfolio.json — semua section ==="
+  python3 - "$DATA_FILE" <<'EOF'
+import json, sys
+d = json.load(open(sys.argv[1]))
+for k, v in d.items():
+    if isinstance(v, list):
+        print(f"  {k:<20} [{len(v)} items]")
+    elif isinstance(v, dict):
+        print(f"  {k:<20} {{{len(v)} keys}}")
+    else:
+        print(f"  {k:<20} {type(v).__name__}")
+EOF
   echo
-  for name in $(echo "${!FILES[@]}" | tr ' ' '\n' | sort); do
-    file="${FILES[$name]}"
-    size=$(wc -c < "$DATA_DIR/$file" 2>/dev/null || echo "?")
-    printf "  %-18s → %s (%s bytes)\n" "$name" "$file" "$size"
-  done
-  echo
-  echo "Usage: ./scripts/edit.sh <name>"
-  echo "Shortcuts: p=personal s=skills j=projects x=experiences c=certs a=about h=hero"
+  echo "Usage: ./scripts/edit.sh <section>   (atau tanpa argumen = edit semua)"
   exit 0
 fi
 
-file="${FILES[$key]:-}"
-if [[ -z "$file" ]]; then
-  echo "Unknown data file: $key"
-  echo "Run without args to see available files."
-  exit 1
-fi
+# Extract the requested section, edit it, merge it back.
+python3 - "$DATA_FILE" "$key" "$TMP_FILE" <<'EOF'
+import json, sys
+data_file, key, tmp = sys.argv[1], sys.argv[2], sys.argv[3]
+d = json.load(open(data_file))
+if key not in d:
+    sys.stderr.write(f"Section '{key}' tidak ada di portfolio.json.\n")
+    sys.stderr.write(f"Tersedia: {', '.join(d.keys())}\n")
+    sys.exit(1)
+json.dump(d[key], open(tmp, "w"), indent=2, ensure_ascii=False)
+EOF
 
-exec $EDITOR "$DATA_DIR/$file"
+$EDITOR "$TMP_FILE"
+
+python3 - "$DATA_FILE" "$key" "$TMP_FILE" <<'EOF'
+import json, sys
+data_file, key, tmp = sys.argv[1], sys.argv[2], sys.argv[3]
+d = json.load(open(data_file))
+try:
+    d[key] = json.load(open(tmp))
+except json.JSONDecodeError as e:
+    sys.stderr.write(f"JSON tidak valid: {e}\n")
+    sys.exit(1)
+json.dump(d, open(data_file, "w"), indent=2, ensure_ascii=False)
+print(f"✅ Section '{key}' tersimpan ke portfolio.json")
+EOF

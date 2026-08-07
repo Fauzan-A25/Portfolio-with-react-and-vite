@@ -8,8 +8,17 @@ export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 export const alt = 'Fauzan Ahsanudin Alfikri — Data Science Portfolio';
 
-export default async function Image() {
-  const data = await getPortfolioData();
+// The FA mark, inlined as a data URI. Satori renders <img> reliably; a raw
+// <svg> child is only partially supported, so this is the safe way in.
+const MARK = `data:image/svg+xml;utf8,${encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 32" fill="none" ' +
+    'stroke="#dcdde0" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M4.6 27.2V6.4h9.2"/><path d="M4.6 16.6h7.2"/>' +
+    '<path d="M18.8 27.2 25.4 5.2l6.6 22"/><path d="M21.4 16.6h8"/></svg>',
+)}`;
+
+export default function Image() {
+  const data = getPortfolioData();
   const info = data.personalInfo || {};
 
   return new ImageResponse(
@@ -27,8 +36,10 @@ export default async function Image() {
           border: '1px solid #272829',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <div style={{ width: 40, height: 1, background: '#dcdde0' }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={MARK} width={45} height={40} alt="" />
+          <div style={{ width: 1, height: 34, background: '#272829' }} />
           <div style={{ fontSize: 22, letterSpacing: 6, color: '#dcdde0' }}>
             {`DATA SCIENCE · ${(info.university || 'TELKOM UNIVERSITY').toUpperCase()}`}
           </div>
