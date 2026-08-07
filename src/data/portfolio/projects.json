@@ -1,0 +1,473 @@
+[
+  {
+    "id": 9,
+    "title": "Nutriginjal Android Apps",
+    "description": "A capstone project for Telkom University, developing Android apps for nutrition and kidney health.",
+    "image": "",
+    "technologies": [
+      "Dart",
+      "Flutter",
+      "Android SDK",
+      "Firebase",
+      "Git"
+    ],
+    "category": "Mobile Development",
+    "year": 2026,
+    "duration": "1 semester",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/nutriginjal-android-apps",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 10,
+    "title": "Chat Bot WA Assistant",
+    "description": "A JavaScript-based WhatsApp assistant chatbot for automated messaging and interactions.",
+    "image": "",
+    "technologies": [
+      "JavaScript",
+      "Node.js",
+      "WhatsApp Web API",
+      "puppeteer",
+      "Express.js"
+    ],
+    "category": "Tools",
+    "year": 2026,
+    "duration": "2 weeks",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/chat-bot-wa-assistant",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 2,
+    "title": "COPPA Risk Prediction Model",
+    "description": "XGBoost model for COPPA violation detection",
+    "image": "https://drive.google.com/file/d/15zIwGLfO5luTSJuBbaVzeusAXttw4dQC/view?usp=sharing",
+    "technologies": [
+      "Python 3.9+",
+      "XGBoost",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "SHAP"
+    ],
+    "category": "Data Science",
+    "year": 2025,
+    "duration": "1 months",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/coppa-risk-prediction-findit2025-fauzan",
+    "demoUrl": null,
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": "Crowd Counting with CSRNet",
+    "description": "Deep learning for crowd density estimation",
+    "image": "https://drive.google.com/file/d/15j18nDquKe53cXk8P5EVYKpxtB701T0j/view?usp=sharing",
+    "technologies": [
+      "Python 3.9+",
+      "PyTorch",
+      "OpenCV",
+      "NumPy",
+      "Matplotlib",
+      "CUDA"
+    ],
+    "category": "Computer Vision",
+    "year": 2025,
+    "duration": "1 weeks",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/crowd-counting-with-csrnet-competition-hology",
+    "demoUrl": null,
+    "featured": true
+  },
+  {
+    "id": 4,
+    "title": "Pacific Data Viz Challenge - Climate Change & Disasters",
+    "description": "Data visualization project on Pacific climate change and disaster patterns",
+    "image": "https://drive.google.com/file/d/1fuV_ZSnRbq31JD96f_cGES5RXrgyvNl-/view?usp=sharing",
+    "technologies": [
+      "Python",
+      "Pandas",
+      "Plotly/Matplotlib",
+      "JavaScript",
+      "D3.js",
+      "HTML/CSS"
+    ],
+    "category": "Data Visualization",
+    "year": 2025,
+    "duration": "3 months",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/Pacific-Data-Viz-challenge_Climate-Change-And-Disasters",
+    "demoUrl": null,
+    "featured": true
+  },
+  {
+    "id": 6,
+    "title": "GenZ Financial Literacy Analytics Dashboard",
+    "description": "A comprehensive analytics dashboard for analyzing financial literacy, behavior, and well-being among Generation Z in Indonesia.",
+    "image": "https://drive.google.com/file/d/1HjqCn7kwTuYcA7Td8NRWAJijQONhSmvn/view?usp=sharing",
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Zustand",
+      "Tailwind CSS",
+      "Recharts"
+    ],
+    "category": "Data Visualization",
+    "year": 2025,
+    "duration": "1 month",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/dashboard-analisis-sigacorr",
+    "demoUrl": "https://fauzan-a25.github.io/dashboard-analisis-sigacorr/",
+    "featured": true
+  },
+  {
+    "id": 7,
+    "title": "Smart Face Anti-Spoofing",
+    "description": "Deep learning system for facial liveness detection and presentation attack detection",
+    "image": "https://drive.google.com/file/d/1yX95ip3J-i-XqxZX4Q4qmucjNuG8V0BP/view?usp=sharing",
+    "technologies": [
+      "Python 3.9+",
+      "PyTorch",
+      "OpenCV",
+      "NumPy",
+      "Matplotlib"
+    ],
+    "category": "Computer Vision",
+    "year": 2025,
+    "duration": "2 months",
+    "teamSize": 2,
+    "githubUrl": "https://github.com/FaarisKhairrudin/Smart-Face-AntiSpoofing",
+    "demoUrl": null,
+    "featured": true
+  },
+  {
+    "id": 11,
+    "title": "Melodia Apps - Music Application",
+    "description": "A JavaScript-based music application for exploring and managing melodies.",
+    "image": "",
+    "technologies": [
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Web Audio API",
+      "React.js (assumed)"
+    ],
+    "category": "Web Development",
+    "year": 2025,
+    "duration": "2 months",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/melodia_apps",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 12,
+    "title": "AES-256 CBC Encryption Application",
+    "description": "A Jupyter Notebook application implementing AES-256 CBC encryption for data security.",
+    "image": "",
+    "technologies": [
+      "Python 3",
+      "Jupyter Notebook",
+      "pycryptodome",
+      "AES-256",
+      "CBC Mode"
+    ],
+    "category": "Academic",
+    "year": 2025,
+    "duration": "1 week",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/aplikasi-aes256-cbc-crypto",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 13,
+    "title": "Portfolio with React and Vite",
+    "description": "A modern, responsive portfolio website built with React and Vite.",
+    "image": "",
+    "technologies": [
+      "React 18",
+      "Vite 5",
+      "CSS3",
+      "JavaScript ES6",
+      "HTML5",
+      "Git"
+    ],
+    "category": "Web Development",
+    "year": 2025,
+    "duration": "2 weeks",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/Portfolio-with-react-and-vite",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 14,
+    "title": "Customer Churn Prediction",
+    "description": "Predict customer churn using machine learning to help businesses retain clients.",
+    "image": "",
+    "technologies": [
+      "Python 3.x",
+      "Jupyter Notebook",
+      "Pandas",
+      "Scikit-learn",
+      "Matplotlib",
+      "Seaborn"
+    ],
+    "category": "Data Science",
+    "year": 2025,
+    "duration": "2 months",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/Customer_Churn_Prediction_Fauzan_Ahsanudin_Alfikri",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 15,
+    "title": "Study Group Assignment 4 - Data Analysis",
+    "description": "A collaborative data analysis project exploring a dataset using Jupyter Notebook.",
+    "image": "",
+    "technologies": [
+      "Python",
+      "Jupyter Notebook",
+      "pandas",
+      "matplotlib",
+      "seaborn",
+      "numpy"
+    ],
+    "category": "Academic",
+    "year": 2025,
+    "duration": "1 week",
+    "teamSize": 2,
+    "githubUrl": "https://github.com/Fauzan-A25/Assignment_Study_Group_4_Fauzan_Ahsanudin_Alfikri",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 16,
+    "title": "AI Model Ollama DeepSeek to Discord Bot",
+    "description": "A Discord bot that integrates Ollama's DeepSeek AI model for conversational responses.",
+    "image": "",
+    "technologies": [
+      "Python 3.10+",
+      "discord.py",
+      "Ollama",
+      "DeepSeek Model",
+      "REST API",
+      "asyncio"
+    ],
+    "category": "Tools",
+    "year": 2025,
+    "duration": "2 months",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/AI_MODEL_OLLAMA-DEEPSEEK-_TO_DISCORD_BOT",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 17,
+    "title": "Topic Python Programming for Machine Learning Assignment - Study Group 3",
+    "description": "A course assignment on Python programming fundamentals for machine learning.",
+    "image": "",
+    "technologies": [
+      "Python 3",
+      "Jupyter Notebook"
+    ],
+    "category": "Academic",
+    "year": 2025,
+    "duration": "1 week",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/Assignment-Study-Group-3-Fauzan-Ahsanudin-Alfikri",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 18,
+    "title": "Random Walk Analysis of Property and Raw Material Stocks",
+    "description": "Modeling stock price movements of property and raw materials using random walk theory.",
+    "image": "",
+    "technologies": [
+      "Jupyter Notebook",
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "SciPy"
+    ],
+    "category": "Data Science",
+    "year": 2025,
+    "duration": "1 week",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/RandomWalk_Saham_Properti_-_Bahan_Baku",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 1,
+    "title": "Fossil - Water Potability Prediction",
+    "description": "ML application for predicting water safety",
+    "image": "https://drive.google.com/file/d/1MNgX_ecN6bDlplqUxACGC-kCxn2VVL_b/view?usp=sharing",
+    "technologies": [
+      "Python 3.9+",
+      "Streamlit",
+      "Scikit-learn",
+      "Pandas",
+      "NumPy",
+      "Matplotlib"
+    ],
+    "category": "Machine Learning",
+    "year": 2024,
+    "duration": "2 months",
+    "teamSize": 3,
+    "githubUrl": "https://github.com/Fauzan-A25/FOSSIL_GDGoC-TUBES",
+    "demoUrl": "https://fossil-water-app.streamlit.app",
+    "featured": true
+  },
+  {
+    "id": 5,
+    "title": "AstroClassify - Stellar Classification System",
+    "description": "ML-powered astronomical object classification system",
+    "image": "https://drive.google.com/file/d/1ff0HQZp-cSbtA7Z-5MMRYntikp09Ju7C/view?usp=sharing",
+    "technologies": [
+      "Python 3.x",
+      "Streamlit",
+      "Scikit-learn",
+      "XGBoost",
+      "LightGBM",
+      "Pandas"
+    ],
+    "category": "Machine Learning",
+    "year": 2024,
+    "duration": "2 months",
+    "teamSize": 2,
+    "githubUrl": "https://github.com/Fauzan-A25/AstroClassify",
+    "demoUrl": null,
+    "featured": true
+  },
+  {
+    "id": 19,
+    "title": "TUBES AKA - Academic Project in AKA Course",
+    "description": "Final project for the AKA course, focusing on data analysis and modeling.",
+    "image": "",
+    "technologies": [
+      "Python 3.x",
+      "Jupyter Notebook",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "Matplotlib"
+    ],
+    "category": "Academic",
+    "year": 2024,
+    "duration": "1 semester",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/TUBES_AKA",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 20,
+    "title": "Text Editor Laba Laba Sunda",
+    "description": "A C++ text editor built as a data structures course assignment.",
+    "image": "",
+    "technologies": [
+      "C++",
+      "Standard Template Library (STL)",
+      "Linked Lists",
+      "Stacks",
+      "Doubly Linked List"
+    ],
+    "category": "Academic",
+    "year": 2024,
+    "duration": "1 semester",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/Text_Editor_Laba_Laba_Sunda",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 21,
+    "title": "Web Portfolio Using Bootstrap V5",
+    "description": "A responsive personal portfolio website built with Bootstrap 5 to showcase skills and projects.",
+    "image": "",
+    "technologies": [
+      "HTML5",
+      "CSS3",
+      "Bootstrap 5",
+      "Responsive Web Design"
+    ],
+    "category": "Web Development",
+    "year": 2024,
+    "duration": "2 weeks",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/Web_Portofolio_Using_BOOTSTRAP_V5",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 22,
+    "title": "Student Academic Performance Prediction",
+    "description": "Predicting student academic outcomes using machine learning on educational data.",
+    "image": "",
+    "technologies": [
+      "Python",
+      "Jupyter Notebook",
+      "pandas",
+      "scikit-learn",
+      "matplotlib",
+      "seaborn"
+    ],
+    "category": "Data Science",
+    "year": 2024,
+    "duration": "2 months",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/Student-academic-prediction",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 23,
+    "title": "Bot Musik Discord V2",
+    "description": "A feature-rich Discord music bot for high-quality audio streaming from YouTube.",
+    "image": "",
+    "technologies": [
+      "Node.js",
+      "discord.js v14",
+      "yt-dlp",
+      "JavaScript",
+      "npm",
+      "Git"
+    ],
+    "category": "Tools",
+    "year": 2024,
+    "duration": "2 months",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/Bot_Musik_Discord_V2",
+    "demoUrl": null,
+    "featured": false
+  },
+  {
+    "id": 24,
+    "title": "Go Library Manager",
+    "description": "A Go-based library management system for tracking books, members, and borrowing operations.",
+    "image": "",
+    "technologies": [
+      "Go 1.21",
+      "Standard Library",
+      "File I/O",
+      "Linked Lists",
+      "Hash Maps",
+      "Sorting Algorithms"
+    ],
+    "category": "Tools",
+    "year": 2024,
+    "duration": "1 semester",
+    "teamSize": 1,
+    "githubUrl": "https://github.com/Fauzan-A25/go-library-manager",
+    "demoUrl": null,
+    "featured": false
+  }
+]

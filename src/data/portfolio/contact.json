@@ -1,0 +1,32 @@
+{
+  "title": "Get in touch",
+  "subtitle": "Have a project in mind? Let's work together to create something amazing",
+  "leftSection": {
+    "title": "Contact Me",
+    "description": "Have a project in mind? Feel free to reach out through any of these channels. I'm always open to discussing new projects and opportunities."
+  },
+  "form": {
+    "name": {
+      "label": "Your name",
+      "placeholder": "John Doe"
+    },
+    "email": {
+      "label": "Your email",
+      "placeholder": "john@example.com"
+    },
+    "subject": {
+      "label": "Subject",
+      "placeholder": "Project Inquiry"
+    },
+    "message": {
+      "label": "Message",
+      "placeholder": "Tell me about your project..."
+    },
+    "submit": "Send message",
+    "sending": "Sending…"
+  },
+  "messages": {
+    "success": "Thank you! Your message has been sent successfully.",
+    "error": "Oops! Something went wrong. Please try again or contact me directly."
+  }
+}

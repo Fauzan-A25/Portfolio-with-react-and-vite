@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "degree": "Sarjana Sains Data (S.Si.D.)",
+    "institution": "Universitas Telkom",
+    "period": "2023 — 2027",
+    "location": "Bandung, Indonesia",
+    "relevantCourses": [
+      "Machine Learning",
+      "Natural Language Processing",
+      "Computer Vision",
+      "Statistika",
+      "Basis Data"
+    ]
+  }
+]

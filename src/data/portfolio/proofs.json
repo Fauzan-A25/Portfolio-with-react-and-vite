@@ -1,0 +1,53 @@
+{
+  "adikara-photo": {
+    "title": "Penyerahan Juara 3 — Divisi Data Mining ADIKARA 2025",
+    "note": "Ajang Digital Kreatif Mahasiswa Informatika 2025 · Telkom University",
+    "image": "/images/foto-menang-adikara.jpeg"
+  },
+  "adikara-cert": {
+    "title": "Sertifikat Juara 3 Divisi Data Mining",
+    "note": "No. 027/AKD6/IF-DEK/2026 · kode unik A25C0013",
+    "image": "/images/proof-adikara-certificate.jpeg"
+  },
+  "teaching": {
+    "title": "Asisten Dosen — Sistem Cerdas",
+    "note": "Fakultas Informatika, Telkom University · 2026",
+    "image": "/images/proof-teaching.jpeg"
+  },
+  "findit-2025": {
+    "match": "find it|data analyst competition",
+    "title": "Data Analyst Competition FIND IT! 2025",
+    "note": "KMTETI FT UGM · Peserta · Sleman, 17 Mei 2025",
+    "image": "/images/cert-findit-2025.jpeg"
+  },
+  "compfest17": {
+    "match": "compfest 17|data analytics dash",
+    "title": "Data Analytics Dash — COMPFEST 17",
+    "note": "Universitas Indonesia · Participant · COMPFEST 17",
+    "image": "/images/cert-compfest17.jpeg"
+  },
+  "gelarrasa-2025": {
+    "match": "gelar rasa 2025",
+    "title": "GELAR RASA 2025",
+    "note": "UPN Veteran Jawa Timur · Peserta · No. 655/UN63.7/TU/2025",
+    "image": "/images/cert-gelarrasa-2025.jpeg"
+  },
+  "compfest16": {
+    "match": "compfest 16|senior competitive programming",
+    "title": "Senior Competitive Programming — COMPFEST 16",
+    "note": "Universitas Indonesia · Participant · COMPFEST 16",
+    "image": "/images/cert-compfest16.jpeg"
+  },
+  "gelarrasa-2024": {
+    "match": "gelar rasa 2024",
+    "title": "GELAR RASA 2024",
+    "note": "UPN Veteran Jawa Timur · Peserta · No. 1846/UN63.7/2024",
+    "image": "/images/cert-gelarrasa-2024.jpeg"
+  },
+  "aiesec-2024": {
+    "match": "aiesec",
+    "title": "Youth Today × Join AIESEC 2024",
+    "note": "AIESEC in Bandung · Delegate · No. 1062/TM-BDG/C/X/2024",
+    "image": "/images/cert-aiesec-2024.jpeg"
+  }
+}

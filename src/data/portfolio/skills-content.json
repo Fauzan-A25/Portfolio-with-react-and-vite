@@ -1,0 +1,10 @@
+{
+  "title": "Skills & Expertise",
+  "subtitle": "Technologies and tools I work with, measured by years of hands-on experience.",
+  "categoryTitles": {
+    "programming": "Programming Languages",
+    "dataScience": "Data Science & ML",
+    "tools": "Tools & Frameworks",
+    "soft": "Soft Skills"
+  }
+}
