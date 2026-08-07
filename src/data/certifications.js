@@ -1,0 +1,42 @@
+export const certifications = [
+  {
+    id: 1,
+    name: 'MySkill Certified INLINE ELEMENTS',
+    issuer: 'MySkill',
+    date: '',
+    credentialId: '',
+    url: '',
+  },
+  {
+    id: 2,
+    name: 'Peserta GELAR RASA 2025',
+    issuer: '',
+    date: '2025',
+    credentialId: '',
+    url: '',
+  },
+  {
+    id: 3,
+    name: 'Delegate at Youth Today X Join AIESEC 2024',
+    issuer: 'AIESEC',
+    date: '2024',
+    credentialId: '',
+    url: '',
+  },
+  {
+    id: 4,
+    name: 'Data Analyst Competition FIND IT! 2025',
+    issuer: '',
+    date: '2025',
+    credentialId: '',
+    url: '',
+  },
+  {
+    id: 5,
+    name: 'Belajar Dasar AI',
+    issuer: '',
+    date: '',
+    credentialId: '',
+    url: '',
+  },
+];
