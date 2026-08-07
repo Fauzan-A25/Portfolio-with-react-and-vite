@@ -30,7 +30,7 @@ A professional portfolio website designed for developers, data scientists, and t
 - 📱 **Fully Responsive** - Works seamlessly on all devices
 - ⚡ **Lightning Fast** - Powered by Vite for optimal performance
 - 🎭 **Smooth Animations** - AOS library and custom CSS animations
-- 🎯 **Easy Customization** - Single data file (`portfolioData.js`) for all content
+- 🎯 **Easy Customization** - Single data file (`src/data/portfolio.json`) for all content
 - 🌓 **Theme Support** - Light/Dark mode toggle (optional)
 - 🎪 **Project Showcase** - Interactive cards with filtering by category
 - 📊 **Skills Section** - Visual skill bars with categories
@@ -167,7 +167,7 @@ portfolio-react/
 │   │   └── ThemeContext.jsx
 │   │
 │   ├── data/                     \# Centralized data
-│   │   └── portfolioData.js     \# ⭐ Main data file
+│   │   └── portfolio.json       \# ⭐ Single source of truth for all content
 │   │
 │   ├── styles/                   \# Global styles
 │   │   └── globals.css
@@ -185,48 +185,52 @@ portfolio-react/
 
 ## 🎨 Customization
 
+All content lives in **one file**: `src/data/portfolio.json`. There is no CMS,
+no spreadsheet and no data API — edit the JSON, commit, redeploy. The page is
+statically prerendered from it, so whatever is in that file is exactly what a
+browser, Googlebot and an AI crawler all receive.
+
 ### 1. Update Personal Information
 
-Edit `src/data/portfolioData.js`:
+Edit the `personalInfo` object in `src/data/portfolio.json`:
 
-```
-
-export const personalInfo = {
-name: 'Your Name',
-title: 'Your Title',
-email: 'your@email.com',
-phone: '+62 xxx-xxxx-xxxx',
-university: 'Your University',
-location: 'Your City, Country',
-profileImage: '/images/your-photo.jpg',
-cvLink: 'https://drive.google.com/your-cv-link',
-// ... more fields
-};
-
+```json
+"personalInfo": {
+  "name": "Your Name",
+  "title": "Your Title",
+  "email": "your@email.com",
+  "university": "Your University",
+  "location": "Your City, Country",
+  "profileImage": "/images/your-photo.jpg",
+  "cvLink": "https://drive.google.com/your-cv-link"
+}
 ```
 
 ### 2. Add Projects
 
-```
+Append to the `projects` array. `description` is the field that matters most:
+it is what ends up in the JSON-LD graph and in `/llms.txt`, so write specific,
+attributable numbers ("89% accuracy across 3,276 samples") rather than adjectives.
 
-export const projects = [
+```json
 {
-id: 1,
-title: 'Your Project Name',
-description: 'Project description...',
-image: '/images/projects/your-project.png',
-tags: ['React', 'Node.js', 'MongoDB'],
-category: 'Web Development',
-status: 'Completed',
-year: 2025,
-githubUrl: 'https://github.com/username/repo',
-demoUrl: 'https://your-demo.com',
-featured: true,
-},
-// Add more projects...
-];
-
+"id": 1,
+"title": "Your Project Name",
+"description": "Project description...",
+"image": "/images/projects/your-project.png",
+"tags": ["React", "Node.js", "MongoDB"],
+"technologies": ["React", "Node.js"],
+"category": "Web Development",
+"status": "Completed",
+"year": 2025,
+"githubUrl": "https://github.com/username/repo",
+"demoUrl": "https://your-demo.com",
+"featured": true
+}
 ```
+
+> `category` must also exist in the `projectCategories` array or the filter
+> chip for it will never appear.
 
 ### 3. Update Skills
 

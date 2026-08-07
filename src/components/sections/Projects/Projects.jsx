@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useReveal } from '@/hooks/useReveal';
 import { getDirectImageUrl } from '@/utils/imageHelper';
+import ProjectIndex from './ProjectIndex';
 import './Projects.css';
 
 const ExternalIcon = () => (
@@ -326,6 +327,12 @@ export default function Projects({ projects = [], projectCategories = [], projec
             </div>
           </div>
         )}
+
+        {/* The stack shows one project's prose at a time. This lists all of
+            them, which is both better for browsing 23 entries and the only
+            way the descriptions reach the HTML at all — see GEO-ANALYSIS.md §7.
+            It follows the same filter as the stack so the two never disagree. */}
+        <ProjectIndex projects={visible} />
 
         <div className="pj__all">
           <a

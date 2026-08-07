@@ -1,40 +1,20 @@
-import { fetchAllData } from '@/utils/fetchFromSheets';
-import { mergeWithLocal } from '@/utils/mergePortfolioData';
-import localData from '@/data/portfolioData';
-
-// The sheet is edited by hand a few times a month, so an hour-stale page is
-// harmless — and it keeps Apps Script from being hit on every request.
-const REVALIDATE_SECONDS = 3600;
+import data from '@/data/portfolio.json';
 
 /**
- * Resolves the portfolio on the server so the HTML that reaches a crawler is
- * the full page, not a loading screen. AI crawlers (GPTBot, ClaudeBot,
- * PerplexityBot, OAI-SearchBot) do not execute JavaScript, so anything fetched
- * in `useEffect` is invisible to them.
+ * The portfolio content, resolved at build time from `src/data/portfolio.json`.
  *
- * Never throws: a failed or slow sheet degrades to the bundled copy, which is
- * complete.
+ * That file is the single source of truth: edit it, commit, redeploy. There is
+ * no network call here on purpose — the page is fully static, so the HTML a
+ * crawler receives can never be a loading screen or a degraded fallback. AI
+ * crawlers (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot) do not execute
+ * JavaScript, so anything resolved after first paint is invisible to them.
+ *
+ * Previously this fetched a Google Sheet through Apps Script. That is gone:
+ * the sheet silently coerced values (a "3.8" GPA cell arrived as a Date), the
+ * endpoint could 404 without warning, and every render depended on it being up.
  */
-/**
- * `proofs[*].match` is a RegExp used only while merging sheet rows. React
- * cannot serialise a RegExp across the server/client boundary, and no client
- * component reads it, so it is dropped once the merge is done.
- */
-function serialisable(data) {
-  const proofs = Object.fromEntries(
-    Object.entries(data.proofs || {}).map(([key, { match, ...rest }]) => [key, rest]),
-  );
-  return { ...data, proofs };
+export function getPortfolioData() {
+  return data;
 }
 
-export async function getPortfolioData() {
-  try {
-    const remote = await fetchAllData({ next: { revalidate: REVALIDATE_SECONDS } });
-    return serialisable(mergeWithLocal(remote));
-  } catch (error) {
-    console.warn('[portfolio] Sheets unavailable, serving bundled data:', error.message);
-    return serialisable(localData);
-  }
-}
-
-export { REVALIDATE_SECONDS };
+export default data;

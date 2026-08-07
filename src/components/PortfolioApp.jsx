@@ -3,7 +3,6 @@
 import dynamic from 'next/dynamic';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { ProofProvider } from '@/components/ui/ProofModal/ProofModal';
-import { usePortfolioData } from '@/hooks/usePortfolioData';
 
 import Navbar from '@/components/layout/Navbar/Navbar';
 import LoadingScreen from '@/components/layout/LoadingScreen/LoadingScreen';
@@ -28,21 +27,17 @@ const AiAssistant = dynamic(() => import('@/components/AiAssistant/AiAssistant')
   ssr: false,
 });
 
-export default function PortfolioApp({ initialData = null }) {
-  const { data, loading, error } = usePortfolioData(initialData);
-
-  if (loading) {
+/**
+ * `data` is resolved on the server from src/data/portfolio.json and handed in
+ * as a prop, so it is always present by the time this renders — there is no
+ * fetch, no loading state, and no hydration gap. The guard below is a guard
+ * against a malformed data file, not a normal render path.
+ */
+export default function PortfolioApp({ data = null }) {
+  if (!data) {
     return (
       <ThemeProvider>
-        <LoadingScreen />
-      </ThemeProvider>
-    );
-  }
-
-  if (error || !data) {
-    return (
-      <ThemeProvider>
-        <LoadingScreen error={error || 'Portfolio data is empty.'} />
+        <LoadingScreen error="Portfolio data is empty." />
       </ThemeProvider>
     );
   }

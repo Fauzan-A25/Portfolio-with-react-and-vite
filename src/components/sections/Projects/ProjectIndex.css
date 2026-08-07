@@ -1,0 +1,248 @@
+/* ==========================================================================
+   Project index — the full, readable list under the card stack.
+   Deliberately quiet: the stack is the showpiece, this is the reference.
+   ========================================================================== */
+
+.px {
+  margin-top: clamp(40px, 5vw, 64px);
+  padding-top: clamp(28px, 3.4vw, 40px);
+  border-top: 1px solid var(--line);
+}
+
+.px__head {
+  margin-bottom: clamp(18px, 2.2vw, 26px);
+}
+
+.px__heading {
+  font: 600 clamp(17px, 1.9vw, 20px) / 1.25 var(--font-sans), sans-serif;
+  letter-spacing: -0.018em;
+  color: var(--txt);
+}
+
+.px__note {
+  margin-top: 7px;
+  max-width: 62ch;
+  font: 400 13.5px/1.6 var(--font-sans), sans-serif;
+  color: var(--mut);
+  text-wrap: pretty;
+}
+
+.px__list {
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.px__item {
+  border-bottom: 1px solid var(--line);
+}
+
+/* ==========================================================================
+   Row
+   ========================================================================== */
+
+.px__summary {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr) auto 13px;
+  align-items: baseline;
+  gap: 4px 14px;
+  padding: 15px 4px;
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.25s var(--ease);
+}
+
+/* Safari still paints its own disclosure triangle without this. */
+.px__summary::-webkit-details-marker {
+  display: none;
+}
+
+.px__summary:hover {
+  background: var(--accSoft);
+}
+
+.px__summary:focus-visible {
+  outline: 2px solid var(--accLine);
+  outline-offset: -2px;
+  border-radius: 6px;
+}
+
+.px__num {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--mut);
+  font-variant-numeric: tabular-nums;
+}
+
+.px__title {
+  min-width: 0;
+  font: 600 15px/1.4 var(--font-sans), sans-serif;
+  letter-spacing: -0.012em;
+  color: var(--txt);
+}
+
+.px__short {
+  grid-column: 2;
+  font: 400 13.5px/1.55 var(--font-sans), sans-serif;
+  color: var(--mut);
+  text-wrap: pretty;
+}
+
+.px__meta {
+  grid-column: 3;
+  grid-row: 1;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--mut);
+  text-align: right;
+}
+
+.px__chev {
+  grid-column: 4;
+  grid-row: 1;
+  color: var(--mut);
+  transition: transform 0.3s var(--ease), color 0.25s;
+}
+
+.px__entry[open] .px__chev {
+  transform: rotate(180deg);
+  color: var(--txt);
+}
+
+.px__summary:hover .px__chev {
+  color: var(--txt);
+}
+
+/* ==========================================================================
+   Expanded body
+   ========================================================================== */
+
+.px__body {
+  /* Aligned to the summary's second grid column — 4px of summary padding plus
+     the 2.4rem number column plus the 14px gap — so the prose reads as a
+     continuation of the title rather than a new indent level. */
+  padding: 2px 4px 26px calc(4px + 2.4rem + 14px);
+  max-width: 74ch;
+}
+
+.px__para {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--mut);
+  text-wrap: pretty;
+}
+
+.px__para + .px__para {
+  margin-top: 13px;
+}
+
+.px__sub {
+  margin-top: 20px;
+  font: 500 11px/1 var(--font-mono), monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--acc);
+}
+
+.px__highlights {
+  margin-top: 11px;
+  padding-left: 17px;
+  list-style: none;
+}
+
+.px__highlights li {
+  position: relative;
+  font-size: 14.2px;
+  line-height: 1.65;
+  color: var(--txt);
+}
+
+.px__highlights li + li {
+  margin-top: 7px;
+}
+
+.px__highlights li::before {
+  content: '';
+  position: absolute;
+  left: -17px;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 1.5px;
+  background: var(--acc);
+  opacity: 0.55;
+}
+
+.px__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  margin-top: 22px;
+}
+
+.px__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.px__tag {
+  padding: 4px 9px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--mut);
+}
+
+.px__links {
+  display: flex;
+  gap: 18px;
+}
+
+.px__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 500 13px/1 var(--font-sans), sans-serif;
+  color: var(--txt);
+  border-bottom: 1px solid var(--accLine);
+  padding-bottom: 3px;
+  transition: border-color 0.25s;
+}
+
+.px__link:hover {
+  border-color: var(--acc);
+}
+
+/* ==========================================================================
+   Narrow screens — the meta column has nowhere to go, so it wraps under.
+   ========================================================================== */
+
+@media (max-width: 720px) {
+  .px__summary {
+    grid-template-columns: 2.1rem minmax(0, 1fr) 13px;
+    gap: 5px 11px;
+  }
+
+  .px__meta {
+    grid-column: 2;
+    grid-row: 3;
+    text-align: left;
+  }
+
+  .px__chev {
+    grid-column: 3;
+  }
+
+  .px__body {
+    padding-left: calc(4px + 2.1rem + 11px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .px__chev {
+    transition: none;
+  }
+}
