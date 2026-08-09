@@ -1,0 +1,36 @@
+# Normalise line endings in the repository to LF.
+#
+# Without this, `core.autocrlf=true` on Windows means the working tree and the
+# index disagree about every line of every text file. Git mostly hides that,
+# but a merge sees two sides whose line endings were normalised at different
+# times as having rewritten the whole file — so trivially compatible edits come
+# back as full-file conflicts. Pinning LF in the repo makes the stored bytes
+# identical no matter which machine or editor produced them.
+* text=auto eol=lf
+
+# Windows-only scripts must keep CRLF or cmd.exe/PowerShell mis-parse them.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Shell scripts break outright with CRLF — the shebang keeps the \r.
+*.sh text eol=lf
+
+# Binary: never touch, never diff as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.pdf binary
+
+# SVG is text and worth diffing, but it is generated as often as hand-written.
+*.svg text eol=lf
+
+# Lockfiles are machine-written; a conflict in one is never resolved by hand.
+package-lock.json -diff linguist-generated
