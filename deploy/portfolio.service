@@ -1,0 +1,65 @@
+# systemd *user* unit — install to ~/.config/systemd/user/portfolio.service
+#
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now portfolio
+#
+# A user unit normally dies when the last login session ends, which would take
+# the site down on logout. Run this once so it survives:
+#
+#   loginctl enable-linger $USER
+#
+# Adjust WorkingDirectory if you deploy somewhere other than ~/apps/portfolio.
+
+[Unit]
+Description=Fauzan Ahsanudin — portfolio (Next.js standalone)
+Documentation=https://portfolio.fauzanahsan.my.id
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/apps/portfolio
+ExecStart=/usr/bin/env node server.js
+
+# Cloudflare Tunnel connects over loopback, so there is no reason to accept
+# connections from anywhere else. server.js defaults to 0.0.0.0, which would
+# expose the origin directly and let people bypass Cloudflare entirely.
+Environment=NODE_ENV=production
+Environment=HOSTNAME=127.0.0.1
+Environment=PORT=3000
+
+# Secrets live here, not in the repo and not in the deploy artifact.
+#   mkdir -p ~/.config/portfolio
+#   printf 'GEMINI_API_KEY=...\n' > ~/.config/portfolio/env
+#   chmod 600 ~/.config/portfolio/env
+EnvironmentFile=%h/.config/portfolio/env
+
+Restart=always
+RestartSec=3
+
+# Don't let a crash loop hammer the machine, but don't give up permanently
+# either — a transient failure at boot should still recover.
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=portfolio
+
+# The process only needs to read its own directory and talk to the network.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/apps/portfolio
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictNamespaces=true
+RestrictSUIDSGID=true
+# Must stay false: V8's JIT needs write+execute pages and Node will not start
+# without them. Listed explicitly so nobody "hardens" it to true later.
+MemoryDenyWriteExecute=false
+
+[Install]
+WantedBy=default.target

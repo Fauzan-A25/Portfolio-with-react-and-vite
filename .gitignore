@@ -13,7 +13,7 @@ pnpm-debug.log*
 out/
 next-env.d.ts
 
-# Build output
+# Build output — dist/ is the assembled deploy artifact from scripts/bundle.sh
 build/
 dist/
 
