@@ -59,7 +59,7 @@ export default function Projects({ projects = [], projectCategories = [], projec
   useReveal(rootRef, { enabled: !reduced });
 
   const [filter, setFilter] = useState('All');
-  const [index, setIndex] = useState(0);
+  const [rawIndex, setIndex] = useState(0);
   const [gap, setGap] = useState(60);
 
   // The sheet stores Drive *share* links, which serve an HTML page rather than
@@ -85,6 +85,11 @@ export default function Projects({ projects = [], projectCategories = [], projec
   }, [projects, projectCategories]);
 
   const total = visible.length;
+
+  // Picking a filter shrinks `visible` on the same render that still holds the
+  // previous index, so the reset effect below lands one render too late — clamp
+  // here or `active` is undefined whenever the old index outruns the new list.
+  const index = total ? Math.min(rawIndex, total - 1) : 0;
   const active = visible[index];
 
   useEffect(() => setIndex(0), [filter]);

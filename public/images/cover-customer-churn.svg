@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="1000" height="750" role="img" aria-label="Customer Churn Prediction">
+  <defs>
+    <linearGradient id="bgcustomerchurnprediction" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141517"/>
+      <stop offset="1" stop-color="#0b0b0c"/>
+    </linearGradient>
+    <radialGradient id="glowcustomerchurnprediction" cx="0.78" cy="0.26" r="0.62">
+      <stop offset="0" stop-color="#6f9de8" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#6f9de8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="gridcustomerchurnprediction" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M50 0H0V50" fill="none" stroke="#ffffff" stroke-opacity=".035" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1000" height="750" fill="url(#bgcustomerchurnprediction)"/>
+  <rect width="1000" height="750" fill="url(#gridcustomerchurnprediction)"/>
+  <rect width="1000" height="750" fill="url(#glowcustomerchurnprediction)"/>
+
+  <g><circle cx="630.06" cy="383.28" r="3.74" fill="#6f9de8" opacity="0.46"/><circle cx="791.79" cy="295.35" r="3.14" fill="#6f9de8" opacity="0.55"/><circle cx="928.18" cy="254.51" r="3.67" fill="#6f9de8" opacity="0.43"/><circle cx="634.89" cy="326.18" r="6.3" fill="#6f9de8" opacity="0.26"/><circle cx="567.25" cy="365.97" r="6" fill="#6f9de8" opacity="0.39"/><circle cx="612.37" cy="408.36" r="3.86" fill="#6f9de8" opacity="0.45"/><circle cx="711.61" cy="380.97" r="4.1" fill="#6f9de8" opacity="0.43"/><circle cx="645.15" cy="369.27" r="4.65" fill="#6f9de8" opacity="0.47"/><circle cx="743.32" cy="343.35" r="6.35" fill="#6f9de8" opacity="0.27"/><circle cx="730.51" cy="283.44" r="4.33" fill="#6f9de8" opacity="0.51"/><circle cx="615.42" cy="375.94" r="4.03" fill="#6f9de8" opacity="0.57"/><circle cx="694.97" cy="366.93" r="6.19" fill="#6f9de8" opacity="0.36"/><circle cx="739.87" cy="328.55" r="3.51" fill="#6f9de8" opacity="0.35"/><circle cx="927.11" cy="235.87" r="5.96" fill="#6f9de8" opacity="0.51"/><circle cx="920.41" cy="149.97" r="6.36" fill="#6f9de8" opacity="0.42"/><circle cx="824.8" cy="295.19" r="5.91" fill="#6f9de8" opacity="0.41"/><circle cx="630.95" cy="316.05" r="3.35" fill="#6f9de8" opacity="0.59"/><circle cx="913.35" cy="230.75" r="6.06" fill="#6f9de8" opacity="0.54"/><circle cx="897.15" cy="200.95" r="5.27" fill="#6f9de8" opacity="0.52"/><circle cx="687.76" cy="295.88" r="3.9" fill="#6f9de8" opacity="0.51"/><circle cx="741.96" cy="251.09" r="5.39" fill="#6f9de8" opacity="0.62"/><circle cx="782.43" cy="283.56" r="4.64" fill="#6f9de8" opacity="0.51"/><circle cx="800.69" cy="217.05" r="3.05" fill="#6f9de8" opacity="0.22"/><circle cx="631.15" cy="352.89" r="3.96" fill="#6f9de8" opacity="0.59"/><circle cx="921.05" cy="216.1" r="5.15" fill="#6f9de8" opacity="0.58"/><circle cx="751.09" cy="283.59" r="6.2" fill="#6f9de8" opacity="0.33"/><circle cx="874.07" cy="214.72" r="5.87" fill="#6f9de8" opacity="0.28"/><circle cx="907.45" cy="156.71" r="4.03" fill="#6f9de8" opacity="0.54"/><circle cx="579.56" cy="455.37" r="3.16" fill="#6f9de8" opacity="0.28"/><circle cx="915.74" cy="199.29" r="5.16" fill="#6f9de8" opacity="0.49"/><circle cx="893.36" cy="221.58" r="6.4" fill="#6f9de8" opacity="0.26"/><circle cx="580.83" cy="425.64" r="4.25" fill="#6f9de8" opacity="0.54"/><circle cx="883.84" cy="227.92" r="4.63" fill="#6f9de8" opacity="0.55"/><circle cx="647.38" cy="395.53" r="4.66" fill="#6f9de8" opacity="0.52"/><line x1="560" y1="410" x2="930" y2="196" stroke="#6f9de8" stroke-width="2" opacity=".5"/></g>
+
+  <text x="72" y="78" font-family="'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace" font-size="19" letter-spacing="3.4" fill="#6f9de8" opacity=".92">DATA SCIENCE</text>
+  <text x="928" y="78" text-anchor="end" font-family="'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace" font-size="19" letter-spacing="1.6" fill="#8a8b8f">2025</text>
+  <line x1="72" y1="102" x2="928" y2="102" stroke="#ffffff" stroke-opacity=".1" stroke-width="1"/>
+
+  <rect x="72" y="552.76" width="46" height="3" fill="#6f9de8"/>
+  <text x="72" y="616" font-family="'Instrument Sans','Segoe UI',system-ui,-apple-system,sans-serif" font-size="58" font-weight="600" fill="#f3f3f4" letter-spacing="-.6">Customer Churn Prediction</text>
+
+  <text x="72" y="682" font-family="'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace" font-size="19" letter-spacing=".6" fill="#8a8b8f">Python  ·  Jupyter Notebook  ·  Pandas</text>
+</svg>

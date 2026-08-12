@@ -14,7 +14,12 @@ const COMPETITION = /competition|kompetisi|lomba|contest|compfest|competitive|ge
 function summarize(items) {
   return [
     { value: items.length, label: 'Sertifikat' },
-    { value: items.filter((c) => c.proofKey).length, label: 'Dengan dokumen' },
+    // A scan and an issuer's verification page both let a visitor check the
+    // claim, so they count the same here.
+    {
+      value: items.filter((c) => c.proofKey || c.credentialUrl).length,
+      label: 'Dapat diverifikasi',
+    },
     {
       value: items.filter((c) => COMPETITION.test(`${c.name} ${c.issuer}`)).length,
       label: 'Kompetisi',
@@ -48,8 +53,8 @@ export default function Certifications({ certifications = [] }) {
           <h2 className="section-title">Certifications</h2>
         </div>
         <p className="section-lead cert__lead" data-reveal="" data-d="50">
-          Dokumen asli, bukan klaim. Klik salah satu untuk melihat versi penuh beserta nomor
-          sertifikatnya.
+          Dokumen asli, bukan klaim. Klik untuk melihat versi penuh beserta nomor sertifikatnya,
+          atau membuka halaman verifikasi penerbitnya.
         </p>
 
         <div className="cert__stats" data-reveal="" data-d="80">
@@ -64,9 +69,41 @@ export default function Certifications({ certifications = [] }) {
         <div className="cert__grid">
           {items.map((c, i) => {
             const proof = c.proofKey ? proofs[c.proofKey] : null;
-            const caption = [c.issuer, c.role, c.credentialId && `No. ${c.credentialId}`]
-              .filter((v) => v && v !== 'N/A')
-              .join(' · ');
+            // Guard the id before formatting — "N/A" is a placeholder, and
+            // wrapping it first would sneak "No. N/A" past the filter.
+            const id = c.credentialId && c.credentialId !== 'N/A' ? `No. ${c.credentialId}` : null;
+            const caption = [c.issuer, c.role, id].filter((v) => v && v !== 'N/A').join(' · ');
+
+            // Some issuers hand out PDFs, which the lightbox cannot render — but
+            // they also publish a verification page, which beats a scan anyway:
+            // the visitor confirms it at the source instead of trusting an image.
+            if (!proof && c.credentialUrl) {
+              return (
+                <a
+                  key={c.id ?? c.name}
+                  href={c.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cert__card cert__card--verify"
+                  data-reveal=""
+                  data-d={i * 55}
+                >
+                  <span className="cert__verify-mark mono">
+                    Verifikasi
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <path
+                        d="M2 10 10 2M4.4 2H10v5.6"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                  <span className="cert__title">{c.name}</span>
+                  <span className="cert__caption mono">{caption}</span>
+                </a>
+              );
+            }
 
             if (!proof) {
               return (
