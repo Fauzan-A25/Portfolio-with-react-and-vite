@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="1000" height="750" role="img" aria-label="Tech Stock EDA — Study Group 3">
+  <defs>
+    <linearGradient id="bgtopicpythonprogrammingformachinelearningassignmentstudygroup3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141517"/>
+      <stop offset="1" stop-color="#0b0b0c"/>
+    </linearGradient>
+    <radialGradient id="glowtopicpythonprogrammingformachinelearningassignmentstudygroup3" cx="0.78" cy="0.26" r="0.62">
+      <stop offset="0" stop-color="#9a9cb2" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#9a9cb2" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="gridtopicpythonprogrammingformachinelearningassignmentstudygroup3" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M50 0H0V50" fill="none" stroke="#ffffff" stroke-opacity=".035" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1000" height="750" fill="url(#bgtopicpythonprogrammingformachinelearningassignmentstudygroup3)"/>
+  <rect width="1000" height="750" fill="url(#gridtopicpythonprogrammingformachinelearningassignmentstudygroup3)"/>
+  <rect width="1000" height="750" fill="url(#glowtopicpythonprogrammingformachinelearningassignmentstudygroup3)"/>
+
+  <g><rect x="596" y="160" width="334" height="54" rx="8" fill="#9a9cb2" opacity="0.09" stroke="#9a9cb2" stroke-width="1.2" stroke-opacity=".28"/><text x="612" y="193" font-family="'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace" font-size="14" fill="#9a9cb2" opacity=".5">[1]</text><rect x="654" y="175" width="205.15" height="10" rx="5" fill="#9a9cb2" opacity="0.3"/><rect x="654" y="193" width="64.34" height="10" rx="5" fill="#9a9cb2" opacity="0.27"/><rect x="596" y="234" width="334" height="54" rx="8" fill="#9a9cb2" opacity="0.07" stroke="#9a9cb2" stroke-width="1.2" stroke-opacity=".28"/><text x="612" y="267" font-family="'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace" font-size="14" fill="#9a9cb2" opacity=".5">[2]</text><rect x="654" y="249" width="210.15" height="10" rx="5" fill="#9a9cb2" opacity="0.47"/><rect x="654" y="267" width="120.23" height="10" rx="5" fill="#9a9cb2" opacity="0.2"/><rect x="596" y="308" width="334" height="54" rx="8" fill="#9a9cb2" opacity="0.08" stroke="#9a9cb2" stroke-width="1.2" stroke-opacity=".28"/><text x="612" y="341" font-family="'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace" font-size="14" fill="#9a9cb2" opacity=".5">[3]</text><rect x="654" y="323" width="235.83" height="10" rx="5" fill="#9a9cb2" opacity="0.39"/><rect x="654" y="341" width="148.96" height="10" rx="5" fill="#9a9cb2" opacity="0.26"/><rect x="596" y="382" width="334" height="54" rx="8" fill="#9a9cb2" opacity="0.06" stroke="#9a9cb2" stroke-width="1.2" stroke-opacity=".28"/><text x="612" y="415" font-family="'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace" font-size="14" fill="#9a9cb2" opacity=".5">[4]</text><rect x="654" y="397" width="103.99" height="10" rx="5" fill="#9a9cb2" opacity="0.42"/><rect x="654" y="415" width="75.94" height="10" rx="5" fill="#9a9cb2" opacity="0.18"/></g>
+
+  <text x="72" y="78" font-family="'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace" font-size="19" letter-spacing="3.4" fill="#9a9cb2" opacity=".92">ACADEMIC</text>
+  <text x="928" y="78" text-anchor="end" font-family="'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace" font-size="19" letter-spacing="1.6" fill="#8a8b8f">2025</text>
+  <line x1="72" y1="102" x2="928" y2="102" stroke="#ffffff" stroke-opacity=".1" stroke-width="1"/>
+
+  <rect x="72" y="485.48" width="46" height="3" fill="#9a9cb2"/>
+  <text x="72" y="548.72" font-family="'Instrument Sans','Segoe UI',system-ui,-apple-system,sans-serif" font-size="58" font-weight="600" fill="#f3f3f4" letter-spacing="-.6">Tech Stock EDA — Study</text>
+  <text x="72" y="616" font-family="'Instrument Sans','Segoe UI',system-ui,-apple-system,sans-serif" font-size="58" font-weight="600" fill="#f3f3f4" letter-spacing="-.6">Group 3</text>
+
+  <text x="72" y="682" font-family="'JetBrains Mono',ui-monospace,'Cascadia Code',Consolas,monospace" font-size="19" letter-spacing=".6" fill="#8a8b8f">Python  ·  Jupyter Notebook  ·  Pandas</text>
+</svg>

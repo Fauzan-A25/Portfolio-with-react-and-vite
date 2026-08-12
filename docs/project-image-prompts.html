@@ -1,0 +1,695 @@
+<title>Prompt gambar proyek — portfolio</title>
+<style>
+  :root {
+    --ground: #faf9f7;
+    --surface: #ffffff;
+    --sunken: #f2f0ec;
+    --ink: #16181b;
+    --muted: #6b6e74;
+    --line: #e5e3de;
+    --ring: rgba(22, 24, 27, .34);
+
+    --mono: ui-monospace, "JetBrains Mono", "Cascadia Code", "SF Mono", Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+    /* Wide enough that an 80-column prompt block never re-wraps mid-sentence;
+       prose is pulled back to a readable measure separately. */
+    --measure: 840px;
+    --prose: 64ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0e0f11;
+      --surface: #17181a;
+      --sunken: #101113;
+      --ink: #eceef0;
+      --muted: #8d9096;
+      --line: #26282b;
+      --ring: rgba(236, 238, 240, .4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0e0f11;
+    --surface: #17181a;
+    --sunken: #101113;
+    --ink: #eceef0;
+    --muted: #8d9096;
+    --line: #26282b;
+    --ring: rgba(236, 238, 240, .4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: clamp(28px, 6vw, 76px) clamp(18px, 5vw, 40px) 96px;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: var(--measure);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+
+  /* ---------------------------------------------------------- masthead -- */
+
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: clamp(28px, 5.4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  .lede { margin: 0; color: var(--muted); max-width: var(--prose); }
+
+  .note {
+    border: 1px solid var(--line);
+    background: var(--sunken);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .note p { margin: 0; max-width: var(--prose); }
+  .note strong { font-weight: 650; }
+
+  /* ----------------------------------------------------------- section -- */
+
+  section { display: flex; flex-direction: column; gap: 20px; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  h2 {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 19px;
+    font-weight: 650;
+    letter-spacing: -.01em;
+  }
+
+  .section-head .count {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .section-lead { margin: 0; color: var(--muted); font-size: 15px; max-width: var(--prose); }
+
+  /* -------------------------------------------------------------- card -- */
+
+  .card {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 14px 18px 0;
+  }
+
+  /* The swatch is the accent's only job on this page: it shows the exact hex
+     the prompt beside it will bake into the image. */
+  .swatch {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--accent, var(--ink));
+    flex: none;
+  }
+
+  .file {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chip {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 2px 8px;
+  }
+
+  h3 {
+    margin: 0;
+    padding: 4px 18px 0;
+    font-size: 17px;
+    font-weight: 640;
+    letter-spacing: -.01em;
+  }
+
+  .hint {
+    margin: 0;
+    padding: 6px 18px 0;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+
+  .hint a { color: inherit; text-underline-offset: 3px; }
+
+  .block { position: relative; padding: 14px 18px 18px; }
+
+  pre {
+    margin: 0;
+    background: var(--sunken);
+    border: 1px solid var(--line);
+    padding: 16px 18px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .copy {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+  }
+
+  .copy:hover { color: var(--ink); border-color: var(--ring); }
+  .copy:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .copy[data-done="1"] { color: var(--accent, var(--ink)); border-color: var(--accent, var(--ink)); }
+
+  ol { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; }
+  li::marker { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+  code {
+    font-family: var(--mono);
+    font-size: .88em;
+    background: var(--sunken);
+    border: 1px solid var(--line);
+    padding: 1px 5px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <span class="eyebrow">portfolio-with-react · src/data/portfolio.json</span>
+    <h1>Prompt gambar untuk 15 proyek</h1>
+    <p class="lede">
+      Lima belas proyek sekarang memakai cover SVG buatan sendiri. Ini prompt untuk menggantinya
+      dengan hasil Stitch atau Gemini — sudah dipisah menurut tool yang cocok, dan sudah membawa
+      warna aksen yang sama supaya satu stack tetap terbaca sebagai satu sistem.
+    </p>
+    <div class="note">
+      <p><strong>Sebelum generate: tiga proyek ini lebih baik di-screenshot aslinya.</strong></p>
+      <p>
+        Proyek 1–7 di portfolio memakai screenshot asli. Gambar AI yang dicampur screenshot asli
+        akan terlihat timpang. Kalau aplikasinya masih bisa dibuka, screenshot selalu menang:
+        <em>Portfolio React</em> (live di Vercel), <em>AES-256</em> (notebook Colab-nya bisa dibuka),
+        dan <em>NutriGinjal</em> (APK-nya masih ada di Drive). Prompt-nya tetap saya sertakan
+        kalau ternyata tidak sempat.
+      </p>
+    </div>
+  </header>
+
+  <!-- ------------------------------------------------------------ global -- -->
+
+  <section>
+    <div class="section-head">
+      <h2>Blok gaya bersama</h2>
+      <span class="count">wajib</span>
+    </div>
+    <p class="section-lead">
+      Tempel ini di akhir setiap prompt di bawah, dan ganti <code>&lt;ACCENT&gt;</code> dengan hex
+      yang tertera di kartunya. Tanpa blok ini hasilnya tidak akan konsisten antar-kartu.
+    </p>
+
+    <article class="card">
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>Output: 4:3 landscape, full bleed, at least 1600x1200.
+Palette: near-black background (#0c0c0d to #17181a), off-white text (#f3f3f4),
+neutral grey (#8a8b8f), and exactly one accent colour: &lt;ACCENT&gt;. No other hues.
+Look: dark-mode product screenshot aesthetic. Flat, precise, generous spacing,
+thin 1.5-2px strokes, faint technical grid. No gloss, no 3D, no bevel, no neon
+glow, no lens flare, no gradient mesh, no drop shadows.
+Do not include: people, faces, hands, company logos, watermarks, headline text.
+Any interface text must be small, plausible and treated as texture.</pre>
+      </div>
+    </article>
+  </section>
+
+  <!-- ------------------------------------------------------------ stitch -- -->
+
+  <section>
+    <div class="section-head">
+      <h2>Stitch</h2>
+      <span class="count">7 proyek</span>
+    </div>
+    <p class="section-lead">
+      Proyek yang benar-benar punya antarmuka. Stitch menghasilkan desain UI, jadi hasilnya akan
+      terlihat seperti screenshot produk — cocok berdampingan dengan proyek 1–7. Ekspor sebagai
+      gambar, lalu crop ke 4:3.
+    </p>
+
+    <article class="card" style="--accent:#6cc78d">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-nutriginjal.png · #6cc78d</span>
+        <span class="chip">Mobile</span>
+      </div>
+      <h3>NutriGinjal — CKD Nutrition App</h3>
+      <p class="hint">Minta tiga layar sekaligus, lalu susun berjajar supaya bentuknya lanskap.</p>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>Dark-mode Android app for chronic kidney disease patients.
+
+Home screen: greeting header with the patient's name; a "Today's limits" card
+showing protein, potassium and phosphorus as three thin progress arcs against
+their daily caps; a large "NutriSnap AI" card inviting the user to ask about a
+meal; a "Lab Vault" list of the last three lab results, each with date, value and
+a small trend sparkline; bottom navigation with Home, Chat, Labs, Profile.
+
+Then generate two more screens in the same style: the AI nutrition chat, and a
+risk result screen showing a Low/High CKD progression verdict above a scrollable
+list of the 24 lab parameters that produced it.
+
+Calm and clinical, not playful. Rounded cards, roomy padding.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#67b2d4">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-melodia.png · #67b2d4</span>
+        <span class="chip">Web</span>
+      </div>
+      <h3>Melodia — Music Streaming App</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>Dark-mode desktop web app for personal music streaming.
+
+Library screen: left sidebar with Home, Search, Library and Playlists, plus a
+user avatar pinned at the bottom; main area headed "Your library" showing a grid
+of square album cards with title and artist beneath each; a persistent player bar
+fixed to the bottom of the viewport with a cover thumbnail, track name, artist,
+a scrubber with elapsed and total time, previous/play/next controls and a volume
+slider.
+
+Minimal and typography-led. Flat cards, no gradients on artwork placeholders.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#d4836c">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-wa-assistant.png · #d4836c</span>
+        <span class="chip">Tools</span>
+      </div>
+      <h3>WhatsApp AI Assistant Bot</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>Dark-mode mobile messaging interface for an assistant bot.
+
+Show one conversation thread: the user's messages right-aligned in accent-tinted
+bubbles, the bot's replies left-aligned in neutral bubbles. The latest bot reply
+carries a small pill above it labelling the detected intent, then a short
+structured answer listing three project entries with a status tag on each. A
+message input bar with a send button sits at the bottom.
+
+The intent pill is the only place the accent appears besides the outgoing
+bubbles. Everything else neutral.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#d4836c">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-discord-music.png · #d4836c</span>
+        <span class="chip">Tools</span>
+      </div>
+      <h3>Discord Music Bot V2</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>Dark-mode chat application showing a music bot's rich embed card.
+
+The embed has a coloured accent bar down its left edge, a small square album
+thumbnail on the right, a "Now playing" label, a track title and artist, a
+progress bar with elapsed and total time, and a row of three small fields:
+Queue 7 tracks, Loop Queue, Volume 60%. Beneath the embed, a compact numbered
+list of the next three queued tracks.
+
+A narrow channel sidebar is visible on the left. Neutral surfaces, accent used
+only on the embed bar and the progress fill.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#d4836c">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-ollama-discord.png · #d4836c</span>
+        <span class="chip">Tools</span>
+      </div>
+      <h3>Ollama DeepSeek Discord Bot</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>Dark-mode chat application showing an AI assistant replying in a channel.
+
+A short user question sits at the top; below it the bot's answer runs across two
+paragraphs inside a bordered card, with a thin footer line showing the model name
+and a small dot indicating local inference. A narrow channel sidebar with four
+channel names is visible on the left.
+
+Accent used only on the bot's name and the local-inference dot.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#67b2d4">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-portfolio-react.png · #67b2d4</span>
+        <span class="chip">Web</span>
+      </div>
+      <h3>Portfolio with React and Vite</h3>
+      <p class="hint">Lebih baik screenshot langsung dari <a href="https://portofolio-with-react-weld.vercel.app" target="_blank" rel="noopener noreferrer">portofolio-with-react-weld.vercel.app</a>.</p>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>Dark-mode personal portfolio website for a data scientist, desktop viewport.
+
+Hero section: a large name, a role subtitle, and two buttons reading "View
+projects" and "Download CV". Below the hero, a row of three project cards, each
+with an image area, a title, a one-line description and two or three small tech
+tags. A sticky top navigation bar carries section links and a theme toggle.
+
+Frosted glass panels with subtle backdrop blur over a near-black background.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#67b2d4">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-bootstrap-portfolio.png · #67b2d4</span>
+        <span class="chip">Web</span>
+      </div>
+      <h3>Web Portfolio with Bootstrap 5</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>Dark-mode personal portfolio website, desktop viewport, glassmorphism style.
+
+Show the projects section: a section heading, and a horizontal slider holding
+three frosted-glass project cards with a navigation arrow on either side. Each
+card has an image area, a title, a two-line description and small tags. A theme
+toggle switch sits in the top-right of the navigation bar.
+
+Soft blurred colour shapes sit behind the glass panels, tinted only in the accent
+hue. Everything else neutral.</pre>
+      </div>
+    </article>
+  </section>
+
+  <!-- ------------------------------------------------------------ gemini -- -->
+
+  <section>
+    <div class="section-head">
+      <h2>Gemini</h2>
+      <span class="count">8 proyek</span>
+    </div>
+    <p class="section-lead">
+      Proyek tanpa antarmuka — notebook, CLI, analisis. Di sini yang dipakai bukan ilustrasi
+      abstrak, tapi render dari hal yang benar-benar dihasilkan proyeknya: terminal, confusion
+      matrix, kurva runtime. Lebih jujur, dan lebih nyambung dengan screenshot proyek lain.
+    </p>
+
+    <article class="card" style="--accent:#d4836c">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-go-library.png · #d4836c</span>
+        <span class="chip">Tools</span>
+      </div>
+      <h3>Go Library Manager</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>A single dark terminal window, centred and filling most of the frame, running a
+library management CLI.
+
+The screen shows a formatted ASCII table of active loans with columns for ID,
+book title, member and due date. One row is marked overdue and is the only thing
+tinted in the accent colour. Beneath the table sits a numbered menu of six
+options and a prompt line with a solid block cursor.
+
+Monospaced type throughout, thin window border, flat — no window shadow, no
+reflection, no desk or laptop around it.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#9a9cb2">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-text-editor.png · #9a9cb2</span>
+        <span class="chip">Academic</span>
+      </div>
+      <h3>Text Editor Laba-Laba Sunda</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>A single dark terminal window showing a text editor mid-edit.
+
+Numbered lines of plain prose fill the window. One contiguous block spanning
+three lines is highlighted as a selection in the accent colour, with a solid
+block cursor at the end of it. A thin status bar along the bottom shows a
+filename, a line and column indicator, and a small undo/redo marker.
+
+Monospaced type, no syntax colouring — this is prose, not code. Flat, no window
+shadow, no surrounding desk.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#9a9cb2">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-aes256.png · #9a9cb2</span>
+        <span class="chip">Academic</span>
+      </div>
+      <h3>AES-256-CBC Encryption Tool</h3>
+      <p class="hint">Notebook Colab-nya bisa dibuka — screenshot aslinya lebih baik.</p>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>A dark notebook interface showing the output of an encryption tool.
+
+One numbered code cell sits at the top. Below it, an output block prints an
+operation summary as aligned label-and-value rows: algorithm AES-256-CBC, mode
+CBC, key derivation PBKDF2-HMAC-SHA256, iterations 100,000. Under that, two long
+hexadecimal strings labelled salt and IV wrap across several monospaced lines.
+
+Accent colour appears only on the labels; the hex strings stay neutral grey.
+Flat, no browser chrome, no cursor.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#6f9de8">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-customer-churn.png · #6f9de8</span>
+        <span class="chip">Data Science</span>
+      </div>
+      <h3>Customer Churn Prediction</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>A dark analytics panel showing model evaluation output, arranged as two charts
+side by side.
+
+Left: a 2x2 confusion matrix drawn as a heatmap, its four cells stepping through
+tints of the accent colour from faint to solid, each carrying a count label.
+Right: a horizontal bar chart of feature importances with six unlabelled bars of
+decreasing length. A thin strip along the bottom shows four small metric readouts.
+
+Flat and precise. Hairline gridlines, grey axis labels, accent reserved for the
+data marks only. No legend box, no title.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#6f9de8">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-student-academic.png · #6f9de8</span>
+        <span class="chip">Data Science</span>
+      </div>
+      <h3>Student Academic Performance Prediction</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>A dark analytics panel showing a three-class classification result.
+
+Left: a 3x3 confusion matrix drawn as a heatmap, the diagonal cells solid in the
+accent colour and the off-diagonal cells faint, every cell carrying a count.
+Right: three stacked horizontal bars showing the class distribution across
+dropout, enrolled and graduate outcomes, each bar a different tint of the same
+accent.
+
+Flat, scientific, hairline gridlines, grey axis labels. No legend box, no title.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#9a9cb2">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-study-group-3.png · #9a9cb2</span>
+        <span class="chip">Academic</span>
+      </div>
+      <h3>Tech Stock EDA — Study Group 3</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>A dark data-analysis panel, two charts side by side.
+
+Left, taking two thirds of the width: five overlaid stock price line charts on a
+shared time axis, drawn with thin 1.5px strokes in five tints of the same accent
+colour, over a faint gridline background. The lines rise and diverge toward the
+right.
+Right: a small square correlation matrix rendered as a heatmap grid, cells
+stepping through the same tints.
+
+Flat and editorial. No glow, no 3D, no legend box, no title.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#9a9cb2">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-study-group-4.png · #9a9cb2</span>
+        <span class="chip">Academic</span>
+      </div>
+      <h3>Preprocessing Pipeline — Study Group 4</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>A dark technical diagram of a data preprocessing pipeline, read left to right.
+
+On the left, five small stacked dataset tiles converge with thin arrows into a
+single horizontal chain of four rounded stages, each stage a plain box connected
+by thin arrows. On the right, a before-and-after pair of boxplots sits side by
+side: the first with several outlier dots beyond its whiskers, the second clean.
+
+Flat vector, thin strokes, generous space between stages. The accent colour is
+used only on the connecting arrows and the outlier dots; every box stays neutral.</pre>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#9a9cb2">
+      <div class="card-head">
+        <span class="swatch"></span>
+        <span class="file">cover-tubes-aka.png · #9a9cb2</span>
+        <span class="chip">Academic</span>
+      </div>
+      <h3>TUBES AKA — Iterative vs Recursive</h3>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>A dark scientific line chart comparing two algorithm runtime curves plotted on
+the same axes.
+
+One curve rises almost linearly; the other climbs steeply and pulls away toward
+the right. Both carry small circular markers at each measured point. The x-axis
+is labelled by dataset size, the y-axis by execution time in seconds, with
+tick labels along both.
+
+The steeper curve is drawn in the accent colour, the flatter one in neutral grey.
+Faint gridlines, thin 2px strokes, no legend box, no title, no shading under the
+curves.</pre>
+      </div>
+    </article>
+  </section>
+
+  <!-- ------------------------------------------------------------ wiring -- -->
+
+  <section>
+    <div class="section-head">
+      <h2>Memasang hasilnya</h2>
+    </div>
+
+    <article class="card">
+      <div class="block">
+        <ol>
+          <li>Simpan tiap gambar sebagai PNG ke <code>public/images/</code> dengan nama persis seperti di kartunya, misalnya <code>cover-melodia.png</code>.</li>
+          <li>Jalankan perintah di bawah. Ia hanya mengalihkan entry yang PNG-nya benar-benar sudah ada, jadi aman dijalankan berapa kali pun dan boleh dicicil.</li>
+          <li>Cover SVG yang belum diganti tetap dipakai. Generator SVG sudah dikunci agar tidak menimpa PNG Anda.</li>
+        </ol>
+      </div>
+      <div class="block">
+        <button class="copy" type="button">Salin</button>
+        <pre>node -e "const fs=require('fs'),p=require('./src/data/portfolio.json');let n=0;for(const x of p.projects){if(!String(x.image).startsWith('/images/cover-'))continue;const png=x.image.replace(/\.svg$/,'.png');if(fs.existsSync('public'+png)){x.image=png;n++}}fs.writeFileSync('src/data/portfolio.json',JSON.stringify(p,null,2)+'\n');console.log(n+' cover switched to PNG')"</pre>
+      </div>
+    </article>
+  </section>
+
+</div>
+
+<script>
+  document.querySelectorAll('.copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const pre = btn.parentElement.querySelector('pre');
+      if (!pre) return;
+      try {
+        await navigator.clipboard.writeText(pre.textContent.trim());
+      } catch {
+        const sel = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(pre);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        return;
+      }
+      const label = btn.textContent;
+      btn.textContent = 'Tersalin';
+      btn.dataset.done = '1';
+      setTimeout(() => {
+        btn.textContent = label;
+        delete btn.dataset.done;
+      }, 1400);
+    });
+  });
+</script>

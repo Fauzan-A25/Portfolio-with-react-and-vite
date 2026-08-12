@@ -78,6 +78,31 @@
   box-shadow: none;
 }
 
+/* Same solid frame as a documented card — it is evidence, just held elsewhere. */
+.cert__card--verify {
+  justify-content: flex-end;
+  gap: 7px;
+  min-height: 150px;
+  padding: 16px;
+}
+
+.cert__verify-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: auto;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mut);
+  transition: color 0.32s;
+}
+
+.cert__card--verify:hover .cert__verify-mark {
+  color: var(--txt);
+}
+
 .cert__empty-mark {
   font-size: 10.5px;
   line-height: 1;

@@ -71,3 +71,10 @@ logs/
 # - next.config.mjs, jsconfig.json, package.json
 # - .env.example        (environment template)
 # ============================================
+
+# Scans containing personal data (home address, DOB, ID numbers) — never publish
+raw/certificates-private/
+
+# Local archive of original certificate scans — the ones actually shown are
+# copied into public/images/, so this does not belong in the repo.
+raw/certificates/

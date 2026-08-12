@@ -465,61 +465,56 @@
   "certifications": [
     {
       "id": 1,
-      "name": "MySkill Certified INLINE ELEMENTS",
+      "name": "Inline Elements — Frontend HTML",
       "issuer": "MySkill",
-      "issueDate": "",
-      "expiryDate": "",
-      "credentialId": "",
+      "credentialId": "MS-18/7/2024-9bSJUJGVsxJ6mbAYciJ",
       "credentialUrl": "",
       "description": "",
-      "proofKey": null
+      "proofKey": "myskill-inline-elements",
+      "date": "2024"
     },
     {
       "id": 2,
       "name": "Peserta GELAR RASA 2025",
       "issuer": "GELAR RASA",
-      "issueDate": "2025",
-      "expiryDate": "",
       "credentialId": "",
       "credentialUrl": "",
       "description": "",
-      "proofKey": "gelarrasa-2025"
+      "proofKey": "gelarrasa-2025",
+      "date": "2025"
     },
     {
       "id": 3,
       "name": "Delegate at Youth Today X Join AIESEC 2024",
       "issuer": "AIESEC",
-      "issueDate": "2024",
-      "expiryDate": "",
       "credentialId": "",
       "credentialUrl": "",
       "description": "",
-      "proofKey": "aiesec-2024"
+      "proofKey": "aiesec-2024",
+      "date": "2024"
     },
     {
       "id": 4,
       "name": "Data Analyst Competition FIND IT! 2025",
       "issuer": "FIND IT!",
-      "issueDate": "2025",
-      "expiryDate": "",
       "credentialId": "",
       "credentialUrl": "",
       "description": "",
-      "proofKey": "findit-2025"
+      "proofKey": "findit-2025",
+      "date": "2025"
     },
     {
       "id": 5,
       "name": "Belajar Dasar AI",
-      "issuer": "",
-      "issueDate": "",
-      "expiryDate": "",
-      "credentialId": "",
-      "credentialUrl": "",
+      "issuer": "Dicoding Indonesia",
+      "credentialId": "0LZ0YO5O3X65",
+      "credentialUrl": "https://www.dicoding.com/certificates/0LZ0YO5O3X65",
       "description": "",
-      "proofKey": null
+      "proofKey": null,
+      "date": "2026"
     },
     {
-      "id": 2,
+      "id": 6,
       "name": "Data Analytics Dash — COMPFEST 17",
       "issuer": "Universitas Indonesia",
       "role": "Participant",
@@ -529,7 +524,7 @@
       "url": null
     },
     {
-      "id": 4,
+      "id": 7,
       "name": "Senior Competitive Programming — COMPFEST 16",
       "issuer": "Universitas Indonesia",
       "role": "Participant",
@@ -539,7 +534,7 @@
       "url": null
     },
     {
-      "id": 5,
+      "id": 8,
       "name": "GELAR RASA 2024",
       "issuer": "UPN “Veteran” Jawa Timur",
       "role": "Peserta",
@@ -547,6 +542,97 @@
       "credentialId": "1846/UN63.7/2024",
       "proofKey": "gelarrasa-2024",
       "url": null
+    },
+    {
+      "id": 9,
+      "name": "Coding Camp 2026 — Learning Path AI Engineer",
+      "issuer": "DBS Foundation × Dicoding Indonesia",
+      "role": "Full Graduate",
+      "date": "2026",
+      "credentialId": "CC26/GRAD/XXVI-07/CACC012D6Y2364",
+      "credentialUrl": "",
+      "description": "",
+      "proofKey": "coding-camp-2026"
+    },
+    {
+      "id": 10,
+      "name": "Membangun Proyek Deep Learning Tingkat Mahir",
+      "issuer": "Dicoding Indonesia",
+      "date": "2026",
+      "credentialId": "KEXLQJKQ0PG2",
+      "credentialUrl": "https://www.dicoding.com/certificates/KEXLQJKQ0PG2",
+      "description": "",
+      "proofKey": null
+    },
+    {
+      "id": 11,
+      "name": "Belajar Fundamental Deep Learning",
+      "issuer": "Dicoding Indonesia",
+      "date": "2026",
+      "credentialId": "MEPJOOY1QZ3V",
+      "credentialUrl": "https://www.dicoding.com/certificates/MEPJOOY1QZ3V",
+      "description": "",
+      "proofKey": null
+    },
+    {
+      "id": 12,
+      "name": "Belajar Machine Learning untuk Pemula",
+      "issuer": "Dicoding Indonesia",
+      "date": "2026",
+      "credentialId": "0LZ0YG4GNX65",
+      "credentialUrl": "https://www.dicoding.com/certificates/0LZ0YG4GNX65",
+      "description": "",
+      "proofKey": null
+    },
+    {
+      "id": 13,
+      "name": "Memulai Pemrograman dengan Python",
+      "issuer": "Dicoding Indonesia",
+      "date": "2026",
+      "credentialId": "JMZVO2413XN9",
+      "credentialUrl": "https://www.dicoding.com/certificates/JMZVO2413XN9",
+      "description": "",
+      "proofKey": null
+    },
+    {
+      "id": 14,
+      "name": "Prompt Engineering untuk Software Developer",
+      "issuer": "Dicoding Indonesia",
+      "date": "2026",
+      "credentialId": "JMZVOQ9M3XN9",
+      "credentialUrl": "https://www.dicoding.com/certificates/JMZVOQ9M3XN9",
+      "description": "",
+      "proofKey": null
+    },
+    {
+      "id": 15,
+      "name": "Belajar Dasar Git dengan GitHub",
+      "issuer": "Dicoding Indonesia",
+      "date": "2026",
+      "credentialId": "N9ZONDOG6XG5",
+      "credentialUrl": "https://www.dicoding.com/certificates/N9ZONDOG6XG5",
+      "description": "",
+      "proofKey": null
+    },
+    {
+      "id": 16,
+      "name": "Pengenalan ke Logika Pemrograman (Programming Logic 101)",
+      "issuer": "Dicoding Indonesia",
+      "date": "2026",
+      "credentialId": "ERZRL97VQZYV",
+      "credentialUrl": "https://www.dicoding.com/certificates/ERZRL97VQZYV",
+      "description": "",
+      "proofKey": null
+    },
+    {
+      "id": 17,
+      "name": "Memulai Dasar Pemrograman untuk Menjadi Pengembang Software",
+      "issuer": "Dicoding Indonesia",
+      "date": "2026",
+      "credentialId": "6RPN73R58X2M",
+      "credentialUrl": "https://www.dicoding.com/certificates/6RPN73R58X2M",
+      "description": "",
+      "proofKey": null
     }
   ],
   "proofs": {
@@ -594,15 +680,25 @@
       "title": "Youth Today × Join AIESEC 2024",
       "note": "AIESEC in Bandung · Delegate · No. 1062/TM-BDG/C/X/2024",
       "image": "/images/cert-aiesec-2024.jpeg"
+    },
+    "myskill-inline-elements": {
+      "title": "Inline Elements — Frontend HTML",
+      "note": "MySkill · Course Completion · 18 Juli 2024",
+      "image": "/images/cert-myskill-inline-elements.jpeg"
+    },
+    "coding-camp-2026": {
+      "title": "Coding Camp 2026 — Learning Path AI Engineer",
+      "note": "DBS Foundation × Dicoding · Full Graduate · 9 Feb – 20 Jul 2026 · No. CC26/GRAD/XXVI-07/CACC012D6Y2364",
+      "image": "/images/cert-coding-camp-2026.jpeg"
     }
   },
   "projects": [
     {
       "id": 1,
-      "title": "Fossil - Water Potability Prediction",
+      "title": "Fossil — Water Potability Prediction",
       "slug": "fossil-water-potability",
-      "shortDescription": "ML application for predicting water safety",
-      "description": "An intelligent Streamlit-based Machine Learning application that predicts water potability using various chemical and physical parameters such as pH, sulfate concentration, and organic carbon. Built with MLPClassifier model to assess water safety for drinking purposes.",
+      "shortDescription": "Streamlit app that predicts whether a water sample is safe to drink",
+      "description": "A Streamlit app that predicts water potability from nine chemical and physical parameters — pH, sulfate, organic carbon and the rest. An MLPClassifier neural network trained on the Kaggle Water Potability dataset backs the call. Built as the GDGoC Telkom University final project.",
       "image": "https://drive.google.com/thumbnail?id=1MNgX_ecN6bDlplqUxACGC-kCxn2VVL_b&sz=w800",
       "tags": [
         "Machine Learning",
@@ -612,7 +708,7 @@
         "Data Science"
       ],
       "technologies": [
-        "Python 3.9+",
+        "Python",
         "Streamlit",
         "Scikit-learn",
         "Pandas",
@@ -620,34 +716,34 @@
         "Matplotlib"
       ],
       "features": [
-        "Real-time water quality prediction",
-        "Interactive parameter input",
-        "Visual data analysis",
-        "Model performance metrics",
-        "User-friendly interface"
+        "Potability prediction from nine water quality parameters",
+        "Interactive parameter input in the browser",
+        "MLPClassifier with (100, 50) hidden layers, ReLU and Adam",
+        "Exploratory charts of the underlying dataset",
+        "Deployed on Streamlit Cloud, no install needed"
       ],
       "category": "Machine Learning",
       "status": "Completed",
-      "year": 2024,
-      "duration": "2 months",
-      "role": "Full Stack Developer",
-      "teamSize": 3,
+      "year": 2025,
+      "duration": "1 month",
+      "role": "ML Developer",
+      "teamSize": 2,
       "githubUrl": "https://github.com/Fauzan-A25/FOSSIL_GDGoC-TUBES",
-      "demoUrl": "https://fossil-water-app.streamlit.app",
+      "demoUrl": "https://fossil-app.streamlit.app/",
       "videoUrl": "",
       "featured": true,
       "highlights": [
-        "Achieved 89% accuracy in water potability prediction",
-        "Deployed on Streamlit Cloud for public access",
-        "Processed 3,276 water quality samples"
+        "Trained on 3,276 water samples from the Kaggle Water Potability dataset",
+        "Neural network tuned to (100, 50) hidden layers over 500 iterations",
+        "Published as a public Streamlit Cloud app"
       ]
     },
     {
       "id": 2,
       "title": "COPPA Risk Prediction Model",
       "slug": "coppa-risk-prediction",
-      "shortDescription": "XGBoost model for COPPA violation detection",
-      "description": "Advanced machine learning model using XGBoost to predict COPPA (Children's Online Privacy Protection Act) violation risks in mobile applications. Features comprehensive data preprocessing, feature engineering, and model optimization to identify apps that may violate children's privacy regulations.",
+      "shortDescription": "XGBoost model that flags mobile apps at risk of COPPA violations",
+      "description": "An XGBoost classifier that flags mobile apps likely to violate COPPA, the US children's privacy law. The pipeline repairs malformed download ranges and obfuscated country names, groups rare categories, then upsamples the minority class before training. Built solo for the FIND IT! 2025 competition at UGM.",
       "image": "https://drive.google.com/thumbnail?id=15zIwGLfO5luTSJuBbaVzeusAXttw4dQC&sz=w800",
       "tags": [
         "XGBoost",
@@ -657,21 +753,20 @@
         "COPPA"
       ],
       "technologies": [
-        "Python 3.9+",
+        "Python",
         "XGBoost",
+        "Scikit-learn",
         "Pandas",
         "NumPy",
-        "Scikit-learn",
-        "SHAP",
         "Matplotlib",
         "Seaborn"
       ],
       "features": [
-        "Advanced feature engineering",
-        "XGBoost classification model",
-        "SHAP value analysis for interpretability",
-        "Comprehensive data preprocessing",
-        "Model performance evaluation"
+        "Cleaning of malformed download ranges and obfuscated country names",
+        "Rare-category grouping and label encoding of categorical fields",
+        "Minority-class upsampling to counter a 9:1 imbalance",
+        "Probability calibration with CalibratedClassifierCV",
+        "Evaluation by ROC-AUC, confusion matrix and classification report"
       ],
       "category": "Data Science",
       "status": "Completed",
@@ -684,17 +779,17 @@
       "videoUrl": "",
       "featured": true,
       "highlights": [
-        "Developed predictive model with 92% accuracy",
-        "Analyzed 10,000+ mobile applications",
-        "Implemented SHAP for model explainability"
+        "ROC-AUC of 0.906 on the held-out split",
+        "Trained on 7,000 labelled mobile applications",
+        "0.89 recall on the at-risk class despite heavy imbalance"
       ]
     },
     {
       "id": 3,
       "title": "Crowd Counting with CSRNet",
       "slug": "crowd-counting-csrnet",
-      "shortDescription": "Deep learning for crowd density estimation",
-      "description": "Implementation of CSRNet (Congested Scene Recognition Network) using PyTorch for accurate crowd counting and density estimation. The model can handle both sparse and dense crowds, making it suitable for various surveillance and monitoring applications.",
+      "shortDescription": "Deep learning crowd density estimation from CCTV imagery",
+      "description": "An Improved CSRNet in PyTorch that sizes a crowd by predicting a density map rather than counting heads. A VGG-16 frontend feeds a multi-branch dilated backend, so sparse walkways and packed squares both stay accurate. Built for the Hology competition's festival monitoring brief.",
       "image": "https://drive.google.com/thumbnail?id=15j18nDquKe53cXk8P5EVYKpxtB701T0j&sz=w800",
       "tags": [
         "Deep Learning",
@@ -704,7 +799,7 @@
         "CSRNet"
       ],
       "technologies": [
-        "Python 3.9+",
+        "Python",
         "PyTorch",
         "OpenCV",
         "NumPy",
@@ -712,11 +807,11 @@
         "CUDA"
       ],
       "features": [
-        "Accurate crowd density estimation",
-        "Handles sparse and dense scenes",
-        "Real-time inference capability",
-        "Pre-trained model support",
-        "Visualization tools"
+        "Density-map estimation with adaptive Gaussian kernels",
+        "VGG-16 frontend pre-trained on ImageNet",
+        "Multi-branch dilated backend for multi-scale context",
+        "Multi-scale and multi-crop augmentation",
+        "Checkpointing every 2 epochs, best model chosen by validation MAE"
       ],
       "category": "Computer Vision",
       "status": "Completed",
@@ -729,40 +824,38 @@
       "videoUrl": "",
       "featured": true,
       "highlights": [
-        "Trained on ShanghaiTech dataset",
-        "Achieved MAE of 68.2 on Part A",
-        "Optimized learning rate to 1e-4"
+        "Improved CSRNet trained for 100 epochs on festival CCTV imagery",
+        "Multi-branch backend captures density across several scales",
+        "Aimed at overcrowding alerts and evacuation-route planning"
       ]
     },
     {
       "id": 4,
-      "title": "Pacific Data Viz Challenge - Climate Change & Disasters",
+      "title": "Pacific Data Viz Challenge — Climate & Disasters",
       "slug": "pacific-dataviz-climate-disasters",
-      "shortDescription": "Data visualization project on Pacific climate change and disaster patterns",
-      "description": "An interactive data visualization project created for the Pacific Dataviz Challenge, analyzing climate change impacts and disaster patterns across Pacific Island nations. The project uses open data from the Pacific Data Hub to visualize trends in natural disasters, climate risks, and their effects on Pacific communities, supporting the Blue Pacific 2050 strategy objectives.",
+      "shortDescription": "Interactive dashboard on Pacific climate change and disaster patterns",
+      "description": "An interactive Streamlit dashboard on climate change and disasters across Pacific Island nations, built from Pacific Data Hub open data. Plotly maps and charts let you filter by country and period to trace disaster frequency and climate risk over time.",
       "image": "https://drive.google.com/thumbnail?id=1fuV_ZSnRbq31JD96f_cGES5RXrgyvNl-&sz=w800",
       "tags": [
         "Data Visualization",
         "Climate Change",
         "Open Data",
         "Pacific Islands",
-        "Dashboard"
+        "Streamlit"
       ],
       "technologies": [
         "Python",
+        "Streamlit",
         "Pandas",
-        "Plotly/Matplotlib",
-        "JavaScript",
-        "D3.js",
-        "HTML/CSS"
+        "Plotly",
+        "NumPy"
       ],
       "features": [
-        "Interactive climate change visualizations",
-        "Disaster pattern analysis across Pacific regions",
-        "Time-series data exploration",
-        "Geographic heat maps",
-        "Comparative regional statistics",
-        "Responsive dashboard design"
+        "Interactive maps of disaster events by Pacific region",
+        "Time-series exploration of climate and disaster indicators",
+        "Filtering by country, indicator and period",
+        "Comparative charts across regions",
+        "Responsive dashboard layout"
       ],
       "category": "Data Visualization",
       "status": "Completed",
@@ -771,22 +864,21 @@
       "role": "Data Visualization Developer",
       "teamSize": 1,
       "githubUrl": "https://github.com/Fauzan-A25/Pacific-Data-Viz-challenge_Climate-Change-And-Disasters",
-      "demoUrl": "",
+      "demoUrl": "https://pacific-data-viz-challengeclimate-change-and-disasters.streamlit.app/",
       "videoUrl": "",
       "featured": true,
       "highlights": [
-        "Participated in Pacific Dataviz Challenge competition",
-        "Analyzed climate and disaster data from Pacific Data Hub",
-        "Created compelling visual narratives for Pacific Island climate issues",
-        "Contributed to Blue Pacific 2050 strategy awareness"
+        "Entry to the Pacific Dataviz Challenge",
+        "Built entirely on open data from the Pacific Data Hub",
+        "Published as a live Streamlit dashboard"
       ]
     },
     {
       "id": 5,
-      "title": "AstroClassify - Stellar Classification System",
+      "title": "AstroClassify — Stellar Classification",
       "slug": "astroclassify-stellar-classification",
-      "shortDescription": "ML-powered astronomical object classification system",
-      "description": "An intelligent astronomical object classification system powered by machine learning that identifies and classifies celestial objects (stars, galaxies, and quasars) based on spectral characteristics from the Sloan Digital Sky Survey (SDSS). Built with Streamlit interface featuring multiple ML models including Random Forest, XGBoost, and LightGBM for accurate stellar classification.",
+      "shortDescription": "ML tool that classifies celestial objects from SDSS spectral data",
+      "description": "A Streamlit tool that sorts celestial objects into galaxy, star or quasar from SDSS spectral measurements. Upload a CSV and it preprocesses the data, runs your pick of Random Forest, XGBoost or LightGBM, then shows the confusion matrix and exports the predictions.",
       "image": "https://drive.google.com/thumbnail?id=1ff0HQZp-cSbtA7Z-5MMRYntikp09Ju7C&sz=w800",
       "tags": [
         "Machine Learning",
@@ -796,48 +888,43 @@
         "Data Science"
       ],
       "technologies": [
-        "Python 3.x",
+        "Python",
         "Streamlit",
         "Scikit-learn",
         "XGBoost",
         "LightGBM",
         "Pandas",
-        "NumPy",
-        "Matplotlib"
+        "NumPy"
       ],
       "features": [
-        "Upload and process astronomical observation data (CSV)",
-        "Automatic data preprocessing pipeline",
-        "Multiple ML model selection (Random Forest, XGBoost, LightGBM)",
-        "Interactive classification visualizations",
-        "Confusion matrix and classification reports",
-        "Export prediction results",
-        "Real-time celestial object classification"
+        "CSV upload of astronomical observation data",
+        "Automatic preprocessing pipeline",
+        "Choice of Random Forest, XGBoost or LightGBM at runtime",
+        "Confusion matrices and classification reports per model",
+        "Export of prediction results"
       ],
       "category": "Machine Learning",
       "status": "Completed",
-      "year": 2024,
+      "year": 2025,
       "duration": "2 months",
       "role": "ML Developer",
-      "teamSize": 2,
+      "teamSize": 4,
       "githubUrl": "https://github.com/Fauzan-A25/AstroClassify",
       "demoUrl": "",
       "videoUrl": "",
       "featured": true,
       "highlights": [
-        "Trained on SDSS spectral observation dataset",
-        "Three-class classification: GALAXY, STAR, and QSO (Quasar)",
-        "Implemented ensemble learning with multiple optimized models",
-        "Comprehensive model evaluation with confusion matrices and reports",
-        "Interactive Streamlit dashboard for astronomy enthusiasts and researchers"
+        "Three-class classification of GALAXY, STAR and QSO from SDSS data",
+        "Three tuned models shipped with saved weights and evaluation reports",
+        "Modular app split into preprocessing, model selection and export modules"
       ]
     },
     {
       "id": 6,
-      "title": "GenZ Financial Literacy Analytics Dashboard",
+      "title": "GenZ Financial Literacy Dashboard",
       "slug": "genz-financial-literacy-analytics-dashboard",
-      "shortDescription": "A comprehensive analytics dashboard for analyzing financial literacy, behavior, and well-being among Generation Z in Indonesia.",
-      "description": "A comprehensive analytics dashboard for analyzing financial literacy, behavior, and well-being among Generation Z in Indonesia. Built with React, TypeScript, and Recharts for rich data visualization and insights. This dashboard provides deep insights into GenZ's financial literacy across multiple dimensions: Financial Knowledge, Digital Literacy, Financial Behavior, Decision Making, and Well-being. It targets researchers, policymakers, financial educators, and NGOs working on financial inclusion initiatives.",
+      "shortDescription": "Survey analytics dashboard on Gen Z financial literacy in Indonesia",
+      "description": "A React and TypeScript dashboard analysing financial literacy, behaviour and well-being among Indonesian Gen Z. Four pages break the survey down by knowledge, digital literacy, behaviour, decision-making and well-being — all filterable across 38 provinces, education level, income and age.",
       "image": "https://drive.google.com/thumbnail?id=1HjqCn7kwTuYcA7Td8NRWAJijQONhSmvn&sz=w800",
       "tags": [
         "Financial Literacy",
@@ -855,10 +942,10 @@
         "Recharts"
       ],
       "features": [
-        "Multi-Page Analytics (Overview, Financial Literacy, Behavior & Well-being, Regional)",
-        "Advanced Filtering by Province, Education, Income, and Age",
-        "Rich Visualizations with KPI Cards, Bar Charts, Scatter Plots, Radar Charts, and Heatmaps",
-        "Data Export to CSV with filtered indicators"
+        "Four analysis pages: overview, literacy, behaviour and regional",
+        "Filtering by province, education, income and age group",
+        "KPI cards, bar charts, scatter plots, radar charts and heatmaps",
+        "CSV export of the filtered survey, profile and regional datasets"
       ],
       "category": "Data Visualization",
       "status": "Completed",
@@ -871,17 +958,17 @@
       "videoUrl": "",
       "featured": true,
       "highlights": [
-        "Provides deep insights into GenZ's financial literacy across 5 key dimensions.",
-        "Comprehensive filtering options across 38 provinces and various demographics.",
-        "Utilizes rich visualizations for complex data analysis and insights."
+        "Five literacy dimensions analysed across 38 Indonesian provinces",
+        "Question-level heatmaps expose where understanding actually breaks down",
+        "Aimed at researchers, policymakers and financial-inclusion NGOs"
       ]
     },
     {
       "id": 7,
       "title": "Smart Face Anti-Spoofing",
       "slug": "smart-face-anti-spoofing",
-      "shortDescription": "Deep learning system for facial liveness detection and presentation attack detection",
-      "description": "An advanced computer vision system implementing Face Anti-Spoofing (FAS) to detect and prevent biometric presentation attacks such as printed photos, screen replays, and masks. Built using Deep Learning architectures to ensure secure and reliable facial recognition by verifying user liveness in real-time.",
+      "shortDescription": "Vision model separating real faces from six presentation-attack types",
+      "description": "A face anti-spoofing classifier that tells a genuine face from six presentation attacks — printed photos, screen replays, masks, mannequins and unknown methods. A DINOv3-ConvNeXt backbone is fine-tuned on YOLO-cropped faces with degradation-heavy augmentation. Competition solution for Find IT! UGM 2026.",
       "image": "https://drive.google.com/thumbnail?id=1yX95ip3J-i-XqxZX4Q4qmucjNuG8V0BP&sz=w800",
       "tags": [
         "Computer Vision",
@@ -891,22 +978,22 @@
         "Biometrics"
       ],
       "technologies": [
-        "Python 3.9+",
+        "Python",
         "PyTorch",
-        "OpenCV",
-        "NumPy",
-        "Matplotlib"
+        "Hugging Face Transformers",
+        "DINOv3",
+        "YOLO",
+        "OpenCV"
       ],
       "features": [
-        "Real-time liveness detection",
-        "Presentation attack detection (PAD)",
-        "Spoof vs Real classification",
-        "Face detection and cropping",
-        "Webcam integration for live inference"
+        "Six-class classification across real faces and five spoof types",
+        "DINOv3-ConvNeXt-Large backbone fine-tuned on paired cropped and full-face images",
+        "Augmentation simulating JPEG compression, low resolution, blur and noise",
+        "Stratified 80/20 split with early stopping on macro F1"
       ],
       "category": "Computer Vision",
       "status": "Completed",
-      "year": 2025,
+      "year": 2026,
       "duration": "2 months",
       "role": "Computer Vision Engineer",
       "teamSize": 2,
@@ -915,149 +1002,150 @@
       "videoUrl": "",
       "featured": true,
       "highlights": [
-        "Developed robust presentation attack detection model",
-        "Integrated with real-time webcam feed for live inference",
-        "Enhanced biometric security for facial recognition pipelines"
+        "Best validation macro F1 of 0.97 across six attack classes",
+        "Built on the DINOv3 vision foundation model rather than a scratch CNN",
+        "Competition solution for Find IT! UGM 2026"
       ]
     },
     {
-      "id": "9",
-      "title": "Nutriginjal Android Apps",
+      "id": 9,
+      "title": "NutriGinjal — CKD Nutrition App",
       "slug": "nutriginjal-android-apps",
-      "shortDescription": "A capstone project for Telkom University, developing Android apps for nutrition and kidney health.",
-      "description": "This project was created as part of a capstone requirement at Telkom University, focusing on building Android applications to support nutrition and kidney health management. The goal was to provide users with tools to track dietary intake and monitor kidney-related health metrics, addressing the growing need for accessible health technology.\n\nThe solution was developed using Dart and the Flutter framework, enabling cross-platform mobile app development. Key features include user-friendly interfaces for logging meals, tracking nutrient consumption, and visualizing health data. The project followed a standard Android development lifecycle, from planning and design to implementation and testing.\n\nAs a capstone project, it demonstrates the application of software engineering principles and mobile development skills in a health-focused context. While specific performance metrics are not available, the project successfully met academic requirements and showcases proficiency in Dart and Flutter for building functional Android apps.",
-      "image": null,
+      "shortDescription": "Flutter health app pairing an AI nutrition assistant with CKD risk prediction",
+      "description": "A Flutter app for people managing chronic kidney disease. It pairs a Gemini-powered nutrition assistant that answers diet questions against the patient's own restrictions with a risk engine scoring CKD progression from 24 clinical lab parameters, all on a Supabase backend.",
+      "image": "/images/cover-nutriginjal.png",
       "tags": [
         "Dart",
         "Flutter",
         "Android",
-        "Mobile Development",
         "Health",
+        "Generative AI",
         "Capstone"
       ],
       "technologies": [
         "Dart",
         "Flutter",
-        "Android SDK",
-        "Firebase",
-        "Git"
+        "Supabase",
+        "Google Gemini API",
+        "Machine Learning"
       ],
       "features": [
-        "User-friendly interface for tracking daily nutrition and kidney health metrics",
-        "Meal logging and nutrient intake visualization",
-        "Health data monitoring and history display",
-        "Cross-platform mobile app development using Flutter"
+        "NutriSnap AI chat: a Gemini nutrition assistant aware of the patient's restrictions and history",
+        "Risk engine scoring CKD progression from 24 laboratory parameters",
+        "Lab Vault storing and charting past lab results",
+        "Supabase backend with role-separated patient and clinician access"
       ],
       "category": "Mobile Development",
       "status": "Completed",
       "year": 2026,
       "duration": "1 semester",
-      "role": "Solo Developer",
-      "teamSize": "1",
+      "role": "Mobile & AI Developer",
+      "teamSize": 4,
       "githubUrl": "https://github.com/Fauzan-A25/nutriginjal-android-apps",
       "demoUrl": "",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Developed a functional Android app for nutrition and kidney health tracking as a capstone project",
-        "Applied Dart and Flutter to create a cross-platform mobile application",
-        "Successfully met academic requirements for Telkom University capstone"
+        "Telkom University capstone joining generative AI and a trained risk model in one app",
+        "Handles the protein, potassium and phosphorus limits that make CKD diets hard",
+        "Distributed as an installable Android APK"
       ]
     },
     {
-      "id": "10",
-      "title": "Chat Bot WA Assistant",
+      "id": 10,
+      "title": "WhatsApp AI Assistant Bot",
       "slug": "chat-bot-wa-assistant",
-      "shortDescription": "A JavaScript-based WhatsApp assistant chatbot for automated messaging and interactions.",
-      "description": "This project addresses the need for automated customer support and messaging on WhatsApp, a widely used platform. Many businesses and individuals require a simple yet effective way to handle repetitive queries or send scheduled messages without manual effort. The goal was to create a lightweight assistant that can interact with users via WhatsApp, providing quick responses and basic task automation.\n\nThe solution is a chatbot built using JavaScript, leveraging WhatsApp Web's API or similar libraries to send and receive messages. The assistant can be configured with predefined responses or triggered actions based on incoming messages. The implementation focuses on ease of use and deployment, making it accessible for personal or small-scale business use.\n\nWhile specific metrics are not available, the project demonstrates a functional proof-of-concept for WhatsApp automation. It can serve as a foundation for more advanced features like natural language processing or integration with external services, showing potential for scalability in real-world applications.",
-      "image": null,
+      "shortDescription": "WhatsApp bot that routes messages by detected intent rather than commands",
+      "description": "A WhatsApp assistant that reads intent instead of matching commands. A Gemini-backed classifier sorts each message into one of 11+ intents, then the bot answers, edits project records in Google Sheets, or declines based on the sender's role. Chat history and summaries keep it in context.",
+      "image": "/images/cover-wa-assistant.png",
       "tags": [
         "Chatbot",
         "WhatsApp",
         "Automation",
         "JavaScript",
-        "Messaging"
+        "Generative AI"
       ],
       "technologies": [
         "JavaScript",
         "Node.js",
-        "WhatsApp Web API",
-        "puppeteer",
-        "Express.js"
+        "whatsapp-web.js",
+        "Google Gemini API",
+        "Google Sheets API"
       ],
       "features": [
-        "Automated message sending and receiving on WhatsApp",
-        "Predefined response configuration for common queries",
-        "Lightweight and easy to deploy on local or cloud servers",
-        "Basic scheduling for timed messages"
+        "AI intent detection across 11+ intent types",
+        "Role-based access control separating admin and user actions",
+        "Google Sheets integration for querying and updating project data",
+        "Memory system holding chat history, summaries and context"
       ],
       "category": "Tools",
       "status": "Completed",
       "year": 2026,
-      "duration": "2 weeks",
+      "duration": "1 week",
       "role": "Solo Developer",
-      "teamSize": "1",
+      "teamSize": 1,
       "githubUrl": "https://github.com/Fauzan-A25/chat-bot-wa-assistant",
       "demoUrl": "",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Developed a functional WhatsApp chatbot prototype in under two weeks",
-        "Enabled automated messaging without manual intervention",
-        "Created a simple, configurable system for non-technical users"
+        "Intent detection in 200-500 ms, full replies under three seconds",
+        "Natural-language routing replaces rigid command syntax",
+        "Write operations gated behind an admin allowlist"
       ]
     },
     {
-      "id": "11",
-      "title": "Melodia Apps - Music Application",
+      "id": 11,
+      "title": "Melodia — Music Streaming App",
       "slug": "melodia-apps",
-      "shortDescription": "A JavaScript-based music application for exploring and managing melodies.",
-      "description": "Melodia Apps is a web application designed to provide users with an intuitive platform for discovering, organizing, and playing music tracks. The project aims to simplify music management by offering a clean interface for browsing melodies, creating playlists, and controlling playback. It addresses the need for a lightweight, accessible tool for music enthusiasts who want to curate their listening experience without the bloat of larger platforms.\n\nThe application is built using JavaScript, leveraging modern front-end frameworks and libraries to ensure a responsive and interactive user experience. Key features include a dynamic music library, playlist creation, and a built-in audio player with basic controls. The development focused on modular code architecture to allow easy customization and future enhancements.\n\nWhile still in early stages, Melodia Apps demonstrates a solid foundation for a music-centric web tool. With further development, it has the potential to grow into a full-featured music streaming and organization platform. The current version showcases core functionality and a user-friendly design.",
-      "image": null,
+      "shortDescription": "Full-stack personal music streaming app on React and Spring Boot",
+      "description": "A personal music streaming web app with a React front end over a Spring Boot API and PostgreSQL. Users register, build a library and playlists, stream tracks and review listening history. Written for an OOP course, so inheritance, encapsulation and interfaces shape the domain model.",
+      "image": "/images/cover-melodia.png",
       "tags": [
-        "JavaScript",
-        "Music",
-        "Web Application",
-        "Frontend",
-        "Audio Player"
+        "React",
+        "Spring Boot",
+        "PostgreSQL",
+        "Full Stack",
+        "OOP"
       ],
       "technologies": [
-        "JavaScript",
-        "HTML5",
-        "CSS3",
-        "Web Audio API",
-        "React.js (assumed)"
+        "React",
+        "Vite",
+        "Spring Boot",
+        "PostgreSQL",
+        "JWT",
+        "Railway"
       ],
       "features": [
-        "Browse and search through a collection of melodies",
-        "Create and manage custom playlists",
-        "Built-in audio player with play, pause, and skip controls",
-        "Responsive design for desktop and mobile devices",
-        "Modular code architecture for easy customization"
+        "JWT authentication with user, artist and admin roles",
+        "Personal music library and custom playlist management",
+        "Streaming player with play, pause, next and previous",
+        "Listening history and account settings",
+        "OOP domain model across User, Song, Playlist and MusicPlayer"
       ],
       "category": "Web Development",
-      "status": "In Progress",
+      "status": "Completed",
       "year": 2025,
       "duration": "2 months",
-      "role": "Solo Developer",
-      "teamSize": "1",
+      "role": "Full Stack Developer",
+      "teamSize": 1,
       "githubUrl": "https://github.com/Fauzan-A25/melodia_apps",
       "demoUrl": "",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Developed a functional prototype with core music browsing and playback features",
-        "Implemented responsive UI for seamless use across devices",
-        "Established modular codebase for future scalability and feature additions"
+        "React and Vite front end against a Spring Boot 3 REST API",
+        "Three-role auth model persisted in PostgreSQL",
+        "Deployed on Railway"
       ]
     },
     {
-      "id": "12",
-      "title": "AES-256 CBC Encryption Application",
+      "id": 12,
+      "title": "AES-256-CBC Encryption Tool",
       "slug": "aes-256-cbc-encryption-application",
-      "shortDescription": "A Jupyter Notebook application implementing AES-256 CBC encryption for data security.",
-      "description": "This project was developed as a course assignment for a data security class. The goal was to create a functional application that demonstrates the implementation of the Advanced Encryption Standard (AES) with a 256-bit key in Cipher Block Chaining (CBC) mode, a widely used symmetric encryption algorithm for securing sensitive data. The assignment required a hands-on approach to understanding cryptographic principles and their practical application.\n\nThe solution is implemented in a Jupyter Notebook using Python, leveraging libraries such as `pycryptodome` to handle the encryption and decryption processes. The application allows users to input plaintext and a key, then outputs the ciphertext in hexadecimal format. It also includes a decryption function to verify the integrity of the process. The notebook is structured with clear code cells and explanations to facilitate learning and reproducibility.\n\nThis project successfully met the course requirements, providing a clear demonstration of AES-256 CBC encryption. It serves as a practical example for students learning about cryptography and data security, showcasing the steps involved in encrypting and decrypting data using a robust industry-standard algorithm.",
-      "image": null,
+      "shortDescription": "Colab-based file and text encryption using AES-256-CBC with PBKDF2",
+      "description": "A file and text encryption tool for a data security course. It runs AES-256 in CBC mode with keys derived through PBKDF2-HMAC-SHA256 at 100,000 iterations, generating a fresh random salt and IV on every operation. Opens straight in Google Colab with nothing to install.",
+      "image": "/images/cover-aes256.svg",
       "tags": [
         "Cryptography",
         "AES-256",
@@ -1066,314 +1154,142 @@
         "Python"
       ],
       "technologies": [
-        "Python 3",
+        "Python",
         "Jupyter Notebook",
+        "Google Colab",
         "pycryptodome",
-        "AES-256",
-        "CBC Mode"
+        "PBKDF2-HMAC-SHA256"
       ],
       "features": [
-        "Implements AES-256 encryption with CBC mode for secure data handling",
-        "Provides both encryption and decryption functions in a single notebook",
-        "Outputs ciphertext and decrypted plaintext in hexadecimal format for easy verification",
-        "Well-documented code cells for educational purposes"
+        "Text encryption to JSON and decryption back to plain text",
+        "File encryption of any type up to 1 MB, original filename kept in metadata",
+        "PBKDF2-HMAC-SHA256 key derivation over 100,000 iterations",
+        "Fresh random 128-bit salt and IV on every encryption",
+        "Menu-driven interface, no local setup required"
       ],
       "category": "Academic",
       "status": "Completed",
       "year": 2025,
       "duration": "1 week",
       "role": "Solo Developer",
-      "teamSize": "1",
+      "teamSize": 1,
       "githubUrl": "https://github.com/Fauzan-A25/aplikasi-aes256-cbc-crypto",
-      "demoUrl": "",
+      "demoUrl": "https://colab.research.google.com/drive/1F_ZvKED_W_Eqi-KSuLxfJp-8vJ-aH8Wq?usp=sharing",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Successfully implemented AES-256 CBC encryption as a course assignment",
-        "Demonstrated encryption and decryption processes with sample data",
-        "Provided a clear, educational notebook for learning cryptography"
+        "Random salt and IV per operation, so identical inputs never produce identical ciphertext",
+        "100,000 PBKDF2 iterations to make password brute-forcing expensive",
+        "Runs one-click in Colab, which removes the usual crypto-library setup"
       ]
     },
     {
-      "id": "13",
+      "id": 13,
       "title": "Portfolio with React and Vite",
       "slug": "portfolio-with-react-and-vite",
-      "shortDescription": "A modern, responsive portfolio website built with React and Vite.",
-      "description": "This project is a personal portfolio website designed to showcase projects, skills, and experience in a clean, modern interface. The goal was to create a fast, visually appealing, and fully responsive site that reflects a professional data science and development identity.\n\nThe website was built using React for component-based architecture and Vite for rapid development and optimized builds. Styling is achieved primarily with CSS, ensuring a lightweight and customizable design. Key sections include a project gallery, skills overview, and contact information, all structured for easy navigation and content updates.\n\nThe result is a deployable portfolio that loads quickly, adapts seamlessly to various screen sizes, and provides a strong foundation for future enhancements. This project demonstrates proficiency in modern frontend development tools and responsive design principles.",
-      "image": null,
+      "shortDescription": "The React and Vite version of this portfolio, driven by a single JSON file",
+      "description": "The React and Vite version of this portfolio: a single-page site where every piece of content comes from one portfolio.json file. Glassmorphism styling, AOS scroll animations and a Swiper project slider, with category filtering and a contact form.",
+      "image": "/images/cover-portfolio-react.svg",
       "tags": [
         "Portfolio",
         "React",
         "Vite",
-        "CSS",
-        "Responsive Design",
-        "Frontend"
+        "Frontend",
+        "Responsive Design"
       ],
       "technologies": [
-        "React 18",
-        "Vite 5",
-        "CSS3",
-        "JavaScript ES6",
-        "HTML5",
-        "Git"
+        "React",
+        "Vite",
+        "JavaScript",
+        "Swiper.js",
+        "AOS",
+        "Bootstrap Icons"
       ],
       "features": [
-        "Component-based architecture using React for maintainability",
-        "Fast development and optimized production builds with Vite",
-        "Fully responsive design for desktop and mobile devices",
-        "Clean, customizable CSS styling for personal branding"
+        "All content driven by a single portfolio.json data file",
+        "Glassmorphism UI with AOS scroll animations",
+        "Swiper-powered project slider with category filtering",
+        "Responsive layout from mobile to desktop",
+        "Semantic HTML and meta tags for SEO"
       ],
       "category": "Web Development",
       "status": "Completed",
       "year": 2025,
       "duration": "2 weeks",
       "role": "Solo Developer",
-      "teamSize": "1",
+      "teamSize": 1,
       "githubUrl": "https://github.com/Fauzan-A25/Portfolio-with-react-and-vite",
-      "demoUrl": "",
+      "demoUrl": "https://portofolio-with-react-weld.vercel.app",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Built a fully responsive portfolio website using React and Vite",
-        "Achieved fast load times with Vite's optimized build process",
-        "Created a clean, modular codebase for easy future updates"
+        "One JSON file changes every section, so content edits need no code",
+        "Component architecture kept reusable for the later Next.js rebuild",
+        "Deployed on Vercel"
       ]
     },
     {
-      "id": "14",
+      "id": 14,
       "title": "Customer Churn Prediction",
       "slug": "customer-churn-prediction",
-      "shortDescription": "Predict customer churn using machine learning to help businesses retain clients.",
-      "description": "Customer churn is a critical issue for subscription-based businesses, leading to revenue loss and increased acquisition costs. This project aims to build a predictive model that identifies customers at high risk of churning, enabling proactive retention strategies. The dataset includes customer demographics, account information, and service usage patterns.\n\nThe solution involves exploratory data analysis to uncover churn patterns, followed by feature engineering and model training using algorithms like logistic regression, random forest, and gradient boosting. The models are evaluated using accuracy, precision, recall, and ROC-AUC to ensure robust performance. The final model is deployed in a Jupyter Notebook with clear visualizations and interpretability.\n\nThe project demonstrates the end-to-end pipeline for churn prediction, achieving high accuracy in identifying churners. This empowers businesses to reduce churn rates by targeting at-risk customers with personalized offers or interventions, ultimately improving customer lifetime value and profitability.",
-      "image": null,
+      "shortDescription": "Random Forest churn classifier built for a GDGOC competition",
+      "description": "A churn classifier built for the GDGOC Telkom University Customer Churn Prediction Challenge. Missing values are filled with KNNImputer and categorical fields label-encoded before a Random Forest is trained, then scored on F1 — which matters more than accuracy on an imbalanced churn label.",
+      "image": "/images/cover-customer-churn.svg",
       "tags": [
         "Machine Learning",
         "Classification",
         "Customer Churn",
         "Data Science",
-        "Jupyter Notebook"
+        "Random Forest"
       ],
       "technologies": [
-        "Python 3.x",
+        "Python",
         "Jupyter Notebook",
         "Pandas",
         "Scikit-learn",
+        "NumPy",
         "Matplotlib",
-        "Seaborn",
-        "NumPy"
+        "Seaborn"
       ],
       "features": [
-        "Comprehensive exploratory data analysis with visualizations",
-        "Feature engineering for improved model performance",
-        "Multiple classification models for comparison",
-        "Model evaluation with key metrics like accuracy and ROC-AUC"
+        "KNNImputer filling missing numerical values",
+        "Label encoding of categorical customer attributes",
+        "Random Forest classifier trained on an 80/20 split",
+        "F1-score, classification report and confusion matrix evaluation",
+        "Predictions exported to CSV for submission"
       ],
       "category": "Data Science",
       "status": "Completed",
       "year": 2025,
       "duration": "2 months",
       "role": "Data Scientist",
-      "teamSize": "1",
+      "teamSize": 1,
       "githubUrl": "https://github.com/Fauzan-A25/Customer_Churn_Prediction_Fauzan_Ahsanudin_Alfikri",
       "demoUrl": "",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Achieved 85% accuracy in predicting customer churn",
-        "Developed feature engineering that improved recall by 10%",
-        "Delivered actionable insights through clear visualizations"
+        "Submission to the GDGOC Telkom University churn challenge",
+        "F1 chosen over accuracy so the imbalanced churn class still counts",
+        "KNN-based imputation instead of dropping incomplete customer records"
       ]
     },
     {
-      "id": "15",
-      "title": "Study Group Assignment 4 - Data Analysis",
+      "id": 15,
+      "title": "Preprocessing Pipeline — Study Group 4",
       "slug": "study-group-assignment-4-data-analysis",
-      "shortDescription": "A collaborative data analysis project exploring a dataset using Jupyter Notebook.",
-      "description": "This repository contains the fourth assignment for a study group, focusing on data analysis and visualization using Python. The project aims to apply foundational data science techniques to extract insights from a given dataset, reinforcing concepts learned in a collaborative learning environment.\n\nThe analysis is conducted entirely within a Jupyter Notebook, leveraging libraries such as pandas and matplotlib for data manipulation and visualization. The approach involves cleaning the data, performing exploratory data analysis (EDA), and generating visualizations to identify patterns and trends.\n\nThe project serves as a practical exercise in data analysis, demonstrating the ability to work with real-world datasets and communicate findings effectively. It highlights the importance of teamwork and reproducibility in data science projects.",
-      "image": null,
+      "shortDescription": "One preprocessing and feature engineering pipeline applied across five datasets",
+      "description": "A preprocessing and feature engineering exercise for the GDGOC Telkom University study group, run across five unrelated datasets. Each gets the same treatment — profiling, IQR outlier removal, standardisation, one-hot and datetime encoding — the point being a repeatable pipeline rather than one clever model.",
+      "image": "/images/cover-study-group-4.svg",
       "tags": [
-        "Data Analysis",
-        "Jupyter Notebook",
+        "Data Preprocessing",
+        "Feature Engineering",
         "Python",
         "EDA",
-        "Collaborative Learning"
+        "Scikit-learn"
       ],
       "technologies": [
         "Python",
-        "Jupyter Notebook",
-        "pandas",
-        "matplotlib",
-        "seaborn",
-        "numpy"
-      ],
-      "features": [
-        "Comprehensive exploratory data analysis (EDA)",
-        "Data cleaning and preprocessing",
-        "Visualization of key trends and patterns",
-        "Reproducible analysis in Jupyter Notebook"
-      ],
-      "category": "Academic",
-      "status": "Completed",
-      "year": 2025,
-      "duration": "1 week",
-      "role": "Data Scientist",
-      "teamSize": "2-3",
-      "githubUrl": "https://github.com/Fauzan-A25/Assignment_Study_Group_4_Fauzan_Ahsanudin_Alfikri",
-      "demoUrl": "",
-      "videoUrl": "",
-      "featured": "",
-      "highlights": [
-        "Completed a structured data analysis assignment as part of a study group",
-        "Applied data cleaning and visualization techniques to extract meaningful insights",
-        "Collaborated effectively with team members to deliver a reproducible analysis"
-      ]
-    },
-    {
-      "id": "16",
-      "title": "AI Model Ollama DeepSeek to Discord Bot",
-      "slug": "ai-model-ollama-deepseek-to-discord-bot",
-      "shortDescription": "A Discord bot that integrates Ollama's DeepSeek AI model for conversational responses.",
-      "description": "This project addresses the need for an accessible AI-powered chatbot within the Discord platform, allowing users to interact with a local large language model without relying on external cloud services. The goal was to create a seamless integration between Discord's messaging interface and the Ollama runtime for running DeepSeek models locally.\n\nThe solution leverages Python with the discord.py library to build a bot that listens for commands and messages in Discord channels. It communicates with the Ollama API to load and query the DeepSeek model, processing user inputs and returning generated responses in real-time. The bot is designed to be lightweight, easy to deploy, and customizable for different server needs.\n\nAs a personal project, it demonstrates practical skills in API integration, bot development, and local AI model deployment. While still in early stages, the bot successfully enables conversational interactions and can be extended with additional features like context memory or moderation filters.",
-      "image": null,
-      "tags": [
-        "Python",
-        "Discord Bot",
-        "AI",
-        "Ollama",
-        "DeepSeek",
-        "Chatbot"
-      ],
-      "technologies": [
-        "Python 3.10+",
-        "discord.py",
-        "Ollama",
-        "DeepSeek Model",
-        "REST API",
-        "asyncio"
-      ],
-      "features": [
-        "Integrates Ollama-hosted DeepSeek model for AI responses",
-        "Listens to Discord commands and messages in real-time",
-        "Lightweight and easy to deploy on local or cloud servers",
-        "Customizable prompt handling for different use cases"
-      ],
-      "category": "Tools",
-      "status": "In Progress",
-      "year": 2025,
-      "duration": "2 months",
-      "role": "Solo Developer",
-      "teamSize": "1",
-      "githubUrl": "https://github.com/Fauzan-A25/AI_MODEL_OLLAMA-DEEPSEEK-_TO_DISCORD_BOT",
-      "demoUrl": "",
-      "videoUrl": "",
-      "featured": "",
-      "highlights": [
-        "Successfully integrated local AI model (DeepSeek) into Discord platform",
-        "Built a functional bot with low latency response times",
-        "Created reusable codebase for future AI bot projects"
-      ]
-    },
-    {
-      "id": "17",
-      "title": "Topic Python Programming for Machine Learning Assignment - Study Group 3",
-      "slug": "topic-python-programming-for-machine-learning-assignment-study-group-3",
-      "shortDescription": "A course assignment on Python programming fundamentals for machine learning.",
-      "description": "This project was created to fulfill the topic assignment on Python Programming for Machine Learning as part of the GDGOC Telkom University study group. The assignment focuses on building foundational Python skills essential for data science and machine learning tasks.\n\nThe solution implements core Python concepts including data structures, control flow, functions, and libraries commonly used in machine learning workflows. The notebook demonstrates practical coding exercises that reinforce understanding of Python syntax and its application to basic data manipulation and analysis.\n\nAs a course assignment, this project served as a learning exercise to prepare students for more advanced machine learning topics. It provides a solid foundation for further exploration into data preprocessing, model building, and evaluation.",
-      "image": null,
-      "tags": [
-        "Python",
-        "Machine Learning",
-        "Jupyter Notebook",
-        "GDGOC",
-        "Assignment"
-      ],
-      "technologies": [
-        "Python 3",
-        "Jupyter Notebook"
-      ],
-      "features": [
-        "Covers fundamental Python programming concepts for machine learning",
-        "Includes practical coding exercises with real-world data scenarios",
-        "Demonstrates use of Python libraries for data manipulation",
-        "Structured as an educational assignment for study group collaboration"
-      ],
-      "category": "Academic",
-      "status": "Completed",
-      "year": 2025,
-      "duration": "1 week",
-      "role": "Student",
-      "teamSize": "1",
-      "githubUrl": "https://github.com/Fauzan-A25/Assignment-Study-Group-3-Fauzan-Ahsanudin-Alfikri",
-      "demoUrl": "",
-      "videoUrl": "",
-      "featured": "",
-      "highlights": [
-        "Completed as part of GDGOC Telkom University study group curriculum",
-        "Demonstrated proficiency in Python programming fundamentals",
-        "Prepared foundation for advanced machine learning topics"
-      ]
-    },
-    {
-      "id": "18",
-      "title": "Random Walk Analysis of Property and Raw Material Stocks",
-      "slug": "random-walk-analysis-of-property-and-raw-material-stocks",
-      "shortDescription": "Modeling stock price movements of property and raw materials using random walk theory.",
-      "description": "Stock market price movements are often assumed to follow a random walk, making them inherently unpredictable. This project focuses on analyzing the behavior of stocks from the property and raw material sectors, testing whether their price series conform to the random walk hypothesis. Understanding this can help investors set realistic expectations and avoid over-reliance on technical analysis.",
-      "image": null,
-      "tags": [
-        "Jupyter Notebook",
-        "Finance",
-        "Random Walk",
-        "Stock Analysis",
-        "Time Series",
-        "Statistical Modeling"
-      ],
-      "technologies": [
-        "Jupyter Notebook",
-        "Python",
-        "Pandas",
-        "NumPy",
-        "Matplotlib",
-        "SciPy"
-      ],
-      "features": [
-        "Implementation of random walk model for stock price simulation",
-        "Statistical tests (e.g., runs test, autocorrelation) to evaluate randomness",
-        "Visualization of actual vs. simulated price paths",
-        "Comparison across property and raw material stock sectors"
-      ],
-      "category": "Data Science",
-      "status": "Completed",
-      "year": 2025,
-      "duration": "1 week",
-      "role": "Solo Developer",
-      "teamSize": "1",
-      "githubUrl": "https://github.com/Fauzan-A25/RandomWalk_Saham_Properti_-_Bahan_Baku",
-      "demoUrl": "",
-      "videoUrl": "",
-      "featured": "",
-      "highlights": [
-        "Applied random walk theory to real-world stock data from property and raw material sectors",
-        "Performed statistical tests to assess market efficiency hypothesis",
-        "Generated clear visualizations comparing actual and simulated price movements"
-      ]
-    },
-    {
-      "id": "19",
-      "title": "TUBES AKA - Academic Project in AKA Course",
-      "slug": "tubes-aka",
-      "shortDescription": "Final project for the AKA course, focusing on data analysis and modeling.",
-      "description": "This repository contains the final project for the AKA course, a core academic subject in the undergraduate curriculum. The project aims to apply theoretical concepts learned throughout the course to a practical data analysis problem. The specific problem addressed involves analyzing a given dataset to uncover patterns and insights, likely through statistical methods and machine learning techniques.\n\nThe solution was developed using Jupyter Notebook, providing an interactive environment for data exploration, preprocessing, model building, and evaluation. The approach includes data cleaning, feature engineering, and the application of appropriate algorithms to achieve the project's objectives. The notebook documents the entire workflow, from data loading to final results.\n\nAs a course final project, the work demonstrates the student's ability to independently apply data science methodologies to a real-world problem. While specific metrics are not available, the project successfully fulfills the academic requirements and showcases proficiency in data analysis and programming.",
-      "image": null,
-      "tags": [
-        "Data Analysis",
-        "Jupyter Notebook",
-        "Python",
-        "Machine Learning",
-        "Academic Project"
-      ],
-      "technologies": [
-        "Python 3.x",
         "Jupyter Notebook",
         "Pandas",
         "NumPy",
@@ -1382,54 +1298,139 @@
         "Seaborn"
       ],
       "features": [
-        "End-to-end data analysis pipeline in Jupyter Notebook",
-        "Data cleaning and preprocessing steps",
-        "Exploratory data analysis with visualizations",
-        "Implementation of machine learning models for prediction or classification",
-        "Comprehensive documentation of methodology and results"
+        "Profiling of each dataset: schema, descriptive stats, missing values, duplicates",
+        "IQR-based outlier removal with before/after boxplots",
+        "StandardScaler standardisation of numeric columns",
+        "One-hot encoding of categorical columns and datetime parsing"
       ],
       "category": "Academic",
       "status": "Completed",
-      "year": 2024,
-      "duration": "1 semester",
-      "role": "Solo Developer",
-      "teamSize": "1",
-      "githubUrl": "https://github.com/Fauzan-A25/TUBES_AKA",
+      "year": 2025,
+      "duration": "1 week",
+      "role": "Student",
+      "teamSize": 1,
+      "githubUrl": "https://github.com/Fauzan-A25/Assignment_Study_Group_4_Fauzan_Ahsanudin_Alfikri",
       "demoUrl": "",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Completed as the final project for the AKA course",
-        "Demonstrated proficiency in data analysis and machine learning",
-        "Produced a well-documented Jupyter Notebook with reproducible analysis"
+        "The same pipeline applied to five separate datasets to prove it generalises",
+        "Outliers trimmed with the 1.5×IQR rule and verified visually each time",
+        "Covers scaling, encoding and datetime handling end to end"
       ]
     },
     {
-      "id": "20",
-      "title": "Text Editor Laba Laba Sunda",
-      "slug": "text-editor-laba-laba-sunda",
-      "shortDescription": "A C++ text editor built as a data structures course assignment.",
-      "description": "This project is a simple text editor developed as part of a data structures course assignment. The goal was to implement core text editing functionalities while applying fundamental data structure concepts such as linked lists, stacks, or trees to manage text operations efficiently. The editor provides basic features like inserting, deleting, and navigating text, demonstrating how theoretical concepts translate into practical software.\n\nThe solution was implemented entirely in C++, leveraging its performance and low-level memory control. The architecture likely uses a doubly linked list to represent the text buffer, enabling efficient insertion and deletion at arbitrary positions. A stack-based undo/redo system may also be included to reverse actions. The code is structured to handle user input and display the current text state.\n\nAs a course project, the editor successfully met its educational objectives, showcasing a working application of data structures. While it is a basic tool without advanced features like syntax highlighting or file I/O, it serves as a solid foundation for understanding how data structures underpin real-world software. The project is complete and archived, reflecting its role as a learning exercise.",
-      "image": null,
+      "id": 16,
+      "title": "Ollama DeepSeek Discord Bot",
+      "slug": "ai-model-ollama-deepseek-to-discord-bot",
+      "shortDescription": "Discord bot serving a locally hosted DeepSeek model through Ollama",
+      "description": "A Discord bot that pipes messages to a DeepSeek model running locally through Ollama, so conversations never leave the machine. Token, model and behaviour all come from environment variables, which makes pointing it at a different local model a one-line change.",
+      "image": "/images/cover-ollama-discord.svg",
       "tags": [
-        "C++",
-        "Data Structures",
-        "Text Editor",
-        "Academic",
-        "Console Application"
+        "Python",
+        "Discord Bot",
+        "Ollama",
+        "DeepSeek",
+        "Local LLM"
       ],
       "technologies": [
-        "C++",
-        "Standard Template Library (STL)",
-        "Linked Lists",
-        "Stacks",
-        "Doubly Linked List"
+        "Python",
+        "discord.py",
+        "Ollama",
+        "DeepSeek",
+        "python-dotenv"
       ],
       "features": [
-        "Text insertion and deletion at any position",
-        "Undo/redo functionality using stack data structure",
-        "Efficient text navigation and display",
-        "Modular code structure for educational clarity"
+        "Chat with a locally hosted DeepSeek model from any Discord channel",
+        "Ollama runtime integration, no cloud inference",
+        "Configuration through environment variables with secrets kept in .env",
+        "Extensible base for other custom AI Discord bots"
+      ],
+      "category": "Tools",
+      "status": "In Progress",
+      "year": 2025,
+      "duration": "2 months",
+      "role": "Solo Developer",
+      "teamSize": 1,
+      "githubUrl": "https://github.com/Fauzan-A25/AI_MODEL_OLLAMA-DEEPSEEK-_TO_DISCORD_BOT",
+      "demoUrl": "",
+      "videoUrl": "",
+      "featured": false,
+      "highlights": [
+        "Inference runs entirely on local hardware, so no prompt data leaves the host",
+        "Tokens and configuration stay out of source control via .env",
+        "Written as a reusable base for other AI-powered Discord bots"
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Tech Stock EDA — Study Group 3",
+      "slug": "topic-python-programming-for-machine-learning-assignment-study-group-3",
+      "shortDescription": "Exploratory analysis of AMD, NVIDIA, Intel, ASUS and MSI share prices",
+      "description": "An exploratory analysis of daily share prices for AMD, NVIDIA, Intel, ASUS and MSI, submitted for the GDGOC Telkom University Python-for-ML topic. Correlation matrices, distribution histograms and volume boxplots over 316 trading days show how closely the five tech stocks move together.",
+      "image": "/images/cover-study-group-3.svg",
+      "tags": [
+        "EDA",
+        "Stock Analysis",
+        "Python",
+        "Pandas",
+        "Data Visualization"
+      ],
+      "technologies": [
+        "Python",
+        "Jupyter Notebook",
+        "Pandas",
+        "Matplotlib",
+        "Seaborn"
+      ],
+      "features": [
+        "Correlation matrix across price and volume variables",
+        "Histograms of price and volume distributions",
+        "Boxplots surfacing outliers in trading volume",
+        "Kaggle dataset covering AMD, NVIDIA, Intel, ASUS and MSI"
+      ],
+      "category": "Academic",
+      "status": "Completed",
+      "year": 2025,
+      "duration": "1 week",
+      "role": "Student",
+      "teamSize": 1,
+      "githubUrl": "https://github.com/Fauzan-A25/Assignment-Study-Group-3-Fauzan-Ahsanudin-Alfikri",
+      "demoUrl": "",
+      "videoUrl": "",
+      "featured": false,
+      "highlights": [
+        "316 daily records analysed across five tech-sector stocks",
+        "Correlation analysis linking price movement to trading volume",
+        "Submitted for the GDGOC Telkom University Python for ML topic"
+      ]
+    },
+    {
+      "id": 19,
+      "title": "TUBES AKA — Iterative vs Recursive Complexity",
+      "slug": "tubes-aka",
+      "shortDescription": "Benchmarking iterative against recursive search in a song recommender",
+      "description": "The final project for Analisis Kompleksitas Algoritma. One song-recommendation scoring routine is written twice, iteratively and recursively, then timed against a user set growing from 10 to 300 — plotting how each version's runtime actually scales rather than assuming it.",
+      "image": "/images/cover-tubes-aka.svg",
+      "tags": [
+        "Algorithm Analysis",
+        "Complexity",
+        "Python",
+        "Recursion",
+        "Benchmarking"
+      ],
+      "technologies": [
+        "Python",
+        "Jupyter Notebook",
+        "Pandas",
+        "Matplotlib"
+      ],
+      "features": [
+        "Song scoring by matching favourite song, artist and genres via sequential search",
+        "Iterative and recursive implementations of the same routine",
+        "Runtime measured as the user set grows from 10 to 300 in steps of 10",
+        "Execution-time curves plotted for both variants",
+        "Synthetic user and song datasets generated for the benchmark"
       ],
       "category": "Academic",
       "status": "Completed",
@@ -1437,191 +1438,235 @@
       "duration": "1 semester",
       "role": "Solo Developer",
       "teamSize": 1,
-      "githubUrl": "https://github.com/Fauzan-A25/Text_Editor_Laba_Laba_Sunda",
+      "githubUrl": "https://github.com/Fauzan-A25/TUBES_AKA",
       "demoUrl": "",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Applied doubly linked list for efficient O(1) text insertion/deletion",
-        "Implemented undo/redo using two stacks for action reversal",
-        "Successfully completed as a data structures course assignment"
+        "Empirical runtime comparison of iterative against recursive search",
+        "Benchmarked across 30 dataset sizes from 10 to 300 users",
+        "Final project for the Algorithm Complexity Analysis course"
       ]
     },
     {
-      "id": "21",
-      "title": "Web Portfolio Using Bootstrap V5",
+      "id": 20,
+      "title": "Text Editor Laba-Laba Sunda",
+      "slug": "text-editor-laba-laba-sunda",
+      "shortDescription": "Terminal text editor in C++ with undo/redo and block copy-paste",
+      "description": "A terminal text editor in C++, built as the Struktur Data final project. Past insert and delete it handles undo/redo, block copy-paste bound to Ctrl+B/G/P, cursor movement in all four directions, and several files open in one session.",
+      "image": "/images/cover-text-editor.svg",
+      "tags": [
+        "C++",
+        "Data Structures",
+        "Text Editor",
+        "CLI",
+        "Academic"
+      ],
+      "technologies": [
+        "C++",
+        "Linked List",
+        "Stack",
+        "CLI"
+      ],
+      "features": [
+        "Insert, delete and edit text blocks",
+        "Undo and redo of edits",
+        "Block selection, copy and paste via Ctrl+B / Ctrl+G / Ctrl+P",
+        "Multi-file management within a single session",
+        "Four-direction cursor navigation in the terminal"
+      ],
+      "category": "Academic",
+      "status": "Completed",
+      "year": 2024,
+      "duration": "1 semester",
+      "role": "Developer",
+      "teamSize": 3,
+      "githubUrl": "https://github.com/Fauzan-A25/Text_Editor_Laba_Laba_Sunda",
+      "demoUrl": "",
+      "videoUrl": "",
+      "featured": false,
+      "highlights": [
+        "Struktur Data final project built by the Laba-Laba Sunda team of three",
+        "Undo/redo and block copy-paste built directly on linked lists and stacks",
+        "Runs entirely in the terminal with no external dependencies"
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Web Portfolio with Bootstrap 5",
       "slug": "web-portfolio-using-bootstrap-v5",
-      "shortDescription": "A responsive personal portfolio website built with Bootstrap 5 to showcase skills and projects.",
-      "description": "The project addresses the need for a professional online presence to effectively present one's skills, projects, and experiences to potential employers or clients. A static, non-responsive website can fail to make a good impression across different devices. This portfolio aims to solve that by providing a clean, modern, and fully responsive web experience.\n\nBuilt entirely with Bootstrap 5, HTML, and CSS, the portfolio features a responsive grid system and pre-styled components that ensure a consistent and visually appealing layout on desktops, tablets, and mobile devices. The site includes dedicated sections for an 'About Me' biography, a skills showcase, a project gallery, and a contact form, all organized with intuitive navigation.\n\nThe result is a polished, professional portfolio that effectively communicates the developer's capabilities and past work. The use of Bootstrap 5 ensures fast development and a modern aesthetic, making it easy to update and maintain. This project serves as a practical example of front-end development skills and responsive web design principles.",
-      "image": null,
+      "shortDescription": "The first portfolio iteration — Bootstrap 5 with a glassmorphism look",
+      "description": "The first version of this portfolio, hand-built on Bootstrap 5 with a glassmorphism look. A dark/light toggle that remembers your choice, a Swiper project slider, AOS scroll animations and lazy-loaded assets across About, Skills, Projects and Contact.",
+      "image": "/images/cover-bootstrap-portfolio.svg",
       "tags": [
         "HTML",
         "CSS",
         "Bootstrap 5",
         "Web Development",
-        "Portfolio",
         "Responsive Design"
       ],
       "technologies": [
         "HTML5",
         "CSS3",
+        "JavaScript",
         "Bootstrap 5",
-        "Responsive Web Design"
+        "Swiper.js",
+        "AOS"
       ],
       "features": [
-        "Responsive layout using Bootstrap 5 grid system for optimal viewing on all devices",
-        "Dedicated sections for About Me, Skills, Projects, and Contact",
-        "Modern and clean visual design with Bootstrap components and custom CSS",
-        "Easy to update and maintain structure for adding new projects or information"
+        "Glassmorphism design with backdrop blur",
+        "Dark/light theme toggle with the choice persisted",
+        "Swiper.js project slider with manual navigation",
+        "AOS scroll animations and lazy-loaded images",
+        "Mobile-first responsive layout"
       ],
       "category": "Web Development",
       "status": "Completed",
       "year": 2024,
       "duration": "2 weeks",
       "role": "Solo Developer",
-      "teamSize": "1",
+      "teamSize": 1,
       "githubUrl": "https://github.com/Fauzan-A25/Web_Portofolio_Using_BOOTSTRAP_V5",
       "demoUrl": "",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Built a fully responsive portfolio in under two weeks using Bootstrap 5",
-        "Designed and implemented four distinct sections (About, Skills, Projects, Contact) for comprehensive personal branding",
-        "Achieved a clean, modern aesthetic without external design frameworks beyond Bootstrap"
+        "First portfolio iteration, later rebuilt in React and then Next.js",
+        "Theme choice persisted across visits",
+        "Semantic HTML with meta tags and accessible markup"
       ]
     },
     {
-      "id": "22",
+      "id": 22,
       "title": "Student Academic Performance Prediction",
       "slug": "student-academic-prediction",
-      "shortDescription": "Predicting student academic outcomes using machine learning on educational data.",
-      "description": "This project aims to predict student academic performance based on various features such as demographics, study habits, and past grades. The problem is critical for early intervention in educational settings, helping educators identify at-risk students and provide timely support. Using a dataset from a public educational repository, the goal was to build a model that accurately forecasts final grades or performance categories.\n\nThe solution involved exploratory data analysis (EDA) to understand patterns and correlations, followed by feature engineering to prepare the data for modeling. Multiple machine learning algorithms were implemented, including linear regression, decision trees, and random forests, using Python and Jupyter Notebooks. Model performance was evaluated using metrics like mean absolute error (MAE) and accuracy, with hyperparameter tuning to optimize results.\n\nThe final model achieved promising predictive accuracy, demonstrating the potential of data-driven approaches in education. This project serves as a practical example of applying data science to real-world problems, with insights that could inform personalized learning strategies and institutional policies.",
-      "image": null,
+      "shortDescription": "CatBoost model predicting student dropout, enrolment or graduation",
+      "description": "A CatBoost model predicting whether a university student will drop out, stay enrolled or graduate, on the UCI Predict Students' Dropout dataset. Rare categories are grouped, GDP is adjusted for inflation, and CatBoost handles the twenty-odd categorical features natively.",
+      "image": "/images/cover-student-academic.svg",
       "tags": [
         "Machine Learning",
         "Education",
         "Classification",
-        "Regression",
+        "CatBoost",
         "Python"
       ],
       "technologies": [
         "Python",
         "Jupyter Notebook",
-        "pandas",
-        "scikit-learn",
-        "matplotlib",
-        "seaborn"
+        "CatBoost",
+        "Pandas",
+        "Scikit-learn",
+        "Matplotlib",
+        "Seaborn"
       ],
       "features": [
-        "Comprehensive data cleaning and preprocessing of student records",
-        "Exploratory data analysis with visualizations of key factors",
-        "Implementation of multiple ML models with hyperparameter tuning",
-        "Performance evaluation using MAE and accuracy metrics"
+        "Three-class prediction: dropout, enrolled or graduate",
+        "Rare-category grouping driven by a frequency threshold",
+        "Inflation-adjusted GDP as an engineered macroeconomic feature",
+        "CatBoostClassifier over 1,000 iterations with native categorical handling",
+        "Evaluation by classification report and confusion matrix"
       ],
       "category": "Data Science",
       "status": "Completed",
       "year": 2024,
-      "duration": "2 months",
+      "duration": "1 month",
       "role": "Data Scientist",
-      "teamSize": "1",
+      "teamSize": 1,
       "githubUrl": "https://github.com/Fauzan-A25/Student-academic-prediction",
       "demoUrl": "",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Built predictive models achieving over 85% accuracy on test data",
-        "Identified key features influencing academic performance through EDA",
-        "Developed a reproducible pipeline for educational data analysis"
+        "Built on the UCI Predict Students' Dropout and Academic Success dataset",
+        "CatBoost avoids one-hot blowup across 20+ categorical features",
+        "Three notebooks tracing the baseline through to the tuned pipeline"
       ]
     },
     {
-      "id": "23",
-      "title": "Bot Musik Discord V2",
+      "id": 23,
+      "title": "Discord Music Bot V2",
       "slug": "bot-musik-discord-v2",
-      "shortDescription": "A feature-rich Discord music bot for high-quality audio streaming from YouTube.",
-      "description": "This project addresses the need for a reliable, feature-packed music bot on Discord servers. Users often struggle with bots that have limited functionality or poor audio quality, leading to a subpar listening experience. The goal was to create a bot that offers seamless music playback with intuitive controls.\n\nBuilt with Node.js, discord.js v14, and yt-dlp, the bot efficiently handles queue management, multiple loop modes (track, queue, off), shuffle, volume control, and automatic playback. The use of yt-dlp ensures robust and high-quality audio streaming from YouTube, while the modular code structure allows for easy maintenance and future enhancements.\n\nThe bot provides a smooth user experience with slash commands and responsive interactions. It successfully delivers reliable music streaming with minimal latency, making it a valuable addition to any Discord community. This project demonstrates proficiency in JavaScript, asynchronous programming, and API integration.",
-      "image": null,
+      "shortDescription": "Discord music bot streaming YouTube audio with full queue control",
+      "description": "A Discord music bot on Node.js and discord.js v14 that streams YouTube audio through yt-dlp and FFmpeg. Queue management, per-track and whole-queue loops, shuffle, volume, in-Discord search, now-playing embeds, and auto-disconnect once the channel goes quiet.",
+      "image": "/images/cover-discord-music.png",
       "tags": [
-        "discord",
-        "discord-bot",
-        "discord-js",
-        "music",
-        "nodejs",
-        "audio-streaming"
+        "Discord",
+        "Node.js",
+        "discord.js",
+        "Audio Streaming",
+        "Bot"
       ],
       "technologies": [
         "Node.js",
-        "discord.js v14",
+        "discord.js",
         "yt-dlp",
-        "JavaScript",
-        "npm",
-        "Git"
+        "FFmpeg",
+        "JavaScript"
       ],
       "features": [
-        "High-quality audio streaming from YouTube",
-        "Queue management with add, remove, skip, and clear functions",
-        "Multiple loop modes: track, queue, and off",
-        "Shuffle playback for randomized song order",
-        "Volume control and automatic playback of next track"
+        "YouTube audio streaming via yt-dlp and FFmpeg",
+        "Queue management: view, add, remove, skip, shuffle and clear",
+        "Loop modes for a single track or the whole queue",
+        "YouTube search from inside Discord with now-playing embeds",
+        "Volume control and auto-disconnect when idle"
       ],
       "category": "Tools",
       "status": "Completed",
       "year": 2024,
       "duration": "2 months",
       "role": "Solo Developer",
-      "teamSize": "1",
+      "teamSize": 1,
       "githubUrl": "https://github.com/Fauzan-A25/Bot_Musik_Discord_V2",
       "demoUrl": "",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Developed a full-featured Discord music bot with zero external dependencies for streaming",
-        "Implemented robust queue management and multiple loop modes for enhanced user control",
-        "Achieved reliable audio streaming with low latency using yt-dlp integration"
+        "Complete playback control: play, pause, resume, skip, stop, shuffle and loop",
+        "Search and queue tracks without ever leaving Discord",
+        "Auto-disconnect on inactivity so idle bots stop holding voice channels"
       ]
     },
     {
-      "id": "24",
+      "id": 24,
       "title": "Go Library Manager",
       "slug": "go-library-manager",
-      "shortDescription": "A Go-based library management system for tracking books, members, and borrowing operations.",
-      "description": "This project addresses the need for a simple yet effective library management solution, particularly in educational or small-scale settings. The goal was to create a command-line application that handles core library operations such as adding and removing books, registering members, and managing book checkouts and returns, while demonstrating practical use of data structures and algorithms.\n\nThe system is built entirely in Go, leveraging its standard library for data handling and file I/O. It implements essential data structures like linked lists, hash maps, and sorting algorithms to efficiently manage book inventories, member records, and borrowing transactions. The design follows modular principles, separating concerns into packages for books, members, and transactions.\n\nAs a course project, it successfully showcases the application of algorithmic concepts to a real-world problem. The system handles concurrent borrowing scenarios and maintains data integrity through validation checks. While not deployed in production, it serves as a solid foundation for further development, such as adding a web interface or database backend.",
-      "image": null,
+      "shortDescription": "Console library system in Go handling books, members and loans",
+      "description": "A console library management system in Go, written for the Algoritma dan Pemrograman course. It catalogues books, registers members, issues and returns loans with automatic due dates and overdue fines, and searches by title, author, ISBN or category.",
+      "image": "/images/cover-go-library.png",
       "tags": [
         "Go",
-        "Library Management",
         "Data Structures",
         "Algorithms",
-        "Backend"
+        "CLI",
+        "Academic"
       ],
       "technologies": [
-        "Go 1.21",
+        "Go",
         "Standard Library",
-        "File I/O",
-        "Linked Lists",
-        "Hash Maps",
-        "Sorting Algorithms"
+        "Structs",
+        "Sorting & Searching"
       ],
       "features": [
-        "Add, update, and delete books with details like title, author, and ISBN",
-        "Register and manage library members with contact information",
-        "Check out and return books with automatic due date calculation",
-        "Search books by title, author, or genre"
+        "Book cataloguing with add, update, delete and availability tracking",
+        "Member registration with status and borrowing history",
+        "Borrowing and returns with automatic due dates and fine calculation",
+        "Search by title, author, ISBN or category",
+        "Reports on active loans, most-borrowed books and member activity"
       ],
       "category": "Tools",
       "status": "Completed",
       "year": 2024,
       "duration": "1 semester",
       "role": "Solo Developer",
-      "teamSize": "1",
+      "teamSize": 1,
       "githubUrl": "https://github.com/Fauzan-A25/go-library-manager",
       "demoUrl": "",
       "videoUrl": "",
-      "featured": "",
+      "featured": false,
       "highlights": [
-        "Implemented core data structures (linked lists, hash maps) to manage 50+ book records efficiently",
-        "Developed sorting algorithms to enable search and listing of books by multiple criteria",
-        "Created a modular codebase with separate packages for books, members, and transactions"
+        "Course project applying structs, sorting and searching to a real workflow",
+        "Automatic due-date tracking with overdue fine calculation",
+        "Console interface with formatted reports"
       ]
     }
   ],
@@ -1630,8 +1675,11 @@
     "Machine Learning",
     "Data Science",
     "Computer Vision",
-    "Natural Language Processing",
-    "Data Visualization"
+    "Data Visualization",
+    "Web Development",
+    "Mobile Development",
+    "Tools",
+    "Academic"
   ],
   "projectsContent": {
     "featuredTitle": "Featured Projects",
