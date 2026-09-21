@@ -82,7 +82,7 @@ export const metadata = {
     description: DESCRIPTION,
   },
   // No `icons` key on purpose. Both icons come from the app/ file convention
-  // (icon.svg and apple-icon.jsx), which emits the <link> tags automatically.
+  // (icon.png and apple-icon.png), which emits the <link> tags automatically.
   // Declaring `icons` here overrides that convention wholesale — which is how
   // the apple-touch-icon went missing before.
 };
