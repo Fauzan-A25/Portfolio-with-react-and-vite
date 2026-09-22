@@ -6,7 +6,7 @@ import { getPortfolioData } from '@/lib/portfolio';
 // they actually want, in the site's own dark palette.
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
-export const alt = 'Fauzan Ahsanudin Alfikri — Data Science Portfolio';
+export const alt = 'Fauzan Ahsanudin Alfikri · Data Science Portfolio';
 
 // The FZN mark (light variant) inlined as a data URI. Satori renders <img>
 // reliably; a raw <svg> child is only partially supported, so a PNG data URI

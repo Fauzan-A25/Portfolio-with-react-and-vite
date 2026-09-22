@@ -30,7 +30,7 @@ export const metadata = {
     template: '%s | Fauzan Ahsanudin Alfikri',
   },
   description: DESCRIPTION,
-  applicationName: 'Fauzan Ahsanudin Alfikri — Portfolio',
+  applicationName: 'Fauzan Ahsanudin Alfikri · Portfolio',
   keywords: [
     'Fauzan Ahsanudin Alfikri',
     'Data Science',
@@ -71,7 +71,7 @@ export const metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: 'Fauzan Ahsanudin Alfikri — Data Science Portfolio',
+    siteName: 'Fauzan Ahsanudin Alfikri · Data Science Portfolio',
     locale: 'en_US',
     // The 1200x630 card comes from app/opengraph-image.jsx; declaring images
     // here would override that file convention.

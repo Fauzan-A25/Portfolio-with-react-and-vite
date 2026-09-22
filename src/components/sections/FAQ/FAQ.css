@@ -1,0 +1,30 @@
+.faq__lead {
+  margin-bottom: clamp(24px, 4vw, 36px);
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+}
+
+.faq__item {
+  padding: clamp(18px, 3vw, 26px) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+}
+
+.faq__q {
+  margin: 0 0 10px;
+  font: 600 clamp(17px, 2vw, 20px) / 1.35 var(--font-sans), sans-serif;
+  letter-spacing: -0.01em;
+  color: var(--txt);
+  text-wrap: balance;
+}
+
+.faq__a {
+  margin: 0;
+  max-width: 760px;
+  font: 400 15.5px / 1.65 var(--font-sans), sans-serif;
+  color: var(--mut);
+  text-wrap: pretty;
+}

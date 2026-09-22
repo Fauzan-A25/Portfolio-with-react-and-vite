@@ -253,7 +253,7 @@ export default function Skills({ skills = {}, skillsContent = {} }) {
           className="sk__modal"
           role="dialog"
           aria-modal="true"
-          aria-label={`${active.title} — detail skill`}
+          aria-label={`${active.title} detail skill`}
           onClick={(e) => {
             if (e.target === e.currentTarget) setModal(false);
           }}

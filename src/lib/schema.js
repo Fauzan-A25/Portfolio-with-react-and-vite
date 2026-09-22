@@ -124,7 +124,7 @@ export function buildPortfolioSchema(data, { dateModified } = {}) {
     '@type': 'WebSite',
     '@id': `${SITE_URL}/#website`,
     url: SITE_URL,
-    name: info.name ? `${info.name} — Data Science Portfolio` : 'Data Science Portfolio',
+    name: info.name ? `${info.name} · Data Science Portfolio` : 'Data Science Portfolio',
     inLanguage: 'en',
     publisher: { '@id': `${SITE_URL}/#person` },
   });
@@ -152,8 +152,27 @@ export function buildPortfolioSchema(data, { dateModified } = {}) {
     itemListElement: projectItems(data.projects),
   });
 
+  // Mirrors the FAQ section on the page so answer engines can cite the exact
+  // question/answer text a reader sees.
+  const faqPage = (() => {
+    const questions = (data.faqContent?.questions || [])
+      .filter((q) => q?.question && q?.answer)
+      .map((q) => ({
+        '@type': 'Question',
+        name: q.question,
+        acceptedAnswer: { '@type': 'Answer', text: q.answer },
+      }));
+    return questions.length
+      ? clean({
+          '@type': 'FAQPage',
+          '@id': `${SITE_URL}/#faq`,
+          mainEntity: questions,
+        })
+      : null;
+  })();
+
   return {
     '@context': 'https://schema.org',
-    '@graph': [person, website, page, projectList],
+    '@graph': [person, website, page, projectList, faqPage].filter(Boolean),
   };
 }

@@ -19,6 +19,7 @@ import Experience from '@/components/sections/Experience/Experience';
 import Certifications from '@/components/sections/Certifications/Certifications';
 import Projects from '@/components/sections/Projects/Projects';
 import Contact from '@/components/sections/Contact/Contact';
+import FAQ from '@/components/sections/FAQ/FAQ';
 import Footer from '@/components/layout/Footer/Footer';
 
 // The assistant is a widget, not content: it pulls in the Gemini SDK and a
@@ -74,6 +75,7 @@ export default function PortfolioApp({ data = null }) {
             contactContent={data.contactContent}
             emailjsConfig={data.emailjsConfig}
           />
+          <FAQ faqContent={data.faqContent} />
         </main>
 
         <Footer

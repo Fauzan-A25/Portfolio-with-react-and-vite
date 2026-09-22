@@ -113,7 +113,7 @@ export default function Certifications({ certifications = [] }) {
                   data-reveal=""
                   data-d={i * 55}
                 >
-                  <span className="cert__empty-mark mono">—</span>
+                  <span className="cert__empty-mark mono">·</span>
                   <span className="cert__title">{c.name}</span>
                   <span className="cert__caption mono">
                     {caption || c.issuer} · dokumen belum diunggah

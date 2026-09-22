@@ -12,6 +12,7 @@ const LINKS = [
   { id: 'experience', label: 'Experience' },
   { id: 'certifications', label: 'Certificates' },
   { id: 'projects', label: 'Projects' },
+  { id: 'faq', label: 'FAQ' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -84,7 +85,7 @@ export default function Navbar() {
         <a
           href="#home"
           className="nav__brand"
-          aria-label="Fauzan Ahsanudin Alfikri — back to top"
+          aria-label="Fauzan Ahsanudin Alfikri, back to top"
           onClick={(e) => onNav(e, 'home')}
         >
           <LogoMark size={19} className="nav__mark" />
