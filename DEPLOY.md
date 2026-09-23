@@ -28,13 +28,41 @@ the repo and not in the artifact.
 
 ```bash
 mkdir -p ~/.config/portfolio
-printf 'GEMINI_API_KEY=your-key-here\n' > ~/.config/portfolio/env
+cat > ~/.config/portfolio/env <<'EOF'
+AI_BASE_URL=http://100.120.16.4:20128/v1
+AI_API_KEY=your-key-here
+AI_MODEL=gemini/gemini-3.5-flash-lite
+AI_MODEL_FALLBACKS=gemini/gemini-3.6-flash
+AI_TIMEOUT_MS=20000
+EOF
 chmod 600 ~/.config/portfolio/env
 ```
 
-`GEMINI_API_KEY` is the only one that matters. It powers `/api/chat`; without
-it that route returns a friendly fallback instead of erroring, so the site
-still works, just without AI answers.
+`AI_API_KEY` is the only one that matters. It powers `/api/chat` against any
+OpenAI-compatible endpoint; without it that route returns a friendly fallback
+instead of erroring, so the site still works, just without AI answers.
+
+`AI_MODEL` / `AI_MODEL_FALLBACKS` must be model ids **exactly as the endpoint
+reports them** in `GET $AI_BASE_URL/models`. 9router prefixes the upstream
+provider, so `gemini/gemini-3.5-flash-lite` is correct and `gemini-3.5-flash-lite`
+is not. The route tries `AI_MODEL` first and walks `AI_MODEL_FALLBACKS` in order,
+then falls back to local answers. Verify a candidate before pinning it:
+
+```bash
+curl -s "$AI_BASE_URL/models" -H "Authorization: Bearer $AI_API_KEY" \
+  | python3 -c 'import sys,json;[print(m["id"]) for m in json.load(sys.stdin)["data"]]'
+```
+
+Two quirks this endpoint has that `route.js` absorbs:
+
+- It replies with `text/event-stream` unless the request sends `stream: false`
+  explicitly. The route sets that flag *and* parses SSE, so either shape works.
+- Model quality varies a lot. `gemini-3.5-flash-lite` writes correct English;
+  `gemini-3.6-flash` is accurate but drops verb endings; the larger models are
+  much slower and one of them returns 503 intermittently. The system prompt
+  carries explicit guardrails (correct grammar, no meta-commentary, no invented
+  code) because the smaller models otherwise append "skipped: ..." notes and
+  stray code fences to their answers.
 
 You do **not** need `NEXT_PUBLIC_SITE_URL`. `src/lib/site.js` already falls
 back to `https://portfolio.fauzanahsan.my.id`, so canonical URLs, the sitemap
