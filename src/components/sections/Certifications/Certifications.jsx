@@ -2,6 +2,8 @@
 
 import { useMemo, useRef } from 'react';
 import { useProof } from '@/components/ui/ProofModal/ProofModal';
+import SectionDeco from '@/components/ui/SectionDeco/SectionDeco';
+import { useParallaxLayers } from '@/hooks/useParallaxLayers';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useReveal } from '@/hooks/useReveal';
 import './Certifications.css';
@@ -33,6 +35,7 @@ export default function Certifications({ certifications = [] }) {
   const { openProof, proofs } = useProof();
 
   useReveal(rootRef, { enabled: !reduced });
+  useParallaxLayers(rootRef, { enabled: !reduced });
 
   // Documented certificates first — the page leads with what it can prove.
   const items = useMemo(() => {
@@ -46,7 +49,8 @@ export default function Certifications({ certifications = [] }) {
   if (!items.length) return null;
 
   return (
-    <section id="certifications" ref={rootRef} className="section section--raised">
+    <section id="certifications" ref={rootRef} className="section section--raised section--clip">
+      <SectionDeco variant="grid" />
       <div className="wrap">
         <div className="section-head" data-reveal="">
           <span className="section-num mono">04</span>

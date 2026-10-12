@@ -286,6 +286,15 @@
   scale: 1.025;
 }
 
+/* Spring-driven tilt (see Hero.jsx's rotateX/rotateY motion values) needs a
+   3D perspective context — kept separate from .hero__photo-img so framer
+   motion's own transform doesn't fight the hover `scale` above it. */
+.hero__photo-tilt {
+  width: 100%;
+  height: 100%;
+  perspective: 900px;
+}
+
 /* The slice artwork is a transparent cut-out, so it must sit inside the frame
    rather than fill it. */
 .hero__photo-img {
@@ -293,6 +302,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.4));
 }
 
 /* ==========================================================================

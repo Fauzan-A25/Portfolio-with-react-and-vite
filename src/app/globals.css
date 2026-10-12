@@ -80,6 +80,18 @@ a:hover {
   background: var(--accSoft);
 }
 
+/* Native cursor is hidden only once the custom cursor confirms it's active
+   (pointer: fine, motion not reduced) — see components/ui/Cursor. */
+html[data-cursor='custom'] * {
+  cursor: none !important;
+}
+
+html[data-cursor='custom'] input,
+html[data-cursor='custom'] textarea,
+html[data-cursor='custom'] [contenteditable='true'] {
+  cursor: text !important;
+}
+
 input,
 textarea,
 button {

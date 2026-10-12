@@ -1,0 +1,109 @@
+.deco {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.deco__plate {
+  position: absolute;
+  display: block;
+  will-change: transform;
+}
+
+.deco__plate--a {
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+}
+
+.deco__plate--b {
+  border-radius: 14px;
+  background: var(--accSoft);
+  border: 1px solid var(--accLine);
+}
+
+.deco__plate--c {
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+}
+
+/* ---------- Skills orbit ---------- */
+.deco[data-variant='orbit'] .deco__plate--a {
+  top: -40px;
+  right: 8%;
+  width: 150px;
+  height: 150px;
+  opacity: 0.6;
+}
+.deco[data-variant='orbit'] .deco__plate--b {
+  bottom: 6%;
+  left: 2%;
+  width: 90px;
+  height: 56px;
+  opacity: 0.7;
+}
+.deco[data-variant='orbit'] .deco__plate--c {
+  top: 46%;
+  left: -30px;
+  width: 60px;
+  height: 60px;
+  opacity: 0.5;
+}
+
+/* ---------- Certifications grid ---------- */
+.deco[data-variant='grid'] .deco__plate--a {
+  top: 4%;
+  left: -50px;
+  width: 170px;
+  height: 170px;
+  opacity: 0.5;
+}
+.deco[data-variant='grid'] .deco__plate--b {
+  bottom: -30px;
+  right: 6%;
+  width: 120px;
+  height: 70px;
+  opacity: 0.65;
+}
+.deco[data-variant='grid'] .deco__plate--c {
+  top: 58%;
+  right: -20px;
+  width: 44px;
+  height: 44px;
+  opacity: 0.5;
+}
+
+/* ---------- Contact form ---------- */
+.deco[data-variant='form'] .deco__plate--a {
+  top: -36px;
+  right: 18%;
+  width: 110px;
+  height: 110px;
+  opacity: 0.55;
+}
+.deco[data-variant='form'] .deco__plate--b {
+  bottom: 10%;
+  left: -40px;
+  width: 100px;
+  height: 64px;
+  opacity: 0.6;
+}
+.deco[data-variant='form'] .deco__plate--c {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .deco__plate {
+    opacity: 0.35 !important;
+    transform: scale(0.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deco__plate {
+    transform: none !important;
+  }
+}

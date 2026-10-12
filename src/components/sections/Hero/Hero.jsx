@@ -1,11 +1,19 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import MusicPlayer from '@/components/BackgroundMusic/MusicPlayer';
 import { scrollToSection } from '@/components/layout/Navbar/Navbar';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useTypingEffect } from '@/hooks/useTypingEffect';
+import { MODEL_SRC } from './HeroFigure';
 import './Hero.css';
+
+// three.js/R3F only ships to the client, and only once a figure actually
+// exists at MODEL_SRC (see the HEAD check below) — everyone else keeps the
+// plain <img> with zero extra bytes.
+const HeroFigure = dynamic(() => import('./HeroFigure'), { ssr: false });
 
 /**
  * The hero is composed on a 1180x706 art board: every block is placed by
@@ -59,6 +67,32 @@ export default function Hero({ personalInfo = {}, socialLinks = {}, heroTypingTe
   const [stageH, setStageH] = useState(ART_H);
   const [docked, setDocked] = useState(false);
   const [ready, setReady] = useState(false);
+  const [canRenderFigure, setCanRenderFigure] = useState(false);
+  const pointerRef = useRef({ dx: 0, dy: 0 });
+
+  // Smoothed pointer values for the photo's spring-based tilt — separate from
+  // the raw --dx/--dy CSS vars below, which other blocks' parallax still uses.
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const springX = useSpring(tiltX, { stiffness: 140, damping: 18, mass: 0.6 });
+  const springY = useSpring(tiltY, { stiffness: 140, damping: 18, mass: 0.6 });
+  const rotateY = useTransform(springX, [-1, 1], [-8, 8]);
+  const rotateX = useTransform(springY, [-1, 1], [5, -5]);
+
+  // The 3D figure is additive: only attempt it once a GLB actually exists at
+  // MODEL_SRC, so nothing changes for visitors until that asset is shipped.
+  useEffect(() => {
+    if (reduced || !window.matchMedia('(pointer: fine)').matches) return;
+    let cancelled = false;
+    fetch(MODEL_SRC, { method: 'HEAD' })
+      .then((res) => {
+        if (!cancelled && res.ok) setCanRenderFigure(true);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [reduced]);
 
   // Measure the stage and re-derive the art-board scale.
   useLayoutEffect(() => {
@@ -126,6 +160,10 @@ export default function Hero({ personalInfo = {}, socialLinks = {}, heroTypingTe
         const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
         stage.style.setProperty('--dx', dx.toFixed(3));
         stage.style.setProperty('--dy', dy.toFixed(3));
+        pointerRef.current.dx = dx;
+        pointerRef.current.dy = dy;
+        tiltX.set(dx);
+        tiltY.set(dy);
       });
     };
 
@@ -135,8 +173,10 @@ export default function Hero({ personalInfo = {}, socialLinks = {}, heroTypingTe
       window.removeEventListener('mousemove', onMove);
       stage.style.removeProperty('--dx');
       stage.style.removeProperty('--dy');
+      tiltX.set(0);
+      tiltY.set(0);
     };
-  }, [wide, reduced, ready]);
+  }, [wide, reduced, ready, tiltX, tiltY]);
 
   const onNav = useCallback(
     (e, id) => {
@@ -146,8 +186,10 @@ export default function Hero({ personalInfo = {}, socialLinks = {}, heroTypingTe
     [reduced],
   );
 
+  const mediaMode = wide && canRenderFigure ? 'figure-3d' : 'photo';
+
   const photoSrc = personalInfo.profileImage || '/images/Fauzan-slice.png';
-  const photoName = photoSrc.split('/').pop();
+  const photoName = (mediaMode === 'figure-3d' ? MODEL_SRC : photoSrc).split('/').pop();
 
   const socials = [
     ['GitHub', socialLinks.github],
@@ -208,9 +250,21 @@ export default function Hero({ personalInfo = {}, socialLinks = {}, heroTypingTe
                 <span key={corner} className={`hero__corner hero__corner--${corner}`} aria-hidden="true" />
               ))}
               <span className="hero__photo-tag mono">{photoName}</span>
-              <div className="hero__photo-media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photoSrc} alt={personalInfo.name || 'Portrait'} className="hero__photo-img" />
+              <div className="hero__photo-media" data-media={mediaMode}>
+                {mediaMode === 'figure-3d' ? (
+                  <HeroFigure pointerRef={pointerRef} onError={() => setCanRenderFigure(false)} />
+                ) : (
+                  <div className="hero__photo-tilt">
+                    <motion.img
+                      src={photoSrc}
+                      alt={personalInfo.name || 'Portrait'}
+                      className="hero__photo-img"
+                      style={{ rotateY, rotateX }}
+                      animate={reduced ? undefined : { y: [0, -9, 0] }}
+                      transition={reduced ? undefined : { duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>

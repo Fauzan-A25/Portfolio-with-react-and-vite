@@ -2,6 +2,8 @@
 
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import SectionDeco from '@/components/ui/SectionDeco/SectionDeco';
+import { useParallaxLayers } from '@/hooks/useParallaxLayers';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useReveal } from '@/hooks/useReveal';
 import './Contact.css';
@@ -19,6 +21,7 @@ export default function Contact({
   const reduced = useReducedMotion();
 
   useReveal(rootRef, { enabled: !reduced });
+  useParallaxLayers(rootRef, { enabled: !reduced });
 
   const [status, setStatus] = useState(IDLE);
 
@@ -85,6 +88,7 @@ export default function Contact({
 
   return (
     <section id="contact" ref={rootRef} className="section section--raised section--clip">
+      <SectionDeco variant="form" />
       <div className="wrap">
         <div className="section-head" data-reveal="">
           <span className="section-num mono">06</span>

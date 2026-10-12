@@ -109,6 +109,13 @@ export default function LinkPeek() {
   };
 
   const { url, x, y } = state;
+
+  // Lets the custom cursor (Cursor.jsx) hide itself while this magnifier is
+  // showing, instead of both overlapping the same pointer.
+  useEffect(() => {
+    document.documentElement.dataset.peekActive = url ? 'true' : 'false';
+  }, [url]);
+
   const src = url ? microlink(url, theme) : null;
   const label = url ? url.replace(/^https?:\/\//, '').replace(/\/$/, '') : '';
 
