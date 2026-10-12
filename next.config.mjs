@@ -2,6 +2,44 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  // Do not advertise the framework/version to anyone probing the response.
+  poweredByHeader: false,
+
+  // Security headers. The site is a static portfolio (no cookies, no auth),
+  // so this is defense-in-depth rather than fixing an active hole. The CSP is
+  // deliberately permissive on img/connect: project thumbnails come from Google
+  // Drive and Dicoding, link previews from Microlink, and the contact form
+  // posts to EmailJS. Tightening those would break the content.
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+          { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline'",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: https:",
+              "font-src 'self' data:",
+              "connect-src 'self' https://api.emailjs.com https://api.microlink.io",
+              "frame-ancestors 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "object-src 'none'",
+            ].join('; '),
+          },
+        ],
+      },
+    ];
+  },
+
   // Self-hosted on a systemd user service behind a Cloudflare Tunnel, so the
   // deploy artifact has to be self-contained: `standalone` emits a server.js
   // with only the node_modules the app actually reaches, instead of requiring

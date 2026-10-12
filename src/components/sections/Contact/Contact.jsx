@@ -38,7 +38,7 @@ export default function Contact({
     if (!configured) {
       setStatus({
         state: 'error',
-        message: 'Email service is not configured yet — please use the email address above.',
+        message: 'Email service is not configured yet. Please use the email address above.',
       });
       return;
     }

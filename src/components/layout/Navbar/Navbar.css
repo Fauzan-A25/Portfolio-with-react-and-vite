@@ -38,13 +38,11 @@
   color: var(--txt);
 }
 
-/* The mark paints with currentColor, so it follows the theme for free. It sits
-   one step down from the wordmark's white and lifts to full on hover — the
-   brand should read as one unit, not as an icon competing with the name. */
+/* The mark now renders as a theme-aware PNG pair (Logo.jsx), so sizing comes
+   from the --logo-size custom property and color is baked into the assets.
+   Only the hover lift stays here. */
 .nav__mark {
-  display: block;
   flex: none;
-  color: var(--acc);
   opacity: 0.82;
   transition: opacity 0.25s var(--ease);
 }

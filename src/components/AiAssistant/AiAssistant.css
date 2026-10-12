@@ -20,7 +20,7 @@
   box-shadow: var(--shadow);
   color: var(--mut);
   cursor: pointer;
-  transition: color 0.25s, border-color 0.25s, transform 0.25s var(--ease);
+  transition: color 0.25s, border-color 0.25s, transform 0.25s var(--ease), bottom 0.3s var(--ease);
 }
 
 .ai-chat-button:hover {
@@ -76,6 +76,7 @@
   box-shadow: var(--cardShadow);
   overflow: hidden;
   animation: ai-in 0.32s var(--ease) both;
+  transition: bottom 0.3s var(--ease);
 }
 
 @keyframes ai-in {
@@ -447,4 +448,23 @@
   .ai-chat-window {
     height: min(70vh, calc(100vh - 180px));
   }
+}
+
+/* ==========================================================================
+   Collision avoidance with the docked music player
+   ========================================================================== */
+
+/* The music player parks in the bottom-right corner (z-index 75) and, when
+   opened, expands its card upward ~104px (art + title row + seek bar +
+   controls). The AI button normally floats at bottom +62px, which puts it
+   squarely on top of that card's close button (the card's top-right corner),
+   so a tap meant to close the music lands on the AI button instead. When the
+   docked player is open, lift the AI button and panel clear of the card. */
+
+body:has(.mp[data-docked='true'][data-open='true']) .ai-chat-button {
+  bottom: calc(clamp(14px, 2.5vw, 24px) + 122px);
+}
+
+body:has(.mp[data-docked='true'][data-open='true']) .ai-chat-window {
+  bottom: calc(clamp(14px, 2.5vw, 24px) + 178px);
 }

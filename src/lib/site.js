@@ -30,4 +30,4 @@ export const SITE_URL = resolveSiteUrl();
 /** Absolute URL for a site-relative path. */
 export const abs = (path = '/') => new URL(path, `${SITE_URL}/`).toString();
 
-export const SITE_NAME = 'Fauzan Ahsanudin Alfikri — Data Science Portfolio';
+export const SITE_NAME = 'Fauzan Ahsanudin Alfikri · Data Science Portfolio';

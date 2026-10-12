@@ -1,0 +1,32 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  height: var(--logo-size, 20px);
+  width: auto;
+  line-height: 0;
+}
+
+.logo__img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Theme-aware: the light glyph is the designed default (dark theme); the
+   brand (navy) glyph appears on the light theme so it keeps contrast there. */
+.logo__img--brand {
+  display: none;
+}
+.logo__img--light {
+  display: block;
+}
+
+[data-theme='light'] .logo__img--brand {
+  display: block;
+}
+[data-theme='light'] .logo__img--light {
+  display: none;
+}

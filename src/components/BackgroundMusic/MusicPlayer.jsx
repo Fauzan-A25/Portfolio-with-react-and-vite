@@ -157,7 +157,7 @@ export default function MusicPlayer({ src, title = 'teman-ryo', docked = false }
               type="button"
               className="mp__bar"
               onClick={seek}
-              aria-label={`Seek track — ${Math.round(pct)} percent played`}
+              aria-label={`Seek track, ${Math.round(pct)} percent played`}
             >
               <span className="mp__bar-track" />
               <span className="mp__bar-fill" style={{ width: `${pct}%` }} />

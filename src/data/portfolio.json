@@ -3,7 +3,7 @@
     "name": "Fauzan Ahsanudin Alfikri",
     "title": "Data Science Student",
     "subtitle": "Machine Learning Enthusiast | Python Developer",
-    "tagline": "Passionate about turning data into insights and solving real-world problems through technology",
+    "tagline": "Data science student who builds machine learning systems and competes in ML and computer vision challenges.",
     "university": "Telkom University",
     "location": "Bandung, Indonesia",
     "focus": "NLP · Computer Vision · ML Pipelines",
@@ -53,6 +53,11 @@
       "id": "contact",
       "label": "Contact",
       "href": "#contact"
+    },
+    {
+      "id": "faq",
+      "label": "FAQ",
+      "href": "#faq"
     }
   ],
   "heroTypingTexts": [
@@ -77,11 +82,11 @@
     "paragraphs": [
       {
         "id": 1,
-        "text": "Third-year undergraduate student of Data Science at Telkom University specializing in Machine Learning, Natural Language Processing (NLP), and Computer Vision. Currently serving as a Teaching Assistant for the Sistem Cerdas course, demonstrating strong academic leadership, excellent attention to detail, and a solid foundation in intelligent systems."
+        "text": "Fauzan Ahsanudin Alfikri is a third-year Data Science undergraduate at Telkom University, focused on machine learning, natural language processing and computer vision. As a teaching assistant for the Sistem Cerdas course, he runs NLP and intelligent-systems labs."
       },
       {
         "id": 2,
-        "text": "Proficient in Python, C++, and SQL with hands-on experience building end-to-end ML pipelines using MLflow and Docker. Proven track record in data science competitions, including securing 3rd Place in the Data Mining Division at ADIKARA 2025. A collaborative team player dedicated to delivering accurate data insights and impactful predictive analytics solutions."
+        "text": "He writes Python, C++ and SQL and builds end-to-end ML pipelines with MLflow and Docker. In 2025 he placed 3rd in the Data Mining division at ADIKARA. Recent projects range from XGBoost classifiers and crowd-counting vision models to a Gemini-powered nutrition app."
       }
     ],
     "highlights": [
@@ -90,21 +95,21 @@
         "proofLabel": "Sertifikat",
         "id": 1,
         "icon": "bi-check-circle-fill",
-        "text": "Award-winning data mining competitor (3rd Place ADIKARA 2025)"
+        "text": "3rd place Data Mining, ADIKARA 2025"
       },
       {
         "link": "projects",
-        "linkLabel": "7 proyek",
+        "linkLabel": "Lihat proyek",
         "id": 2,
         "icon": "bi-check-circle-fill",
-        "text": "Expertise in NLP, Computer Vision, and end-to-end ML pipelines"
+        "text": "NLP, computer vision and end-to-end ML pipelines"
       },
       {
         "proofKey": "teaching",
         "proofLabel": "Dokumentasi",
         "id": 3,
         "icon": "bi-check-circle-fill",
-        "text": "Academic leadership as a Teaching Assistant (Sistem Cerdas)"
+        "text": "Teaching assistant for Sistem Cerdas"
       }
     ]
   },
@@ -320,7 +325,7 @@
   },
   "skillsContent": {
     "title": "Skills & Expertise",
-    "subtitle": "Technologies and tools I work with, measured by years of hands-on experience",
+    "subtitle": "The languages, libraries and tools I use day to day.",
     "categoryTitles": {
       "programming": "Programming Languages",
       "dataScience": "Data Science & ML",
@@ -465,7 +470,7 @@
   "certifications": [
     {
       "id": 1,
-      "name": "Inline Elements — Frontend HTML",
+      "name": "Inline Elements: Frontend HTML",
       "issuer": "MySkill",
       "credentialId": "MS-18/7/2024-9bSJUJGVsxJ6mbAYciJ",
       "credentialUrl": "",
@@ -515,7 +520,7 @@
     },
     {
       "id": 6,
-      "name": "Data Analytics Dash — COMPFEST 17",
+      "name": "Data Analytics Dash (COMPFEST 17)",
       "issuer": "Universitas Indonesia",
       "role": "Participant",
       "date": "2025",
@@ -525,7 +530,7 @@
     },
     {
       "id": 7,
-      "name": "Senior Competitive Programming — COMPFEST 16",
+      "name": "Senior Competitive Programming (COMPFEST 16)",
       "issuer": "Universitas Indonesia",
       "role": "Participant",
       "date": "2024",
@@ -545,7 +550,7 @@
     },
     {
       "id": 9,
-      "name": "Coding Camp 2026 — Learning Path AI Engineer",
+      "name": "Coding Camp 2026: Learning Path AI Engineer",
       "issuer": "DBS Foundation × Dicoding Indonesia",
       "role": "Full Graduate",
       "date": "2026",
@@ -637,7 +642,7 @@
   ],
   "proofs": {
     "adikara-photo": {
-      "title": "Penyerahan Juara 3 — Divisi Data Mining ADIKARA 2025",
+      "title": "Penyerahan Juara 3 Divisi Data Mining ADIKARA 2025",
       "note": "Ajang Digital Kreatif Mahasiswa Informatika 2025 · Telkom University",
       "image": "/images/foto-menang-adikara.jpeg"
     },
@@ -647,7 +652,7 @@
       "image": "/images/proof-adikara-certificate.jpeg"
     },
     "teaching": {
-      "title": "Asisten Dosen — Sistem Cerdas",
+      "title": "Asisten Dosen Sistem Cerdas",
       "note": "Fakultas Informatika, Telkom University · 2026",
       "image": "/images/proof-teaching.jpeg"
     },
@@ -657,7 +662,7 @@
       "image": "/images/cert-findit-2025.jpeg"
     },
     "compfest17": {
-      "title": "Data Analytics Dash — COMPFEST 17",
+      "title": "Data Analytics Dash (COMPFEST 17)",
       "note": "Universitas Indonesia · Participant · COMPFEST 17",
       "image": "/images/cert-compfest17.jpeg"
     },
@@ -667,7 +672,7 @@
       "image": "/images/cert-gelarrasa-2025.jpeg"
     },
     "compfest16": {
-      "title": "Senior Competitive Programming — COMPFEST 16",
+      "title": "Senior Competitive Programming (COMPFEST 16)",
       "note": "Universitas Indonesia · Participant · COMPFEST 16",
       "image": "/images/cert-compfest16.jpeg"
     },
@@ -682,23 +687,23 @@
       "image": "/images/cert-aiesec-2024.jpeg"
     },
     "myskill-inline-elements": {
-      "title": "Inline Elements — Frontend HTML",
+      "title": "Inline Elements: Frontend HTML",
       "note": "MySkill · Course Completion · 18 Juli 2024",
       "image": "/images/cert-myskill-inline-elements.jpeg"
     },
     "coding-camp-2026": {
-      "title": "Coding Camp 2026 — Learning Path AI Engineer",
-      "note": "DBS Foundation × Dicoding · Full Graduate · 9 Feb – 20 Jul 2026 · No. CC26/GRAD/XXVI-07/CACC012D6Y2364",
+      "title": "Coding Camp 2026: Learning Path AI Engineer",
+      "note": "DBS Foundation × Dicoding · Full Graduate · 9 Feb to 20 Jul 2026 · No. CC26/GRAD/XXVI-07/CACC012D6Y2364",
       "image": "/images/cert-coding-camp-2026.jpeg"
     }
   },
   "projects": [
     {
       "id": 1,
-      "title": "Fossil — Water Potability Prediction",
+      "title": "Fossil: Water Potability Prediction",
       "slug": "fossil-water-potability",
       "shortDescription": "Streamlit app that predicts whether a water sample is safe to drink",
-      "description": "A Streamlit app that predicts water potability from nine chemical and physical parameters — pH, sulfate, organic carbon and the rest. An MLPClassifier neural network trained on the Kaggle Water Potability dataset backs the call. Built as the GDGoC Telkom University final project.",
+      "description": "A Streamlit app that predicts water potability from nine chemical and physical parameters, including pH, sulfate and organic carbon. An MLPClassifier neural network trained on the Kaggle Water Potability dataset backs the call. Built as the GDGoC Telkom University final project.",
       "image": "https://drive.google.com/thumbnail?id=1MNgX_ecN6bDlplqUxACGC-kCxn2VVL_b&sz=w800",
       "tags": [
         "Machine Learning",
@@ -831,7 +836,7 @@
     },
     {
       "id": 4,
-      "title": "Pacific Data Viz Challenge — Climate & Disasters",
+      "title": "Pacific Data Viz Challenge: Climate & Disasters",
       "slug": "pacific-dataviz-climate-disasters",
       "shortDescription": "Interactive dashboard on Pacific climate change and disaster patterns",
       "description": "An interactive Streamlit dashboard on climate change and disasters across Pacific Island nations, built from Pacific Data Hub open data. Plotly maps and charts let you filter by country and period to trace disaster frequency and climate risk over time.",
@@ -875,7 +880,7 @@
     },
     {
       "id": 5,
-      "title": "AstroClassify — Stellar Classification",
+      "title": "AstroClassify: Stellar Classification",
       "slug": "astroclassify-stellar-classification",
       "shortDescription": "ML tool that classifies celestial objects from SDSS spectral data",
       "description": "A Streamlit tool that sorts celestial objects into galaxy, star or quasar from SDSS spectral measurements. Upload a CSV and it preprocesses the data, runs your pick of Random Forest, XGBoost or LightGBM, then shows the confusion matrix and exports the predictions.",
@@ -924,7 +929,7 @@
       "title": "GenZ Financial Literacy Dashboard",
       "slug": "genz-financial-literacy-analytics-dashboard",
       "shortDescription": "Survey analytics dashboard on Gen Z financial literacy in Indonesia",
-      "description": "A React and TypeScript dashboard analysing financial literacy, behaviour and well-being among Indonesian Gen Z. Four pages break the survey down by knowledge, digital literacy, behaviour, decision-making and well-being — all filterable across 38 provinces, education level, income and age.",
+      "description": "A React and TypeScript dashboard analysing financial literacy, behaviour and well-being among Indonesian Gen Z. Four pages break the survey down by knowledge, digital literacy, behaviour, decision-making and well-being. Every chart is filterable across 38 provinces, education level, income and age.",
       "image": "https://drive.google.com/thumbnail?id=1HjqCn7kwTuYcA7Td8NRWAJijQONhSmvn&sz=w800",
       "tags": [
         "Financial Literacy",
@@ -968,7 +973,7 @@
       "title": "Smart Face Anti-Spoofing",
       "slug": "smart-face-anti-spoofing",
       "shortDescription": "Vision model separating real faces from six presentation-attack types",
-      "description": "A face anti-spoofing classifier that tells a genuine face from six presentation attacks — printed photos, screen replays, masks, mannequins and unknown methods. A DINOv3-ConvNeXt backbone is fine-tuned on YOLO-cropped faces with degradation-heavy augmentation. Competition solution for Find IT! UGM 2026.",
+      "description": "A face anti-spoofing classifier that tells a genuine face from six presentation attacks: printed photos, screen replays, masks, mannequins and unknown methods. A DINOv3-ConvNeXt backbone is fine-tuned on YOLO-cropped faces with degradation-heavy augmentation. Competition solution for Find IT! UGM 2026.",
       "image": "https://drive.google.com/thumbnail?id=1yX95ip3J-i-XqxZX4Q4qmucjNuG8V0BP&sz=w800",
       "tags": [
         "Computer Vision",
@@ -1009,7 +1014,7 @@
     },
     {
       "id": 9,
-      "title": "NutriGinjal — CKD Nutrition App",
+      "title": "NutriGinjal: CKD Nutrition App",
       "slug": "nutriginjal-android-apps",
       "shortDescription": "Flutter health app pairing an AI nutrition assistant with CKD risk prediction",
       "description": "A Flutter app for people managing chronic kidney disease. It pairs a Gemini-powered nutrition assistant that answers diet questions against the patient's own restrictions with a risk engine scoring CKD progression from 24 clinical lab parameters, all on a Supabase backend.",
@@ -1096,7 +1101,7 @@
     },
     {
       "id": 11,
-      "title": "Melodia — Music Streaming App",
+      "title": "Melodia: Music Streaming App",
       "slug": "melodia-apps",
       "shortDescription": "Full-stack personal music streaming app on React and Spring Boot",
       "description": "A personal music streaming web app with a React front end over a Spring Boot API and PostgreSQL. Users register, build a library and playlists, stream tracks and review listening history. Written for an OOP course, so inheritance, encapsulation and interfaces shape the domain model.",
@@ -1233,7 +1238,7 @@
       "title": "Customer Churn Prediction",
       "slug": "customer-churn-prediction",
       "shortDescription": "Random Forest churn classifier built for a GDGOC competition",
-      "description": "A churn classifier built for the GDGOC Telkom University Customer Churn Prediction Challenge. Missing values are filled with KNNImputer and categorical fields label-encoded before a Random Forest is trained, then scored on F1 — which matters more than accuracy on an imbalanced churn label.",
+      "description": "A churn classifier built for the GDGOC Telkom University Customer Churn Prediction Challenge. Missing values are filled with KNNImputer and categorical fields label-encoded before a Random Forest is trained, then scored on F1, which matters more than accuracy on an imbalanced churn label.",
       "image": "/images/cover-customer-churn.svg",
       "tags": [
         "Machine Learning",
@@ -1276,10 +1281,10 @@
     },
     {
       "id": 15,
-      "title": "Preprocessing Pipeline — Study Group 4",
+      "title": "Preprocessing Pipeline: Study Group 4",
       "slug": "study-group-assignment-4-data-analysis",
       "shortDescription": "One preprocessing and feature engineering pipeline applied across five datasets",
-      "description": "A preprocessing and feature engineering exercise for the GDGOC Telkom University study group, run across five unrelated datasets. Each gets the same treatment — profiling, IQR outlier removal, standardisation, one-hot and datetime encoding — the point being a repeatable pipeline rather than one clever model.",
+      "description": "A preprocessing and feature engineering exercise for the GDGOC Telkom University study group, run across five unrelated datasets. Each gets the same treatment: profiling, IQR outlier removal, standardisation, one-hot and datetime encoding. The goal is a repeatable pipeline rather than one clever model.",
       "image": "/images/cover-study-group-4.svg",
       "tags": [
         "Data Preprocessing",
@@ -1364,7 +1369,7 @@
     },
     {
       "id": 17,
-      "title": "Tech Stock EDA — Study Group 3",
+      "title": "Tech Stock EDA: Study Group 3",
       "slug": "topic-python-programming-for-machine-learning-assignment-study-group-3",
       "shortDescription": "Exploratory analysis of AMD, NVIDIA, Intel, ASUS and MSI share prices",
       "description": "An exploratory analysis of daily share prices for AMD, NVIDIA, Intel, ASUS and MSI, submitted for the GDGOC Telkom University Python-for-ML topic. Correlation matrices, distribution histograms and volume boxplots over 316 trading days show how closely the five tech stocks move together.",
@@ -1407,10 +1412,10 @@
     },
     {
       "id": 19,
-      "title": "TUBES AKA — Iterative vs Recursive Complexity",
+      "title": "TUBES AKA: Iterative vs Recursive Complexity",
       "slug": "tubes-aka",
       "shortDescription": "Benchmarking iterative against recursive search in a song recommender",
-      "description": "The final project for Analisis Kompleksitas Algoritma. One song-recommendation scoring routine is written twice, iteratively and recursively, then timed against a user set growing from 10 to 300 — plotting how each version's runtime actually scales rather than assuming it.",
+      "description": "The final project for Analisis Kompleksitas Algoritma. One song-recommendation scoring routine is written twice, iteratively and recursively, then timed against a user set growing from 10 to 300, plotting how each version's runtime actually scales rather than assuming it.",
       "image": "/images/cover-tubes-aka.svg",
       "tags": [
         "Algorithm Analysis",
@@ -1495,7 +1500,7 @@
       "id": 21,
       "title": "Web Portfolio with Bootstrap 5",
       "slug": "web-portfolio-using-bootstrap-v5",
-      "shortDescription": "The first portfolio iteration — Bootstrap 5 with a glassmorphism look",
+      "shortDescription": "The first portfolio iteration, built on Bootstrap 5 with a glassmorphism look",
       "description": "The first version of this portfolio, hand-built on Bootstrap 5 with a glassmorphism look. A dark/light toggle that remembers your choice, a Swiper project slider, AOS scroll animations and lazy-loaded assets across About, Skills, Projects and Contact.",
       "image": "/images/cover-bootstrap-portfolio.svg",
       "tags": [
@@ -1684,7 +1689,7 @@
   "projectsContent": {
     "featuredTitle": "Featured Projects",
     "allTitle": "All Projects",
-    "subtitle": "Showcasing latest work in data science and machine learning",
+    "subtitle": "Selected work in data science and machine learning",
     "noProjects": "No projects found in this category",
     "allSubtitle": "Displaying all {count} projects{category}",
     "viewAllButton": "View All Projects ({count})",
@@ -1692,10 +1697,10 @@
   },
   "contactContent": {
     "title": "Get In Touch",
-    "subtitle": "Have a project in mind? Let's work together to create something amazing",
+    "subtitle": "Have a project in mind? Get in touch.",
     "leftSection": {
       "title": "Contact Me",
-      "description": "Feel free to reach out through any of these channels. I'm always open to discussing new projects and opportunities."
+      "description": "Reach me through any of these channels. I usually reply within a day."
     },
     "form": {
       "name": {
@@ -1728,6 +1733,42 @@
     "publicKey": "_RI8Nk23mYc9B8ZeX"
   },
   "footerContent": {
-    "quote": "Data is the new oil. But like oil, data is useless unless refined."
+    "quote": "The hard part of data science is rarely the model. It's getting the data clean enough to trust."
+  },
+  "faqContent": {
+    "title": "Frequently asked questions",
+    "subtitle": "Quick answers about Fauzan, his work and how to get in touch.",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Who is Fauzan Ahsanudin Alfikri?",
+        "answer": "Fauzan is a third-year Data Science undergraduate at Telkom University in Bandung. He focuses on machine learning, natural language processing and computer vision, and works as a teaching assistant for the Sistem Cerdas course."
+      },
+      {
+        "id": 2,
+        "question": "What does Fauzan specialize in?",
+        "answer": "Machine learning, NLP and computer vision, with hands-on experience building end-to-end pipelines in Python using MLflow and Docker."
+      },
+      {
+        "id": 3,
+        "question": "What are Fauzan's notable achievements?",
+        "answer": "He placed 3rd in the Data Mining division at ADIKARA 2025. He has also competed in Find IT! UGM, where his face anti-spoofing model reached a validation macro F1 of 0.97."
+      },
+      {
+        "id": 4,
+        "question": "What tools and technologies does Fauzan use?",
+        "answer": "Python, C++, SQL and JavaScript, with PyTorch, Scikit-learn, XGBoost, Streamlit, React, Flutter and Docker across his projects."
+      },
+      {
+        "id": 5,
+        "question": "Where can I see Fauzan's work?",
+        "answer": "On GitHub at github.com/Fauzan-A25 and on LinkedIn. Every project on this page links to its code, and several have live demos."
+      },
+      {
+        "id": 6,
+        "question": "How can I contact Fauzan?",
+        "answer": "Through the contact form on this page or by email at fauzanahsanudin@gmail.com."
+      }
+    ]
   }
 }

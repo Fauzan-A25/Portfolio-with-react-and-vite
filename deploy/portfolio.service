@@ -30,7 +30,7 @@ Environment=PORT=3000
 
 # Secrets live here, not in the repo and not in the deploy artifact.
 #   mkdir -p ~/.config/portfolio
-#   printf 'GEMINI_API_KEY=...\n' > ~/.config/portfolio/env
+#   printf 'AI_API_KEY=...\nAI_BASE_URL=...\nAI_MODEL=...\n' > ~/.config/portfolio/env
 #   chmod 600 ~/.config/portfolio/env
 EnvironmentFile=%h/.config/portfolio/env
 
