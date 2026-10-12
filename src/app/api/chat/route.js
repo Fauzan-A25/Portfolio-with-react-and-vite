@@ -28,7 +28,7 @@ const FALLBACK =
   '🤖 AI is not configured yet. Ask about skills, projects, or experience and I will answer from the portfolio data directly.';
 
 // Trailing slashes stripped so `${BASE_URL}/chat/completions` never doubles up.
-const BASE_URL = (process.env.AI_BASE_URL || 'http://100.120.16.4:20128/v1').replace(/\/+$/, '');
+const BASE_URL = (process.env.AI_BASE_URL || 'http://127.0.0.1:20128/v1').replace(/\/+$/, '');
 const PRIMARY_MODEL = process.env.AI_MODEL || 'gemini/gemini-3.5-flash-lite';
 const FALLBACK_MODELS = (process.env.AI_MODEL_FALLBACKS || 'gemini/gemini-3.6-flash')
   .split(',')

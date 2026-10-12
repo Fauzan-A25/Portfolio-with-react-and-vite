@@ -29,7 +29,7 @@ the repo and not in the artifact.
 ```bash
 mkdir -p ~/.config/portfolio
 cat > ~/.config/portfolio/env <<'EOF'
-AI_BASE_URL=http://100.120.16.4:20128/v1
+AI_BASE_URL=http://127.0.0.1:20128/v1
 AI_API_KEY=your-key-here
 AI_MODEL=gemini/gemini-3.5-flash-lite
 AI_MODEL_FALLBACKS=gemini/gemini-3.6-flash
@@ -38,9 +38,13 @@ EOF
 chmod 600 ~/.config/portfolio/env
 ```
 
-`AI_API_KEY` is the only one that matters. It powers `/api/chat` against any
-OpenAI-compatible endpoint; without it that route returns a friendly fallback
-instead of erroring, so the site still works, just without AI answers.
+The loopback `AI_BASE_URL` example assumes the gateway runs on the same host
+as the Node server. For a gateway on another host, set its private reachable
+URL explicitly; do not expose the gateway publicly.
+
+`AI_API_KEY` powers `/api/chat` against the configured OpenAI-compatible
+endpoint; without it that route returns a friendly fallback instead of
+erroring, so the site still works, just without AI answers.
 
 `AI_MODEL` / `AI_MODEL_FALLBACKS` must be model ids **exactly as the endpoint
 reports them** in `GET $AI_BASE_URL/models`. 9router prefixes the upstream
