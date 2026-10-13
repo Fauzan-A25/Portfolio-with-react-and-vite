@@ -1,6 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import SectionDeco from '@/components/ui/SectionDeco/SectionDeco';
+import { useParallaxLayers } from '@/hooks/useParallaxLayers';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useReveal } from '@/hooks/useReveal';
 import './Skills.css';
@@ -31,6 +33,7 @@ export default function Skills({ skills = {}, skillsContent = {} }) {
   const reduced = useReducedMotion();
 
   useReveal(rootRef, { enabled: !reduced });
+  useParallaxLayers(rootRef, { enabled: !reduced });
 
   const [cat, setCat] = useState(0);
   const [modal, setModal] = useState(false);
@@ -150,6 +153,7 @@ export default function Skills({ skills = {}, skillsContent = {} }) {
 
   return (
     <section id="skills" ref={rootRef} className="section section--raised section--clip">
+      <SectionDeco variant="orbit" />
       <div className="wrap">
         <div className="section-head" data-reveal="">
           <span className="section-num mono">02</span>

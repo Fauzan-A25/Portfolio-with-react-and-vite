@@ -9,6 +9,7 @@ import LoadingScreen from '@/components/layout/LoadingScreen/LoadingScreen';
 import Hero from '@/components/sections/Hero/Hero';
 import ScrollToTop from '@/components/core/ScrollToTop/ScrollToTop';
 import LinkPeek from '@/components/ui/LinkPeek/LinkPeek';
+import Cursor from '@/components/ui/Cursor/Cursor';
 
 // Every section below is page content, so it is imported statically and ships
 // in the server-rendered HTML. Lazy-loading them hid the entire portfolio from
@@ -49,6 +50,7 @@ export default function PortfolioApp({ data = null }) {
         <Navbar />
         <ScrollToTop />
         <LinkPeek />
+        <Cursor />
 
         <main>
           <Hero
